@@ -4,13 +4,13 @@ wesjet is a content SDK that validates and transforms your content into type-saf
 
 ## Getting Started
 
-The video above is a brief look at wesjet. Explore further with our [example projects](https://www.wesbitty.vercel.app/specs), which you can clone to try out locally or in via Gitpod or Stackblitz in your browser.
+The video above is a brief look at wesjet. Explore further with our [example projects](https://www.wesbitty.com/examples), which you can clone to try out locally or in via Gitpod or Stackblitz in your browser.
 
 ## Features
-- Live reload on content changes
 - Fast and incremental builds
-- Simple but powerful schema DSL to design your content model (validates your content and generates types)
-- Auto-generated TypeScript types based on your content model (e.g. frontmatter or CMS schema)
+- Live reload on content changes
+- Powerful schema DSL to design your content model (validates your content and compiles types)
+- Compile TypeScript types based on your content model automatically (e.g. frontmatter or CMS schema)
 
 ## Supported Content Sources
 - Local content (Markdown, MDX, JSON, YAML)
@@ -19,10 +19,10 @@ The video above is a brief look at wesjet. Explore further with our [example pro
 - Next.js
 
 ## Tutorial & Documentation
-Follow [the tutorial](https://www.wesbitty.vercel.app/docs/getting-started) to get started building your own project. Or explore [the full documentation](https://www.wesbitty.vercel.app/docs).
+Follow [the tutorial](https://www.wesbitty.com/docs/getting-started) to get started building your own project. Or explore [the full documentation](https://www.wesbitty.com/docs).
 
 ## Roadmap
-See [our docs](https://www.wesbitty.vercel.app/docs/other/roadmap) for more information on our roadmap.
+See [our docs](https://www.wesbitty.com/docs/other/roadmap) for more information on our roadmap.
 
 ## Community & Support
 
