@@ -1,0 +1,76 @@
+---
+title: Wesjet Cli
+nav_title: CLI
+excerpt: Working with Wesjet on the command line.
+---
+
+The Wesjet CLI enables you to transform you content into data.
+
+## Usage
+
+```txt
+wesjet <command> [options]
+```
+
+To get a list of all commands, you can run `wesjet` with the `--help` flag:
+
+```txt
+wesjet --help
+```
+
+Which will produce an output that looks like this:
+
+```txt
+━━━ Wesjet CLI - 0.0.2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  $ wesjet <command>
+
+━━━ General commands ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  wesjet build [-c,--config #0] [--clearCache] [--verbose]
+    Transforms your content into static data
+
+  wesjet dev [-c,--config #0] [--clearCache] [--verbose]
+    Same as "wesjet build" but with watch mode
+
+You can also print more details about any of these commands by calling them
+with the `-h,--help` flag right after the command name.
+```
+
+## Commands
+
+### `build`
+
+```txt
+wesjet build [options]
+```
+
+Transforms content into data objects that your pages and components can consume. These objects are written to files in the `.wesjet/jetpack` directory.
+
+### `dev`
+
+```txt
+wesjet dev [options]
+```
+
+Runs a build, then listens for changes to your content files, rebuilding after each change.
+
+## Options
+
+The following options are available to run with each command.
+
+### `config` (alias: `-c`)
+
+Use a custom config file path. Both `wesjet.config.ts` and `wesjet.config.js` work by default.
+
+### `clearCache`
+
+Clears the `.wesjet/jetpack` directory before running the specified command.
+
+### `verbose`
+
+Adds more detailed output when running a command.
+
+### `help`
+
+Generates usage instructions and options for the CLI. Does not require an associated command.
