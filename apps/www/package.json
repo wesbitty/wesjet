@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3001 & local-ssl-proxy --source 3000 --target 3001",
+    "dev": "next dev --port 4040",
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "check-links": "blc \"http://localhost:3001\" -roe"
+    "check-links": "blc \"http://localhost:4040\" -roe"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^0.1.6",
