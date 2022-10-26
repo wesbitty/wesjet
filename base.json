@@ -1,0 +1,17 @@
+{
+    "extends": "./wesjet.json",
+    "compilerOptions": {},
+    "include": [],
+    "references": [
+      { "path": "./packages/@wesjet/cli" },
+      { "path": "./packages/@wesjet/core" },
+      { "path": "./packages/@wesjet/contentful-docker" },
+      { "path": "./packages/@wesjet/maker" },
+      { "path": "./packages/@wesjet/sanity-store" },
+      { "path": "./packages/@wesjet/isdev" },
+      { "path": "./packages/@wesjet/utils" },
+      { "path": "./packages/wesjet" },
+      { "path": "./packages/wesjet-simple-import-hooks" },
+      { "path": "./packages/wesjet-nextjs-plugin" }
+    ]
+  }
