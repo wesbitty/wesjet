@@ -27,3 +27,6 @@ out
 
 # wesjet cache
 .wesjet
+
+.gitpod.yml
+.vscode
