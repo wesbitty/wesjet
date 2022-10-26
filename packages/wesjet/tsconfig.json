@@ -1,0 +1,27 @@
+{
+  "extends": "../../wesjet.json",
+  "compilerOptions": {
+    "module": "ES2020",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "tsBuildInfoFile": "./dist/.tsbuildinfo.json"
+  },
+  "include": ["./src"],
+  "references": [
+    {
+      "path": "../@wesjet/cli"
+    },
+    {
+      "path": "../@wesjet/client"
+    },
+    {
+      "path": "../@wesjet/maker"
+    },
+    {
+      "path": "../@wesjet/utils"
+    },
+    {
+      "path": "../@wesjet/core"
+    }
+  ]
+}
