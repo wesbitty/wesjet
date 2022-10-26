@@ -1,0 +1,15 @@
+{
+  "extends": "../../../wesjet.json",
+  "compilerOptions": {
+    // Needed for @sanity/image-url
+    "allowSyntheticDefaultImports": true,
+    // DOM needed for @sanity/client
+    "lib": ["DOM", "ES2020"],
+    "module": "ES2020",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "tsBuildInfoFile": "./dist/.tsbuildinfo.json"
+  },
+  "include": ["./src"],
+  "references": [{ "path": "../core" }, { "path": "../utils" }]
+}
