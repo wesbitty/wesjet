@@ -1,0 +1,8 @@
+{
+  "name": "reference",
+  "packageManager": "yarn@3.2.4",
+  "dependencies": {
+    "wesjet": "workspace:^",
+    "wesjet-nextjs-plugin": "workspace:^"
+  }
+}
