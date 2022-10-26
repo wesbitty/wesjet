@@ -1,6 +1,6 @@
 # <img src="https://i.ibb.co/dMH4HS8/wesjet.png" height="30" />&nbsp;&nbsp;wesjet [![](https://badgen.net/npm/v/wesjet)](https://www.npmjs.com/wesjet/packages)
 
-**Wesjet is a content SDK that validates and transforms your content into type-safe JSON data you can easily `import` into your application's pages.**
+**Wesjet SDK Validates & Transforms Content into type-safe JSON data to ease importing content into your application's pages easily.**
 
 ## Getting Started
 
