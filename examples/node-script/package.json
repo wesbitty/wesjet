@@ -1,0 +1,10 @@
+{
+  "name": "node-script-examples",
+  "private": true,
+  "scripts": {
+    "start": "wesjet build && node --experimental-json-modules my-script.mjs"
+  },
+  "dependencies": {
+    "wesjet": "latest"
+  }
+}
