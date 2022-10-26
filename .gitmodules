@@ -1,4 +1,3 @@
-
 [submodule "examples/nextjs-with-wesjet-example"]
 	path = examples/nextjs-with-wesjet-example
 	url = https://github.com/wesbitty/nextjs-with-wesjet.git
