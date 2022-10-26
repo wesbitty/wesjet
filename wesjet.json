@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "incremental": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ES2020", "DOM"],
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noErrorTruncation": true,
+    "resolveJsonModule": true,
+    "target": "ES2020",
+    "plugins": [{ "transform": "@effect-ts/tracing-plugin" }],
+    "paths": {
+      "@wesjet/utils/*": ["./packages/@wesjet/utils/src/*"],
+      "@wesjet/maker/*": ["./packages/@wesjet/maker/src/*"],
+      "@wesjet/*": ["./packages/@wesjet/*/src"],
+      "wesjet/*": ["./packages/wesjet/src/*"],
+      "wesjet": ["./packages/wesjet/src"]
+    }
+  }
+}
