@@ -1,0 +1,56 @@
+{
+  "name": "@wesbitty/wesjetpkg",
+  "private": true,
+  "workspaces": [
+    "examples/*",
+    "apps/*",
+    "packages/*",
+    "packages/@wesjet/*"
+  ],
+  "scripts": {
+    "wesjet:build": "run wesjet:clean && tsc --build base.json && yarn workspace wesjet-nextjs-plugin run prepack",
+    "wesjet:clean": "bash -c 'rm -rf packages/*/dist packages/@wesjet/*/dist'",
+    "postinstall": "ts-patch install && ts-patch --persist",
+    "wesjet:postinstall": "yarn workspaces foreach --verbose --include \"examples-*\" exec yarn wesjet postinstall",
+    "test": "CI=true VITEST_SEGFAULT_RETRY=3 yarn workspaces foreach --parallel run test",
+    "dev:ts": "run build:ts --watch",
+    "release:prerelease": "yarn wesjet:build && yarn workspaces foreach --verbose --topological-dev --parallel --no-private npm publish --tolerate-republish --tag=latest",
+    "release:patch": "yarn wesjet:build && yarn workspaces foreach --verbose --topological-dev --parallel --no-private npm publish --tolerate-republish",
+    "release:minor": "yarn wesjet:build && yarn workspaces foreach --verbose --topological-dev --parallel --no-private npm publish --tolerate-republish",
+    "lint:eslint:check": "eslint packages --ext .ts --max-warnings=0",
+    "lint:eslint:fix": "eslint packages --ext .ts --fix",
+    "lint:prettier:check": "prettier packages --check",
+    "lint:prettier:fix": "prettier packages --write",
+    "lint:check": "run lint:eslint:check && run lint:prettier:check",
+    "lint:fix": "run lint:eslint:fix & run lint:prettier:fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wesbitty/wesjet"
+  },
+  "author": "wesjet",
+  "devDependencies": {
+    "@changesets/cli": "^2.25.0",
+    "@effect-ts/tracing-plugin": "^0.20.0",
+    "@types/prettier": "^2.7.1",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/parser": "^5.39.0",
+    "eslint": "^8.24.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "prettier": "^2.7.1",
+    "ts-patch": "^2.0.2",
+    "typescript": "^4.8.4"
+  },
+  "resolutions": {
+    "esbuild": "0.15.7",
+    "wesjet": "workspace:*",
+    "@wesjet/*": "workspace:*",
+    "wesjet-simple-import-hooks": "workspace:*",
+    "wesjet-nextjs-plugin": "workspace:*",
+    "rxjs": "^7.1.0"
+  },
+  "packageManager": "yarn@3.2.4"
+}
