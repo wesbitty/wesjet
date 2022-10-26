@@ -1,0 +1,206 @@
+// Vitest Snapshot v1
+
+exports[`generate-types: references with embedded schema 1`] = `
+"// NOTE This file is automatically compiled by WesJet
+
+import type { Markdown, MDX, ImageFieldData, IsoDateTimeString } from 'wesjet/core'
+import * as Local from 'wesjet/maker'
+
+export { isType } from 'wesjet/client'
+
+export type { Markdown, MDX, ImageFieldData, IsoDateTimeString }
+
+/** Document types */
+export type Person = {
+  /** File path relative to \`contentDirPath\` */
+  _id: string
+  _raw: Local.RawDocumentData
+  type: 'Person'
+  name: string
+  /** Markdown file body */
+  body: Markdown
+
+}
+
+export type Post = {
+  /** File path relative to \`contentDirPath\` */
+  _id: string
+  _raw: Local.RawDocumentData
+  type: 'Post'
+  title: string
+  author: Person
+  /** Markdown file body */
+  body: Markdown
+
+}  
+
+/** Nested types */
+  
+
+/** Helper types */
+
+export type AllTypes = DocumentTypes | NestedTypes
+export type AllTypeNames = DocumentTypeNames | NestedTypeNames
+
+export type DocumentTypes = Person | Post
+export type DocumentTypeNames = 'Person' | 'Post'
+
+export type NestedTypes = never
+export type NestedTypeNames = never
+
+
+export interface WesjetGenTypes {
+  documentTypes: DocumentTypes
+  documentTypeMap: DocumentTypeMap
+  documentTypeNames: DocumentTypeNames
+  nestedTypes: NestedTypes
+  nestedTypeMap: NestedTypeMap
+  nestedTypeNames: NestedTypeNames
+  allTypeNames: AllTypeNames
+}
+
+declare global {
+  interface WesjetGen extends WesjetGenTypes {}
+}
+
+export type DocumentTypeMap = {
+  Person: Person
+  Post: Post
+}
+
+export type NestedTypeMap = {
+
+}
+
+ "
+`;
+
+exports[`generate-types: simple schema 1`] = `
+"// NOTE This file is automatically compiled by WesJet
+
+import type { Markdown, MDX, ImageFieldData, IsoDateTimeString } from 'wesjet/core'
+import * as Local from 'wesjet/maker'
+
+export { isType } from 'wesjet/client'
+
+export type { Markdown, MDX, ImageFieldData, IsoDateTimeString }
+
+/** Document types */
+export type TestPost = {
+  /** File path relative to \`contentDirPath\` */
+  _id: string
+  _raw: Local.RawDocumentData
+  type: 'TestPost'
+  /** The title of the post */
+  title: string
+  /** The date of the post */
+  date: IsoDateTimeString
+  /** Markdown file body */
+  body: Markdown
+  slug: string
+}  
+
+/** Nested types */
+  
+
+/** Helper types */
+
+export type AllTypes = DocumentTypes | NestedTypes
+export type AllTypeNames = DocumentTypeNames | NestedTypeNames
+
+export type DocumentTypes = TestPost
+export type DocumentTypeNames = 'TestPost'
+
+export type NestedTypes = never
+export type NestedTypeNames = never
+
+
+export interface WesjetGenTypes {
+  documentTypes: DocumentTypes
+  documentTypeMap: DocumentTypeMap
+  documentTypeNames: DocumentTypeNames
+  nestedTypes: NestedTypes
+  nestedTypeMap: NestedTypeMap
+  nestedTypeNames: NestedTypeNames
+  allTypeNames: AllTypeNames
+}
+
+declare global {
+  interface WesjetGen extends WesjetGenTypes {}
+}
+
+export type DocumentTypeMap = {
+  TestPost: TestPost
+}
+
+export type NestedTypeMap = {
+
+}
+
+ "
+`;
+
+exports[`generate-types: simple schema with optional fields 1`] = `
+"// NOTE This file is automatically compiled by WesJet
+
+import type { Markdown, MDX, ImageFieldData, IsoDateTimeString } from 'wesjet/core'
+import * as Local from 'wesjet/maker'
+
+export { isType } from 'wesjet/client'
+
+export type { Markdown, MDX, ImageFieldData, IsoDateTimeString }
+
+/** Document types */
+export type TestPost = {
+  /** File path relative to \`contentDirPath\` */
+  _id: string
+  _raw: Local.RawDocumentData
+  type: 'TestPost'
+  /** The title of the post */
+  title: string
+  /** The date of the post */
+  date?: IsoDateTimeString | undefined
+  /** Markdown file body */
+  body: Markdown
+  slug: string
+}  
+
+/** Nested types */
+  
+
+/** Helper types */
+
+export type AllTypes = DocumentTypes | NestedTypes
+export type AllTypeNames = DocumentTypeNames | NestedTypeNames
+
+export type DocumentTypes = TestPost
+export type DocumentTypeNames = 'TestPost'
+
+export type NestedTypes = never
+export type NestedTypeNames = never
+
+
+export interface WesjetGenTypes {
+  documentTypes: DocumentTypes
+  documentTypeMap: DocumentTypeMap
+  documentTypeNames: DocumentTypeNames
+  nestedTypes: NestedTypes
+  nestedTypeMap: NestedTypeMap
+  nestedTypeNames: NestedTypeNames
+  allTypeNames: AllTypeNames
+}
+
+declare global {
+  interface WesjetGen extends WesjetGenTypes {}
+}
+
+export type DocumentTypeMap = {
+  TestPost: TestPost
+}
+
+export type NestedTypeMap = {
+
+}
+
+ "
+`;
