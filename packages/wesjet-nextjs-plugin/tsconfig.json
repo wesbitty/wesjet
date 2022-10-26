@@ -1,0 +1,20 @@
+{
+  "extends": "../../wesjet.json",
+  "compilerOptions": {
+    // needed for Next.js imports
+    "allowSyntheticDefaultImports": true,
+    "module": "ES2020",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "tsBuildInfoFile": "./dist/.tsbuildinfo.json"
+  },
+  "include": ["./src"],
+  "references": [
+    {
+      "path": "../@wesjet/utils"
+    },
+    {
+      "path": "../@wesjet/core"
+    }
+  ]
+}
