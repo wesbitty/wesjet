@@ -17426,6 +17426,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"reference@workspace:apps/reference":
+  version: 0.0.0-use.local
+  resolution: "reference@workspace:apps/reference"
+  dependencies:
+    wesjet: "workspace:^"
+    wesjet-nextjs-plugin: "workspace:^"
+  languageName: unknown
+  linkType: soft
+
 "regenerate-unicode-properties@npm:^10.1.0":
   version: 10.1.0
   resolution: "regenerate-unicode-properties@npm:10.1.0"
