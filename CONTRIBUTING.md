@@ -1,10 +1,11 @@
-# Contributing to Wesjet
+# <img src="https://i.ibb.co/dMH4HS8/wesjet.png" height="30" />&nbsp;&nbsp;wesjet [![](https://badgen.net/npm/v/wesjet)](https://www.npmjs.com/wesjet/packages)
 
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/wesbitty/wesjet)
 
-## Development setup
+Wesjet is developed as a monorepo using Yarn. 
 
-Wesjet is developed as a monorepo using Yarn.
+### Contributing to Wesjet
+ [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/wesbitty/wesjet)
+
 
 * **Cloning Wesjet Repo**
 
@@ -34,7 +35,7 @@ yarn wesjet:build
 yarn dev:ts
 ```
 
-**- Tests**
+* **Tests**
 
 ```sh
 yarn test
