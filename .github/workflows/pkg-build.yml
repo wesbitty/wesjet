@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - main
-      - packages
+      - jet
     paths:
       - 'packages/**'
 jobs:
@@ -12,11 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: borales/actions-yarn@v3.0.0
-        uses: actions/setup-node@v2
+      - uses: borales/actions-yarn@v3.0.0
         with:
           cmd: install # will run `yarn install` command
-     - uses: borales/actions-yarn@v3.0.0
-       with:
+      - uses: borales/actions-yarn@v3.0.0
+        with:
           cmd: wesjet:build # will run `yarn build` command
-          working-directory: ./
+          
