@@ -1,0 +1,6 @@
+node_modules
+dist
+.next
+.wesjet
+.DS_Store
+yarn.lock
