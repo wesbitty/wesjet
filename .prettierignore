@@ -3,3 +3,5 @@ packages/_archieve/*
 **/fixtures/**/*.yaml
 **/dist/*
 **/.nyc_output/*
+apps/
+examples/

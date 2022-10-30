@@ -3,7 +3,7 @@ name: Check Code with Prettier
 on:
   pull_request:
     branches:
-      - 'main'
+      - 'canary'
 
 jobs:
   format:

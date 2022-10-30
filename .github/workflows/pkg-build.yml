@@ -3,7 +3,7 @@ name: Pkg Build
 on:
   pull_request:
     branches:
-      - main
+      - canary
       - jet
     paths:
       - 'packages/**'
