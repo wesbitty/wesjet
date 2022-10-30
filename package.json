@@ -18,7 +18,7 @@
     "postinstall:wesjet": "yarn workspaces foreach --verbose --include \"examples-*\" exec yarn wesjet postinstall",
     "format:prettier": "prettier packages -w",
     "format:eslint": "eslint packages --ext .ts --fix",
-    "lint": "run format:prettier && format:eslint",
+    "lint": "run format:prettier && run format:eslint",
     "wesjet": "run build:clean && run build && yarn workspace wesjet-nextjs-plugin run prepack",
     "test": "CI=true VITEST_SEGFAULT_RETRY=3 yarn workspaces foreach --parallel run test",
     "dev:ts": "run build:ts --watch"
