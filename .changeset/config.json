@@ -11,9 +11,10 @@
   ],
   "linked": [],
   "access": "public",
-  "baseBranch": "main",
+  "baseBranch": "canary",
   "updateInternalDependencies": "patch",
   "ignore": [
+    "www",
     "nextjs-with-wesjet",
     "node-script-examples"
   ],

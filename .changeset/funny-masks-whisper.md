@@ -12,4 +12,4 @@
 'wesjet-simple-import-hooks': patch
 ---
 
-Initial Release
+Changes: Fix Next-js Error For good.
