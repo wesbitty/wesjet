@@ -10,21 +10,18 @@
     "packages/@wesjet/*"
   ],
   "scripts": {
-    "wesjet:build": "run wesjet:clean && tsc --build base.json && yarn workspace wesjet-nextjs-plugin run prepack",
-    "wesjet:clean": "bash -c 'rm -rf packages/*/dist packages/@wesjet/*/dist'",
-    "postinstall": "ts-patch install && ts-patch --persist",
-    "wesjet:postinstall": "yarn workspaces foreach --verbose --include \"examples-*\" exec yarn wesjet postinstall",
+    "postinstall": "ts-patch install -s && ts-patch --persist",
+    "build": "tsc --build base.json",
+    "check:prettier": "prettier packages -c",
+    "check:eslint": "eslint packages --ext .ts --max-warnings=0",
+    "build:clean": "bash -c 'rm -rf packages/*/dist packages/@wesjet/*/dist'",
+    "postinstall:wesjet": "yarn workspaces foreach --verbose --include \"examples-*\" exec yarn wesjet postinstall",
+    "format:prettier": "prettier packages -w",
+    "format:eslint": "eslint packages --ext .ts --fix",
+    "lint": "run format:prettier && format:eslint",
+    "wesjet": "run build:clean && run build && yarn workspace wesjet-nextjs-plugin run prepack",
     "test": "CI=true VITEST_SEGFAULT_RETRY=3 yarn workspaces foreach --parallel run test",
-    "dev:ts": "run build:ts --watch",
-    "release:prerelease": "yarn wesjet:build && yarn workspaces foreach --verbose --topological-dev --parallel --no-private npm publish --tolerate-republish --tag=latest",
-    "release:patch": "yarn wesjet:build && yarn workspaces foreach --verbose --topological-dev --parallel --no-private npm publish --tolerate-republish",
-    "release:minor": "yarn wesjet:build && yarn workspaces foreach --verbose --topological-dev --parallel --no-private npm publish --tolerate-republish",
-    "lint:eslint:check": "eslint packages --ext .ts --max-warnings=0",
-    "lint:eslint:fix": "eslint packages --ext .ts --fix",
-    "lint:prettier:check": "prettier packages --check",
-    "lint:prettier:fix": "prettier packages --write",
-    "lint:check": "run lint:eslint:check && run lint:prettier:check",
-    "lint:fix": "run lint:eslint:fix & run lint:prettier:fix"
+    "dev:ts": "run build:ts --watch"
   },
   "repository": {
     "type": "git",
