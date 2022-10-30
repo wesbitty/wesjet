@@ -24,7 +24,7 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: wesjetpkg/checkout-runner@canary
+      - uses: wesjetpkg/checkout-runner@v1
       - run: yarn build
 
   build-node-script:
@@ -34,7 +34,7 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: wesjetpkg/checkout-runner@canary
+      - uses: wesjetpkg/checkout-runner@v1
       - run: yarn build
       - run: yarn start
         working-directory: examples/node-script
