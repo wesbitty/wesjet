@@ -2,9 +2,9 @@ name: checkout runner
 
 on:
   push:
-    branches: ['**']
+    branches: ['canary']
   pull_request:
-    branches: ['**']
+    branches: ['canary']
 
 jobs:
   lint:
@@ -14,7 +14,7 @@ jobs:
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: wesjetpkg/checkout-runner@canary
+      - uses: wesjetpkg/checkout-runner@v1
       - run: yarn lint
 
   build:
