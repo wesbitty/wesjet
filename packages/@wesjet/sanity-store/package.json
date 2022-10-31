@@ -1,6 +1,6 @@
 {
   "name": "@wesjet/sanity-store",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -20,8 +20,8 @@
     "@sanity/core": "^2.10.5",
     "@sanity/image-url": "^0.140.22",
     "@sanity/schema": "^2.10.0",
-    "@wesjet/core": "workspace:*",
-    "@wesjet/utils": "workspace:*",
+    "@wesjet/core": "^0.0.5",
+    "@wesjet/utils": "^0.0.5",
     "rxjs": "^7.1.0"
   }
 }
