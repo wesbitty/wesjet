@@ -1,6 +1,6 @@
 {
   "name": "@wesjet/maker",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "exports": {
     ".": {
@@ -28,8 +28,8 @@
     "test": "TZ='GMT' FORCE_COLOR=1 vitest"
   },
   "dependencies": {
-    "@wesjet/core": "workspace:*",
-    "@wesjet/utils": "workspace:*",
+    "@wesjet/core": "^0.0.5",
+    "@wesjet/utils": "^0.0.5",
     "chokidar": "^3.5.3",
     "fast-glob": "^3.2.11",
     "gray-matter": "^4.0.3",
