@@ -66,23 +66,23 @@
     "_bundle-cli": "esbuild ./dist/cli/index.js --bundle --platform=node --format=esm --external:esbuild --external:@esbuild-plugins/node-resolve --outfile=dist/cli/bundle.js --main-fields=module,main --metafile=meta.json --banner:js=\"import { createRequire as topLevelCreateRequire } from 'module'; const require = topLevelCreateRequire(import.meta.url); const __dirname = '__SET_BY_ESBUILD__';\""
   },
   "dependencies": {
-    "@wesjet/cli": "workspace:*",
-    "@wesjet/client": "workspace:*",
-    "@wesjet/core": "workspace:*",
-    "@wesjet/maker": "workspace:*",
-    "@wesjet/utils": "workspace:*"
+    "@wesjet/cli": "^0.0.5",
+    "@wesjet/client": "^0.0.5",
+    "@wesjet/core": "^0.0.5",
+    "@wesjet/maker": "^0.0.5",
+    "@wesjet/utils": "^0.0.5"
   },
   "devDependencies": {
     "typescript": "^4.8.4"
   },
-  "author": "wesjetpkg",
-  "homepage": "https://github.com/wesbitty/wesjet",
+  "author": "wesbitty",
+  "homepage": "https://github.com/wesbitty/wesjetpkg",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wesbitty/wesjet.git"
+    "url": "git+https://github.com/wesbitty/wesjetpkg.git"
   },
   "bug": {
-    "url": "https://github.com/wesbitty/wesjet/issues"
+    "url": "https://github.com/wesbitty/wesjetpkg/issues"
   }
 }
