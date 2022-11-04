@@ -23,11 +23,17 @@
     "all": "run build:clean && run build && yarn workspace wesjet-nextjs-plugin run prepack",
     "test": "CI=true VITEST_SEGFAULT_RETRY=3 yarn workspaces foreach --parallel run test"
   },
+  "author": "Wesbitty, Inc",
+  "keywords": [
+    "Wesjet",
+    "Bundler",
+    "Typescript",
+    "Maker"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wesbitty/wesjetpkg"
   },
-  "author": "Wesbitty, Inc",
   "devDependencies": {
     "@changesets/cli": "^2.25.0",
     "@effect-ts/tracing-plugin": "^0.20.0",
