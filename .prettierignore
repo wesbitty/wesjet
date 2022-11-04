@@ -1,5 +1,6 @@
 !/.*
 /build/
+.yarn
 **/fixtures/**/*.yaml
 **/dist/*
 **/.nyc_output/*
