@@ -1,5 +1,5 @@
 {
-  "name": "node-script-examples",
+  "name": "node-script",
   "private": true,
   "scripts": {
     "start": "wesjet build && node --experimental-json-modules my-script.mjs"

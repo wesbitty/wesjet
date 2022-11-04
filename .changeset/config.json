@@ -14,8 +14,9 @@
   "baseBranch": "master",
   "updateInternalDependencies": "patch",
   "ignore": [
+    "www",
     "nextjs-with-wesjet",
-    "node-script-examples"
+    "node-script"
   ],
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "snapshot.useCalculatedVersion": true

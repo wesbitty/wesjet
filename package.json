@@ -5,7 +5,7 @@
   "private": true,
   "workspaces": [
     "examples/*",
-    "apps/*",
+    "apps/www",
     "cli/*",
     "cli/@wesjet/*",
     "packages/*"
