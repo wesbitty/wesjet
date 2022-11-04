@@ -1,0 +1,18 @@
+{
+  "name": "@wesjet/client",
+  "version": "0.0.6",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "./dist/**/*.{js,ts,map}",
+    "./src",
+    "./package.json"
+  ],
+  "scripts": {
+    "test": "echo No tests yet"
+  },
+  "dependencies": {
+    "@wesjet/core": "^0.0.6"
+  }
+}

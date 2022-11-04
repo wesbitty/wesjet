@@ -17,11 +17,11 @@
     "target": "ES2020",
     "plugins": [{ "transform": "@effect-ts/tracing-plugin" }],
     "paths": {
-      "@wesjet/utils/*": ["./packages/@wesjet/utils/src/*"],
-      "@wesjet/maker/*": ["./packages/@wesjet/maker/src/*"],
-      "@wesjet/*": ["./packages/@wesjet/*/src"],
-      "wesjet/*": ["./packages/wesjet/src/*"],
-      "wesjet": ["./packages/wesjet/src"]
+      "@wesjet/utils/*": ["./cli/@wesjet/utils/src/*"],
+      "@wesjet/maker/*": ["./cli/@wesjet/maker/src/*"],
+      "@wesjet/*": ["./cli/@wesjet/*/src"],
+      "wesjet/*": ["./cli/wesjet/src/*"],
+      "wesjet": ["./cli/wesjet/src"]
     }
   }
 }

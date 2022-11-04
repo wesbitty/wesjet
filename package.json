@@ -6,20 +6,20 @@
   "workspaces": [
     "examples/*",
     "apps/*",
-    "packages/*",
-    "packages/@wesjet/*"
+    "cli/*",
+    "cli/@wesjet/*"
   ],
   "scripts": {
     "postinstall": "ts-patch install -s && ts-patch --persist",
-    "build": "tsc --build base.json",
-    "check:prettier": "prettier packages -c",
-    "check:eslint": "eslint packages --ext .ts --max-warnings=0",
-    "build:clean": "bash -c 'rm -rf packages/*/dist packages/@wesjet/*/dist'",
     "postinstall:wesjet": "yarn workspaces foreach --verbose --include \"examples-*\" exec yarn wesjet postinstall",
-    "format:prettier": "prettier packages -w",
-    "format:eslint": "eslint packages --ext .ts --fix",
+    "build": "tsc -b base.json",
+    "build:clean": "bash -c 'rm -rf cli/*/dist cli/@wesjet/*/dist'",
     "lint": "run format:prettier && run format:eslint",
-    "wesjet": "run build:clean && run build && yarn workspace wesjet-nextjs-plugin run prepack",
+    "check:prettier": "prettier . -c",
+    "check:eslint": "eslint . --ext .ts --max-warnings=0",
+    "format:prettier": "prettier . -w",
+    "format:eslint": "eslint . --ext .ts --fix",
+    "all": "run build:clean && run build && yarn workspace wesjet-nextjs-plugin run prepack",
     "test": "CI=true VITEST_SEGFAULT_RETRY=3 yarn workspaces foreach --parallel run test",
     "dev:ts": "run build:ts --watch"
   },

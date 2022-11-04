@@ -9,24 +9,16 @@
 #/.pnp.*
 node_modules
 .next
-
-dist*
-out
-
-.tmp*
-/tmp
-
-*.tsbuildinfo
-
 .envrc.local
 .direnv
-
 .nyc_output
-
 !tap-snapshots/dist/*
 
 # wesjet cache
 .wesjet
 
-.gitpod.yml
-.vscode
+dist*
+out
+.tmp*
+/tmp
+*.tsbuildinfo
