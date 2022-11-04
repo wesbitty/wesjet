@@ -14642,9 +14642,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-script-examples@workspace:examples/node-script":
+"node-script@workspace:examples/node-script":
   version: 0.0.0-use.local
-  resolution: "node-script-examples@workspace:examples/node-script"
+  resolution: "node-script@workspace:examples/node-script"
   dependencies:
     wesjet: latest
   languageName: unknown
@@ -17428,15 +17428,6 @@ __metadata:
   checksum: d0169016ea22b59d55fa3206507c8f2d009574abd0f9b86552035a8405d52f6d7d5b60d084c5950d6f2884df7de42f87a6260b1b386b79ede63bfc87ea0c3ce8
   languageName: node
   linkType: hard
-
-"reference@workspace:apps/reference":
-  version: 0.0.0-use.local
-  resolution: "reference@workspace:apps/reference"
-  dependencies:
-    wesjet: "workspace:^"
-    wesjet-nextjs-plugin: "workspace:^"
-  languageName: unknown
-  linkType: soft
 
 "regenerate-unicode-properties@npm:^10.1.0":
   version: 10.1.0

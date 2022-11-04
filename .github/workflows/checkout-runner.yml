@@ -2,9 +2,9 @@ name: checkout runner
 
 on:
   push:
-    branches: ['canary']
+    branches: ['master']
   pull_request:
-    branches: ['bundle']
+    branches: ['jet']
 
 jobs:
   lint:
