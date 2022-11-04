@@ -1,5 +1,11 @@
-packages/_archieve/*
-**/.wesjet/*
+!/.*
+/build/
 **/fixtures/**/*.yaml
 **/dist/*
 **/.nyc_output/*
+node_modules
+apps
+examples
+dist*
+
+

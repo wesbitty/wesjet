@@ -5,7 +5,7 @@ let cachedUsedByCount: number | undefined
 
 // const getUsedByCount = async () => {
 //   // We're scraping the GitHub website here instead of using the API since I don't want to deal with rate limits and API tokens 🤷‍♂️
-//   const gitHubPage = await fetch('https://github.com/wesbitty/wesjet/', { cache: 'no-store' }).then((_) =>
+//   const gitHubPage = await fetch('https://github.com/wesbitty/wesjetpkg/', { cache: 'no-store' }).then((_) =>
 //     _.text(),
 //   )
 //   const $ = cheerio(gitHubPage)
@@ -30,7 +30,7 @@ let cachedUsedByCount: number | undefined
 const getUsedByCount = async () => {
   // We're scraping the GitHub website here instead of using the API since I don't want to deal with rate limits and API tokens 🤷‍♂️
   const url =
-    'https://github.com/wesbitty/wesjet/network/dependents?dependent_type=REPOSITORY&package_id=UGFja2FnZS0yMTE4Nzg3MDAw'
+    'https://github.com/wesbitty/wesjetpkg/network/dependents?dependent_type=REPOSITORY&package_id=UGFja2FnZS0yMTE4Nzg3MDAw'
   const gitHubPage = await fetch(url, { cache: 'no-store' }).then((_) => _.text())
   const $ = cheerio(gitHubPage)
 

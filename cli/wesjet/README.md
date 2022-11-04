@@ -15,13 +15,13 @@ Visit [https://wesbitty.com](https://wesbitty.com/docs/getting-started) to get s
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information.
 
 ## Community & Support
-The Wesjet community can be found on [GitHub Discussions](https://github.com/wesbitty/wesjet/discussions), where you can ask questions, voice ideas, and share your projects.
+The Wesjet community can be found on [GitHub Discussions](https://github.com/wesbitty/wesjetpkg/discussions), where you can ask questions, voice ideas, and share your projects.
 
 To chat with other community members, you can join the [Wesjet Discord](https://discord.com)
 
-Our [Code of Conduct](https://github.com/wesbitty/wesjet/main/blob/code_of_conduct.md) applies to all Wesjet community channels.
+Our [Code of Conduct](https://github.com/wesbitty/wesjetpkg/main/blob/code_of_conduct.md) applies to all Wesjet community channels.
 
-Report bugs and errors you encounter using wesjet on [Wesjet Issues Forum](https://github.com/wesbitty/wesjet/issues).
+Report bugs and errors you encounter using wesjet on [Wesjet Issues Forum](https://github.com/wesbitty/wesjetpkg/issues).
 
 
 ## Who is using Wesjet?

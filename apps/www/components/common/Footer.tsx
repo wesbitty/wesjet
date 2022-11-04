@@ -58,7 +58,7 @@ const content = {
       elements: [
         { label: 'Twitter', url: 'https://twitter.com/wesjetpkg' },
         { label: 'Discord', url: 'https://discord.gg/rytFErsARm' },
-        { label: 'GitHub', url: 'https://github.com/wesbitty/wesjet' },
+        { label: 'GitHub', url: 'https://github.com/wesbitty/wesjetpkg' },
       ],
     },
   ],

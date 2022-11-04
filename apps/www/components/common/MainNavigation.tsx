@@ -16,7 +16,7 @@ const navLinks: Array<{ label: string; url: string }> = [
 ]
 
 const iconLinks: Array<{ label: string; icon: IconName; url: string }> = [
-  { label: 'Github', icon: 'github', url: 'https://github.com/wesbitty/wesjet' },
+  { label: 'Github', icon: 'github', url: 'https://github.com/wesbitty/wesjetpkg' },
   { label: 'Discord', icon: 'discord', url: 'https://discord.gg/rytFErsARm' },
 ]
 

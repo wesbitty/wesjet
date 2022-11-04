@@ -10,7 +10,7 @@ import { _jsx_runtime } from './jsx-runtime.cjs'
 // on the import/export level from React v17 to v18.
 // This workaround should work in Next.js since it supports both CJS and ESM at the same time.
 //
-// See https://github.com/wesbitty/wesjet/issues/162
+// See https://github.com/wesbitty/wesjetpkg/issues/162
 // import * as _jsx_runtime from 'react/jsx-runtime'
 
 const getMDXComponent = (code: string, globals: Record<string, unknown> = {}): React.ComponentType<any> => {

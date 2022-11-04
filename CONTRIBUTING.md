@@ -4,7 +4,7 @@
 Wesjet is developed as a monorepo using Yarn. 
 
 ### Contributing to Wesjet
- [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/wesbitty/wesjet)
+ [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/wesbitty/wesjetpkg)
 
 
 * **Cloning Wesjet Repo**

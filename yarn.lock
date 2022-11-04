@@ -4663,26 +4663,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wesbitty/wesjetpkg@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@wesbitty/wesjetpkg@workspace:."
-  dependencies:
-    "@changesets/cli": ^2.25.0
-    "@effect-ts/tracing-plugin": ^0.20.0
-    "@types/prettier": ^2.7.1
-    "@typescript-eslint/eslint-plugin": ^5.39.0
-    "@typescript-eslint/parser": ^5.39.0
-    eslint: ^8.24.0
-    eslint-config-prettier: ^8.5.0
-    eslint-plugin-import: ^2.26.0
-    eslint-plugin-react-hooks: ^4.6.0
-    eslint-plugin-simple-import-sort: ^8.0.0
-    prettier: ^2.7.1
-    ts-patch: ^2.0.2
-    typescript: ^4.8.4
-  languageName: unknown
-  linkType: soft
-
 "@wesjet/cli@^0.0.6, @wesjet/cli@workspace:cli/@wesjet/cli":
   version: 0.0.0-use.local
   resolution: "@wesjet/cli@workspace:cli/@wesjet/cli"
@@ -7030,6 +7010,12 @@ __metadata:
   checksum: 7f8d26266b0d49de9661f6365cbcc373fee4f4d0f422a203dfb17ad8f3d84c5be5ded444874935a197cd03cff297c53fe48910256cb4171cb2e52a3e6b9d317c
   languageName: node
   linkType: hard
+
+"common@workspace:packages/common":
+  version: 0.0.0-use.local
+  resolution: "common@workspace:packages/common"
+  languageName: unknown
+  linkType: soft
 
 "commondir@npm:^1.0.1":
   version: 1.0.1
@@ -20091,6 +20077,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ui@workspace:packages/ui":
+  version: 0.0.0-use.local
+  resolution: "ui@workspace:packages/ui"
+  languageName: unknown
+  linkType: soft
+
 "unbox-primitive@npm:^1.0.2":
   version: 1.0.2
   resolution: "unbox-primitive@npm:1.0.2"
@@ -21058,6 +21050,26 @@ __metadata:
     contentful-migration: ^4.2.3
     lorem-ipsum: ^2.0.8
     ts-node: ^10.9.1
+  languageName: unknown
+  linkType: soft
+
+"wesjetpkg@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "wesjetpkg@workspace:."
+  dependencies:
+    "@changesets/cli": ^2.25.0
+    "@effect-ts/tracing-plugin": ^0.20.0
+    "@types/prettier": ^2.7.1
+    "@typescript-eslint/eslint-plugin": ^5.39.0
+    "@typescript-eslint/parser": ^5.39.0
+    eslint: ^8.24.0
+    eslint-config-prettier: ^8.5.0
+    eslint-plugin-import: ^2.26.0
+    eslint-plugin-react-hooks: ^4.6.0
+    eslint-plugin-simple-import-sort: ^8.0.0
+    prettier: ^2.7.1
+    ts-patch: ^2.0.2
+    typescript: ^4.8.4
   languageName: unknown
   linkType: soft
 

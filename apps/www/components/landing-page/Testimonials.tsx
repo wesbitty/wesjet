@@ -25,7 +25,7 @@ const content = {
           </span>
         </span>
       ),
-      url: 'https://github.com/wesbitty/wesjet/network/dependents',
+      url: 'https://github.com/wesbitty/wesjetpkg/network/dependents',
     },
     avatars: [
       'https://avatars.githubusercontent.com/u/77748010?s=120&v=4',

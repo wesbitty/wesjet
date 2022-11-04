@@ -1,5 +1,5 @@
 {
-  "name": "@wesbitty/wesjetpkg",
+  "name": "wesjetpkg",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -7,7 +7,8 @@
     "examples/*",
     "apps/*",
     "cli/*",
-    "cli/@wesjet/*"
+    "cli/@wesjet/*",
+    "packages/*"
   ],
   "scripts": {
     "postinstall": "ts-patch install -s && ts-patch --persist",
@@ -20,14 +21,13 @@
     "format:prettier": "prettier . -w",
     "format:eslint": "eslint . --ext .ts --fix",
     "all": "run build:clean && run build && yarn workspace wesjet-nextjs-plugin run prepack",
-    "test": "CI=true VITEST_SEGFAULT_RETRY=3 yarn workspaces foreach --parallel run test",
-    "dev:ts": "run build:ts --watch"
+    "test": "CI=true VITEST_SEGFAULT_RETRY=3 yarn workspaces foreach --parallel run test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wesbitty/wesjet"
+    "url": "git+https://github.com/wesbitty/wesjetpkg"
   },
-  "author": "wesjet",
+  "author": "Wesbitty, Inc",
   "devDependencies": {
     "@changesets/cli": "^2.25.0",
     "@effect-ts/tracing-plugin": "^0.20.0",

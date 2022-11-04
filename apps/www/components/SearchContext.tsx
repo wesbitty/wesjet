@@ -37,7 +37,7 @@ export const SearchProvider: FC<{ children: ReactNode }> = ({ children }) => {
         name: 'GitHub Repository',
         keywords: 'Wesbitty Github Git Repository Repo Code Examples',
         section: 'External',
-        perform: () => window.open('https://github.com/wesbitty/wesjet', '_ blank'),
+        perform: () => window.open('https://github.com/wesbitty/wesjetpkg', '_ blank'),
       },
       {
         id: '3-discord',

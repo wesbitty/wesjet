@@ -25,7 +25,7 @@ const content = {
   primaryAction: { label: 'Read more in docs', url: '/docs/other/faq' },
   secondaryAction: {
     label: 'Ask a question',
-    url: 'https://github.com/wesbitty/wesjet/issues/new',
+    url: 'https://github.com/wesbitty/wesjetpkg/issues/new',
     icon: 'external-link' as IconName,
   },
 }

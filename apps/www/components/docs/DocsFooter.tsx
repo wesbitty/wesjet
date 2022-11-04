@@ -5,7 +5,7 @@ import { format } from 'date-fns'
 import { Doc } from 'wesjet/jetpack'
 
 const githubBranch = 'main'
-const githubBaseUrl = `https://github.com/wesbitty/wesjet/blob/${githubBranch}/apps/www/_blog/`
+const githubBaseUrl = `https://github.com/wesbitty/wesjetpkg/blob/${githubBranch}/apps/www/_blog/`
 
 export const DocsFooter: FC<{ doc: Doc }> = ({ doc }) => {
   return (
@@ -14,7 +14,7 @@ export const DocsFooter: FC<{ doc: Doc }> = ({ doc }) => {
       <div className="space-y-4 text-sm sm:flex sm:justify-between sm:space-y-0">
         <p className="m-0">
           Was this article helpful to you? <br />{' '}
-          <Link href="https://github.com/wesbitty/wesjet/issues">
+          <Link href="https://github.com/wesbitty/wesjetpkg/issues">
             <a className="inline-flex items-center space-x-1" target="_blank" rel="noreferrer">
               <span className="inline-block w-4">
                 <Icon name="github" />

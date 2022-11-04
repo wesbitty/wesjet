@@ -1,6 +1,5 @@
 !/.*
 /build/
-/test-config/
 apps
 examples
 node_modules
@@ -10,7 +9,5 @@ out
 .tmp*
 /tmp
 *.tsbuildinfo
-.envrc.local
-.direnv
 .nyc_output
 !tap-snapshots/dist/*
