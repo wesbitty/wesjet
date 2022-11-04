@@ -1,6 +1,7 @@
 {
   "name": "wesjet-simple-import-hooks",
   "version": "0.0.6",
+  "license": "MIT",
   "type": "module",
   "bin": "./dist/cli/index.js",
   "exports": "./dist/lib/index.js",
