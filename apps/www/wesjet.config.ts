@@ -2,9 +2,9 @@
 // eslint-disable-next-line import/no-unresolved
 import { makeSource } from 'wesjet/maker'
 import highlight from 'rehype-highlight'
-import { contentDirPath } from './src/wesjet/utils'
+import { contentDirPath } from './wesjet/utils'
 
-import * as documentTypes from './src/wesjet'
+import * as documentTypes from './wesjet'
 
 export default makeSource({
   contentDirPath,
