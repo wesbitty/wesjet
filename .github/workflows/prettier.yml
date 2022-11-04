@@ -14,7 +14,7 @@ jobs:
       # disable this check while we migrate to monorepo
       - name: Run prettier
         run: |-
-          npx prettier -c 'cli/**/*.{js,jsx,ts,tsx,css,mdx,json}' 
+          npx prettier -c 'cli/**/*.{js,jsx,ts,tsx,css,mdx,json}'
         # run: |-
         #   function run_check() {
         #     if $(grep -q '"prettier"' "$1") ; then

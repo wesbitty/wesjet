@@ -2,22 +2,12 @@
   "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
   "changelog": "@changesets/cli/changelog",
   "commit": false,
-  "fixed": [
-    [
-      "@wesjet/*",
-      "wesjet",
-      "wesjet-nextjs-plugin"
-    ]
-  ],
+  "fixed": [["@wesjet/*", "wesjet", "wesjet-nextjs-plugin"]],
   "linked": [],
   "access": "public",
   "baseBranch": "master",
   "updateInternalDependencies": "patch",
-  "ignore": [
-    "www",
-    "nextjs-with-wesjet",
-    "node-script"
-  ],
+  "ignore": ["www", "nextjs-with-wesjet", "node-script"],
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "snapshot.useCalculatedVersion": true
   }

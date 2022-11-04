@@ -1,31 +1,30 @@
 # <img src="https://i.ibb.co/dMH4HS8/wesjet.png" height="30" />&nbsp;&nbsp;WesjetPkg [![](https://badgen.net/npm/v/wesjet)](https://www.npmjs.com/wesjet/packages)
 
-
 WesjetPkg is developed using Yarn.
 
 ### Contributing to WesjetPkg
- [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/wesbitty/wesjetpkg)
 
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/wesbitty/wesjetpkg)
 
-* **Cloning WesjetPkg Repo**
+- **Cloning WesjetPkg Repo**
 
 ```sh
 git clone --recurse-submodules git://github.com/wesbitty/wesjetpkg.git
 ```
 
-* **Update Git submodules**
+- **Update Git submodules**
 
 ```sh
 git submodule update --init --recursive
 ```
 
-* **installing Dependencies**
+- **installing Dependencies**
 
 ```sh
 yarn install
 ```
 
-* **One Time Build**
+- **One Time Build**
 
 ```sh
 yarn wesjet:build
@@ -35,7 +34,7 @@ yarn wesjet:build
 yarn dev:ts
 ```
 
-* **Tests**
+- **Tests**
 
 ```sh
 yarn test
