@@ -1,16 +1,16 @@
-# <img src="https://i.ibb.co/dMH4HS8/wesjet.png" height="30" />&nbsp;&nbsp;wesjet [![](https://badgen.net/npm/v/wesjet)](https://www.npmjs.com/wesjet/packages)
+# <img src="https://i.ibb.co/dMH4HS8/wesjet.png" height="30" />&nbsp;&nbsp;WesjetPkg [![](https://badgen.net/npm/v/wesjet)](https://www.npmjs.com/wesjet/packages)
 
 
-Wesjet is developed as a monorepo using Yarn. 
+WesjetPkg is developed using Yarn.
 
-### Contributing to Wesjet
+### Contributing to WesjetPkg
  [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/wesbitty/wesjetpkg)
 
 
-* **Cloning Wesjet Repo**
+* **Cloning WesjetPkg Repo**
 
 ```sh
-git clone --recurse-submodules git://github.com/wesbitty/wesjet.git
+git clone --recurse-submodules git://github.com/wesbitty/wesjetpkg.git
 ```
 
 * **Update Git submodules**
