@@ -24,7 +24,7 @@ Our [Code of Conduct](https://github.com/wesbitty/wesjetpkg/master/blob/code_of_
 Report bugs and errors you encounter using wesjet on [Wesjet Issues Forum](https://github.com/wesbitty/wesjetpkg/issues).
 
 
-## Who is using Wesjet?
+## Who is using WesjetPkg?
 
 - [Wesbitty Inc](https://wesbitty.com)
 
