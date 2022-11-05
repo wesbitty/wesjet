@@ -21,7 +21,10 @@
     "format:prettier": "prettier . -w",
     "format:eslint": "eslint . --ext .ts --fix",
     "all": "run build:clean && run build && yarn workspace wesjet-nextjs-plugin run prepack",
-    "test": "CI=true VITEST_SEGFAULT_RETRY=3 yarn workspaces foreach --parallel run test"
+    "test": "CI=true VITEST_SEGFAULT_RETRY=3 yarn workspaces foreach --parallel run test",
+    "dev": "turbo run dev --parallel",
+    "dev:www": "turbo run dev --filter=www --parallel",
+    "dev:nww": "turbo run dev filter --filter=nextjs-with-wesjet --parallel"
   },
   "author": "Wesbitty, Inc",
   "keywords": [
@@ -47,6 +50,7 @@
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "prettier": "^2.7.1",
     "ts-patch": "^2.0.2",
+    "turbo": "^1.6.3",
     "typescript": "^4.8.4"
   },
   "resolutions": {
