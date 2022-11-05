@@ -22,9 +22,7 @@
     "format:eslint": "eslint . --ext .ts --fix",
     "all": "run build:clean && run build && yarn workspace wesjet-nextjs-plugin run prepack",
     "test": "CI=true VITEST_SEGFAULT_RETRY=3 yarn workspaces foreach --parallel run test",
-    "dev": "turbo run dev --parallel",
-    "dev:www": "turbo run dev --filter=www --parallel",
-    "dev:nww": "turbo run dev filter --filter=nextjs-with-wesjet --parallel"
+    "dev:www": "turbo run dev --filter=www --parallel"
   },
   "author": "Wesbitty, Inc",
   "keywords": [
