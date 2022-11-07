@@ -1,15 +1,6 @@
 {
-  "name": "wesjetpkg",
-  "version": "0.0.0",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "examples/*",
-    "apps/www",
-    "cli/*",
-    "cli/@wesjet/*",
-    "packages/*"
-  ],
   "scripts": {
     "postinstall": "ts-patch install -s && ts-patch --persist",
     "postinstall:wesjet": "yarn workspaces foreach --verbose --include \"examples-*\" exec yarn wesjet postinstall",
@@ -51,6 +42,13 @@
     "turbo": "^1.6.3",
     "typescript": "^4.8.4"
   },
+  "workspaces": [
+    "examples/*",
+    "apps/www",
+    "cli/*",
+    "cli/@wesjet/*",
+    "packages/*"
+  ],
   "resolutions": {
     "esbuild": "0.15.7",
     "wesjet": "workspace:*",

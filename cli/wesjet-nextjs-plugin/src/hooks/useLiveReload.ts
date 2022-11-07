@@ -1,5 +1,5 @@
-import { addMessageListener } from 'next/dist/client/dev/error-overlay/websocket'
-import { useRouter } from 'next/router'
+import { addMessageListener } from 'next/dist/client/dev/error-overlay/websocket.js'
+import { useRouter } from 'next/router.js'
 // NOTE use ESM/CommonJS compat import here until resolved: https://github.com/facebook/react/issues/11503
 import React from 'react'
 

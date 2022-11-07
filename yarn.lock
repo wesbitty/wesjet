@@ -17993,6 +17993,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"root-workspace-0b6124@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "root-workspace-0b6124@workspace:."
+  dependencies:
+    "@changesets/cli": ^2.25.0
+    "@effect-ts/tracing-plugin": ^0.20.0
+    "@types/prettier": ^2.7.1
+    "@typescript-eslint/eslint-plugin": ^5.39.0
+    "@typescript-eslint/parser": ^5.39.0
+    eslint: ^8.24.0
+    eslint-config-prettier: ^8.5.0
+    eslint-plugin-import: ^2.26.0
+    eslint-plugin-react-hooks: ^4.6.0
+    eslint-plugin-simple-import-sort: ^8.0.0
+    prettier: ^2.7.1
+    ts-patch: ^2.0.2
+    turbo: ^1.6.3
+    typescript: ^4.8.4
+  languageName: unknown
+  linkType: soft
+
 "run-async@npm:^2.4.0":
   version: 2.4.1
   resolution: "run-async@npm:2.4.1"
@@ -21112,27 +21133,6 @@ __metadata:
     contentful-migration: ^4.2.3
     lorem-ipsum: ^2.0.8
     ts-node: ^10.9.1
-  languageName: unknown
-  linkType: soft
-
-"wesjetpkg@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "wesjetpkg@workspace:."
-  dependencies:
-    "@changesets/cli": ^2.25.0
-    "@effect-ts/tracing-plugin": ^0.20.0
-    "@types/prettier": ^2.7.1
-    "@typescript-eslint/eslint-plugin": ^5.39.0
-    "@typescript-eslint/parser": ^5.39.0
-    eslint: ^8.24.0
-    eslint-config-prettier: ^8.5.0
-    eslint-plugin-import: ^2.26.0
-    eslint-plugin-react-hooks: ^4.6.0
-    eslint-plugin-simple-import-sort: ^8.0.0
-    prettier: ^2.7.1
-    ts-patch: ^2.0.2
-    turbo: ^1.6.3
-    typescript: ^4.8.4
   languageName: unknown
   linkType: soft
 
