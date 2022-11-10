@@ -1,7 +1,5 @@
 import { Chunk } from '@effect-ts/core'
-
 import { E, O, These, Tp } from './index.js'
-
 export * from '@effect-ts/core/Collections/Immutable/Chunk'
 
 /**

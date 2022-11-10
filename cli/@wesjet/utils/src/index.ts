@@ -1,5 +1,4 @@
 import { type Temporal, toTemporalInstant } from '@js-temporal/polyfill'
-
 export * from './string.js'
 export * from './guards.js'
 export * from './object/index.js'
@@ -10,7 +9,6 @@ export * from './single-item.js'
 export * from './file-paths.js'
 export * as base64 from './base64.js'
 export * from './tracing-effect/index.js'
-
 export { Temporal } from '@js-temporal/polyfill'
 export { AsciiTree } from 'oo-ascii-tree'
 export * as pattern from 'ts-pattern'
