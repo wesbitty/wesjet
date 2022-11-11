@@ -1,6 +1,7 @@
 {
-  "license": "UNLICENSED",
   "private": true,
+  "license": "UNLICENSED",
+  "version": "0.0.0",
   "scripts": {
     "postinstall": "ts-patch install -s && ts-patch --persist",
     "postinstall:wesjet": "yarn workspaces foreach --verbose --include \"examples-*\" exec yarn wesjet postinstall",
