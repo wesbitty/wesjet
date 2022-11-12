@@ -1,6 +1,6 @@
 import type { MigrationFunction } from 'contentful-migration'
 
-const migrate: MigrationFunction = (migration) => {
+const migrate: MigrationFunction = migration => {
   const post = migration.createContentType('post', {
     name: 'Blog Post',
     description: 'Posts on our blog',

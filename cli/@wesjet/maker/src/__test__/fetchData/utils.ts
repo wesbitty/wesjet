@@ -29,8 +29,8 @@ export const runTest = async ({
     const source = yield* $(T.tryPromise(() => makeSource({ contentDirPath, documentTypes })))
     const coreSchemaDef = yield* $(source.provideSchema(esbuildHash))
 
-    const documentTypeDefs = (Array.isArray(documentTypes) ? documentTypes : Object.values(documentTypes)).map((_) =>
-      _.def(),
+    const documentTypeDefs = (Array.isArray(documentTypes) ? documentTypes : Object.values(documentTypes)).map(_ =>
+      _.def()
     )
     const filePathPatternMap = testOnly_makefilePathPatternMap(documentTypeDefs)
     const contentTypeMap = testOnly_makeContentTypeMap(documentTypeDefs)
@@ -54,8 +54,8 @@ export const runTest = async ({
           previousCache: undefined,
           contentTypeMap,
         }),
-        These.effectToEither,
-      ),
+        These.effectToEither
+      )
     )
 
     return cache
@@ -65,7 +65,7 @@ export const runTest = async ({
 }
 
 const runMain = async <E, A>(
-  eff: T.Effect<OT.HasTracer & HasClock & HasCwd & HasConsole & HasDocumentTypeMapState, E, A>,
+  eff: T.Effect<OT.HasTracer & HasClock & HasCwd & HasConsole & HasDocumentTypeMapState, E, A>
 ) => {
   const logMessages: string[] = []
   const result = await pipe(
@@ -74,7 +74,7 @@ const runMain = async <E, A>(
     provideDocumentTypeMapState,
     provideCwd,
     provideDummyTracing,
-    T.runPromise,
+    T.runPromise
   )
 
   return { logMessages, result }

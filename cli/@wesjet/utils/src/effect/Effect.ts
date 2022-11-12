@@ -2,6 +2,7 @@
 
 import { Chunk, Effect as T, Either as E, pipe } from '@effect-ts/core'
 import * as Tuple from '@effect-ts/core/Collections/Immutable/Tuple'
+
 import { ConsoleService } from './ConsoleService.js'
 export * from '@effect-ts/core/Effect'
 export type { _A as OutputOf } from '@effect-ts/core/Utils'
@@ -18,14 +19,14 @@ export const log = log_.log
 
 export const rightOrFail = <R, E1, EE1, A>(
   effect: T.Effect<R, E1, E.Either<EE1, A>>,
-  __trace?: string,
+  __trace?: string
 ): T.Effect<R, E1 | EE1, A> =>
   T.chain_(
     effect,
     E.fold(
-      (x) => T.fail(x, __trace),
-      (x) => T.succeed(x, __trace),
-    ),
+      x => T.fail(x, __trace),
+      x => T.succeed(x, __trace)
+    )
   )
 
 export const eitherMap =
@@ -36,11 +37,11 @@ export const eitherMap =
 export const chainMergeObject =
   <T2, E2, A1 extends {}, A2 extends {}>(effect: (a1: A1) => T.Effect<T2, E2, A2>) =>
   <T1, E1>(self: T.Effect<T1, E1, A1>): T.Effect<T1 & T2, E1 | E2, A1 & A2> =>
-    T.chain_(self, (a1) =>
+    T.chain_(self, a1 =>
       pipe(
         effect(a1),
-        T.map((a2) => ({ ...a1, ...a2 })),
-      ),
+        T.map(a2 => ({ ...a1, ...a2 }))
+      )
     )
 
 export const forEachParDict =
@@ -56,12 +57,12 @@ export const forEachParDict_ = <A, R, E, B>(
   }: {
     mapKey: (a: A) => T.Effect<R, E, string>
     mapValue: (a: A) => T.Effect<R, E, B>
-  },
+  }
 ): T.Effect<R, E, Record<string, B>> =>
   pipe(
     as,
-    T.forEach((a) => T.tuplePar(mapKey(a), mapValue(a))),
+    T.forEach(a => T.tuplePar(mapKey(a), mapValue(a))),
     T.map(Chunk.map(Tuple.toNative)),
     T.map(Chunk.toArray),
-    T.map(Object.fromEntries),
+    T.map(Object.fromEntries)
   )

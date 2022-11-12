@@ -4,7 +4,7 @@ import * as utils from '@wesjet/utils'
 
 export const convertSchema = (
   { documentTypeDefMap, nestedTypeDefMap }: core.SchemaDef,
-  extensions: core.PluginExtensions,
+  extensions: core.PluginExtensions
 ): Stackbit.YamlConfig => {
   // TODO this needs to be more dynamic/configurable
   const urlPathFieldName = 'url_path'
@@ -12,19 +12,19 @@ export const convertSchema = (
   const [pageDocumentDefs, dataDocumentDefs] = utils.partition(
     documentTypeDefs,
     (_): _ is core.DocumentTypeDef =>
-      _.fieldDefs.some((_) => _.name === urlPathFieldName) || _.computedFields.some((_) => _.name === urlPathFieldName),
+      _.fieldDefs.some(_ => _.name === urlPathFieldName) || _.computedFields.some(_ => _.name === urlPathFieldName)
   )
   const pagesDir = extensions.stackbit?.pagesDir
   const dataDir = extensions.stackbit?.dataDir
 
   const models = Object.fromEntries(
     [
-      ...pageDocumentDefs.map((def) => documentOrObjectDefToStackbitYamlModel({ def, type: 'page', urlPathFieldName })),
-      ...dataDocumentDefs.map((def) => documentOrObjectDefToStackbitYamlModel({ def, type: 'data', urlPathFieldName })),
-      ...Object.values(nestedTypeDefMap).map((def) =>
-        documentOrObjectDefToStackbitYamlModel({ def, type: 'object', urlPathFieldName }),
+      ...pageDocumentDefs.map(def => documentOrObjectDefToStackbitYamlModel({ def, type: 'page', urlPathFieldName })),
+      ...dataDocumentDefs.map(def => documentOrObjectDefToStackbitYamlModel({ def, type: 'data', urlPathFieldName })),
+      ...Object.values(nestedTypeDefMap).map(def =>
+        documentOrObjectDefToStackbitYamlModel({ def, type: 'object', urlPathFieldName })
       ),
-    ].map(({ model, name }) => [name, model]),
+    ].map(({ model, name }) => [name, model])
   )
 
   return { stackbitVersion: '~0.3.0', nodeVersion: '>=12', models, pagesDir, dataDir }
@@ -43,9 +43,9 @@ const documentOrObjectDefToStackbitYamlModel = ({
     def._tag === 'DocumentTypeDef'
       ? def.fieldDefs
           .filter(not(isContentMarkdownFieldDef))
-          .map((fieldDef) => fieldDefToStackbitField({ fieldDef, fieldExtension: ext?.fields?.[fieldDef.name] }))
-      : def.fieldDefs.map((fieldDef) =>
-          fieldDefToStackbitField({ fieldDef, fieldExtension: ext?.fields?.[fieldDef.name] }),
+          .map(fieldDef => fieldDefToStackbitField({ fieldDef, fieldExtension: ext?.fields?.[fieldDef.name] }))
+      : def.fieldDefs.map(fieldDef =>
+          fieldDefToStackbitField({ fieldDef, fieldExtension: ext?.fields?.[fieldDef.name] })
         )
 
   const options = {
@@ -109,7 +109,7 @@ const fieldDefToStackbitField = ({
         type: 'object',
         fields: fieldDef.typeDef.fieldDefs
           .filter(not(isContentMarkdownFieldDef))
-          .map((fieldDef) => fieldDefToStackbitField({ fieldDef, fieldExtension: undefined })),
+          .map(fieldDef => fieldDefToStackbitField({ fieldDef, fieldExtension: undefined })),
       }
     case 'json':
       return { ...commonField, type: 'object', fields: [] }
@@ -136,7 +136,7 @@ const fieldDefToStackbitField = ({
 }
 
 const listFieldDefToStackbitFieldListItems = (
-  fieldDef: core.ListFieldDef | core.ListPolymorphicFieldDef,
+  fieldDef: core.ListFieldDef | core.ListPolymorphicFieldDef
 ): Stackbit.FieldListItems => {
   const getModelName = (item: core.ListFieldDefItem.ItemNested | core.ListFieldDefItem.ItemDocumentReference) =>
     item.type === 'reference' ? item.documentTypeName : item.nestedTypeName
@@ -152,7 +152,7 @@ const listFieldDefToStackbitFieldListItems = (
     // TODO make more configurable via global `objectTypeKey` option
     // https://www.stackbit.com/docs/stackbit-yaml/properties/#objecttypekey
     throw new Error(
-      `typeField needs to be called "type" in order to be supported by Stackbit. typeField found: "${fieldDef.typeField}"`,
+      `typeField needs to be called "type" in order to be supported by Stackbit. typeField found: "${fieldDef.typeField}"`
     )
   }
 
@@ -160,7 +160,7 @@ const listFieldDefToStackbitFieldListItems = (
     fieldDef.type === 'list_polymorphic' &&
     fieldDef.of.every(
       (_): _ is core.ListFieldDefItem.ItemDocumentReference | core.ListFieldDefItem.ItemNested =>
-        _.type === 'reference' || _.type === 'nested',
+        _.type === 'reference' || _.type === 'nested'
     )
   ) {
     return {
@@ -180,7 +180,7 @@ const listFieldDefToStackbitFieldListItems = (
           type: 'object',
           fields: fieldDef.of.typeDef.fieldDefs
             .filter(not(isContentMarkdownFieldDef))
-            .map((fieldDef) => fieldDefToStackbitField({ fieldDef, fieldExtension: undefined })),
+            .map(fieldDef => fieldDefToStackbitField({ fieldDef, fieldExtension: undefined })),
         }
       case 'enum':
         return { type: 'enum', options: fieldDef.of.options as string[] }

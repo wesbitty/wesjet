@@ -5,14 +5,14 @@ import { UnknownContentfulError } from './errors.js'
 import type { Contentful } from './types.js'
 
 export const environmentGetContentTypes = (
-  environment: Contentful.Environment,
+  environment: Contentful.Environment
 ): T.Effect<OT.HasTracer, UnknownContentfulError, Contentful.ContentType[]> =>
   pipe(
     T.tryCatchPromise(
-      () => environment.getContentTypes().then((_) => _.items),
-      (error) => new UnknownContentfulError({ error }),
+      () => environment.getContentTypes().then(_ => _.items),
+      error => new UnknownContentfulError({ error })
     ),
-    OT.withSpan('@wesjet/source-wesjet/contentful:environmentGetContentTypes'),
+    OT.withSpan('@wesjet/source-wesjet/contentful:environmentGetContentTypes')
   )
 
 export const environmentGetEntries = ({
@@ -27,9 +27,9 @@ export const environmentGetEntries = ({
   pipe(
     T.tryCatchPromise(
       () => environment.getEntries({ limit, skip }),
-      (error) => new UnknownContentfulError({ error }),
+      error => new UnknownContentfulError({ error })
     ),
-    OT.withSpan('@wesjet/source-wesjet/contentful:environmentGetEntries'),
+    OT.withSpan('@wesjet/source-wesjet/contentful:environmentGetEntries')
   )
 
 export const environmentGetAssets = ({
@@ -44,9 +44,9 @@ export const environmentGetAssets = ({
   pipe(
     T.tryCatchPromise(
       () => environment.getAssets({ limit, skip }),
-      (error) => new UnknownContentfulError({ error }),
+      error => new UnknownContentfulError({ error })
     ),
-    OT.withSpan('@wesjet/source-wesjet/contentful:environmentGetAssets'),
+    OT.withSpan('@wesjet/source-wesjet/contentful:environmentGetAssets')
   )
 
 export const getEnvironment = ({
@@ -61,8 +61,8 @@ export const getEnvironment = ({
   const client = createClient({ accessToken })
   return pipe(
     T.tryPromise(() => client.getSpace(spaceId)),
-    T.chain((space) => T.tryPromise(() => space.getEnvironment(environmentId))),
+    T.chain(space => T.tryPromise(() => space.getEnvironment(environmentId))),
     OT.withSpan('@wesjet/source-wesjet/contentful:getEnvironment'),
-    T.mapError((error) => new UnknownContentfulError({ error })),
+    T.mapError(error => new UnknownContentfulError({ error }))
   )
 }

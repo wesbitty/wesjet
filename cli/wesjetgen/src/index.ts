@@ -94,4 +94,4 @@ const main = async () => {
   }
 }
 
-main().catch((e) => console.error(e))
+main().catch(e => console.error(e))

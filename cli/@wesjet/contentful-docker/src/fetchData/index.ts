@@ -60,11 +60,10 @@ export const fetchAllDocuments = ({
         documentTypeDef: core.DocumentTypeDef
       }) => schemaOverrides.documentTypes[entry.sys.contentType.sys.id]?.defName === documentTypeDef.name
 
-      const documentEntriesWithDocumentTypeDef = Object.values(schemaDef.documentTypeDefMap).flatMap(
-        (documentTypeDef) =>
-          allEntries
-            .filter((entry) => isEntryADocument({ entry, documentTypeDef }))
-            .map((documentEntry) => ({ documentEntry, documentTypeDef })),
+      const documentEntriesWithDocumentTypeDef = Object.values(schemaDef.documentTypeDefMap).flatMap(documentTypeDef =>
+        allEntries
+          .filter(entry => isEntryADocument({ entry, documentTypeDef }))
+          .map(documentEntry => ({ documentEntry, documentTypeDef }))
       )
 
       const concurrencyLimit = os.cpus().length
@@ -81,26 +80,26 @@ export const fetchAllDocuments = ({
               schemaDef,
               schemaOverrides,
               options,
-            }),
+            })
           ),
           OT.withSpan('@wesjet/source-wesjet/fetchData:makeCacheItems', {
             attributes: { count: documentEntriesWithDocumentTypeDef.length },
-          }),
-        ),
+          })
+        )
       )
 
-      const cacheItemsMap = Object.fromEntries(Chunk.map_(documents, (_) => [_.document._id, _]))
+      const cacheItemsMap = Object.fromEntries(Chunk.map_(documents, _ => [_.document._id, _]))
 
       return { cacheItemsMap }
     }),
     OT.withSpan('@wesjet/source-wesjet/fetchData:fetchAllDocuments', {
       attributes: { schemaDef: JSON.stringify(schemaDef), schemaOverrides_: JSON.stringify(schemaOverrides_) },
     }),
-    T.mapError((error) => new core.SourceFetchDataError({ error, alreadyHandled: false })),
+    T.mapError(error => new core.SourceFetchDataError({ error, alreadyHandled: false }))
   )
 
 const getAllEntries = (
-  environment: Contentful.Environment,
+  environment: Contentful.Environment
 ): T.Effect<OT.HasTracer, UnknownContentfulError, Contentful.Entry[]> =>
   pipe(
     T.gen(function* ($) {
@@ -116,11 +115,11 @@ const getAllEntries = (
 
       return entries
     }),
-    OT.withSpan('@wesjet/source-wesjet/fetchData:getAllEntries'),
+    OT.withSpan('@wesjet/source-wesjet/fetchData:getAllEntries')
   )
 
 const getAllAssets = (
-  environment: Contentful.Environment,
+  environment: Contentful.Environment
 ): T.Effect<OT.HasTracer, UnknownContentfulError, Contentful.Asset[]> =>
   pipe(
     T.gen(function* ($) {
@@ -136,5 +135,5 @@ const getAllAssets = (
 
       return entries
     }),
-    OT.withSpan('@wesjet/source-wesjet/fetchData:getAllAssets'),
+    OT.withSpan('@wesjet/source-wesjet/fetchData:getAllAssets')
   )

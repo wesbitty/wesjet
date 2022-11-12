@@ -14,14 +14,14 @@ export const renderTypes = ({
 }): string => {
   const documentTypes = Object.values(schemaDef.documentTypeDefMap)
     .sort((a, b) => a.name.localeCompare(b.name))
-    .map((def) => ({
+    .map(def => ({
       typeName: def.name,
       typeDef: renderDocumentTypeDefOrNestedTypeDef({ def, generationOptions }),
     }))
 
   const nestedTypes = Object.values(schemaDef.nestedTypeDefMap)
     .sort((a, b) => a.name.localeCompare(b.name))
-    .map((def) => ({
+    .map(def => ({
       typeName: def.name,
       typeDef: renderDocumentTypeDefOrNestedTypeDef({ def, generationOptions }),
     }))
@@ -30,12 +30,12 @@ export const renderTypes = ({
   // to not depend on global types
   const documentTypeMap = documentTypes
     .map(prop('typeName'))
-    .map((_) => `  ${_}: ${_}`)
+    .map(_ => `  ${_}: ${_}`)
     .join('\n')
 
   const nestedTypeMap = nestedTypes
     .map(prop('typeName'))
-    .map((_) => `  ${_}: ${_}`)
+    .map(_ => `  ${_}: ${_}`)
     .join('\n')
 
   const importsForRawTypes = pattern
@@ -112,11 +112,11 @@ export const renderDocumentTypeDefOrNestedTypeDef = ({
   const typeNameField = options.fieldOptions.typeFieldName
   const fieldDefs = def.fieldDefs
     // ignore "type field" to avoid duplicate rendering
-    .filter((_) => _.name !== typeNameField)
+    .filter(_ => _.name !== typeNameField)
     .map(renderFieldDef)
     .join('\n')
   const computedFields = (def._tag === 'DocumentTypeDef' ? def.computedFields : [])
-    .map((field) => `${field.description ? `  /** ${field.description} */\n` : ''}  ${field.name}: ${field.type}`)
+    .map(field => `${field.description ? `  /** ${field.description} */\n` : ''}  ${field.name}: ${field.type}`)
     .join('\n')
   const description = def.description ?? def.extensions.stackbit?.fields?.[def.name]?.label
 

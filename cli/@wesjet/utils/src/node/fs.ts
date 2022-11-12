@@ -1,27 +1,28 @@
-import type { Stats } from 'fs'
-import { promises as fs } from 'fs'
 import { pipe } from '@effect-ts/core'
 import { Tagged } from '@effect-ts/core/Case'
 import * as OT from '@effect-ts/otel'
+import type { Stats } from 'fs'
+import { promises as fs } from 'fs'
 import type { JsonValue } from 'type-fest'
+
 import { T } from '../effect/index.js'
 import { errorToString } from '../index.js'
 
 export const fileOrDirExists = (pathLike: string): T.Effect<OT.HasTracer, StatError, boolean> => {
   return pipe(
     stat(pathLike),
-    T.map((stat_) => stat_.isFile() || stat_.isDirectory()),
+    T.map(stat_ => stat_.isFile() || stat_.isDirectory()),
     T.catchTag('node.fs.FileNotFoundError', () => T.succeed(false)),
-    T.tap((exists) => OT.addAttribute('exists', exists)),
-    OT.withSpan('fileOrDirExists', { attributes: { pathLike } }),
+    T.tap(exists => OT.addAttribute('exists', exists)),
+    OT.withSpan('fileOrDirExists', { attributes: { pathLike } })
   )
 }
 
 export const symlinkExists = (pathLike: string): T.Effect<unknown, StatError, boolean> => {
   return pipe(
     stat(pathLike),
-    T.map((stat_) => stat_.isSymbolicLink()),
-    T.catchTag('node.fs.FileNotFoundError', () => T.succeed(false)),
+    T.map(stat_ => stat_.isSymbolicLink()),
+    T.catchTag('node.fs.FileNotFoundError', () => T.succeed(false))
   )
 }
 
@@ -34,7 +35,7 @@ export const stat = (filePath: string): T.Effect<unknown, FileNotFoundError | St
       } else {
         return new StatError({ filePath, error })
       }
-    },
+    }
   )
 }
 
@@ -48,8 +49,8 @@ export const readFile = (filePath: string): T.Effect<OT.HasTracer, ReadFileError
         } else {
           return new ReadFileError({ filePath, error })
         }
-      },
-    ),
+      }
+    )
   )
 
 export const readFileBuffer = (filePath: string): T.Effect<OT.HasTracer, ReadFileError | FileNotFoundError, Buffer> =>
@@ -62,38 +63,38 @@ export const readFileBuffer = (filePath: string): T.Effect<OT.HasTracer, ReadFil
         } else {
           return new ReadFileError({ filePath, error })
         }
-      },
-    ),
+      }
+    )
   )
 
 export const readFileJson = <T extends JsonValue = JsonValue>(
-  filePath: string,
+  filePath: string
 ): T.Effect<OT.HasTracer, ReadFileError | FileNotFoundError | JsonParseError, T> =>
   pipe(
     readFile(filePath),
-    T.chain((str) =>
+    T.chain(str =>
       T.tryCatch(
         () => JSON.parse(str) as T,
-        (error) => new JsonParseError({ str, error }),
-      ),
-    ),
+        error => new JsonParseError({ str, error })
+      )
+    )
   )
 
 export const readFileJsonIfExists = <T extends JsonValue = JsonValue>(
-  filePath: string,
+  filePath: string
 ): T.Effect<OT.HasTracer, StatError | ReadFileError | JsonParseError, T | undefined> =>
   pipe(
     fileOrDirExists(filePath),
-    T.chain((exists) => (exists ? readFileJson<T>(filePath) : T.succeed(undefined))),
-    T.catchTag('node.fs.FileNotFoundError', (e) => T.die(e)),
+    T.chain(exists => (exists ? readFileJson<T>(filePath) : T.succeed(undefined))),
+    T.catchTag('node.fs.FileNotFoundError', e => T.die(e))
   )
 
 export const writeFile = (filePath: string, content: string): T.Effect<OT.HasTracer, WriteFileError, void> =>
   OT.withSpan('writeFile', { attributes: { filePath } })(
     T.tryCatchPromise(
       () => fs.writeFile(filePath, content, 'utf8'),
-      (error) => new WriteFileError({ filePath, error }),
-    ),
+      error => new WriteFileError({ filePath, error })
+    )
   )
 
 export const writeFileJson = ({
@@ -106,28 +107,28 @@ export const writeFileJson = ({
   pipe(
     T.tryCatch(
       () => JSON.stringify(content, null, 2) + '\n',
-      (error) => new JsonStringifyError({ error }),
+      error => new JsonStringifyError({ error })
     ),
-    T.chain((contentStr) => writeFile(filePath, contentStr)),
+    T.chain(contentStr => writeFile(filePath, contentStr))
   )
 
 export const mkdirp = <T extends string>(dirPath: T): T.Effect<OT.HasTracer, MkdirError, void> =>
   OT.withSpan('mkdirp', { attributes: { dirPath } })(
     T.tryCatchPromise(
       () => fs.mkdir(dirPath, { recursive: true }),
-      (error) => new MkdirError({ dirPath, error }),
-    ),
+      error => new MkdirError({ dirPath, error })
+    )
   )
 
 export function rm(path: string, params: { force: true; recursive?: boolean }): T.Effect<OT.HasTracer, RmError, void>
 export function rm(
   path: string,
-  params?: { force?: false; recursive?: boolean },
+  params?: { force?: false; recursive?: boolean }
 ): T.Effect<OT.HasTracer, RmError | FileOrDirNotFoundError, void>
 
 export function rm(
   path: string,
-  params: { force?: boolean; recursive?: boolean } = {},
+  params: { force?: boolean; recursive?: boolean } = {}
 ): T.Effect<OT.HasTracer, RmError | FileOrDirNotFoundError, void> {
   const { force = false, recursive = true } = params
   return OT.withSpan('rm', { attributes: { path } })(
@@ -139,8 +140,8 @@ export function rm(
         } else {
           return new RmError({ path, error })
         }
-      },
-    ),
+      }
+    )
   )
 }
 
@@ -161,8 +162,8 @@ export const symlink = ({
   OT.withSpan('symlink', { attributes: { targetPath, symlinkPath, type } })(
     T.tryCatchPromise(
       () => fs.symlink(targetPath, symlinkPath, type),
-      (error) => new SymlinkError({ targetPath, symlinkPath, type, error }),
-    ),
+      error => new SymlinkError({ targetPath, symlinkPath, type, error })
+    )
   )
 
 export class FileNotFoundError extends Tagged('node.fs.FileNotFoundError')<{ readonly filePath: string }> {}

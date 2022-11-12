@@ -9,10 +9,10 @@ const MIN_NODE_VERSION_MAJOR = 14
 const MIN_NODE_VERSION_MINOR = 18
 
 const checkNodeVersion = () => {
-  const [nodeVersionMajor, nodeVersionMinor] = process.versions.node.split('.').map((_) => parseInt(_, 10)) as [
+  const [nodeVersionMajor, nodeVersionMinor] = process.versions.node.split('.').map(_ => parseInt(_, 10)) as [
     number,
     number,
-    number,
+    number
   ]
 
   if (
@@ -20,7 +20,7 @@ const checkNodeVersion = () => {
     (nodeVersionMajor === MIN_NODE_VERSION_MAJOR && nodeVersionMinor < MIN_NODE_VERSION_MINOR)
   ) {
     throw new Error(
-      `wesjet required Node.js version >= ${MIN_NODE_VERSION_MAJOR}.${MIN_NODE_VERSION_MINOR}. (Current version: ${process.versions.node})`,
+      `wesjet required Node.js version >= ${MIN_NODE_VERSION_MAJOR}.${MIN_NODE_VERSION_MINOR}. (Current version: ${process.versions.node})`
     )
   }
 }
@@ -33,7 +33,7 @@ const checkWesjetVersionsMatch = () => {
     throw new Error(
       `\
 The versions of "wesjet" and "wesjet-nextjs-plugin" need to be identical in your "package.json".
-Currently used versions: wesjetpkg: "${wesjetVersion}", wesjet-nextjs-plugin: "${nextWesjetVersion}"`,
+Currently used versions: wesjetpkg: "${wesjetVersion}", wesjet-nextjs-plugin: "${nextWesjetVersion}"`
     )
   }
 }

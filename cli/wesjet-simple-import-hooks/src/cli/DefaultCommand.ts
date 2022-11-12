@@ -39,10 +39,10 @@ export class DefaultCommand extends Command {
       await pipe(
         this.executeSafe(),
         provideJaegerTracing('wesjet-simple-import-hooks'),
-        T.tapCause((cause) => T.die(pretty(cause))),
+        T.tapCause(cause => T.die(pretty(cause))),
         provideCwd,
         provideConsole,
-        T.runPromise,
+        T.runPromise
       )
     } catch (e: any) {
       console.error(e)
@@ -53,8 +53,8 @@ export class DefaultCommand extends Command {
   executeSafe = (): T.Effect<OT.HasTracer & HasCwd & HasConsole, unknown, void> =>
     pipe(
       getConfig({ configPath: this.configPath }),
-      T.chain((config) =>
-        T.struct({ source: T.succeed(config.source), schema: config.source.provideSchema(config.esbuildHash) }),
+      T.chain(config =>
+        T.struct({ source: T.succeed(config.source), schema: config.source.provideSchema(config.esbuildHash) })
       ),
       T.chain(({ schema, source }) =>
         T.tryCatchPromise(
@@ -76,10 +76,10 @@ ${toYamlString(stackbitConfig)}
             await fs.writeFile(this.stackbitYamlPath, yamlContent)
             console.log(`Stackbit config generated to ${this.stackbitYamlPath}`)
           },
-          (error) => error,
-        ),
+          error => error
+        )
       ),
-      OT.withSpan('DefaultCommand:executeSafe'),
+      OT.withSpan('DefaultCommand:executeSafe')
     )
 }
 

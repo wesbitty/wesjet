@@ -107,10 +107,10 @@ const aggregateFetchDataErrors = ({
   const topMessage = shouldFail ? `Error: ${keyMessage}` : `Warning: ${keyMessage}`
   const asciiTree = new AsciiTree(topMessage + '\n')
 
-  const uniqueErrorTags = Array.from(new Set(errors.map((e) => e._tag)))
+  const uniqueErrorTags = Array.from(new Set(errors.map(e => e._tag)))
 
   for (const tag of uniqueErrorTags) {
-    const taggedErrors = errors.filter((e) => e._tag === tag)
+    const taggedErrors = errors.filter(e => e._tag === tag)
 
     let str = ''
 
@@ -168,27 +168,27 @@ const failOrSkip = ({
   errors: readonly FetchDataError.FetchDataError[]
   flags: Flags
 }): 'fail' | 'skip' => {
-  if (errors.some((_) => _.category === 'ExtraFieldData') && flags.onExtraFieldData === 'fail') {
+  if (errors.some(_ => _.category === 'ExtraFieldData') && flags.onExtraFieldData === 'fail') {
     return 'fail'
   }
 
-  if (errors.some((_) => _.category === 'UnknownDocument') && flags.onUnknownDocuments === 'fail') {
+  if (errors.some(_ => _.category === 'UnknownDocument') && flags.onUnknownDocuments === 'fail') {
     return 'fail'
   }
 
-  if (errors.some((_) => _.category === 'MissingOrIncompatibleData') && flags.onMissingOrIncompatibleData === 'fail') {
+  if (errors.some(_ => _.category === 'MissingOrIncompatibleData') && flags.onMissingOrIncompatibleData === 'fail') {
     return 'fail'
   }
 
-  if (errors.some((_) => _.category === 'SingletonDocumentNotFound')) {
+  if (errors.some(_ => _.category === 'SingletonDocumentNotFound')) {
     return 'fail'
   }
 
-  if (errors.some((_) => _.category === 'Unexpected')) {
+  if (errors.some(_ => _.category === 'Unexpected')) {
     return 'fail'
   }
 
-  if (errors.some((_) => _.documentTypeDef?.isSingleton)) {
+  if (errors.some(_ => _.documentTypeDef?.isSingleton)) {
     return 'fail'
   }
 
@@ -202,7 +202,7 @@ const filterIgnoredErrorsByFlags = ({
   errors: readonly FetchDataError.FetchDataError[]
   flags: Flags
 }): readonly FetchDataError.FetchDataError[] =>
-  errors.filter((e) => {
+  errors.filter(e => {
     if (e.category === 'ExtraFieldData' && flags.onExtraFieldData === 'ignore') return false
     if (e.category === 'UnknownDocument' && flags.onUnknownDocuments === 'skip-ignore') return false
     if (e.category === 'MissingOrIncompatibleData' && flags.onMissingOrIncompatibleData === 'skip-ignore') return false

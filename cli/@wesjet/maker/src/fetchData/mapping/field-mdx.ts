@@ -33,7 +33,7 @@ export const makeMdxField = ({
           options: options?.mdx,
           contentDirPath,
           rawDocumentData,
-        }),
+        })
       )
       return { raw: mdxString, code }
     } else {

@@ -29,17 +29,17 @@ export const fetchData = async ({
 
   const documents = entries
     // Ignores documents that are not explicitly defined in the schema (e.g. assets which are accessed via URLs instead)
-    .filter((_) => _._type in schemaDef.documentTypeDefMap)
-    .map((rawDocumentData) =>
+    .filter(_ => _._type in schemaDef.documentTypeDefMap)
+    .map(rawDocumentData =>
       makeDocument({
         rawDocumentData,
         documentTypeDef: schemaDef.documentTypeDefMap[rawDocumentData._type]!,
         schemaDef,
         imageUrlBuilder,
-      }),
+      })
     )
 
-  const cacheItemsMap = Object.fromEntries(documents.map((_) => [_.document._id, _]))
+  const cacheItemsMap = Object.fromEntries(documents.map(_ => [_.document._id, _]))
 
   return { cacheItemsMap }
   // }
@@ -61,7 +61,7 @@ const makeDocument = ({
   const raw = Object.fromEntries(Object.entries(rawDocumentData).filter(([key]) => key.startsWith('_')))
   const doc: Core.Document = { _typeName: documentTypeDef.name, _id: rawDocumentData._id, _raw: raw }
 
-  documentTypeDef.fieldDefs.forEach((fieldDef) => {
+  documentTypeDef.fieldDefs.forEach(fieldDef => {
     doc[fieldDef.name] = getDataForFieldDef({
       fieldDef,
       rawFieldData: rawDocumentData[fieldDef.name],
@@ -90,7 +90,7 @@ const makeNestedDocument = ({
   const raw = Object.fromEntries(Object.entries(rawObjectData).filter(([key]) => key.startsWith('_')))
   const obj: Core.NestedDocument = { _typeName: typeName, _raw: raw }
 
-  fieldDefs.forEach((fieldDef) => {
+  fieldDefs.forEach(fieldDef => {
     obj[fieldDef.name] = getDataForFieldDef({
       fieldDef,
       rawFieldData: rawObjectData[fieldDef.name],
@@ -146,8 +146,8 @@ const getDataForFieldDef = ({
     //   return imageUrlBuilder.image(rawFieldData).url()
     case 'list_polymorphic':
     case 'list':
-      return (rawFieldData as any[]).map((rawItemData) =>
-        getDataForListItem({ rawItemData, fieldDef, schemaDef, imageUrlBuilder }),
+      return (rawFieldData as any[]).map(rawItemData =>
+        getDataForListItem({ rawItemData, fieldDef, schemaDef, imageUrlBuilder })
       )
     default:
       return rawFieldData

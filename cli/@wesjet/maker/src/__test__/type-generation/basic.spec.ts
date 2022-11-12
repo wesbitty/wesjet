@@ -11,10 +11,10 @@ const renderTypeSource = async (documentTypes: DocumentTypes) => {
   const esbuildHash = 'not-important-for-this-test'
   const schemaDef = await pipe(
     T.tryPromise(() => makeSource({ documentTypes, contentDirPath: '' })),
-    T.chain((source) => source.provideSchema(esbuildHash)),
+    T.chain(source => source.provideSchema(esbuildHash)),
     provideJaegerTracing('wesjet-cli'),
     provideConsole,
-    T.runPromise,
+    T.runPromise
   )
 
   const typeSource = renderTypes({
@@ -52,7 +52,7 @@ test('generate-types: simple schema', async () => {
       },
     },
     computedFields: {
-      slug: { type: 'string', resolve: (_) => _._id.replace('.md', '') },
+      slug: { type: 'string', resolve: _ => _._id.replace('.md', '') },
     },
   }))
 
@@ -77,7 +77,7 @@ test('generate-types: simple schema with optional fields', async () => {
       },
     },
     computedFields: {
-      slug: { type: 'string', resolve: (_) => _._id.replace('.md', '') },
+      slug: { type: 'string', resolve: _ => _._id.replace('.md', '') },
     },
   }))
 

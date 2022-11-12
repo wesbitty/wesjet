@@ -33,7 +33,7 @@ export const markdownToHtml = ({
           T.tryPromise(async () => {
             const { parse: parseWasm } = await import('markdown-wasm/dist/markdown.node.js')
             return parseWasm(mdString)
-          }),
+          })
         )
       }
 
@@ -70,8 +70,8 @@ export const markdownToHtml = ({
       return res.toString()
     }),
     T.catchAllDefect(T.fail),
-    T.mapError((error) => new UnexpectedMarkdownError({ error })),
-    OT.withSpan('@wesjet/core/markdown:markdownToHtml'),
+    T.mapError(error => new UnexpectedMarkdownError({ error })),
+    OT.withSpan('@wesjet/core/markdown:markdownToHtml')
   )
 
 export class UnexpectedMarkdownError extends Tagged('UnexpectedMarkdownError')<{ readonly error: unknown }> {

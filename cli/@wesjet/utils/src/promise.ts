@@ -4,7 +4,7 @@ export const promiseMap = <T, Res>(arr: T[], map: (el: T, index?: number) => Res
 
 export const promiseMapDict = async <T, Res>(
   dict: Record<string, T>,
-  map: (el: T, index?: number) => Res | Promise<Res>,
+  map: (el: T, index?: number) => Res | Promise<Res>
 ): Promise<Record<string, Res>> => {
   const mappedEntries = await Promise.all(Object.entries(dict).map(async ([key, val]) => [key, await map(val)]))
   return Object.fromEntries(mappedEntries)
@@ -13,7 +13,7 @@ export const promiseMapDict = async <T, Res>(
 export const promiseMapToDict = async <T, Res>(
   arr: T[],
   mapValue: (el: T, index?: number) => Res | Promise<Res>,
-  mapKey: (el: T, index?: number) => string,
+  mapKey: (el: T, index?: number) => string
 ): Promise<Record<string, Res>> => {
   const mappedEntries = await Promise.all(arr.map(async (el, index) => [mapKey(el, index), await mapValue(el, index)]))
 
@@ -23,7 +23,7 @@ export const promiseMapToDict = async <T, Res>(
 export const promiseMapPool = async <T, Res>(
   arr: T[],
   map: (el: T, index?: number) => Promise<Res>,
-  poolLimit: number,
+  poolLimit: number
 ): Promise<Res[]> => {
   const ret: Promise<Res>[] = []
   const executing: Promise<Res>[] = []

@@ -113,7 +113,7 @@ export type SourcePlugin = {
 }
 
 export type ProvideSchema = (
-  esbuildHash: string,
+  esbuildHash: string
 ) => T.Effect<OT.HasTracer & HasConsole, SourceProvideSchemaError, SchemaDef>
 export type FetchData = (_: {
   schemaDef: SchemaDef
@@ -129,7 +129,7 @@ export type FetchData = (_: {
 // ) => Promise<core.SourcePlugin>
 
 export type MakeSourcePlugin<TArgs extends PartialArgs> = (
-  _: TArgs | Thunk<TArgs> | Thunk<Promise<TArgs>>,
+  _: TArgs | Thunk<TArgs> | Thunk<Promise<TArgs>>
 ) => Promise<SourcePlugin>
 
 export type PartialArgs = {
@@ -147,7 +147,7 @@ export const defaultFieldOptions: FieldOptions = {
 }
 
 export const processArgs = async <TArgs extends PartialArgs>(
-  argsOrArgsThunk: TArgs | Thunk<TArgs> | Thunk<Promise<TArgs>>,
+  argsOrArgsThunk: TArgs | Thunk<TArgs> | Thunk<Promise<TArgs>>
 ): Promise<{
   extensions: PluginExtensions
   options: PluginOptions

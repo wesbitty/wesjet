@@ -32,7 +32,7 @@ export const relativePosixFilePath = (path_: string): RelativePosixFilePath => {
 
 export const isPosixFilePathString = (path_: string) => !path_.includes(path.win32.sep)
 export const assertPosixFilePathString = (
-  path_: string,
+  path_: string
 ): asserts path_ is RelativePosixFilePath | AbsolutePosixFilePath => {
   if (!isPosixFilePathString(path_)) {
     throw new Error(`Expected a Posix file path, got ${path_}`)
@@ -92,7 +92,7 @@ export function filePathJoin(...paths: string[]): RelativePosixFilePath | Absolu
 export function dirname(path_: RelativePosixFilePath): RelativePosixFilePath
 export function dirname(path_: AbsolutePosixFilePath): AbsolutePosixFilePath
 export function dirname(
-  path_: RelativePosixFilePath | AbsolutePosixFilePath,
+  path_: RelativePosixFilePath | AbsolutePosixFilePath
 ): AbsolutePosixFilePath | RelativePosixFilePath {
   return path.dirname(path_) as AbsolutePosixFilePath | RelativePosixFilePath
 }
@@ -101,7 +101,7 @@ export function relative(from: AbsolutePosixFilePath, to: AbsolutePosixFilePath)
 export function relative(from: AbsolutePosixFilePath, to: string): RelativePosixFilePath
 export function relative(
   from: AbsolutePosixFilePath | string,
-  to: AbsolutePosixFilePath | string,
+  to: AbsolutePosixFilePath | string
 ): RelativePosixFilePath {
   return unknownToRelativePosixFilePath(path.relative(from, to))
 }

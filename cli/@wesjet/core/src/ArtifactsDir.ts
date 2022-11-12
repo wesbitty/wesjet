@@ -28,8 +28,8 @@ export namespace ArtifactsDir {
       cwd: getCwd,
     }),
     T.map(({ wesjetVersion, cwd }) =>
-      filePathJoin(getDirPath({ cwd }), 'cache' as RelativePosixFilePath, `v${wesjetVersion}` as RelativePosixFilePath),
-    ),
+      filePathJoin(getDirPath({ cwd }), 'cache' as RelativePosixFilePath, `v${wesjetVersion}` as RelativePosixFilePath)
+    )
   )
 
   export const mkdirCache: T.Effect<

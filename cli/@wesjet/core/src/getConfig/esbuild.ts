@@ -28,23 +28,23 @@ class ConcreteEsbuildWatcher implements EsbuildWatcher {
   constructor(
     private initialBuildResult: Ref.Ref<O.Option<esbuild.BuildResult>>,
     public buildOptions: esbuild.BuildOptions,
-    private fsEventsHub: H.Hub<Ex.Exit<never, E.Either<EsbuildError, esbuild.BuildResult>>>, // public readonly paths: readonly string[], // public readonly options?: Chokidar.WatchOptions
+    private fsEventsHub: H.Hub<Ex.Exit<never, E.Either<EsbuildError, esbuild.BuildResult>>> // public readonly paths: readonly string[], // public readonly options?: Chokidar.WatchOptions
   ) {}
 
   shutdown: T.Effect<unknown, never, void> = pipe(
     this.initialBuildResult,
     Ref.get,
-    T.chain((initialBuildResult) => {
+    T.chain(initialBuildResult => {
       if (O.isSome(initialBuildResult)) {
         return T.tryCatch(
           () => initialBuildResult.value.stop!(),
-          (error) => new UnknownEsbuildError({ error }),
+          error => new UnknownEsbuildError({ error })
         )
       }
       console.log(`This shouldn't happen. Seems like esbuild watcher wasn't running (yet).`)
       return T.unit
     }),
-    T.catchAll((_) => T.unit),
+    T.catchAll(_ => T.unit)
   )
 
   start: T.Effect<OT.HasTracer, never, void> = pipe(
@@ -62,18 +62,18 @@ class ConcreteEsbuildWatcher implements EsbuildWatcher {
             },
           },
         }),
-      (error) => new UnknownEsbuildError({ error }),
+      error => new UnknownEsbuildError({ error })
     ),
     OT.withSpan('esbuild', { attributes: { buildOptions: JSON.stringify(this.buildOptions) } }),
-    T.tap((initialBuildResult) => Ref.set_(this.initialBuildResult, O.some(initialBuildResult))),
-    T.tap((initialBuildResult) => H.publish_(this.fsEventsHub, Ex.succeed(E.right(initialBuildResult)))),
-    T.catchAll((error) => H.publish_(this.fsEventsHub, Ex.succeed(E.left(error)))),
+    T.tap(initialBuildResult => Ref.set_(this.initialBuildResult, O.some(initialBuildResult))),
+    T.tap(initialBuildResult => H.publish_(this.fsEventsHub, Ex.succeed(E.right(initialBuildResult)))),
+    T.catchAll(error => H.publish_(this.fsEventsHub, Ex.succeed(E.left(error))))
   )
 
   subscribe: M.Managed<unknown, never, S.Stream<unknown, never, E.Either<EsbuildError, esbuild.BuildResult>>> = pipe(
     H.subscribe(this.fsEventsHub),
-    M.chain((_) => M.ensuringFirst_(M.succeed(S.fromQueue()(_)), Q.shutdown(_))),
-    M.map(S.flattenExit),
+    M.chain(_ => M.ensuringFirst_(M.succeed(S.fromQueue()(_)), Q.shutdown(_))),
+    M.map(S.flattenExit)
   )
 }
 
@@ -86,13 +86,13 @@ export const make = (buildOptions: esbuild.BuildOptions): T.Effect<unknown, neve
     Ref.makeRef<O.Option<esbuild.BuildResult>>(O.none),
     T.zip(H.makeUnbounded<Ex.Exit<never, E.Either<EsbuildError, esbuild.BuildResult>>>()),
     T.chain(({ tuple: [initialBuildResult, hub] }) =>
-      T.succeedWith(() => new ConcreteEsbuildWatcher(initialBuildResult, buildOptions, hub)),
-    ),
+      T.succeedWith(() => new ConcreteEsbuildWatcher(initialBuildResult, buildOptions, hub))
+    )
     // T.tap((_) => _.start),
   )
 
 export const subscribe = (
-  self: EsbuildWatcher,
+  self: EsbuildWatcher
 ): M.Managed<unknown, never, S.Stream<unknown, never, E.Either<EsbuildError, esbuild.BuildResult>>> => {
   concrete(self)
 
@@ -111,20 +111,20 @@ export const start = (self: EsbuildWatcher): T.Effect<OT.HasTracer, never, void>
 //   pipe(M.make_(make(buildOptions), shutdown), M.chain(subscribe))
 
 export const makeAndSubscribeManaged = (
-  buildOptions: esbuild.BuildOptions,
+  buildOptions: esbuild.BuildOptions
 ): M.Managed<OT.HasTracer, never, S.Stream<unknown, never, E.Either<EsbuildError, esbuild.BuildResult>>> =>
   pipe(
     M.make_(make(buildOptions), shutdown),
-    M.chain((esbuildWatcher) =>
+    M.chain(esbuildWatcher =>
       pipe(
         subscribe(esbuildWatcher),
-        M.tap(() => T.toManaged(start(esbuildWatcher))),
-      ),
-    ),
+        M.tap(() => T.toManaged(start(esbuildWatcher)))
+      )
+    )
   )
 
 export const makeAndSubscribe = (
-  buildOptions: esbuild.BuildOptions,
+  buildOptions: esbuild.BuildOptions
 ): S.Stream<OT.HasTracer, never, E.Either<EsbuildError, esbuild.BuildResult>> =>
   pipe(makeAndSubscribeManaged(buildOptions), S.unwrapManaged)
 

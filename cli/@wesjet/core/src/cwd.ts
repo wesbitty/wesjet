@@ -9,7 +9,7 @@ export const makeCwd = T.gen(function* (_) {
     T.succeedWith(() => {
       const cwdValue = process.env.PWD ?? process.cwd()
       return unknownToAbsolutePosixFilePath(cwdValue)
-    }),
+    })
   )
 
   return { serviceId: CwdSymbol, cwd } as const
@@ -20,6 +20,6 @@ export const Cwd = tag<Cwd>()
 
 export const provideCwd = T.provideServiceM(Cwd)(makeCwd)
 
-export const getCwd = T.accessService(Cwd)((_) => _.cwd)
+export const getCwd = T.accessService(Cwd)(_ => _.cwd)
 
 export type HasCwd = Has<Cwd>

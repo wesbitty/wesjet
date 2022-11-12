@@ -45,6 +45,6 @@ export const makeAndProvideDocumentContext = ({
 }
 
 export const getFromDocumentContext = <K extends keyof DocumentContext>(key: K) =>
-  T.accessService(DocumentContext)((_) => _[key])
+  T.accessService(DocumentContext)(_ => _[key])
 
 export type HasDocumentContext = Has<DocumentContext>

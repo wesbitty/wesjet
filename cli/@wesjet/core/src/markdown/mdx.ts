@@ -37,7 +37,7 @@ export const bundleMDX = ({
       const getCwd = () => (resolveCwd === 'contentDirPath' ? getCwdFromContentDirPath() : getRelativeCwd())
 
       const mdxOptions: BundleMDXOptions<any> = {
-        mdxOptions: (opts) => {
+        mdxOptions: opts => {
           opts.rehypePlugins = [...(opts.rehypePlugins ?? []), ...(rehypePlugins ?? [])]
           opts.remarkPlugins = [
             addRawDocumentToVFile(rawDocumentData),
@@ -60,8 +60,8 @@ export const bundleMDX = ({
 
       return res.code
     }),
-    T.mapError((error) => new UnexpectedMDXError({ error })),
-    OT.withSpan('@wesjet/corerkdown:bundleMDX'),
+    T.mapError(error => new UnexpectedMDXError({ error })),
+    OT.withSpan('@wesjet/corerkdown:bundleMDX')
   )
 
 export class UnexpectedMDXError extends Tagged('UnexpectedMDXError')<{ readonly error: unknown }> {

@@ -27,7 +27,7 @@ export const runMain =
             yield* $(
               T.log(`\
 This error shouldn't have happened. Please consider opening a GitHub issue with the stack trace below here:
-https://github.com/wesbitty/wesjetpkg/issues`),
+https://github.com/wesbitty/wesjetpkg/issues`)
             )
           }
 
@@ -49,7 +49,7 @@ OS: ${process.platform} ${os.release()} (arch: ${process.arch})
 Process: ${process.argv.join(' ')}
 Node version: ${process.version}
 wesjet version: ${wesjetVersion}
-`),
+`)
             )
           }
 
@@ -57,5 +57,5 @@ wesjet version: ${wesjetVersion}
         }
       }),
       provideConsole,
-      T.runPromise,
+      T.runPromise
     )

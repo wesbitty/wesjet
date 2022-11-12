@@ -10,7 +10,7 @@ const ParsedImageData = zod.object({
   alt: zod.string().optional(),
 })
 
-const ImageData = zod.union([zod.string(), ParsedImageData]).transform((_) => {
+const ImageData = zod.union([zod.string(), ParsedImageData]).transform(_ => {
   if (typeof _ === 'string') {
     return { src: _ }
   }
@@ -61,7 +61,7 @@ export const parseFieldData = <TFieldType extends core.FieldDefType>({
         documentTypeDef,
         documentFilePath,
         incompatibleFieldData: [[fieldName, rawData]],
-      }),
+      })
     )
   }
 }

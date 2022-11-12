@@ -67,7 +67,7 @@ const stackbitFieldToField =
           : identity<WithName<SourceFiles.ListFieldDef>>({ ...commonFields, type: 'list', of })
       }
       case 'reference': {
-        const of = stackbitField.models.map((modelName) => ctx.documentTypeMap[modelName]!)
+        const of = stackbitField.models.map(modelName => ctx.documentTypeMap[modelName]!)
         if (of.length === 1) {
           return identity<WithName<SourceFiles.ReferenceFieldDef>>({ ...commonFields, type: 'reference', of: of[0]! })
         }
@@ -79,7 +79,7 @@ const stackbitFieldToField =
         })
       }
       case 'model': {
-        const of = stackbitField.models.map((modelName) => ctx.nestedTypeMap[modelName]!)
+        const of = stackbitField.models.map(modelName => ctx.nestedTypeMap[modelName]!)
         if (of.length === 1) {
           return identity<WithName<SourceFiles.NestedFieldDef>>({ ...commonFields, type: 'nested', of: of[0]! })
         }
@@ -127,7 +127,7 @@ const stackbitFieldToField =
 const stackbitListItemToListFieldDef =
   (ctx: SharedCtx) =>
   (
-    stackbitListItem: Stackbit.FieldListItems,
+    stackbitListItem: Stackbit.FieldListItems
   ): SourceFiles.ListFieldDefItem.Item | readonly SourceFiles.ListFieldDefItem.Item[] => {
     switch (stackbitListItem.type) {
       case 'boolean':
@@ -145,15 +145,15 @@ const stackbitListItemToListFieldDef =
         })
       case 'reference':
         return firstArrayItemIfOne(
-          stackbitListItem.models.map((modelName) =>
-            identity<SourceFiles.ListFieldDefItem.ItemDocumentReference>(ctx.documentTypeMap[modelName]!),
-          ),
+          stackbitListItem.models.map(modelName =>
+            identity<SourceFiles.ListFieldDefItem.ItemDocumentReference>(ctx.documentTypeMap[modelName]!)
+          )
         )
       case 'model':
         return firstArrayItemIfOne(
-          stackbitListItem.models.map((modelName) =>
-            identity<SourceFiles.ListFieldDefItem.ItemNestedType>(ctx.nestedTypeMap[modelName]!),
-          ),
+          stackbitListItem.models.map(modelName =>
+            identity<SourceFiles.ListFieldDefItem.ItemNestedType>(ctx.nestedTypeMap[modelName]!)
+          )
         )
       case 'object':
         return identity<SourceFiles.ListFieldDefItem.ItemNestedType>({

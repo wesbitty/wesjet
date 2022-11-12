@@ -31,7 +31,7 @@ export const makeCacheItem = ({
     const { typeFieldName } = options.fieldOptions
     const docValues = yield* $(
       T.forEachParDict_(documentTypeDef.fieldDefs, {
-        mapValue: (fieldDef) =>
+        mapValue: fieldDef =>
           getDataForFieldDef({
             fieldDef,
             allEntries,
@@ -41,8 +41,8 @@ export const makeCacheItem = ({
             schemaOverrides,
             options,
           }),
-        mapKey: (fieldDef) => T.succeed(fieldDef.name),
-      }),
+        mapKey: fieldDef => T.succeed(fieldDef.name),
+      })
     )
 
     const raw = { sys: documentEntry.sys, metadata: documentEntry.metadata }
@@ -81,13 +81,13 @@ const makeNestedDocument = ({
 }): T.Effect<OT.HasTracer & HasConsole, MakeDocumentError, core.NestedDocument> =>
   T.gen(function* ($) {
     const { typeFieldName } = options.fieldOptions
-    const objectEntry = allEntries.find((_) => _.sys.id === entryId)!
+    const objectEntry = allEntries.find(_ => _.sys.id === entryId)!
     const raw = { sys: objectEntry.sys, metadata: objectEntry.metadata }
 
     const objValues = yield* $(
       T.forEachParDict_(fieldDefs, {
-        mapKey: (fieldDef) => T.succeed(fieldDef.name),
-        mapValue: (fieldDef) =>
+        mapKey: fieldDef => T.succeed(fieldDef.name),
+        mapValue: fieldDef =>
           getDataForFieldDef({
             fieldDef,
             allEntries,
@@ -97,7 +97,7 @@ const makeNestedDocument = ({
             schemaOverrides,
             options,
           }),
-      }),
+      })
     )
 
     const obj: core.NestedDocument = {
@@ -148,7 +148,7 @@ const getDataForFieldDef = ({
             schemaDef,
             schemaOverrides,
             options,
-          }),
+          })
         )
       case 'nested_polymorphic':
       case 'nested_unnamed':
@@ -160,7 +160,7 @@ const getDataForFieldDef = ({
       case 'list_polymorphic':
       case 'list':
         return yield* $(
-          T.forEachPar_(rawFieldData as any[], (rawItemData) =>
+          T.forEachPar_(rawFieldData as any[], rawItemData =>
             getDataForListItem({
               rawItemData,
               allEntries,
@@ -169,14 +169,14 @@ const getDataForFieldDef = ({
               schemaDef,
               schemaOverrides,
               options,
-            }),
-          ),
+            })
+          )
         )
       case 'date':
         return new Date(rawFieldData)
       case 'markdown':
         const html = yield* $(
-          core.markdownToHtml({ mdString: rawFieldData, options: options?.markdown, rawDocumentData: {} }),
+          core.markdownToHtml({ mdString: rawFieldData, options: options?.markdown, rawDocumentData: {} })
         )
         return <core.Markdown>{ raw: rawFieldData, html }
       // NOTE `mdx` support for Contentful is experimental and not clearly defined
@@ -187,14 +187,14 @@ const getDataForFieldDef = ({
             options: options?.mdx,
             contentDirPath: 'contentful://',
             rawDocumentData: {},
-          }),
+          })
         )
         return <core.MDX>{ raw: rawFieldData, code }
       case 'image': // TODO better image asset handling
       case 'string':
         // e.g. for images
         if (rawFieldDataIsAsset(rawFieldData)) {
-          const asset = allAssets.find((_) => _.sys.id === rawFieldData.sys.id)!
+          const asset = allAssets.find(_ => _.sys.id === rawFieldData.sys.id)!
           const url = asset.fields.file['en-US']!.url
           // starts with `//`
           return `https:${url}`
@@ -237,7 +237,7 @@ const getDataForListItem = ({
 
   if (rawItemData.sys?.id) {
     // if (rawItemData.sys?.id && rawItemData.sys.id in schemaDef.objectDefMap) {
-    const entry = allEntries.find((_) => _.sys.id === rawItemData.sys.id)!
+    const entry = allEntries.find(_ => _.sys.id === rawItemData.sys.id)!
     const typeName = schemaOverrides.nestedTypes[entry.sys.contentType.sys.id]!.defName
     const nestedTypeDef = schemaDef.nestedTypeDefMap[typeName]!
     return makeNestedDocument({

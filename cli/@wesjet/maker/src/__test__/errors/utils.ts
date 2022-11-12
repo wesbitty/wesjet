@@ -58,7 +58,7 @@ const generateFakeFilePath = (extension = 'md'): RelativePosixFilePath =>
 
 export const makeErrors = (
   countRecord: Partial<Record<FetchDataError.FetchDataError['_tag'], number>>,
-  schemaDef: core.SchemaDef,
+  schemaDef: core.SchemaDef
 ): FetchDataError.FetchDataError[] => {
   const errors: FetchDataError.FetchDataError[] = []
 
@@ -84,7 +84,7 @@ export const makeErrors = (
       new FetchDataError.UnexpectedError({
         documentFilePath,
         error: new Error(`Some problem happened: ${faker.hacker.phrase()}`),
-      }),
+      })
     )
   })
 
@@ -96,18 +96,18 @@ export const makeErrors = (
         documentFilePath,
         error,
         documentTypeDef,
-      }),
+      })
     )
   })
 
-  doNTimes(countRecord.ExtraFieldDataError, (index) => {
+  doNTimes(countRecord.ExtraFieldDataError, index => {
     const documentFilePath = generateFakeFilePath()
     errors.push(
       new FetchDataError.ExtraFieldDataError({
         documentFilePath,
         documentTypeDef,
         extraFieldEntries: [index === 0 ? ['someKey', 'someVal'] : ['someOtherKey', 42]],
-      }),
+      })
     )
   })
 
@@ -126,7 +126,7 @@ export const makeErrors = (
         documentFilePath,
         documentTypeDef,
         fieldDefsWithMissingData: [fieldDef],
-      }),
+      })
     )
   })
 

@@ -4,9 +4,9 @@ import { SpanStatusCode, trace } from '@opentelemetry/api'
 export const tracer = trace.getTracer('wesjet')
 
 export const traceAsync = <Res>(spanName: string, fn: () => Promise<Res>): Promise<Res> => {
-  return tracer.startActiveSpan(spanName, (span) => {
+  return tracer.startActiveSpan(spanName, span => {
     return fn()
-      .catch((e) => {
+      .catch(e => {
         span.setStatus({ code: SpanStatusCode.ERROR, message: e.toString() })
         throw e
       })
@@ -24,11 +24,11 @@ export const traceAsyncFn =
   <T extends any[]>(spanName: string, argsMapper: ArgKeysOrArgsMapper<T> = []) =>
   <U>(fn: (...args: T) => Promise<U>) => {
     return (...args: T): Promise<U> => {
-      return tracer.startActiveSpan(spanName, (span) => {
+      return tracer.startActiveSpan(spanName, span => {
         addArgsToSpan(span, argsMapper, args)
 
         return fn(...args)
-          .catch((e) => {
+          .catch(e => {
             span.setStatus({ code: SpanStatusCode.ERROR, message: e.toString() })
             throw e
           })
@@ -43,7 +43,7 @@ export const traceFn =
   <T extends any[]>(spanName: string, argsMapper: ArgKeysOrArgsMapper<T> = []) =>
   <U>(fn: (...args: T) => U) => {
     return (...args: T): U => {
-      return tracer.startActiveSpan(spanName, (span) => {
+      return tracer.startActiveSpan(spanName, span => {
         addArgsToSpan(span, argsMapper, args)
 
         try {
@@ -78,7 +78,7 @@ export const makeSpanTuple = (spanName: string): SpanTuple => {
 
 const addArgsToSpan = (span: Span, argsMapper: ArgKeysOrArgsMapper<any>, args: any[]): void => {
   const args_ = Array.isArray(argsMapper)
-    ? Object.fromEntries(argsMapper.map((key) => [key, args[0][key]]))
+    ? Object.fromEntries(argsMapper.map(key => [key, args[0][key]]))
     : argsMapper(...args)
 
   try {

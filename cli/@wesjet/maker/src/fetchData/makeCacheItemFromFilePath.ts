@@ -44,8 +44,8 @@ export const makeCacheItemFromFilePath = ({
       const documentHash = yield* $(
         pipe(
           fs.stat(fullFilePath),
-          T.map((_) => _.mtime.getTime().toString()),
-        ),
+          T.map(_ => _.mtime.getTime().toString())
+        )
       )
 
       // return previous cache item if it exists
@@ -56,7 +56,7 @@ export const makeCacheItemFromFilePath = ({
         previousCache.cacheItemsMap[relativeFilePath]!.hasWarnings === false
       ) {
         const cacheItem = previousCache.cacheItemsMap[relativeFilePath]!
-        yield* $(DocumentTypeMapState.update((_) => _.add(cacheItem.documentTypeName, relativeFilePath)))
+        yield* $(DocumentTypeMapState.update(_ => _.add(cacheItem.documentTypeName, relativeFilePath)))
 
         return These.succeed(cacheItem)
       }
@@ -75,8 +75,8 @@ export const makeCacheItemFromFilePath = ({
             contentTypeMap,
           }),
           T.chain(These.toEffect),
-          T.map((_) => _.tuple),
-        ),
+          T.map(_ => _.tuple)
+        )
       )
 
       const document = yield* $(
@@ -89,12 +89,12 @@ export const makeCacheItemFromFilePath = ({
             contentDirPath,
             options,
           }),
-          makeAndProvideDocumentContext({ rawContent, relativeFilePath, documentTypeDef }),
-        ),
+          makeAndProvideDocumentContext({ rawContent, relativeFilePath, documentTypeDef })
+        )
       )
 
       const computedValues = yield* $(
-        getComputedValues({ documentTypeDef, document, documentFilePath: relativeFilePath }),
+        getComputedValues({ documentTypeDef, document, documentFilePath: relativeFilePath })
       )
       if (computedValues) {
         Object.entries(computedValues).forEach(([fieldName, value]) => {
@@ -104,11 +104,11 @@ export const makeCacheItemFromFilePath = ({
 
       return These.warnOption(
         { document, documentHash, hasWarnings: O.isSome(warnings), documentTypeName: documentTypeDef.name },
-        warnings,
+        warnings
       )
     }),
     OT.withSpan('@wesjet/source-local/fetchData:makeCacheItemFromFilePath', { attributes: { relativeFilePath } }),
-    T.mapError((error) => {
+    T.mapError(error => {
       switch (error._tag) {
         case 'node.fs.StatError':
         case 'node.fs.ReadFileError':
@@ -118,7 +118,7 @@ export const makeCacheItemFromFilePath = ({
           return error
       }
     }),
-    These.effectThese,
+    These.effectThese
   )
 
 const processRawContent = ({
@@ -174,12 +174,12 @@ const processRawContent = ({
         default:
           return yield* $(
             T.fail(
-              new FetchDataError.UnsupportedFileExtension({ extension: filePathExtension, filePath: relativeFilePath }),
-            ),
+              new FetchDataError.UnsupportedFileExtension({ extension: filePathExtension, filePath: relativeFilePath })
+            )
           )
       }
     }),
-    OT.withSpan('@wesjet/source-local/fetchData:getRawContent'),
+    OT.withSpan('@wesjet/source-local/fetchData:getRawContent')
   )
 
 const getComputedValues = ({
@@ -198,13 +198,13 @@ const getComputedValues = ({
   return pipe(
     documentTypeDef.computedFields,
     T.forEachParDict({
-      mapKey: (field) => T.succeed(field.name),
-      mapValue: (field) =>
+      mapKey: field => T.succeed(field.name),
+      mapValue: field =>
         T.tryCatchPromise(
           async () => field.resolve(document),
-          (error) => new FetchDataError.ComputedValueError({ error, documentFilePath, documentTypeDef }),
+          error => new FetchDataError.ComputedValueError({ error, documentFilePath, documentTypeDef })
         ),
-    }),
+    })
   )
 }
 
@@ -224,7 +224,7 @@ const parseMarkdown = ({
       matter(markdownString, {
         engines: {
           // Provide custom YAML engine to avoid parsing of date values https://github.com/jonschlinkert/gray-matter/issues/62)
-          yaml: (str) => yaml.parse(str),
+          yaml: str => yaml.parse(str),
         },
       }),
     (error: any) => {
@@ -233,7 +233,7 @@ const parseMarkdown = ({
       } else {
         return new FetchDataError.InvalidMarkdownFileError({ error, documentFilePath })
       }
-    },
+    }
   )
 
 const parseJson = ({
@@ -245,7 +245,7 @@ const parseJson = ({
 }): T.Effect<unknown, FetchDataError.InvalidJsonFileError, Record<string, any>> =>
   T.tryCatch(
     () => JSON.parse(jsonString),
-    (error) => new FetchDataError.InvalidJsonFileError({ error, documentFilePath }),
+    error => new FetchDataError.InvalidJsonFileError({ error, documentFilePath })
   )
 
 const parseYaml = ({
@@ -257,5 +257,5 @@ const parseYaml = ({
 }): T.Effect<unknown, FetchDataError.InvalidYamlFileError, Record<string, any>> =>
   T.tryCatch(
     () => yaml.parse(yamlString),
-    (error) => new FetchDataError.InvalidYamlFileError({ error, documentFilePath }),
+    error => new FetchDataError.InvalidYamlFileError({ error, documentFilePath })
   )

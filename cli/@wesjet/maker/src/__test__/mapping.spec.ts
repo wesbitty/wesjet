@@ -57,7 +57,7 @@ describe('getDataForFieldDef', () => {
         },
       }),
       OT.withSpan('testValue'),
-      runPromise,
+      runPromise
     )
 
     expect(transformedData).toBe(expectedValue)
@@ -136,8 +136,8 @@ test('getDataForFieldDef error', async () => {
             ...options,
           },
         }),
-        T.either,
-      ),
+        T.either
+      )
     )
 
     expect(transformedData._tag).toBe('Left')

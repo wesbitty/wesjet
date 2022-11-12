@@ -52,7 +52,7 @@ export const validateDocumentData = ({
       if (documentDefName === undefined) {
         const typeFieldName = options.fieldOptions.typeFieldName
         return These.fail(
-          new FetchDataError.CouldNotDetermineDocumentTypeError({ documentFilePath: relativeFilePath, typeFieldName }),
+          new FetchDataError.CouldNotDetermineDocumentTypeError({ documentFilePath: relativeFilePath, typeFieldName })
         )
       }
 
@@ -63,7 +63,7 @@ export const validateDocumentData = ({
           new FetchDataError.NoSuchDocumentTypeError({
             documentTypeName: documentDefName,
             documentFilePath: relativeFilePath,
-          }),
+          })
         )
       }
 
@@ -71,16 +71,16 @@ export const validateDocumentData = ({
       const mismatchError = validateContentTypeMatchesFileExtension({ contentType, relativeFilePath })
       if (mismatchError) return These.fail(mismatchError)
 
-      yield* $(DocumentTypeMapState.update((_) => _.add(documentDefName, relativeFilePath)))
+      yield* $(DocumentTypeMapState.update(_ => _.add(documentDefName, relativeFilePath)))
 
       const existingDataFieldKeys = Object.keys(rawContent.fields)
 
       // make sure all required fields are present
       const requiredFieldsWithoutDefaultValue = documentTypeDef.fieldDefs.filter(
-        (_) => _.isRequired && _.default === undefined && _.isSystemField === false,
+        _ => _.isRequired && _.default === undefined && _.isSystemField === false
       )
       const misingRequiredFieldDefs = requiredFieldsWithoutDefaultValue.filter(
-        (fieldDef) => !existingDataFieldKeys.includes(fieldDef.name),
+        fieldDef => !existingDataFieldKeys.includes(fieldDef.name)
       )
       if (misingRequiredFieldDefs.length > 0) {
         return These.fail(
@@ -88,7 +88,7 @@ export const validateDocumentData = ({
             documentFilePath: relativeFilePath,
             documentTypeDef,
             fieldDefsWithMissingData: misingRequiredFieldDefs,
-          }),
+          })
         )
       }
 
@@ -97,10 +97,10 @@ export const validateDocumentData = ({
       // warn about data fields not defined in the schema
       const typeFieldName = options.fieldOptions.typeFieldName
       // NOTE we also need to add the system-level type name field to the list of existing data fields
-      const schemaFieldNames = documentTypeDef.fieldDefs.map((_) => _.name).concat([typeFieldName])
+      const schemaFieldNames = documentTypeDef.fieldDefs.map(_ => _.name).concat([typeFieldName])
       const extraFieldEntries = existingDataFieldKeys
-        .filter((fieldKey) => !schemaFieldNames.includes(fieldKey))
-        .map((fieldKey) => [fieldKey, rawContent.fields[fieldKey]] as const)
+        .filter(fieldKey => !schemaFieldNames.includes(fieldKey))
+        .map(fieldKey => [fieldKey, rawContent.fields[fieldKey]] as const)
 
       if (extraFieldEntries.length > 0) {
         const extraFieldDataError = new FetchDataError.ExtraFieldDataError({
@@ -120,7 +120,7 @@ export const validateDocumentData = ({
             fieldDef,
             rawFieldData: rawContent.fields[fieldDef.name],
             contentDirPath,
-          }),
+          })
         )
 
         if (O.isSome(fieldValidOption)) {
@@ -132,7 +132,7 @@ export const validateDocumentData = ({
 
       return These.warnOption({ documentTypeDef }, warningOption)
     }),
-    OT.withSpan('validateDocumentData', { attributes: { relativeFilePath } }),
+    OT.withSpan('validateDocumentData', { attributes: { relativeFilePath } })
   )
 
 const getDocumentDefName = ({
@@ -165,8 +165,8 @@ const getDocumentDefNameByFilePathPattern = ({
   relativeFilePath: string
   filePathPatternMap: FilePathPatternMap
 }): string | undefined => {
-  const matchingFilePathPattern = Object.keys(filePathPatternMap).find((filePathPattern) =>
-    micromatch.isMatch(relativeFilePath, filePathPattern, {}),
+  const matchingFilePathPattern = Object.keys(filePathPatternMap).find(filePathPattern =>
+    micromatch.isMatch(relativeFilePath, filePathPattern, {})
   )
 
   if (matchingFilePathPattern) {
@@ -208,7 +208,7 @@ const validateFieldData = ({
                 incompatibleFieldData: [[fieldDef.name, rawFieldData]],
                 documentFilePath,
                 documentTypeDef,
-              }),
+              })
             )
       // TODO also check for references in lists
       case 'reference':
@@ -222,7 +222,7 @@ const validateFieldData = ({
                 fieldName: fieldDef.name,
                 documentFilePath,
                 documentTypeDef,
-              }),
+              })
             )
           }
         }

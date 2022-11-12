@@ -29,7 +29,7 @@ export abstract class BaseCommand extends Command {
       core.runMain({
         tracingServiceName: 'wesjet-cli',
         verbose: this.verbose || process.env.CL_DEBUG !== undefined,
-      }),
+      })
     )
 
   clearCacheIfNeeded = () => {

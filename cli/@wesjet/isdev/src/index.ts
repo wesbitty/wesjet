@@ -44,9 +44,9 @@ export type WesjetOverrideNestedType = {
  */
 export const loadStackbitConfigAsDocumentTypes = <TDocumentTypeNames extends core.GetDocumentTypeNamesGen>(
   options: Stackbit.ConfigLoaderOptions = { dirPath: '' },
-  overrideArgs: WesjetOverrideArgs<TDocumentTypeNames> = { documentTypes: {}, nestedTypes: {} },
+  overrideArgs: WesjetOverrideArgs<TDocumentTypeNames> = { documentTypes: {}, nestedTypes: {} }
 ): Promise<SourceFiles.DocumentType[]> =>
-  Stackbit.loadConfig(options).then((configResult) => {
+  Stackbit.loadConfig(options).then(configResult => {
     if (configResult.errors.length > 0) {
       throw new Error(configResult.errors.join('\n'))
     }
@@ -70,7 +70,7 @@ export const loadStackbitConfigAsDocumentTypes = <TDocumentTypeNames extends cor
  */
 export const stackbitConfigToDocumentTypes = <TDocumentTypeNames extends core.GetDocumentTypeNamesGen>(
   stackbitConfig: Stackbit.Config | Stackbit.YamlConfig,
-  overrideArgs: WesjetOverrideArgs<TDocumentTypeNames> = { documentTypes: {}, nestedTypes: {} },
+  overrideArgs: WesjetOverrideArgs<TDocumentTypeNames> = { documentTypes: {}, nestedTypes: {} }
 ): SourceFiles.DocumentType[] => {
   const validatedStackbitConfig = validateStackbitConfig(stackbitConfig)
 
@@ -83,7 +83,7 @@ export const stackbitConfigToDocumentTypes = <TDocumentTypeNames extends core.Ge
 
   const documentTypes = documentLikeModels.map(stackbitDocumentLikeModelToDocumentType(ctx))
 
-  objectModels.forEach((model) => {
+  objectModels.forEach(model => {
     const nestedType = stackbitObjectModelToDocumentType(ctx)(model)
     ctx.nestedTypeMap[model.name] = nestedType
 
@@ -92,7 +92,7 @@ export const stackbitConfigToDocumentTypes = <TDocumentTypeNames extends core.Ge
     if (nestedOverride?.fields && fields) {
       for (const [fieldName, { type }] of Object.entries(nestedOverride.fields)) {
         const fieldDef = Array.isArray(fields)
-          ? fields.find((fieldDef) => fieldDef.name === fieldName)
+          ? fields.find(fieldDef => fieldDef.name === fieldName)
           : fields[fieldName]
 
         if (fieldDef) {
@@ -104,7 +104,7 @@ export const stackbitConfigToDocumentTypes = <TDocumentTypeNames extends core.Ge
     }
   })
 
-  documentTypes.forEach((documentType) => {
+  documentTypes.forEach(documentType => {
     const documentTypeName = documentType.def().name
     ctx.documentTypeMap[documentTypeName] = documentType
 
@@ -119,7 +119,7 @@ export const stackbitConfigToDocumentTypes = <TDocumentTypeNames extends core.Ge
     if (documentOverride?.fields && fields) {
       for (const [fieldName, { type }] of Object.entries(documentOverride.fields)) {
         const fieldDef = Array.isArray(fields)
-          ? fields.find((fieldDef) => fieldDef.name === fieldName)
+          ? fields.find(fieldDef => fieldDef.name === fieldName)
           : fields[fieldName]
 
         if (fieldDef) {
@@ -136,7 +136,7 @@ export const stackbitConfigToDocumentTypes = <TDocumentTypeNames extends core.Ge
 
 const patchDocumentType = (
   documentType: SourceFiles.DocumentType,
-  patch: PartialDeep<SourceFiles.DocumentTypeDef>,
+  patch: PartialDeep<SourceFiles.DocumentTypeDef>
 ): void => {
   const previousDef = documentType.def()
   documentType.def = defineDocumentType(() => mergeDeep({ ...previousDef, ...patch })).def
@@ -162,7 +162,7 @@ const validateStackbitConfig = (stackbitConfig: Stackbit.Config | Stackbit.YamlC
 }
 
 const isDocumentLikeModel = (
-  model: Stackbit.Model,
+  model: Stackbit.Model
 ): model is Stackbit.PageModel | Stackbit.DataModel | Stackbit.ConfigModel =>
   model.type === 'data' || model.type === 'page' || model.type === 'config'
 

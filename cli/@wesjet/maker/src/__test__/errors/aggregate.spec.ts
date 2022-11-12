@@ -49,7 +49,7 @@ test('CouldNotDetermineDocumentTypeError: should print 4 errors', async () => {
          • docs/card_table.md
          
     "
-  `,
+  `
   )
 })
 
@@ -94,7 +94,7 @@ test('CouldNotDetermineDocumentTypeError: should print 24 errors - truncated', a
          • ... 4 more documents (Use the --verbose CLI option to show all documents)
          
     "
-  `,
+  `
   )
 })
 
@@ -143,7 +143,7 @@ test('CouldNotDetermineDocumentTypeError: should print 24 errors - full', async 
          • docs/front_line.md
          
     "
-  `,
+  `
   )
 })
 
@@ -187,7 +187,7 @@ test('MissingRequiredFieldsError: should print 4 warnings', async () => {
            • someField: string
          
     "
-  `,
+  `
   )
 })
 
@@ -218,7 +218,7 @@ test('MissingRequiredFieldsError: should fail because of singleton', async () =>
            • someField: string
          
     "
-  `,
+  `
   )
 })
 
@@ -244,7 +244,7 @@ test('ExtraFieldDataError: should print warning', async () => {
            • someOtherKey: 42 
          
     "
-  `,
+  `
   )
 })
 
@@ -270,7 +270,7 @@ test('ExtraFieldDataError: should print error', async () => {
            • someOtherKey: 42 
          
     "
-  `,
+  `
   )
 })
 
@@ -333,7 +333,7 @@ test('MissingRequiredFieldsError: should print 24 errors - truncated', async () 
          • ... 4 more documents (Use the --verbose CLI option to show all documents)
          
     "
-  `,
+  `
   )
 })
 
@@ -368,7 +368,7 @@ test('mix of different errors: some', async () => {
          • docs/withdrawal_buckinghamshire.md (Used type name: \\"TypeB\\")
          
     "
-  `,
+  `
   )
 })
 
@@ -376,7 +376,7 @@ test('mix of different errors: with extra field data', async () => {
   const errorString = aggregateFetchDataErrors({
     errors: makeErrors(
       { CouldNotDetermineDocumentTypeError: 4, NoSuchDocumentTypeError: 2, ExtraFieldDataError: 1 },
-      schemaDef,
+      schemaDef
     ),
     options,
     flags,
@@ -411,7 +411,7 @@ test('mix of different errors: with extra field data', async () => {
            • someKey: \\"someVal\\" 
          
     "
-  `,
+  `
   )
 })
 
@@ -425,7 +425,7 @@ test('mix of different errors: other', async () => {
         UnexpectedError: 2,
         MissingRequiredFieldsError: 3,
       },
-      schemaDef,
+      schemaDef
     ),
     options,
     flags,
@@ -473,6 +473,6 @@ test('mix of different errors: other', async () => {
            • someField: string
          
     "
-  `,
+  `
   )
 })

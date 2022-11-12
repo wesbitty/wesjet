@@ -11,7 +11,7 @@ export type ComputedField<DocumentTypeName extends string = string> = {
 
 // TODO come up with a way to hide computed fields from passed in document
 type ComputedFieldResolver<DocumentTypeName extends string> = (
-  _: GetDocumentTypeGen<DocumentTypeName>,
+  _: GetDocumentTypeGen<DocumentTypeName>
 ) => any | Promise<any>
 
 type GetDocumentTypeGen<Name extends string> = Name extends keyof GetDocumentTypeMapGen<LocalDocument>

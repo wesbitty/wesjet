@@ -18,11 +18,11 @@ export const runWesjetDev = async ({ configPath }: NextPluginOptions) => {
   await pipe(
     core.getConfigWatch({ configPath }),
     S.tapSkipFirstRight(() => T.log(`wesjet config change detected. Updating type definitions and data...`)),
-    S.tapRight((config) => (config.source.options.disableImportAliasWarning ? T.unit : T.fork(core.validateTsconfig))),
-    S.chainSwitchMapEitherRight((config) => core.generateDotpkgStream({ config, verbose: false, isDev: true })),
-    S.tap(E.fold((error) => T.log(errorToString(error)), core.logGenerateInfo)),
+    S.tapRight(config => (config.source.options.disableImportAliasWarning ? T.unit : T.fork(core.validateTsconfig))),
+    S.chainSwitchMapEitherRight(config => core.generateDotpkgStream({ config, verbose: false, isDev: true })),
+    S.tap(E.fold(error => T.log(errorToString(error)), core.logGenerateInfo)),
     S.runDrain,
-    runMain,
+    runMain
   )
 }
 
@@ -32,10 +32,10 @@ export const runWesjetBuild = async ({ configPath }: NextPluginOptions) => {
 
   await pipe(
     core.getConfig({ configPath }),
-    T.chain((config) => core.generateDotpkg({ config, verbose: false })),
+    T.chain(config => core.generateDotpkg({ config, verbose: false })),
     T.tap(core.logGenerateInfo),
     OT.withSpan('wesjet-nextjs-plugin:runWesjetBuild'),
-    runMain,
+    runMain
   )
 }
 

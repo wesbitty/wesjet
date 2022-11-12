@@ -29,7 +29,7 @@ export const makeImageField = ({
         documentFilePath,
         contentDirPath,
         fieldDef,
-      }),
+      })
     )
 
     return identity<core.ImageFieldData>({ ...imageFieldData, alt: imageData.alt })
@@ -72,10 +72,10 @@ const getImageFieldData = ({
         blurhashDataUrl,
       })
     }),
-    T.catchAll((error) =>
+    T.catchAll(error =>
       pipe(
         getFromDocumentContext('documentTypeDef'),
-        T.chain((documentTypeDef) =>
+        T.chain(documentTypeDef =>
           T.fail(
             new FetchDataError.ImageError({
               error,
@@ -83,12 +83,12 @@ const getImageFieldData = ({
               fieldDef,
               imagePath: imagePath_,
               documentTypeDef,
-            }),
-          ),
-        ),
-      ),
+            })
+          )
+        )
+      )
     ),
-    OT.withSpan('getImageFieldData', { attributes: { imagePath: imagePath_ } }),
+    OT.withSpan('getImageFieldData', { attributes: { imagePath: imagePath_ } })
   )
 
 let SharpModule: typeof sharp | undefined = undefined
@@ -106,15 +106,15 @@ const processImage = (fileBuffer: Buffer) =>
         pipe(
           T.tryPromise(() => import('sharp')),
           // NOTE `sharp` is still a CJS module, so default import is needed
-          T.tap((_) => T.succeedWith(() => (SharpModule = _.default))),
+          T.tap(_ => T.succeedWith(() => (SharpModule = _.default))),
           T.catchAll(() =>
             pipe(
               T.tryPromise(() => import('imagescript')),
-              T.tap((_) => T.succeedWith(() => (ImageScriptModule = _))),
-            ),
+              T.tap(_ => T.succeedWith(() => (ImageScriptModule = _)))
+            )
           ),
-          OT.withSpan('importSharpOrImageScript'),
-        ),
+          OT.withSpan('importSharpOrImageScript')
+        )
       )
     }
 
@@ -136,8 +136,8 @@ const processImageWithImageScript = (fileBuffer: Buffer) =>
       const image = yield* $(
         pipe(
           T.tryPromise(() => ImageScriptModule!.decode(fileBuffer)),
-          OT.withSpan('decodeImage'),
-        ),
+          OT.withSpan('decodeImage')
+        )
       )
 
       const { width, height } = image
@@ -146,13 +146,13 @@ const processImageWithImageScript = (fileBuffer: Buffer) =>
       const resizedData = yield* $(
         pipe(
           T.tryPromise(() => image.encode(70)),
-          OT.withSpan('resizeImage'),
-        ),
+          OT.withSpan('resizeImage')
+        )
       )
 
       return { resizedData, width, height, format }
     }),
-    OT.withSpan('processImageWithImageScript'),
+    OT.withSpan('processImageWithImageScript')
   )
 
 const processImageWithSharp = (fileBuffer: Buffer) =>
@@ -190,11 +190,11 @@ const processImageWithSharp = (fileBuffer: Buffer) =>
 
             return sharpImage.resize(8, 8).toBuffer({ resolveWithObject: true })
           }),
-          OT.withSpan('resizeImage', { attributes: { width, height, format } }),
-        ),
+          OT.withSpan('resizeImage', { attributes: { width, height, format } })
+        )
       )
 
       return { resizedData: resizedInfo.data, width, height, format }
     }),
-    OT.withSpan('processImageWithSharp'),
+    OT.withSpan('processImageWithSharp')
   )

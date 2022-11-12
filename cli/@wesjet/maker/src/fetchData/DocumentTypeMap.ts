@@ -12,7 +12,7 @@ export class DocumentTypeMap extends Tagged('@local/DocumentTypeMap')<{
   add = (documentTypeName: DocumentTypeName, filePath: RelativePosixFilePath) => {
     const oldPaths = pipe(
       HashMap.get_(this.map, documentTypeName),
-      O.getOrElse(() => []),
+      O.getOrElse(() => [])
     )
 
     return new DocumentTypeMap({

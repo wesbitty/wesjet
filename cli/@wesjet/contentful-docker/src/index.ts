@@ -23,7 +23,7 @@ export type Args = {
   schemaOverrides?: SchemaOverrides.Input.SchemaOverrides
 }
 
-export const makeSourcePlugin: core.MakeSourcePlugin<Args & PluginOptions> = async (args) => {
+export const makeSourcePlugin: core.MakeSourcePlugin<Args & PluginOptions> = async args => {
   const {
     options,
     extensions,
@@ -40,11 +40,11 @@ export const makeSourcePlugin: core.MakeSourcePlugin<Args & PluginOptions> = asy
         S.fromEffect(
           pipe(
             fetchAllDocuments({ accessToken, spaceId, environmentId, schemaDef, schemaOverrides, options }),
-            T.either,
-          ),
+            T.either
+          )
         ),
         // TODO remove polling and implement "properly"
-        S.repeatSchedule(SC.spaced(5_000)),
+        S.repeatSchedule(SC.spaced(5_000))
       ),
   }
 }

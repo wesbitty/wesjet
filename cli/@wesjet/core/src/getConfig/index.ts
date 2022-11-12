@@ -40,7 +40,7 @@ export const getConfig = ({
     S.runCollect,
     T.map(Chunk.unsafeHead),
     T.rightOrFail,
-    OT.withSpan('@wesjet/core/getConfig:getConfig', { attributes: { configPath } }),
+    OT.withSpan('@wesjet/core/getConfig:getConfig', { attributes: { configPath } })
   )
 
 export const getConfigWatch = ({
@@ -51,7 +51,7 @@ export const getConfigWatch = ({
   const resolveParams = pipe(
     T.structPar({ configPath: resolveConfigPath({ configPath: configPath_ }), cwd: getCwd }),
     T.chainMergeObject(() => makeTmpDirAndResolveEntryPoint),
-    T.either,
+    T.either
   )
 
   return pipe(
@@ -74,9 +74,9 @@ export const getConfigWatch = ({
           absWorkingDir: cwd,
           plugins: [wesjetGenPlugin(), makeAllPackagesExternalPlugin(configPath)],
         }),
-        S.mapEffectEitherRight((result) => getConfigFromResult({ result, configPath })),
-      ),
-    ),
+        S.mapEffectEitherRight(result => getConfigFromResult({ result, configPath }))
+      )
+    )
   )
 }
 
@@ -98,7 +98,7 @@ const resolveConfigPath = ({
 
     const defaultFilePaths = [path.join(cwd, 'wesjet.config.ts'), path.join(cwd, 'wesjet.config.js')]
     const foundDefaultFiles = yield* $(pipe(defaultFilePaths, T.forEachPar(fs.fileOrDirExists), T.map(Chunk.toArray)))
-    const foundDefaultFile = defaultFilePaths[foundDefaultFiles.findIndex((_) => _)]
+    const foundDefaultFile = defaultFilePaths[foundDefaultFiles.findIndex(_ => _)]
     if (foundDefaultFile) {
       return foundDefaultFile
     }
@@ -108,7 +108,7 @@ const resolveConfigPath = ({
 
 const makeTmpDirAndResolveEntryPoint = pipe(
   ArtifactsDir.mkdirCache,
-  T.map((cacheDir) => ({ outfilePath: path.join(cacheDir, 'compiled-wesjet-config.mjs') })),
+  T.map(cacheDir => ({ outfilePath: path.join(cacheDir, 'compiled-wesjet-config.mjs') }))
 )
 
 const getConfigFromResult = ({
@@ -122,10 +122,10 @@ const getConfigFromResult = ({
   pipe(
     T.gen(function* ($) {
       const unknownWarnings = result.warnings.filter(
-        (warning) =>
+        warning =>
           warning.text.match(
-            /Import \".*\" will always be undefined because the file \"wesjet-gen:.wesjet\/(data|types)\" has no exports/,
-          ) === null,
+            /Import \".*\" will always be undefined because the file \"wesjet-gen:.wesjet\/(data|types)\" has no exports/
+          ) === null
       )
 
       if (unknownWarnings.length > 0) {
@@ -139,10 +139,10 @@ const getConfigFromResult = ({
       const outfilePath = pipe(
         Object.keys(result.metafile!.outputs),
         // Will look like `path.join(cacheDir, 'compiled-wesjet-config-[SOME_HASH].mjs')
-        Array.find((_) => _.match(/compiled-wesjet-config-.+.mjs$/) !== null),
+        Array.find(_ => _.match(/compiled-wesjet-config-.+.mjs$/) !== null),
         // Needs to be absolute path for ESM import to work
-        O.map((_) => path.join(cwd, _)),
-        O.getUnsafe,
+        O.map(_ => path.join(cwd, _)),
+        O.getUnsafe
       )
 
       const esbuildHash = outfilePath.match(/compiled-wesjet-config-(.+).mjs$/)![1]!
@@ -156,10 +156,10 @@ const getConfigFromResult = ({
         pipe(
           T.tryCatchPromise(
             async () => (await import('source-map-support')).install(),
-            (error) => new ConfigReadError({ error, configPath }),
+            error => new ConfigReadError({ error, configPath })
           ),
-          OT.withSpan('load-source-map-support'),
-        ),
+          OT.withSpan('load-source-map-support')
+        )
       )
 
       // NOTES:
@@ -171,10 +171,10 @@ const getConfigFromResult = ({
         pipe(
           T.tryCatchPromise(
             () => importFresh(outfilePath),
-            (error) => new ConfigReadError({ error, configPath }),
+            error => new ConfigReadError({ error, configPath })
           ),
-          OT.withSpan('import-compiled-wesjet-config'),
-        ),
+          OT.withSpan('import-compiled-wesjet-config')
+        )
       )
 
       if (!('default' in exports)) {
@@ -186,16 +186,16 @@ const getConfigFromResult = ({
         pipe(
           T.tryCatchPromise(
             async () => exports.default,
-            (error) => new ConfigReadError({ error, configPath }),
+            error => new ConfigReadError({ error, configPath })
           ),
-          OT.withSpan('resolve-source-plugin-promise'),
-        ),
+          OT.withSpan('resolve-source-plugin-promise')
+        )
       )
 
       return { source, esbuildHash }
     }),
     OT.withSpan('@wesjet/core/getConfig:getConfigFromResult', { attributes: { configPath } }),
-    T.either,
+    T.either
   )
 
 /**
@@ -205,7 +205,7 @@ const getConfigFromResult = ({
 const wesjetGenPlugin = (): esbuild.Plugin => ({
   name: 'wesjet-gen',
   setup(build) {
-    build.onResolve({ filter: /wesjet\/jetpack/ }, (args) => ({
+    build.onResolve({ filter: /wesjet\/jetpack/ }, args => ({
       path: args.path,
       namespace: 'wesjet-gen',
     }))
@@ -219,9 +219,9 @@ const wesjetGenPlugin = (): esbuild.Plugin => ({
 // TODO also take tsconfig.json `paths` mapping into account
 const makeAllPackagesExternalPlugin = (configPath: string): esbuild.Plugin => ({
   name: 'make-all-packages-external',
-  setup: (build) => {
+  setup: build => {
     const filter = /^[^.\/]|^\.[^.\/]|^\.\.[^\/]/ // Must not start with "/" or "./" or "../"
-    build.onResolve({ filter }, (args) => {
+    build.onResolve({ filter }, args => {
       // avoid marking config file as external
       if (args.path.includes(configPath)) {
         return { path: args.path, external: false }

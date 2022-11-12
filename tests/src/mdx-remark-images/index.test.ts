@@ -29,7 +29,7 @@ test('mdx - resolveCwd - contentDirPath', async () => {
     mdx: {
       resolveCwd: 'contentDirPath',
       remarkPlugins: [remarkMdxImages],
-      esbuildOptions: (options) => {
+      esbuildOptions: options => {
         options.platform = 'node'
         options.outdir = testOutPath
         options.assetNames = `images/[name]-[hash]`
@@ -45,7 +45,7 @@ test('mdx - resolveCwd - contentDirPath', async () => {
   })
 
   await core.runMain({ tracingServiceName: 'wesjet-test', verbose: false })(
-    core.generateDotpkg({ config: { source, esbuildHash: 'STATIC_HASH' }, verbose: true }),
+    core.generateDotpkg({ config: { source, esbuildHash: 'STATIC_HASH' }, verbose: true })
   )
 
   // Check that the bundled image has been generated
@@ -75,7 +75,7 @@ test('mdx - resolveCwd - relative', async () => {
     mdx: {
       resolveCwd: 'relative',
       remarkPlugins: [remarkMdxImages],
-      esbuildOptions: (options) => {
+      esbuildOptions: options => {
         options.platform = 'node'
         options.outdir = testOutPath
         options.assetNames = `images/[name]-[hash]`
@@ -91,7 +91,7 @@ test('mdx - resolveCwd - relative', async () => {
   })
 
   await core.runMain({ tracingServiceName: 'wesjet-test', verbose: false })(
-    core.generateDotpkg({ config: { source, esbuildHash: 'STATIC_HASH' }, verbose: true }),
+    core.generateDotpkg({ config: { source, esbuildHash: 'STATIC_HASH' }, verbose: true })
   )
 
   // Check that the bundled image has been generated

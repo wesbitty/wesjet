@@ -32,7 +32,7 @@ function is<N extends TypeNameOneOrMany>(typeName: N, _?: any): any {
   if (_) {
     if (Array.isArray(typeName)) {
       // TODO make type field name dynamic (probably will require to code-gen the guard function)
-      return typeName.some((typeName_) => _?.type === typeName_)
+      return typeName.some(typeName_ => _?.type === typeName_)
     } else {
       return typeName === _?.type
     }

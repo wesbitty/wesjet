@@ -147,7 +147,7 @@ declare module 'imagescript' {
       scale: number,
       text: string,
       color?: number,
-      layout?: TextLayout,
+      layout?: TextLayout
     ): Promise<Image>
   }
 
@@ -166,7 +166,7 @@ declare module 'imagescript' {
       duration?: number,
       xOffset?: number,
       yOffset?: number,
-      disposalMode?: typeof Frame.DISPOSAL_KEEP | string,
+      disposalMode?: typeof Frame.DISPOSAL_KEEP | string
     )
 
     toString(): string
@@ -176,7 +176,7 @@ declare module 'imagescript' {
       duration?: number,
       xOffset?: number,
       yOffset?: number,
-      disposalMode?: typeof Frame.DISPOSAL_KEEP | string,
+      disposalMode?: typeof Frame.DISPOSAL_KEEP | string
     ): Frame
 
     resize(width: number, height: number, mode?: typeof Image.RESIZE_NEAREST_NEIGHBOR | string): Image

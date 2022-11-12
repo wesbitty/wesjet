@@ -45,7 +45,7 @@ export const fetchAllDocuments = ({
   pipe(
     T.gen(function* ($) {
       const allRelativeFilePaths = yield* $(
-        getAllRelativeFilePaths({ contentDirPath, contentDirInclude, contentDirExclude }),
+        getAllRelativeFilePaths({ contentDirPath, contentDirInclude, contentDirExclude })
       )
 
       const concurrencyLimit = os.cpus().length
@@ -53,7 +53,7 @@ export const fetchAllDocuments = ({
       const { dataErrors, documents } = yield* $(
         pipe(
           allRelativeFilePaths,
-          T.forEachParN(concurrencyLimit, (relativeFilePath) =>
+          T.forEachParN(concurrencyLimit, relativeFilePath =>
             makeCacheItemFromFilePath({
               relativeFilePath,
               filePathPatternMap,
@@ -62,11 +62,11 @@ export const fetchAllDocuments = ({
               options,
               previousCache,
               contentTypeMap,
-            }),
+            })
           ),
           T.map(Chunk.partitionThese),
-          T.map(({ tuple: [errors, docs] }) => ({ dataErrors: Chunk.toArray(errors), documents: Chunk.toArray(docs) })),
-        ),
+          T.map(({ tuple: [errors, docs] }) => ({ dataErrors: Chunk.toArray(errors), documents: Chunk.toArray(docs) }))
+        )
       )
 
       const singletonDataErrors = yield* $(validateSingletonDocuments({ coreSchemaDef, filePathPatternMap }))
@@ -80,15 +80,15 @@ export const fetchAllDocuments = ({
           schemaDef: coreSchemaDef,
           contentDirPath,
           verbose,
-        }),
+        })
       )
 
-      const cacheItemsMap = Object.fromEntries(documents.map((_) => [_.document._id, _]))
+      const cacheItemsMap = Object.fromEntries(documents.map(_ => [_.document._id, _]))
 
       return { cacheItemsMap }
     }),
     provideDocumentTypeMapState,
-    OT.withSpan('@wesjet/source-local/fetchData:fetchAllDocuments', { attributes: { contentDirPath } }),
+    OT.withSpan('@wesjet/source-local/fetchData:fetchAllDocuments', { attributes: { contentDirPath } })
   )
 
 const getAllRelativeFilePaths = ({
@@ -102,9 +102,9 @@ const getAllRelativeFilePaths = ({
 }): T.Effect<OT.HasTracer, fs.UnknownFSError, RelativePosixFilePath[]> => {
   const getPatternPrefix = (paths_: readonly string[]) => {
     const paths = paths_
-      .map((_) => _.trim())
-      .filter((_) => _ !== '.' && _ !== './')
-      .map((_) => (_.endsWith('/') ? _ : `${_}/`))
+      .map(_ => _.trim())
+      .filter(_ => _ !== '.' && _ !== './')
+      .map(_ => (_.endsWith('/') ? _ : `${_}/`))
 
     if (paths.length === 0) return ''
     if (paths.length === 1) return paths[0]
@@ -117,10 +117,10 @@ const getAllRelativeFilePaths = ({
   return pipe(
     T.tryCatchPromise(
       () => glob(pattern, { cwd: contentDirPath, ignore: asMutableArray(contentDirExclude) }),
-      (error) => new fs.UnknownFSError({ error }),
+      error => new fs.UnknownFSError({ error })
     ),
-    T.map((_) => _.map(relativePosixFilePath)),
-    OT.withSpan('@wesjet/source-local/fetchData:getAllRelativeFilePaths'),
+    T.map(_ => _.map(relativePosixFilePath)),
+    OT.withSpan('@wesjet/source-local/fetchData:getAllRelativeFilePaths')
   )
 }
 
@@ -133,7 +133,7 @@ const validateSingletonDocuments = ({
 }): T.Effect<HasDocumentTypeMapState, never, FetchDataError.SingletonDocumentNotFoundError[]> =>
   T.gen(function* ($) {
     const singletonDocumentDefs = Object.values(coreSchemaDef.documentTypeDefMap).filter(
-      (documentTypeDef) => documentTypeDef.isSingleton,
+      documentTypeDef => documentTypeDef.isSingleton
     )
 
     const documentTypeMap = yield* $(DocumentTypeMapState.get)
@@ -142,21 +142,21 @@ const validateSingletonDocuments = ({
 
     return singletonDocumentDefs
       .filter(
-        (documentTypeDef) =>
+        documentTypeDef =>
           pipe(
             documentTypeMap.getFilePaths(documentTypeDef.name),
-            O.map((_) => _.length),
-            O.getOrElse(() => 0),
-          ) !== 1,
+            O.map(_ => _.length),
+            O.getOrElse(() => 0)
+          ) !== 1
       )
       .map(
-        (documentTypeDef) =>
+        documentTypeDef =>
           new FetchDataError.SingletonDocumentNotFoundError({
             documentTypeDef,
             filePath: invertedFilePathPattnernMap[documentTypeDef.name],
-          }),
+          })
       )
   })
 
 const invertRecord = (record: Record<string, string>): Record<string, string> =>
-  pipe(Object.entries(record), (entries) => entries.map(([key, value]) => [value, key]), Object.fromEntries)
+  pipe(Object.entries(record), entries => entries.map(([key, value]) => [value, key]), Object.fromEntries)

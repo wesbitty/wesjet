@@ -29,7 +29,7 @@ export const makeMarkdownField = ({
           mdString: rawContent.rawDocumentContent,
           options: options?.markdown,
           rawDocumentData,
-        }),
+        })
       )
       return { raw: mdString, html }
     } else {

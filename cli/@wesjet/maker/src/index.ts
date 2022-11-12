@@ -73,7 +73,7 @@ export type Args = {
 } & PluginOptions &
   Partial<Flags>
 
-export const makeSource: core.MakeSourcePlugin<Args> = async (args) => {
+export const makeSource: core.MakeSourcePlugin<Args> = async args => {
   const {
     options,
     extensions,
@@ -90,29 +90,29 @@ export const makeSource: core.MakeSourcePlugin<Args> = async (args) => {
 
   const flags: Flags = { onUnknownDocuments, onExtraFieldData, onMissingOrIncompatibleData }
 
-  const documentTypeDefs = (Array.isArray(documentTypes) ? documentTypes : Object.values(documentTypes)).map((_) =>
-    _.def(),
+  const documentTypeDefs = (Array.isArray(documentTypes) ? documentTypes : Object.values(documentTypes)).map(_ =>
+    _.def()
   )
 
   return {
     type: 'local',
     extensions: extensions ?? {},
     options,
-    provideSchema: (esbuildHash) =>
+    provideSchema: esbuildHash =>
       pipe(
         makeCoreSchema({ documentTypeDefs, options, esbuildHash }),
-        T.mapError((error) => new SourceProvideSchemaError({ error })),
+        T.mapError(error => new SourceProvideSchemaError({ error }))
       ),
     fetchData: ({ schemaDef, verbose }) =>
       pipe(
         S.fromEffect(core.getCwd),
-        S.chain((cwd) => {
+        S.chain(cwd => {
           const contentDirPath = unknownToAbsolutePosixFilePath(contentDirPath_, cwd)
-          const contentDirExclude = (contentDirExclude_ ?? contentDirExcludeDefault).map((_) =>
-            unknownToRelativePosixFilePath(_, contentDirPath),
+          const contentDirExclude = (contentDirExclude_ ?? contentDirExcludeDefault).map(_ =>
+            unknownToRelativePosixFilePath(_, contentDirPath)
           )
-          const contentDirInclude = (contentDirInclude_ ?? []).map((_) =>
-            unknownToRelativePosixFilePath(_, contentDirPath),
+          const contentDirInclude = (contentDirInclude_ ?? []).map(_ =>
+            unknownToRelativePosixFilePath(_, contentDirPath)
           )
 
           return fetchData({
@@ -125,7 +125,7 @@ export const makeSource: core.MakeSourcePlugin<Args> = async (args) => {
             contentDirInclude,
             verbose,
           })
-        }),
+        })
       ),
   }
 }

@@ -16,6 +16,6 @@ export const post = defineDocumentType(() => ({
     },
   },
   computedFields: {
-    slug: { type: 'string', resolve: (_) => _._id.replace('.md', '') },
+    slug: { type: 'string', resolve: _ => _._id.replace('.md', '') },
   },
 }))

@@ -1,4 +1,3 @@
-import type fs from 'fs'
 import * as T from '@effect-ts/core/Effect'
 import * as Ex from '@effect-ts/core/Effect/Exit'
 import * as S from '@effect-ts/core/Effect/Experimental/Stream'
@@ -10,6 +9,8 @@ import * as E from '@effect-ts/core/Either'
 import { pipe } from '@effect-ts/core/Function'
 import * as O from '@effect-ts/core/Option'
 import * as Chokidar from 'chokidar'
+import type fs from 'fs'
+
 import { Tagged } from '../effect/index.js'
 import type { UnknownFilePath } from '../file-paths.js'
 import { unknownFilePath } from '../file-paths.js'
@@ -81,7 +82,7 @@ class ConcreteFileWatcher extends FileWatcherInternal {
     public instance: Ref.Ref<Chokidar.FSWatcher>,
     private fsEventsHub: H.Hub<Ex.Exit<never, E.Either<FileWatcherError, FileSystemEvent>>>,
     public readonly paths: readonly string[] | string,
-    public readonly options?: Chokidar.WatchOptions,
+    public readonly options?: Chokidar.WatchOptions
   ) {
     super()
   }
@@ -90,8 +91,8 @@ class ConcreteFileWatcher extends FileWatcherInternal {
     return pipe(
       this.instance,
       Ref.get,
-      T.chain((_) => T.tryPromise(() => _.close())),
-      T.catchAll((_) => T.unit),
+      T.chain(_ => T.tryPromise(() => _.close())),
+      T.catchAll(_ => T.unit)
     )
   }
 
@@ -99,11 +100,11 @@ class ConcreteFileWatcher extends FileWatcherInternal {
     return pipe(
       this.instance,
       Ref.get,
-      T.chain((_) =>
+      T.chain(_ =>
         T.succeedWith(() => {
           _.add(paths)
-        }),
-      ),
+        })
+      )
     )
   }
 
@@ -111,11 +112,11 @@ class ConcreteFileWatcher extends FileWatcherInternal {
     return pipe(
       this.instance,
       Ref.get,
-      T.chain((_) =>
+      T.chain(_ =>
         T.succeedWith(() => {
           _.unwatch(paths)
-        }),
-      ),
+        })
+      )
     )
   }
 
@@ -123,9 +124,9 @@ class ConcreteFileWatcher extends FileWatcherInternal {
     return pipe(
       this.instance,
       Ref.get,
-      T.chain((_) =>
+      T.chain(_ =>
         T.succeedWith(() => {
-          _.on('error', (error) => {
+          _.on('error', error => {
             T.run(H.publish_(this.fsEventsHub, Ex.succeed(E.left(new FileWatcherError({ origin: O.some(error) })))))
           })
           _.on('all', (eventName, path, stats) => {
@@ -134,54 +135,54 @@ class ConcreteFileWatcher extends FileWatcherInternal {
                 T.run(
                   H.publish_(
                     this.fsEventsHub,
-                    Ex.succeed(E.right(new FileAdded(unknownFilePath(path), O.fromNullable(stats)))),
-                  ),
+                    Ex.succeed(E.right(new FileAdded(unknownFilePath(path), O.fromNullable(stats))))
+                  )
                 )
                 break
               case 'unlink':
                 T.run(
                   H.publish_(
                     this.fsEventsHub,
-                    Ex.succeed(E.right(new FileRemoved(unknownFilePath(path), O.fromNullable(stats)))),
-                  ),
+                    Ex.succeed(E.right(new FileRemoved(unknownFilePath(path), O.fromNullable(stats))))
+                  )
                 )
                 break
               case 'change':
                 T.run(
                   H.publish_(
                     this.fsEventsHub,
-                    Ex.succeed(E.right(new FileChanged(unknownFilePath(path), O.fromNullable(stats)))),
-                  ),
+                    Ex.succeed(E.right(new FileChanged(unknownFilePath(path), O.fromNullable(stats))))
+                  )
                 )
                 break
               case 'addDir':
                 T.run(
                   H.publish_(
                     this.fsEventsHub,
-                    Ex.succeed(E.right(new DirectoryAdded(unknownFilePath(path), O.fromNullable(stats)))),
-                  ),
+                    Ex.succeed(E.right(new DirectoryAdded(unknownFilePath(path), O.fromNullable(stats))))
+                  )
                 )
                 break
               case 'unlinkDir':
                 T.run(
                   H.publish_(
                     this.fsEventsHub,
-                    Ex.succeed(E.right(new DirectoryRemoved(unknownFilePath(path), O.fromNullable(stats)))),
-                  ),
+                    Ex.succeed(E.right(new DirectoryRemoved(unknownFilePath(path), O.fromNullable(stats))))
+                  )
                 )
                 break
             }
           })
-        }),
-      ),
+        })
+      )
     )
   }
 
   subscribe(): M.Managed<unknown, never, S.Stream<unknown, never, E.Either<FileWatcherError, FileSystemEvent>>> {
     return pipe(
       H.subscribe(this.fsEventsHub),
-      M.chain((_) => M.ensuringFirst_(M.succeed(S.fromQueue()(_)), Q.shutdown(_))),
-      M.map(S.flattenExit),
+      M.chain(_ => M.ensuringFirst_(M.succeed(S.fromQueue()(_)), Q.shutdown(_))),
+      M.map(S.flattenExit)
     )
   }
 }
@@ -222,18 +223,18 @@ export function makeUnsafe(paths: readonly string[] | string, options?: Chokidar
 // export function make(paths: readonly string[] | string, options?: Chokidar.WatchOptions): T.UIO<FileWatcher> {
 export function make(
   paths: readonly string[] | string,
-  options?: Chokidar.WatchOptions,
+  options?: Chokidar.WatchOptions
 ): T.Effect<unknown, never, FileWatcher> {
   return pipe(
     T.succeedWith(() => Chokidar.watch(paths, options)),
     // T.tap(() => T.succeedWith(() => console.log('start make'))),
-    T.chain((_) => Ref.makeRef<Chokidar.FSWatcher>(_)),
+    T.chain(_ => Ref.makeRef<Chokidar.FSWatcher>(_)),
     T.zip(H.makeUnbounded<Ex.Exit<never, E.Either<FileWatcherError, FileSystemEvent>>>()),
     // T.tap(() => T.fail(new Error('test'))),
     T.chain(({ tuple: [instance, hub] }) =>
-      T.succeedWith(() => new ConcreteFileWatcher(instance, hub, paths, options)),
+      T.succeedWith(() => new ConcreteFileWatcher(instance, hub, paths, options))
     ),
-    T.tap((_) => _.subscribeToEvents()),
+    T.tap(_ => _.subscribeToEvents())
   )
 }
 
@@ -245,12 +246,12 @@ export function make(
 
 export const makeAndSubscribe = (
   paths: readonly string[] | string,
-  options?: Chokidar.WatchOptions,
+  options?: Chokidar.WatchOptions
 ): S.Stream<unknown, never, E.Either<FileWatcherError, FileSystemEvent>> =>
   pipe(M.make_(make(paths, options), shutdown), M.chain(subscribe), S.unwrapManaged)
 
 export function subscribe(
-  self: FileWatcher,
+  self: FileWatcher
 ): M.Managed<unknown, never, S.Stream<unknown, never, E.Either<FileWatcherError, FileSystemEvent>>> {
   concrete(self)
 

@@ -44,5 +44,5 @@ export const makeDateField = ({
         documentFilePath,
         documentTypeDef,
         incompatibleFieldData: [[fieldName, dateString]],
-      }),
+      })
   )

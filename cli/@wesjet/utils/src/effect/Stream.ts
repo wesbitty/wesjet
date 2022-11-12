@@ -18,8 +18,8 @@ export const streamTapSkipFirst =
             yield* _(f(o))
           }
           return Tuple.tuple(x + 1, o)
-        }),
-      ),
+        })
+      )
     )
 
 /** Note this function doesn't currently work if the first value is a `E.left` value */
@@ -30,7 +30,7 @@ export const tapSkipFirstRight =
       stream,
       S.zipWithIndex,
       S.tap(({ tuple: [val, index] }) => (index === 0 || E.isLeft(val) ? T.succeed(null) : f(val.right))),
-      S.map(({ tuple: [val] }) => val),
+      S.map(({ tuple: [val] }) => val)
     )
 
 export const tapRight =
@@ -38,7 +38,7 @@ export const tapRight =
   (stream: S.Stream<R1, E1, E.Either<EE1, A1>>): S.Stream<R1 & R2, E1, E.Either<EE1, A1>> =>
     pipe(
       stream,
-      S.tap((val) => (E.isLeft(val) ? T.succeed(null) : f(val.right))),
+      S.tap(val => (E.isLeft(val) ? T.succeed(null) : f(val.right)))
     )
 
 export const tapLeft =
@@ -46,7 +46,7 @@ export const tapLeft =
   (stream: S.Stream<R1, E1, E.Either<EE1, A1>>): S.Stream<R1 & R2, E1, E.Either<EE1, A1>> =>
     pipe(
       stream,
-      S.tap((val) => (E.isLeft(val) ? f(val.left) : T.succeed(null))),
+      S.tap(val => (E.isLeft(val) ? f(val.left) : T.succeed(null)))
     )
 
 export const tapRightEither =
@@ -54,7 +54,7 @@ export const tapRightEither =
   (stream: S.Stream<R1, E1, E.Either<EE1, A1>>): S.Stream<R1 & R2, E1, E.Either<EE1 | EE2, A1>> =>
     pipe(
       stream,
-      S.tap((val) => (E.isLeft(val) ? T.succeed(null) : f(val.right))),
+      S.tap(val => (E.isLeft(val) ? T.succeed(null) : f(val.right)))
     )
 
 export const startWith =
@@ -73,9 +73,9 @@ export const chainMapEitherRight =
     return S.chain_(
       stream,
       E.fold(
-        (_left) => stream as any,
-        (right) => mapRight(right),
-      ),
+        _left => stream as any,
+        right => mapRight(right)
+      )
     )
   }
 
@@ -84,10 +84,10 @@ export const chainSwitchMapEitherRight =
   <R1, E1, EE1>(stream: S.Stream<R1, E1, E.Either<EE1, A1>>): S.Stream<R1 & R2, E1 | E2, E.Either<EE1 | EE2, A2>> => {
     return S.chainParSwitch<R2, E2, E.Either<EE1, A1>, E.Either<EE2, A2>>(
       E.fold(
-        (_left) => stream as any,
-        (right) => mapRight(right),
+        _left => stream as any,
+        right => mapRight(right)
       ),
-      1,
+      1
     )(stream)
   }
 
@@ -97,9 +97,9 @@ export const mapEffectEitherRight =
     return S.mapEffect_(
       stream,
       E.fold(
-        (left) => T.succeed(E.leftW<E1 | E2, A2>(left)),
-        (right) => mapRight(right),
-      ),
+        left => T.succeed(E.leftW<E1 | E2, A2>(left)),
+        right => mapRight(right)
+      )
     )
   }
 

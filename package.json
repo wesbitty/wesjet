@@ -3,17 +3,16 @@
   "license": "UNLICENSED",
   "version": "0.0.0",
   "scripts": {
-    "postinstall": "ts-patch install -s && ts-patch --persist",
-    "postinstall:wesjet": "yarn workspaces foreach --verbose --include \"examples-*\" exec yarn wesjet postinstall",
+    "postinstall": "ts-patch install && ts-patch --persist",
+    "postinstall:wesjet": "npx workspaces foreach --verbose --include \"examples-*\" exec npx wesjet postinstall",
     "build": "tsc -b base.json",
     "build:clean": "bash -c 'rm -rf cli/*/dist cli/@wesjet/*/dist'",
-    "lint": "run format:prettier && run format:eslint",
+    "lint": "npm run format:prettier && npm run format:eslint",
     "check:prettier": "prettier . -c",
-    "check:eslint": "eslint . --ext .ts --max-warnings=0",
     "format:prettier": "prettier . -w",
+    "check:eslint": "eslint . --ext .ts --max-warnings=0",
     "format:eslint": "eslint . --ext .ts --fix",
-    "all": "yarn build:clean && yarn build && yarn workspace wesjet-nextjs-plugin run prepack",
-    "test": "CI=true VITEST_SEGFAULT_RETRY=3 yarn workspaces foreach --parallel run test"
+    "all": "npm run build:clean && npm run build && npm i --workspace=wesjet-nextjs-plugin run prepack"
   },
   "author": "Wesbitty, Inc",
   "keywords": [
@@ -46,7 +45,8 @@
     "apps/www",
     "cli/*",
     "cli/@wesjet/*",
-    "packages/*"
+    "packages/*",
+    "tests"
   ],
   "resolutions": {
     "esbuild": "0.15.13",

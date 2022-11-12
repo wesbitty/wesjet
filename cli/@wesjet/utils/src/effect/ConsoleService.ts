@@ -24,11 +24,11 @@ export const { log } = T.deriveLifted(ConsoleService)(['log'], [], [])
 export const provideTestConsole = (messages: any[]) =>
   T.provideServiceM(ConsoleService)(
     T.succeedWith(() => ({
-      log: (message) =>
+      log: message =>
         T.succeedWith(() => {
           messages.push(message)
         }),
-    })),
+    }))
   )
 
 export type HasConsole = Has<ConsoleService>

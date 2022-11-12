@@ -4,7 +4,7 @@ import type { DocumentTypeDef, DocumentTypeDefMap, NestedTypeDef, NestedTypeDefM
 export const derefDocumentOrThrow = (documentDefMap: DocumentTypeDefMap, documentDefName: string): DocumentTypeDef => {
   if (!(documentDefName in documentDefMap)) {
     throw new Error(
-      `No such DocumentTypeDef "${documentDefName}" in DocumentTypeDefMap: ${JSON.stringify(documentDefMap)}`,
+      `No such DocumentTypeDef "${documentDefName}" in DocumentTypeDefMap: ${JSON.stringify(documentDefMap)}`
     )
   }
 
@@ -14,7 +14,7 @@ export const derefDocumentOrThrow = (documentDefMap: DocumentTypeDefMap, documen
 export const derefEmbeddedOrThrow = (nestedTypeDefMap: NestedTypeDefMap, nestedTypeDefName: string): NestedTypeDef => {
   if (!(nestedTypeDefName in nestedTypeDefMap)) {
     throw new Error(
-      `No such NestedTypeDef "${nestedTypeDefName}" in NestedTypeDefMap: ${JSON.stringify(nestedTypeDefMap)}`,
+      `No such NestedTypeDef "${nestedTypeDefName}" in NestedTypeDefMap: ${JSON.stringify(nestedTypeDefMap)}`
     )
   }
 

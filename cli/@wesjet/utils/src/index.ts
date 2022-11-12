@@ -30,7 +30,7 @@ export const recRemoveUndefinedValues = (val: any): void => {
   if (Array.isArray(val)) {
     val.forEach(recRemoveUndefinedValues)
   } else if (typeof val === 'object') {
-    Object.keys(val).forEach((key) => {
+    Object.keys(val).forEach(key => {
       if (val[key] === undefined) {
         delete val[key]
       } else {
@@ -42,7 +42,7 @@ export const recRemoveUndefinedValues = (val: any): void => {
 
 export const partition = <T, TLeft extends T>(
   arr: T[],
-  isLeft: (_: T) => _ is TLeft,
+  isLeft: (_: T) => _ is TLeft
 ): [TLeft[], Exclude<T, TLeft>[]] => {
   return arr.reduce(
     (acc, el) => {
@@ -53,7 +53,7 @@ export const partition = <T, TLeft extends T>(
       }
       return acc
     },
-    [[], []] as [TLeft[], Exclude<T, TLeft>[]],
+    [[], []] as [TLeft[], Exclude<T, TLeft>[]]
   )
 }
 

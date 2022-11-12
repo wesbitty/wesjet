@@ -19,7 +19,7 @@ export class PostInstallCommand extends BaseCommand {
 
         yield* $(addToplevelDotpkgToGitignore())
       }),
-      OT.withSpan('@wesjet/cli/commands/PostInstallCommand:executeSafe', { attributes: { cwd: process.cwd() } }),
+      OT.withSpan('@wesjet/cli/commands/PostInstallCommand:executeSafe', { attributes: { cwd: process.cwd() } })
     )
   }
 }

@@ -19,10 +19,10 @@ export const provideSchema = async ({
 
   const documentTypes = types
     .filter((_): _ is Sanity.DocumentType => _.type === 'document')
-    .filter((_) => !_.name.startsWith('sanity./index.js'))
+    .filter(_ => !_.name.startsWith('sanity./index.js'))
   const nestedTypes = types.filter((_): _ is Sanity.ObjectType => _.type === 'object')
 
-  const nestedTypeNames = nestedTypes.map((_) => _.name)
+  const nestedTypeNames = nestedTypes.map(_ => _.name)
 
   const documentTypeDefMap: core.DocumentTypeDefMap = documentTypes
     .map(sanityDocumentTypeToCoreDocumentDef(nestedTypeNames))
@@ -57,7 +57,7 @@ const collectUsedObjectTypes = ({
 }): Sanity.ObjectType[] => {
   const sanityObjectTypeMap: { [typeName: string]: Sanity.ObjectType } = nestedTypes.reduce(
     (acc, _) => ({ ...acc, [_.name]: _ }),
-    {},
+    {}
   )
   const visitedObjectTypes: { [typeName: string]: boolean } = {}
   const traverseObjectType = (objectType: Sanity.ObjectType) => {
@@ -94,9 +94,9 @@ const collectUsedObjectTypes = ({
     }
   }
 
-  documentTypes.flatMap((_) => _.fields).forEach(traverseField)
+  documentTypes.flatMap(_ => _.fields).forEach(traverseField)
 
-  return Object.keys(visitedObjectTypes).map((_) => sanityObjectTypeMap[_]!)
+  return Object.keys(visitedObjectTypes).map(_ => sanityObjectTypeMap[_]!)
 }
 
 const sanityDocumentTypeToCoreDocumentDef =
@@ -221,8 +221,8 @@ const sanityFieldToCoreFieldDef =
         const type = pattern
           .match(field.type)
           .when(
-            (_) => _ === 'boolean' || _ === 'markdown' || _ === 'number',
-            (_) => _,
+            _ => _ === 'boolean' || _ === 'markdown' || _ === 'number',
+            _ => _
           )
           .otherwise(() => 'string' as const)
         return <FieldDef>{
@@ -282,7 +282,7 @@ const sanitizeString = (_: string): string => _.replace(/\./g, '_')
 /** Sanitizes the schema definition (e.g. replace "." with "_" in type names) */
 const sanitizeDef = <TypeDef extends core.NestedTypeDef | core.DocumentTypeDef>(def: TypeDef): TypeDef => {
   def.name = sanitizeString(def.name)
-  def.fieldDefs.forEach((fieldDef) => {
+  def.fieldDefs.forEach(fieldDef => {
     fieldDef.name = sanitizeString(fieldDef.name)
     switch (fieldDef.type) {
       case 'nested':

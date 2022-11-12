@@ -31,12 +31,12 @@ test('mdx-image-field ', async () => {
   })
 
   await core.runMain({ tracingServiceName: 'wesjet-test', verbose: false })(
-    core.generateDotpkg({ config: { source, esbuildHash: 'STATIC_HASH' }, verbose: true }),
+    core.generateDotpkg({ config: { source, esbuildHash: 'STATIC_HASH' }, verbose: true })
   )
 
   const allPosts = await fs
     .readFile(path.join(generatedWesjetDirPath, 'generated', 'Post', '_index.json'), 'utf8')
-    .then((json) => JSON.parse(json))
+    .then(json => JSON.parse(json))
 
   expect(allPosts[0].coverImage).toMatchInlineSnapshot(`
     {

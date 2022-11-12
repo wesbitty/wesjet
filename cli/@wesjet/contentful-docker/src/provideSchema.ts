@@ -35,20 +35,20 @@ export const provideSchema = ({
       // ;(await import('fs')).writeFileSync('.tmp.contentTypes.json', JSON.stringify(contentTypes, null, 2))
 
       const [documentContentTypes, objectContentTypes] = partition(contentTypes, (_): _ is Contentful.ContentType =>
-        isDocument({ schemaOverrides, contentTypeId: _.sys.id }),
+        isDocument({ schemaOverrides, contentTypeId: _.sys.id })
       )
 
-      const documentTypeDefs = documentContentTypes.map((contentType) =>
-        toDocumentTypeDef({ contentType, schemaOverrides }),
+      const documentTypeDefs = documentContentTypes.map(contentType =>
+        toDocumentTypeDef({ contentType, schemaOverrides })
       )
       const documentTypeDefMap = documentTypeDefs.reduce(
         (acc, documentDef) => ({ ...acc, [documentDef.name]: documentDef }),
-        {},
+        {}
       )
-      const nestedTypeDefs = objectContentTypes.map((contentType) => toNestedTypeDef({ contentType, schemaOverrides }))
+      const nestedTypeDefs = objectContentTypes.map(contentType => toNestedTypeDef({ contentType, schemaOverrides }))
       const nestedTypeDefMap = nestedTypeDefs.reduce(
         (acc, documentDef) => ({ ...acc, [documentDef.name]: documentDef }),
-        {},
+        {}
       )
 
       const defs = { documentTypeDefMap, nestedTypeDefMap }
@@ -67,7 +67,7 @@ export const provideSchema = ({
     OT.withSpan('@wesjet/source-wesjet/fetchData:provideSchema', {
       attributes: { spaceId, environmentId },
     }),
-    T.mapError((error) => new SourceProvideSchemaError({ error })),
+    T.mapError(error => new SourceProvideSchemaError({ error }))
   )
 
 const isDocument = ({
@@ -94,7 +94,7 @@ const toDocumentTypeDef = ({
         field,
         schemaOverrides,
         fieldOverrides: schemaOverrides.documentTypes[contentType.sys.id]!.fields[field.id],
-      }),
+      })
     ),
     computedFields: [],
     description: contentType.description,
@@ -120,7 +120,7 @@ const toNestedTypeDef = ({
         field,
         schemaOverrides,
         fieldOverrides: schemaOverrides.nestedTypes[contentType.sys.id]!.fields[field.id],
-      }),
+      })
     ),
     description: contentType.description,
     // labelField: contentType.displayField,
@@ -200,8 +200,8 @@ const toFieldDef = ({
           return {
             ...fieldBase,
             type: 'list_polymorphic',
-            of: field.items.validations![0]!.linkContentType!.map((contentTypeId) =>
-              toListFieldDefItem({ contentTypeId, schemaOverrides }),
+            of: field.items.validations![0]!.linkContentType!.map(contentTypeId =>
+              toListFieldDefItem({ contentTypeId, schemaOverrides })
             ),
             // TODO support dot syntax or array syntax
             typeField: 'contentType.sys.id',

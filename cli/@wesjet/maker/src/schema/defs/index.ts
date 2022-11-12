@@ -93,7 +93,7 @@ export type DocumentType<DefName extends string = string> = { type: 'document'; 
 export type DocumentTypes = DocumentType<any>[] | Record<string, DocumentType<any>>
 
 export const defineNestedType = <DefName extends string>(
-  def: Thunk<NestedTypeDef<DefName> | NestedUnnamedTypeDef>,
+  def: Thunk<NestedTypeDef<DefName> | NestedUnnamedTypeDef>
   // NOTE we're not using the generic `DefName` here because it causes problems with when using the defined document type
 ): NestedType => ({
   type: 'nested',
@@ -101,7 +101,7 @@ export const defineNestedType = <DefName extends string>(
 })
 
 export const defineDocumentType = <DefName extends string>(
-  def: Thunk<DocumentTypeDef<DefName>>,
+  def: Thunk<DocumentTypeDef<DefName>>
   // NOTE we're not using the generic `DefName` here because it causes problems with when using the defined document type
 ): DocumentType => ({
   type: 'document',

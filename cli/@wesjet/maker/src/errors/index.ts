@@ -137,7 +137,7 @@ export namespace FetchDataError {
 
     renderLine = () =>
       `"${this.documentFilePath}" with field "${this.fieldDef.name}: ${this.imagePath}" failed with ${errorToString(
-        this.error,
+        this.error
       )}`
   }
 
@@ -194,7 +194,7 @@ export namespace FetchDataError {
         .exhaustive()
 
       return `"${this.filePath}" ends with "${this.extension}" but expected to be one of "${expectedFileExtensions.join(
-        ', ',
+        ', '
       )}" as defined \`contentType\` is "${this.contentType}"`
     }
   }
@@ -280,7 +280,7 @@ Couldn't find nested document type definitions provided by name for ${errorCount
 
     renderLine = () => {
       const misingRequiredFieldsStr = this.fieldDefsWithMissingData
-        .map((fieldDef) => `  • ${fieldDef.name}: ${fieldDef.type}`)
+        .map(fieldDef => `  • ${fieldDef.name}: ${fieldDef.type}`)
         .join('\n')
 
       return `\

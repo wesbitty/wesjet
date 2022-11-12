@@ -44,13 +44,13 @@ export const makeDocument = ({
       // )
       const body = utils.pattern
         .match(rawContent)
-        .when(rawContentHasBody, (_) => _.body)
+        .when(rawContentHasBody, _ => _.body)
         .otherwise(() => undefined)
 
       const rawData = { ...rawContent.fields, [bodyFieldName]: body }
       const docValues = yield* $(
         T.forEachParDict_(documentTypeDef.fieldDefs, {
-          mapValue: (fieldDef) =>
+          mapValue: fieldDef =>
             getDataForFieldDef({
               fieldDef,
               rawFieldData: rawData[fieldDef.name],
@@ -60,8 +60,8 @@ export const makeDocument = ({
               documentFilePath: relativeFilePath,
               contentDirPath,
             }),
-          mapKey: (fieldDef) => T.succeed(fieldDef.name),
-        }),
+          mapKey: fieldDef => T.succeed(fieldDef.name),
+        })
       )
 
       const _raw = yield* $(getFromDocumentContext('rawDocumentData'))
@@ -75,13 +75,13 @@ export const makeDocument = ({
 
       return doc
     }),
-    T.mapError((error) =>
+    T.mapError(error =>
       error._tag === 'NoSuchNestedDocumentTypeError' ||
       error._tag === 'IncompatibleFieldDataError' ||
       error._tag === 'ImageError'
         ? error
-        : new FetchDataError.UnexpectedError({ error, documentFilePath: relativeFilePath }),
-    ),
+        : new FetchDataError.UnexpectedError({ error, documentFilePath: relativeFilePath })
+    )
   )
 
 type MakeDocumentInternalError =
@@ -129,7 +129,7 @@ const makeNestedDocument = ({
   T.gen(function* ($) {
     const objValues = yield* $(
       T.forEachParDict_(fieldDefs, {
-        mapValue: (fieldDef) =>
+        mapValue: fieldDef =>
           getDataForFieldDef({
             fieldDef,
             rawFieldData: rawObjectData[fieldDef.name],
@@ -139,8 +139,8 @@ const makeNestedDocument = ({
             documentFilePath,
             contentDirPath,
           }),
-        mapKey: (fieldDef) => T.succeed(fieldDef.name),
-      }),
+        mapKey: fieldDef => T.succeed(fieldDef.name),
+      })
     )
 
     const typeNameField = options.fieldOptions.typeFieldName
@@ -174,7 +174,7 @@ const getDataForFieldDef = ({
     if (rawFieldData === undefined) {
       console.assert(
         !fieldDef.isRequired || fieldDef.isSystemField,
-        `Inconsistent data found: ${JSON.stringify({ fieldDef, documentFilePath, typeName: documentTypeName })}`,
+        `Inconsistent data found: ${JSON.stringify({ fieldDef, documentFilePath, typeName: documentTypeName })}`
       )
 
       return undefined
@@ -203,7 +203,7 @@ const getDataForFieldDef = ({
             options,
             documentFilePath,
             contentDirPath,
-          }),
+          })
         )
       }
       case 'nested_unnamed':
@@ -217,7 +217,7 @@ const getDataForFieldDef = ({
             options,
             documentFilePath,
             contentDirPath,
-          }),
+          })
         )
       case 'nested_polymorphic': {
         const rawObjectData = yield* $(parseFieldDataEff('nested_polymorphic'))
@@ -232,8 +232,8 @@ const getDataForFieldDef = ({
                 fieldName: fieldDef.name,
                 validNestedTypeNames: fieldDef.nestedTypeNames,
                 documentTypeDef: coreSchemaDef.documentTypeDefMap[documentTypeName]!,
-              }),
-            ),
+              })
+            )
           )
         }
 
@@ -248,7 +248,7 @@ const getDataForFieldDef = ({
             options,
             documentFilePath,
             contentDirPath,
-          }),
+          })
         )
       }
       case 'reference':
@@ -258,7 +258,7 @@ const getDataForFieldDef = ({
       case 'list':
         const rawListData = yield* $(parseFieldDataEff('list'))
         return yield* $(
-          T.forEachPar_(rawListData, (rawItemData) =>
+          T.forEachPar_(rawListData, rawItemData =>
             getDataForListItem({
               rawItemData,
               fieldDef,
@@ -267,13 +267,13 @@ const getDataForFieldDef = ({
               documentTypeName,
               documentFilePath,
               contentDirPath,
-            }),
-          ),
+            })
+          )
         )
       case 'date':
         const dateString = yield* $(parseFieldDataEff('date'))
         return yield* $(
-          makeDateField({ dateString, documentFilePath, fieldName: fieldDef.name, documentTypeDef, options }),
+          makeDateField({ dateString, documentFilePath, fieldName: fieldDef.name, documentTypeDef, options })
         )
       case 'markdown': {
         const mdString = yield* $(parseFieldDataEff('markdown'))
@@ -334,7 +334,7 @@ const getDataForListItem = ({
       if (nestedTypeDef === undefined) {
         const validNestedTypeNames = fieldDef.of
           .filter((_): _ is core.ListFieldDefItem.ItemNested => _.type === 'nested')
-          .map((_) => _.nestedTypeName)
+          .map(_ => _.nestedTypeName)
 
         return yield* $(
           T.fail(
@@ -344,8 +344,8 @@ const getDataForListItem = ({
               fieldName: fieldDef.name,
               validNestedTypeNames,
               documentTypeDef: coreSchemaDef.documentTypeDefMap[documentTypeName]!,
-            }),
-          ),
+            })
+          )
         )
       }
       return yield* $(
@@ -357,7 +357,7 @@ const getDataForListItem = ({
           options,
           documentFilePath,
           contentDirPath,
-        }),
+        })
       )
     }
 
@@ -374,7 +374,7 @@ const getDataForListItem = ({
             options,
             documentFilePath,
             contentDirPath,
-          }),
+          })
         )
       }
       case 'nested_unnamed': {
@@ -388,7 +388,7 @@ const getDataForListItem = ({
             options,
             documentFilePath,
             contentDirPath,
-          }),
+          })
         )
       }
       case 'mdx':
@@ -396,7 +396,7 @@ const getDataForListItem = ({
       case 'date':
         const dateString = yield* $(parseFieldDataEff('date'))
         return yield* $(
-          makeDateField({ dateString, documentFilePath, fieldName: fieldDef.name, documentTypeDef, options }),
+          makeDateField({ dateString, documentFilePath, fieldName: fieldDef.name, documentTypeDef, options })
         )
       case 'markdown': {
         const mdString = yield* $(parseFieldDataEff('markdown'))

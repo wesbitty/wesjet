@@ -9,7 +9,7 @@ export type GetDocumentTypeMapGen<TDocument extends Document> = WesjetGen extend
 
 export type GetDocumentTypeGen<
   Name extends string,
-  TDocument extends Document,
+  TDocument extends Document
 > = Name extends keyof GetDocumentTypeMapGen<TDocument> ? GetDocumentTypeMapGen<TDocument>[Name] : Document
 
 export type GetDocumentTypesGen = WesjetGen extends { documentTypes: infer T } ? T : Document

@@ -1,0 +1,9 @@
+{
+  "extends": "../wesjet.json",
+  "compilerOptions": {
+    "module": "ES2020",
+    "rootDir": "./src",
+    "outDir": "./dist"
+  },
+  "include": ["./src"]
+}

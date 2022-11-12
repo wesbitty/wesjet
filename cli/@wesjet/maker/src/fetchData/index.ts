@@ -48,24 +48,24 @@ export const fetchData = ({
       // Unfortunately needed in order to avoid race conditions
       awaitWriteFinish: { stabilityThreshold: 50, pollInterval: 10 },
     }),
-    S.mapEitherRight(chokidarAllEventToCustomUpdateEvent),
+    S.mapEitherRight(chokidarAllEventToCustomUpdateEvent)
   )
 
   const resolveParams = pipe(core.DataCache.loadPreviousCacheFromDisk({ schemaHash: coreSchemaDef.hash }), T.either)
 
   return pipe(
     S.fromEffect(resolveParams),
-    S.chainSwitchMapEitherRight((cache) =>
+    S.chainSwitchMapEitherRight(cache =>
       pipe(
         fileUpdatesStream,
-        S.tapRight((e) =>
+        S.tapRight(e =>
           T.succeedWith(
             () =>
-              (e._tag === 'updated' || e._tag === 'deleted') && console.log(`\nFile ${e._tag}: ${e.relativeFilePath}`),
-          ),
+              (e._tag === 'updated' || e._tag === 'deleted') && console.log(`\nFile ${e._tag}: ${e.relativeFilePath}`)
+          )
         ),
         S.startWithRight(initEvent),
-        S.mapEffectEitherRight((event) =>
+        S.mapEffectEitherRight(event =>
           pipe(
             event,
             T.matchTag({
@@ -82,12 +82,12 @@ export const fetchData = ({
                   verbose,
                   contentTypeMap,
                 }),
-              deleted: (event) =>
+              deleted: event =>
                 T.succeedWith(() => {
                   delete cache!.cacheItemsMap[event.relativeFilePath]
                   return cache!
                 }),
-              updated: (event) =>
+              updated: event =>
                 updateCacheEntry({
                   contentDirPath,
                   filePathPatternMap,
@@ -99,35 +99,31 @@ export const fetchData = ({
                   contentTypeMap,
                 }),
             }),
-            T.either,
-          ),
+            T.either
+          )
         ),
         // update local and persisted cache
-        S.tapRight((cache_) => T.succeedWith(() => (cache = cache_))),
-        S.tapRightEither((cache_) =>
-          core.DataCache.writeCacheToDisk({ cache: cache_, schemaHash: coreSchemaDef.hash }),
-        ),
-      ),
+        S.tapRight(cache_ => T.succeedWith(() => (cache = cache_))),
+        S.tapRightEither(cache_ => core.DataCache.writeCacheToDisk({ cache: cache_, schemaHash: coreSchemaDef.hash }))
+      )
     ),
-    S.mapEitherRight((cache) => embedReferences({ cache, coreSchemaDef })),
+    S.mapEitherRight(cache => embedReferences({ cache, coreSchemaDef })),
     S.mapEitherLeft(
-      (error) => new core.SourceFetchDataError({ error, alreadyHandled: error._tag === 'HandledFetchDataError' }),
-    ),
+      error => new core.SourceFetchDataError({ error, alreadyHandled: error._tag === 'HandledFetchDataError' })
+    )
   )
 }
 
 const makefilePathPatternMap = (documentTypeDefs: LocalSchema.DocumentTypeDef[]): FilePathPatternMap =>
   Object.fromEntries(
-    documentTypeDefs
-      .filter((_) => _.filePathPattern)
-      .map((documentDef) => [documentDef.filePathPattern, documentDef.name]),
+    documentTypeDefs.filter(_ => _.filePathPattern).map(documentDef => [documentDef.filePathPattern, documentDef.name])
   )
 
 export const testOnly_makefilePathPatternMap = makefilePathPatternMap
 
 const makeContentTypeMap = (documentTypeDefs: LocalSchema.DocumentTypeDef[]): ContentTypeMap =>
   Object.fromEntries(
-    documentTypeDefs.filter((_) => _.filePathPattern).map((documentDef) => [documentDef.name, documentDef.contentType]),
+    documentTypeDefs.filter(_ => _.filePathPattern).map(documentDef => [documentDef.name, documentDef.contentType])
   )
 
 export const testOnly_makeContentTypeMap = makeContentTypeMap
@@ -165,12 +161,12 @@ const updateCacheEntry = ({
         }),
         // NOTE in this code path the DocumentTypeMapState is not used
         provideDocumentTypeMapState,
-        These.effectTapSuccess((cacheItem) =>
+        These.effectTapSuccess(cacheItem =>
           T.succeedWith(() => {
             cache.cacheItemsMap[event.relativeFilePath] = cacheItem
-          }),
+          })
         ),
-        These.effectTapErrorOrWarning((errorOrWarning) =>
+        These.effectTapErrorOrWarning(errorOrWarning =>
           FetchDataError.handleErrors({
             errors: [errorOrWarning],
             documentCount: 1,
@@ -179,9 +175,9 @@ const updateCacheEntry = ({
             schemaDef: coreSchemaDef,
             verbose: false,
             contentDirPath,
-          }),
-        ),
-      ),
+          })
+        )
+      )
     )
 
     return cache
@@ -224,15 +220,15 @@ const embedReferences = ({ cache, coreSchemaDef }: { cache: core.DataCache.Cache
   const documentDefs = Object.values(coreSchemaDef.documentTypeDefMap)
   const nestedDefs = Object.values(coreSchemaDef.nestedTypeDefMap)
   const defs = [...documentDefs, ...nestedDefs]
-  const defsWithEmbeddedRefs = defs.filter((_) => _.fieldDefs.some((_) => core.isReferenceField(_) && _.embedDocument))
+  const defsWithEmbeddedRefs = defs.filter(_ => _.fieldDefs.some(_ => core.isReferenceField(_) && _.embedDocument))
 
-  const defsWithEmbeddedListRefs = defs.filter((_) =>
-    _.fieldDefs.some((_) => core.isListFieldDef(_) && _.of.type === 'reference' && _.of.embedDocument),
+  const defsWithEmbeddedListRefs = defs.filter(_ =>
+    _.fieldDefs.some(_ => core.isListFieldDef(_) && _.of.type === 'reference' && _.of.embedDocument)
   )
 
   const defNameSetWithEmbeddedRefs = new Set([
-    ...defsWithEmbeddedRefs.map((_) => _.name),
-    ...defsWithEmbeddedListRefs.map((_) => _.name),
+    ...defsWithEmbeddedRefs.map(_ => _.name),
+    ...defsWithEmbeddedListRefs.map(_ => _.name),
   ])
 
   if (defsWithEmbeddedRefs.length > 0) {
@@ -241,7 +237,7 @@ const embedReferences = ({ cache, coreSchemaDef }: { cache: core.DataCache.Cache
       if (!defNameSetWithEmbeddedRefs.has(cacheItem.documentTypeName)) continue
 
       const documentDef = coreSchemaDef.documentTypeDefMap[cacheItem.documentTypeName]!
-      const fieldDefsWithEmbeddedRefs = documentDef.fieldDefs.filter((_) => core.isReferenceField(_) && _.embedDocument)
+      const fieldDefsWithEmbeddedRefs = documentDef.fieldDefs.filter(_ => core.isReferenceField(_) && _.embedDocument)
       for (const fieldDef of fieldDefsWithEmbeddedRefs) {
         const referenceId = cacheItem.document[fieldDef.name]
         if (referenceId === undefined || referenceId === null) continue

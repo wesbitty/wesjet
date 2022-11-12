@@ -45,17 +45,17 @@ export const normalizeSchemaOverrides = ({
 }): Normalized.SchemaOverrides => {
   const overrideDocumentContentTypeIds = getContentTypeIds(schemaOverrides.documentTypes ?? {})
   const overrideNestedContentTypeIds = getContentTypeIds(schemaOverrides.nestedTypes ?? {})
-  const contentfulContentTypeIds = contentTypes.map((_) => _.sys.id)
+  const contentfulContentTypeIds = contentTypes.map(_ => _.sys.id)
 
   // check whether type names were provided that don't exist in Contentful
   const unknownContentTypeIds = [...overrideDocumentContentTypeIds, ...overrideNestedContentTypeIds].filter(
-    (typeName) => !contentfulContentTypeIds.includes(typeName),
+    typeName => !contentfulContentTypeIds.includes(typeName)
   )
   if (unknownContentTypeIds.length > 0) {
     throw new Error(`\
 Unknown Contentful content type id(s) provided: ${unknownContentTypeIds.join(', ')}.
 Please only use the following Contentful content type ids:
-${contentfulContentTypeIds.map((_) => `  - ${_}`).join('\n')}
+${contentfulContentTypeIds.map(_ => `  - ${_}`).join('\n')}
 `)
   }
 
@@ -64,25 +64,25 @@ ${contentfulContentTypeIds.map((_) => `  - ${_}`).join('\n')}
 
     // in case both documentTypes and nestedTypes were provided, make sure no Contentful content type was forgotten
     const forgottenContentTypeIds = contentfulContentTypeIds.filter(
-      (typeName) => !providedContentTypeIds.includes(typeName),
+      typeName => !providedContentTypeIds.includes(typeName)
     )
 
     if (forgottenContentTypeIds.length > 0) {
       throw new Error(`\
 When providing both the "documentTypes" and "nestedTypes" schemaOverrides options you need to cover all Contentful content types.
 The following content types are missing and need to be provided either in "documentTypes" or "nestedTypes":
-${forgottenContentTypeIds.map((_) => `  - ${_}`).join('\n')}
+${forgottenContentTypeIds.map(_ => `  - ${_}`).join('\n')}
 `)
     }
 
     // check that no content types are mentioned for both options
-    const duplicateContentTypeIds = overrideDocumentContentTypeIds.filter((typeName) =>
-      overrideNestedContentTypeIds.includes(typeName),
+    const duplicateContentTypeIds = overrideDocumentContentTypeIds.filter(typeName =>
+      overrideNestedContentTypeIds.includes(typeName)
     )
     if (duplicateContentTypeIds.length > 0) {
       throw new Error(`\
 The following content types were provided both in "documentTypes" and "nestedTypes" but can only be specified on one sid:
-${duplicateContentTypeIds.map((_) => `  - ${_}`).join('\n')}
+${duplicateContentTypeIds.map(_ => `  - ${_}`).join('\n')}
 `)
     }
   }
@@ -93,14 +93,14 @@ ${duplicateContentTypeIds.map((_) => `  - ${_}`).join('\n')}
         getCompilementTypeNames({
           allTypeNames: contentfulContentTypeIds,
           providedTypeNames: overrideNestedContentTypeIds,
-        }),
+        })
     ),
     nestedTypes: normalizeInputTypeValues(
       schemaOverrides.nestedTypes ??
         getCompilementTypeNames({
           allTypeNames: contentfulContentTypeIds,
           providedTypeNames: overrideDocumentContentTypeIds,
-        }),
+        })
     ),
   }
 
@@ -114,7 +114,7 @@ const normalizeInputTypeValues = (types: Input.TypeOverrideValues): Normalized.T
         typeof type_ === 'object'
           ? { ...acc, ...normalizeInputTypeOverrideMap(type_) }
           : { ...acc, [type_]: { defName: type_, isSingleton: false, fields: {} } },
-      {},
+      {}
     )
   }
 
@@ -138,13 +138,13 @@ const normalizeInputTypeOverrideItem = (item: Input.TypeOverrideItem | string): 
 const normalizeInputFieldOverrideMap = (map: Input.FieldOverrideMap): Normalized.FieldOverrideMap => {
   return mapObjectValues(
     map,
-    (fieldName, item) => <Normalized.FieldOverrideItem>{ name: item.name ?? fieldName, type: item.type },
+    (fieldName, item) => <Normalized.FieldOverrideItem>{ name: item.name ?? fieldName, type: item.type }
   )
 }
 
 const getContentTypeIds = (types: Input.TypeOverrideValues): string[] => {
   if (Array.isArray(types)) {
-    return types.flatMap((type_) => (typeof type_ === 'object' ? Object.keys(type_) : [type_]))
+    return types.flatMap(type_ => (typeof type_ === 'object' ? Object.keys(type_) : [type_]))
   }
 
   return Object.keys(types)
@@ -157,7 +157,7 @@ const getCompilementTypeNames = ({
   allTypeNames: string[]
   providedTypeNames: string[]
 }): string[] => {
-  return allTypeNames.filter((typeName) => !providedTypeNames.includes(typeName))
+  return allTypeNames.filter(typeName => !providedTypeNames.includes(typeName))
 }
 
 // type Required<T> = T extends object ? { [P in keyof T]-?: NonNullable<T[P]> } : T

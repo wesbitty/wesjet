@@ -1,4 +1,5 @@
 import { Chunk } from '@effect-ts/core'
+
 import { E, O, These, Tp } from './index.js'
 export * from '@effect-ts/core/Collections/Immutable/Chunk'
 
@@ -7,12 +8,12 @@ export * from '@effect-ts/core/Collections/Immutable/Chunk'
  * Values are preserved in case of a warning.
  */
 export const partitionThese = <E, A>(
-  chunk: Chunk.Chunk<These.These<E, A>>,
+  chunk: Chunk.Chunk<These.These<E, A>>
 ): Tp.Tuple<[Chunk.Chunk<E>, Chunk.Chunk<A>]> => {
   let errors = Chunk.empty<E>()
   let values = Chunk.empty<A>()
 
-  Chunk.forEach_(chunk, (a) => {
+  Chunk.forEach_(chunk, a => {
     const res = These.result(a)
     if (E.isLeft(res)) {
       errors = Chunk.append_(errors, res.left)
