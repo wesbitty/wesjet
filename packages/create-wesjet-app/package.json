@@ -1,6 +1,6 @@
 {
   "name": "create-wesjet-app",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "devDependencies": {
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.19",

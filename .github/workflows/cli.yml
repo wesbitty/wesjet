@@ -1,12 +1,12 @@
-name: Pkg Build
+name: CLI Build
 
 on:
   pull_request:
     branches:
-      - main
+      - master
       - jet
     paths:
-      - 'packages/**'
+      - 'cli/**'
 jobs:
   build:
     runs-on: ubuntu-latest

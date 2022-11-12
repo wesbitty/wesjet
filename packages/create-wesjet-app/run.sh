@@ -9,7 +9,7 @@ npx create-wesjet-app my-app
 cd my-app
 
 echo "Adding tailwindcss, postcss and autoprefixer as a dependency"
-npm add -D tailwindcss postcss autoprefixer
+npm add -D tailwindcss postcss autoprefixer date-fns wesjet wesjet-nextjs-plugin
 npx tailwindcss init -p
 
 echo "Configuring valid files glob for tailwindcss.config.js"
