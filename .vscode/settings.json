@@ -1,6 +1,5 @@
 {
   "search.exclude": {
-    "**/.yarn": true,
     "**/*.tsbuildinfo": true,
     "**/dist": true,
     "**/.pnp.*": true,
@@ -8,15 +7,13 @@
     "**/.next": true
   },
   "files.exclude": {
-    "**/.git": false,
+    "**/.git": true,
     "**/.svn": true,
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
     "**/Thumbs.db": true,
     "**/dist": false,
-    "**/vercel.json": false,
-    "**/.yarn": true,
     "**/.direnv": true
   },
   "editor.formatOnSave": true,

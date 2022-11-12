@@ -12,9 +12,8 @@
     "check:eslint": "eslint . --ext .ts --max-warnings=0",
     "format:prettier": "prettier . -w",
     "format:eslint": "eslint . --ext .ts --fix",
-    "all": "run build:clean && run build && yarn workspace wesjet-nextjs-plugin run prepack",
-    "test": "CI=true VITEST_SEGFAULT_RETRY=3 yarn workspaces foreach --parallel run test",
-    "dev:www": "turbo run dev --filter=www --parallel"
+    "all": "yarn build:clean && yarn build && yarn workspace wesjet-nextjs-plugin run prepack",
+    "test": "CI=true VITEST_SEGFAULT_RETRY=3 yarn workspaces foreach --parallel run test"
   },
   "author": "Wesbitty, Inc",
   "keywords": [
@@ -40,7 +39,6 @@
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "prettier": "^2.7.1",
     "ts-patch": "^2.0.2",
-    "turbo": "^1.6.3",
     "typescript": "^4.8.4"
   },
   "workspaces": [
@@ -51,12 +49,11 @@
     "packages/*"
   ],
   "resolutions": {
-    "esbuild": "0.15.7",
-    "wesjet": "workspace:*",
-    "@wesjet/*": "workspace:*",
-    "wesjet-simple-import-hooks": "workspace:*",
-    "wesjet-nextjs-plugin": "workspace:*",
+    "esbuild": "0.15.13",
+    "wesjet": "^0.0.7",
+    "@wesjet/*": "^0.0.7",
+    "wesjet-simple-import-hooks": "^0.0.7",
+    "wesjet-nextjs-plugin": "^0.0.7",
     "rxjs": "^7.1.0"
-  },
-  "packageManager": "yarn@3.2.4"
+  }
 }
