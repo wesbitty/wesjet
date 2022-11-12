@@ -1,10 +1,10 @@
 # <img src="https://i.ibb.co/dMH4HS8/wesjet.png" height="30" />&nbsp;&nbsp;Wesjet [![](https://badgen.net/npm/v/wesjet)](https://www.npmjs.com/wesjet/packages)
 
-**WesjetPkg Transforms & Validates Content, build system optimized for JavaScript and TypeScript in application's pages.**
+**Wesjet - Transforms & Validates Content, build system optimized for JavaScript and TypeScript in application's pages.**
 
 ## Getting Started
 
-Visit [https://wesbitty.com](https://wesbitty.com/docs/getting-started) to get started with WesjetPkg.
+Visit [https://wesbitty.com](https://wesbitty.com/docs/getting-started) to get started with Wesjet.
 
 ## Features
 
@@ -13,25 +13,21 @@ Visit [https://wesbitty.com](https://wesbitty.com/docs/getting-started) to get s
 - Powerful schema DSL to design your content model (validates your content and compiles types)
 - Compile TypeScript types based on your content model automatically (e.g. frontmatter or CMS schema)
 
-## Contributing
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information.
-
 ## Community & Support
 
 The WesjetPkg community can be found on [GitHub Discussions](https://github.com/wesbitty/wesjetpkg/discussions), where you can ask questions, voice ideas, and share your projects.
 
 To chat with other community members, you can join the [WesjetPkg Discord](https://discord.com)
 
-Our [Code of Conduct](https://github.com/wesbitty/wesjetpkg/master/blob/code_of_conduct.md) applies to all Wesjet community channels.
+Our [Code of Conduct](https://github.com/wesbitty/wesjetpkg/master/blob/code_of_conduct.md) applies to all WesjetPkg community channels.
 
-Report bugs and errors you encounter using wesjet on [Wesjet Issues Forum](https://github.com/wesbitty/wesjetpkg/issues).
+Report bugs and errors you encounter using wesjet on [WesjetPkg Issues Forum](https://github.com/wesbitty/wesjetpkg/issues).
 
-## Who is using WesjetPkg?
+## Who is using Wesjet?
 
 - [Wesbitty Inc](https://wesbitty.com)
 
-Are you using WesjetPkg? please add your page (and repo) to the end of the list via a PR. 🙏
+Are you using Wesjet? please add your page (and repo) to the end of the list via a PR. 🙏
 
 ## Security
 
