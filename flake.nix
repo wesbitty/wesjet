@@ -1,5 +1,5 @@
 {
-  description = "Incremental bundler";
+  description = "WesjetPkg Transform & Validate content and build system optimized for JavaScript and TypeScript";
 
   outputs = { self, nixpkgs }: {
 
