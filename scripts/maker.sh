@@ -1,1 +1,1 @@
-npx maker
+#!/bin/bash
