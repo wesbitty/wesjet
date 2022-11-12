@@ -1,5 +1,5 @@
-## Create Wesjet App - TailwindCSS Starter Generator
-A simple shell script that uses create-wesjet-app to create a Wesjet Project and configures tailwindcss on top of it.
+## Create Wesjet App
+A simple shell script that uses `create-wesjet-app` to create `wesjet-starter` and configures tailwindcss on top of it.
 ### Usage
 Clone the repo, or copy the run.sh script and then run with bash or any other shell:
 ```bash
