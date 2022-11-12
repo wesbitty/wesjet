@@ -17,6 +17,8 @@ node_modules
 # wesjet cache
 .wesjet
 
+.gitpod.yml
+
 dist*
 out
 .tmp*
