@@ -13,6 +13,6 @@
     "test": "echo No tests yet"
   },
   "dependencies": {
-    "@wesjet/core": "^0.0.7"
+    "@wesjet/core": "*"
   }
 }

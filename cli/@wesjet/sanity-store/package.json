@@ -20,8 +20,8 @@
     "@sanity/core": "^2.10.5",
     "@sanity/image-url": "^0.140.22",
     "@sanity/schema": "^2.10.0",
-    "@wesjet/core": "^0.0.7",
-    "@wesjet/utils": "^0.0.7",
+    "@wesjet/core": "*",
+    "@wesjet/utils": "*",
     "rxjs": "^7.1.0"
   }
 }

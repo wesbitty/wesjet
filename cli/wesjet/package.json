@@ -73,11 +73,11 @@
     "_bundle-cli": "esbuild ./dist/cli/index.js --bundle --platform=node --format=esm --external:esbuild --external:@esbuild-plugins/node-resolve --outfile=dist/cli/bundle.js --main-fields=module,main --metafile=meta.json --banner:js=\"import { createRequire as topLevelCreateRequire } from 'module'; const require = topLevelCreateRequire(import.meta.url); const __dirname = '__SET_BY_ESBUILD__';\""
   },
   "dependencies": {
-    "@wesjet/cli": "^0.0.7",
-    "@wesjet/client": "^0.0.7",
-    "@wesjet/core": "^0.0.7",
-    "@wesjet/maker": "^0.0.7",
-    "@wesjet/utils": "^0.0.7"
+    "@wesjet/cli": "*",
+    "@wesjet/client": "*",
+    "@wesjet/core": "*",
+    "@wesjet/maker": "*",
+    "@wesjet/utils": "*"
   },
   "devDependencies": {
     "typescript": "^4.8.4"

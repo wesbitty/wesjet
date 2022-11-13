@@ -27,9 +27,9 @@
   },
   "dependencies": {
     "@stackbit/sdk": "~0.2.38",
-    "@wesjet/core": "^0.0.7",
-    "@wesjet/maker": "^0.0.7",
-    "@wesjet/utils": "^0.0.7"
+    "@wesjet/core": "*",
+    "@wesjet/maker": "*",
+    "@wesjet/utils": "*"
   },
   "devDependencies": {
     "vite": "^3.1.0",

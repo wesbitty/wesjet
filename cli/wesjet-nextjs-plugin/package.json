@@ -48,8 +48,8 @@
     "prepack": "sed '/^import /d' dist/index-cjs.js > dist/index-cjs.cjs; cp src/hooks/jsx-runtime.cjs dist/hooks/jsx-runtime.cjs"
   },
   "dependencies": {
-    "@wesjet/core": "^0.0.7",
-    "@wesjet/utils": "^0.0.7",
+    "@wesjet/core": "*",
+    "@wesjet/utils": "*",
     "prepack": "^0.2.54",
     "run": "^1.4.0"
   },

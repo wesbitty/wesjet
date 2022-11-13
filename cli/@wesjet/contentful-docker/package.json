@@ -16,8 +16,8 @@
     "@types/node": "^18.7.15"
   },
   "dependencies": {
-    "@wesjet/core": "^0.0.7",
-    "@wesjet/utils": "^0.0.7",
+    "@wesjet/core": "*",
+    "@wesjet/utils": "*",
     "contentful-management": "7.22.4"
   }
 }

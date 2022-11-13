@@ -28,8 +28,8 @@
     "test": "TZ='GMT' FORCE_COLOR=1 vitest"
   },
   "dependencies": {
-    "@wesjet/core": "^0.0.7",
-    "@wesjet/utils": "^0.0.7",
+    "@wesjet/core": "*",
+    "@wesjet/utils": "*",
     "chokidar": "^3.5.3",
     "fast-glob": "^3.2.12",
     "gray-matter": "^4.0.3",

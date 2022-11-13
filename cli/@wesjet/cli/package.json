@@ -13,8 +13,8 @@
     "test": "echo No tests yet"
   },
   "dependencies": {
-    "@wesjet/core": "^0.0.7",
-    "@wesjet/utils": "^0.0.7",
+    "@wesjet/core": "*",
+    "@wesjet/utils": "*",
     "clipanion": "^3.2.0-rc.13",
     "typanion": "^3.12.1"
   },
