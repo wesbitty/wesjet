@@ -40,7 +40,4 @@ Currently used versions: wesjetpkg: "${wesjetVersion}", wesjet-nextjs-plugin: "$
 
 const require = createRequire(import.meta.url)
 
-// const getPackageVersion = (packageName: string): string =>
-//   JSON.parse(fs.readFileSync(require.resolve(packageName), 'utf8')).version
-
 const getPackageVersion = (packageName: string): string => require(`${packageName}/package.json`).version

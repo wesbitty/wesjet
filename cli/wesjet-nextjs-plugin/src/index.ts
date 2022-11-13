@@ -9,21 +9,6 @@ let devServerStarted = false
 
 export const defaultPluginOptions: NextPluginOptions = {}
 
-/**
- * This function allows you to provide custom plugin options (currently there are none however).
- *
- * @example
- * ```js
- * // next.config.mjs
- * import { createWesjetPlugin } from 'wesjet-nextjs-plugin'
- *
- * const withWesjet = createWesjetPlugin({ configPath: './content/wesjet.config.ts' })
- *
- * export default withWesjet({
- *   // My Next.js config
- * })
- * ```
- */
 export const createWesjetPlugin =
   (pluginOptions: NextPluginOptions = defaultPluginOptions) =>
   (nextConfig: Partial<NextConfig> = {}): Partial<NextConfig> => {
@@ -80,19 +65,5 @@ export const createWesjetPlugin =
     }
   }
 
-/**
- * Next.js plugin for wesjet with default options.
- *
- * If you want to provide custom plugin options, please use {@link createWesjetPlugin} instead.
- *
- * @example
- * ```js
- * // next.config.mjs
- * import { withWesjet } from 'wesjet-nextjs-plugin'
- *
- * export default withWesjet({
- *   // My Next.js config
- * })
- * ```
- */
+
 export const withWesjet = createWesjetPlugin(defaultPluginOptions)

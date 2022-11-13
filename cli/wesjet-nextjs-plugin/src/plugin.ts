@@ -8,7 +8,7 @@ export type NextPluginOptions = {
   configPath?: string | undefined
 }
 
-/** Seems like the next.config.js export function might be executed multiple times, so we need to make sure we only run it once */
+
 let wesjetInitialized = false
 
 export const runWesjetDev = async ({ configPath }: NextPluginOptions) => {

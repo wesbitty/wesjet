@@ -1,5 +1,5 @@
-import * as path from 'path'
-import { fileURLToPath } from 'url'
+import * as path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 import type { OT } from '../effect/index.js'
 import { pipe, T } from '../effect/index.js'
