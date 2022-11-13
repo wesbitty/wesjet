@@ -24,3 +24,4 @@ out
 .tmp*
 /tmp
 *.tsbuildinfo
+/result
