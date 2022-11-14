@@ -32,9 +32,9 @@ export const useLiveReload = () => {
     });
 
     return () => {
-      routePathRef.current = undefined
-    }
+      routePathRef.current = undefined;
+    };
 
-        /* eslint-disable react-hooks/exhaustive-deps */
-  }, [routePathRef])
-}
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [routePathRef]);
+};

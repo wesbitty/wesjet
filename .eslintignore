@@ -1,9 +1,7 @@
-node_modules/
+node_modules
 target/
 .next/
 .wesjet/
-build/
-dist/
 
 /examples/
 /apps/
@@ -12,3 +10,9 @@ package-lock.json
 .direnv
 .nyc_output
 !tap-snapshots/dist/*
+dist*
+out
+.tmp*
+/tmp
+*.tsbuildinfo
+/result
