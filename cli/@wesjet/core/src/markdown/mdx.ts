@@ -1,13 +1,13 @@
-import * as path from 'node:path'
+import * as path from "node:path";
 
-import { errorToString } from '@wesjet/utils'
-import { OT, pipe, T, Tagged } from '@wesjet/utils/effect'
-import * as mdxBundler from 'mdx-bundler'
-import type { BundleMDXOptions } from 'mdx-bundler/dist/types'
+import { errorToString } from "@wesjet/utils";
+import { OT, pipe, T, Tagged } from "@wesjet/utils/effect";
+import * as mdxBundler from "mdx-bundler";
+import type { BundleMDXOptions } from "mdx-bundler/dist/types";
 
-import type { RawDocumentData } from '../data-types.js'
-import type { MDXOptions } from '../plugin.js'
-import { addRawDocumentToVFile } from './unified.js'
+import type { RawDocumentData } from "../data-types.js";
+import type { MDXOptions } from "../plugin.js";
+import { addRawDocumentToVFile } from "./unified.js";
 
 export const bundleMDX = ({
   mdxString,
@@ -15,55 +15,79 @@ export const bundleMDX = ({
   contentDirPath,
   rawDocumentData,
 }: {
-  mdxString: string
-  options?: MDXOptions
-  contentDirPath: string
-  rawDocumentData: RawDocumentData
+  mdxString: string;
+  options?: MDXOptions;
+  contentDirPath: string;
+  rawDocumentData: RawDocumentData;
 }): T.Effect<OT.HasTracer, UnexpectedMDXError, string> =>
   pipe(
     T.gen(function* ($) {
       // TODO should be fixed in `mdx-bundler`
       if (mdxString.length === 0) {
-        return ''
+        return "";
       }
-      const { rehypePlugins, remarkPlugins, resolveCwd, cwd: cwd_, ...restOptions } = options ?? {}
+      const {
+        rehypePlugins,
+        remarkPlugins,
+        resolveCwd,
+        cwd: cwd_,
+        ...restOptions
+      } = options ?? {};
 
       const getCwdFromContentDirPath = () =>
         // TODO don't use `process.cwd()` but instead `HasCwd`
-        path.isAbsolute(contentDirPath) ? contentDirPath : path.join(process.cwd(), contentDirPath)
+        path.isAbsolute(contentDirPath)
+          ? contentDirPath
+          : path.join(process.cwd(), contentDirPath);
 
-      const getRelativeCwd = () => path.join(getCwdFromContentDirPath(), path.dirname(rawDocumentData.flattenedPath))
+      const getRelativeCwd = () =>
+        path.join(
+          getCwdFromContentDirPath(),
+          path.dirname(rawDocumentData.flattenedPath)
+        );
 
-      const getCwd = () => (resolveCwd === 'contentDirPath' ? getCwdFromContentDirPath() : getRelativeCwd())
+      const getCwd = () =>
+        resolveCwd === "contentDirPath"
+          ? getCwdFromContentDirPath()
+          : getRelativeCwd();
 
       const mdxOptions: BundleMDXOptions<any> = {
-        mdxOptions: opts => {
-          opts.rehypePlugins = [...(opts.rehypePlugins ?? []), ...(rehypePlugins ?? [])]
+        mdxOptions: (opts) => {
+          opts.rehypePlugins = [
+            ...(opts.rehypePlugins ?? []),
+            ...(rehypePlugins ?? []),
+          ];
           opts.remarkPlugins = [
             addRawDocumentToVFile(rawDocumentData),
             ...(opts.remarkPlugins ?? []),
             ...(remarkPlugins ?? []),
-          ]
-          return opts
+          ];
+          return opts;
         },
         // User-provided cwd trumps resolution
         cwd: cwd_ ?? getCwd(),
         // NOTE `restOptions` should be spread at the end to allow for user overrides
         ...restOptions,
-      }
+      };
 
-      const res = yield* $(T.tryPromise(() => mdxBundler.bundleMDX({ source: mdxString, ...mdxOptions })))
+      const res = yield* $(
+        T.tryPromise(() =>
+          mdxBundler.bundleMDX({ source: mdxString, ...mdxOptions })
+        )
+      );
 
       if (res.errors.length > 0) {
-        return yield* $(T.fail(res.errors))
+        return yield* $(T.fail(res.errors));
       }
 
-      return res.code
+      return res.code;
     }),
-    T.mapError(error => new UnexpectedMDXError({ error })),
-    OT.withSpan('@wesjet/corerkdown:bundleMDX')
-  )
+    T.mapError((error) => new UnexpectedMDXError({ error })),
+    OT.withSpan("@wesjet/corerkdown:bundleMDX")
+  );
 
-export class UnexpectedMDXError extends Tagged('UnexpectedMDXError')<{ readonly error: unknown }> {
-  toString = () => `UnexpectedMDXError: ${errorToString(this.error)}`
+export class UnexpectedMDXError extends Tagged("UnexpectedMDXError")<{
+  readonly error: unknown;
+}> {
+  toString = () => `UnexpectedMDXError: ${errorToString(this.error)}`;
 }

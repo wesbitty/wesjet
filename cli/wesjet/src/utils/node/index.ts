@@ -1,1 +1,1 @@
-export * from '@wesjet/utils/node'
+export * from "@wesjet/utils/node";

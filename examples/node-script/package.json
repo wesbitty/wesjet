@@ -5,6 +5,6 @@
     "start": "wesjet build && node --experimental-json-modules my-script.mjs"
   },
   "dependencies": {
-    "wesjet": "latest"
+    "wesjet": "*"
   }
 }

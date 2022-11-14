@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@sanity/client": "^2.10.5",
-    "@sanity/core": "^2.10.5",
+    "@sanity/core": "^0.139.3",
     "@sanity/image-url": "^0.140.22",
     "@sanity/schema": "^2.10.0",
     "@wesjet/core": "*",

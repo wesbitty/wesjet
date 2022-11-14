@@ -1,9 +1,9 @@
-import type { DocumentType, NestedType } from './index.js'
+import type { DocumentType, NestedType } from "./index.js";
 
-export type FieldDefType = FieldDef['type']
+export type FieldDefType = FieldDef["type"];
 
 /** Needed for the record-style field definitions */
-export type FieldDefWithName = FieldDef & { name: string }
+export type FieldDefWithName = FieldDef & { name: string };
 
 export type FieldDef =
   | ListFieldDef
@@ -20,7 +20,7 @@ export type FieldDef =
   | NestedFieldDef
   | NestedPolymorphicFieldDef
   | ReferenceFieldDef
-  | ReferencePolymorphicFieldDef
+  | ReferencePolymorphicFieldDef;
 
 /**
  * Field name should contain only alphanumeric characters, underscore and a hyphen [A-Za-z0-9_].
@@ -28,13 +28,13 @@ export type FieldDef =
  */
 interface FieldDefBase {
   /** Short description to editors how the field is to be used */
-  description?: string
+  description?: string;
 
   /**
    * Whether the field is required or not. Fields are optional by default.
    * @default false
    */
-  required?: boolean
+  required?: boolean;
 }
 
 // type WithComputedField<ValueType,> = {
@@ -42,26 +42,28 @@ interface FieldDefBase {
 // }
 
 export interface ListFieldDef extends FieldDefBase {
-  type: 'list'
-  default?: readonly any[]
-  of: ListFieldDefItem.Item
+  type: "list";
+  default?: readonly any[];
+  of: ListFieldDefItem.Item;
 }
 
 export interface ListPolymorphicFieldDef extends FieldDefBase {
-  type: 'list'
-  default?: readonly any[]
-  of: readonly ListFieldDefItem.Item[]
+  type: "list";
+  default?: readonly any[];
+  of: readonly ListFieldDefItem.Item[];
 
   /**
    * Field needed to distiguish list data items at run time. Defaults to `fieldOptions.typeFieldName`
    * This option is only needed when using non-scalar `of` values (e.g. `nested`)
    */
-  typeField?: string
+  typeField?: string;
 }
 
-export const isListFieldDef = (_: FieldDef): _ is ListFieldDef => _.type === 'list' && !Array.isArray(_.of)
-export const isListPolymorphicFieldDef = (_: FieldDef): _ is ListPolymorphicFieldDef =>
-  _.type === 'list' && Array.isArray(_.of)
+export const isListFieldDef = (_: FieldDef): _ is ListFieldDef =>
+  _.type === "list" && !Array.isArray(_.of);
+export const isListPolymorphicFieldDef = (
+  _: FieldDef
+): _ is ListPolymorphicFieldDef => _.type === "list" && Array.isArray(_.of);
 
 export namespace ListFieldDefItem {
   export type Item =
@@ -75,18 +77,18 @@ export namespace ListFieldDefItem {
     | ItemImage
     | ItemEnum
     | ItemNestedType
-    | ItemDocumentReference
+    | ItemDocumentReference;
 
-  export type ItemString = { type: 'string' }
-  export type ItemNumber = { type: 'number' }
-  export type ItemBoolean = { type: 'boolean' }
-  export type ItemJSON = { type: 'json' }
-  export type ItemDate = { type: 'date' }
-  export type ItemMarkdown = { type: 'markdown' }
-  export type ItemMDX = { type: 'mdx' }
-  export type ItemImage = { type: 'image' }
-  export type ItemEnum = { type: 'enum'; options: readonly string[] }
-  export type ItemNestedType = NestedType
+  export type ItemString = { type: "string" };
+  export type ItemNumber = { type: "number" };
+  export type ItemBoolean = { type: "boolean" };
+  export type ItemJSON = { type: "json" };
+  export type ItemDate = { type: "date" };
+  export type ItemMarkdown = { type: "markdown" };
+  export type ItemMDX = { type: "mdx" };
+  export type ItemImage = { type: "image" };
+  export type ItemEnum = { type: "enum"; options: readonly string[] };
+  export type ItemNestedType = NestedType;
   export type ItemDocumentReference = DocumentType & {
     /**
      * Whether wesjet should embed the referenced document instead of the reference value (i.e. file path)
@@ -94,86 +96,89 @@ export namespace ListFieldDefItem {
      * @experimental
      * @default false
      */
-    embedDocument?: boolean
-  }
+    embedDocument?: boolean;
+  };
 
-  export const isDefItemNested = (_: Item): _ is ItemNestedType => _.type === 'nested'
+  export const isDefItemNested = (_: Item): _ is ItemNestedType =>
+    _.type === "nested";
 }
 
 export type StringFieldDef = FieldDefBase & {
-  type: 'string'
-  default?: string
-}
+  type: "string";
+  default?: string;
+};
 
 export type NumberFieldDef = FieldDefBase & {
-  type: 'number'
-  default?: number
-}
+  type: "number";
+  default?: number;
+};
 
 export type BooleanFieldDef = FieldDefBase & {
-  type: 'boolean'
-  default?: boolean
-}
+  type: "boolean";
+  default?: boolean;
+};
 
 export type JSONFieldDef = FieldDefBase & {
-  type: 'json'
-  default?: any
-}
+  type: "json";
+  default?: any;
+};
 
 export type DateFieldDef = FieldDefBase & {
-  type: 'date'
-  default?: string
-}
+  type: "date";
+  default?: string;
+};
 
 export type MarkdownFieldDef = FieldDefBase & {
-  type: 'markdown'
-  default?: string
-}
+  type: "markdown";
+  default?: string;
+};
 
 export type MDXFieldDef = FieldDefBase & {
-  type: 'mdx'
-  default?: string
-}
+  type: "mdx";
+  default?: string;
+};
 
 export type ImageFieldDef = FieldDefBase & {
-  type: 'image'
-  default?: string
-}
+  type: "image";
+  default?: string;
+};
 
 export type EnumFieldDef = FieldDefBase & {
-  type: 'enum'
-  default?: any
-  options: readonly string[]
-}
+  type: "enum";
+  default?: any;
+  options: readonly string[];
+};
 
 export type NestedFieldDef = FieldDefBase & {
-  type: 'nested'
-  of: NestedType
-  default?: any
-}
+  type: "nested";
+  of: NestedType;
+  default?: any;
+};
 
-export const isNestedFieldDef = (_: FieldDef): _ is NestedFieldDef => _.type === 'nested' && !Array.isArray(_.of)
+export const isNestedFieldDef = (_: FieldDef): _ is NestedFieldDef =>
+  _.type === "nested" && !Array.isArray(_.of);
 
 export type NestedPolymorphicFieldDef = FieldDefBase & {
-  type: 'nested'
-  of: readonly NestedType[]
+  type: "nested";
+  of: readonly NestedType[];
 
   /**
    * Field needed to distiguish list data items at run time. Defaults to `fieldOptions.typeFieldName`
    * This option is only needed when using non-scalar `of` values (e.g. `nested`)
    */
-  typeField?: string
-  default?: any
-}
+  typeField?: string;
+  default?: any;
+};
 
-export const isNestedPolymorphicFieldDef = (_: FieldDef): _ is NestedPolymorphicFieldDef =>
-  _.type === 'nested' && Array.isArray(_.of)
+export const isNestedPolymorphicFieldDef = (
+  _: FieldDef
+): _ is NestedPolymorphicFieldDef => _.type === "nested" && Array.isArray(_.of);
 
 /** Referenced documents are expected to be relative to `contentDirPath` */
 export type ReferenceFieldDef = FieldDefBase & {
-  type: 'reference'
-  default?: string
-  of: DocumentType
+  type: "reference";
+  default?: string;
+  of: DocumentType;
 
   /**
    * Whether wesjet should embed the referenced document instead of the reference value (i.e. file path)
@@ -181,20 +186,22 @@ export type ReferenceFieldDef = FieldDefBase & {
    * @experimental
    * @default false
    */
-  embedDocument?: boolean
-}
+  embedDocument?: boolean;
+};
 
 export type ReferencePolymorphicFieldDef = FieldDefBase & {
-  type: 'reference'
-  default?: string
-  of: readonly DocumentType[]
+  type: "reference";
+  default?: string;
+  of: readonly DocumentType[];
 
   /**
    * Field needed to distiguish list data items at run time. Defaults to `fieldOptions.typeFieldName`
    * This option is only needed when using non-scalar `of` values (e.g. `nested`)
    */
-  typeField?: string
-}
+  typeField?: string;
+};
 
-export const isReferencePolymorphicFieldDef = (_: FieldDef): _ is ReferencePolymorphicFieldDef =>
-  _.type === 'reference' && Array.isArray(_.of)
+export const isReferencePolymorphicFieldDef = (
+  _: FieldDef
+): _ is ReferencePolymorphicFieldDef =>
+  _.type === "reference" && Array.isArray(_.of);

@@ -1,22 +1,24 @@
-import type { NextConfig } from 'next'
-import type { NextPluginOptions } from './plugin.js'
+import type { NextConfig } from "next";
 
+import type { NextPluginOptions } from "./plugin.js";
 
+export type { NextConfig };
 
-export type { NextConfig }
+let devServerStarted = false;
 
-let devServerStarted = false
-
-const defaultPluginOptions: NextPluginOptions = {}
-module.exports.defaultPluginOptions = defaultPluginOptions
+const defaultPluginOptions: NextPluginOptions = {};
+module.exports.defaultPluginOptions = defaultPluginOptions;
 
 module.exports.createWesjetPlugin =
   (pluginOptions: NextPluginOptions = defaultPluginOptions) =>
   (nextConfig: Partial<NextConfig> = {}): Partial<NextConfig> => {
     // could be either `next dev` or just `next`
     const isNextDev =
-      process.argv.includes('dev') || process.argv.some(_ => _.endsWith('bin/next') || _.endsWith('bin\\next'))
-    const isBuild = process.argv.includes('build')
+      process.argv.includes("dev") ||
+      process.argv.some(
+        (_) => _.endsWith("bin/next") || _.endsWith("bin\\next")
+      );
+    const isBuild = process.argv.includes("build");
 
     return {
       ...nextConfig,
@@ -24,20 +26,20 @@ module.exports.createWesjetPlugin =
       // in order to hook into and block the `next build` and initial `next dev` run.
       redirects: async () => {
         // TODO move to post-install?
-        const { checkConstraints } = await import('./check-constraints.js')
-        checkConstraints()
+        const { checkConstraints } = await import("./check-constraints.js");
+        checkConstraints();
 
         // NOTE since next.config.js doesn't support ESM yet, this "CJS -> ESM bridge" is needed
-        const { runWesjetBuild, runWesjetDev } = await import('./plugin.js')
+        const { runWesjetBuild, runWesjetDev } = await import("./plugin.js");
         if (isBuild) {
-          await runWesjetBuild(pluginOptions)
+          await runWesjetBuild(pluginOptions);
         } else if (isNextDev && !devServerStarted) {
-          devServerStarted = true
+          devServerStarted = true;
           // TODO also block here until first wesjet run is complete
-          runWesjetDev(pluginOptions)
+          runWesjetDev(pluginOptions);
         }
 
-        return nextConfig.redirects?.() ?? []
+        return nextConfig.redirects?.() ?? [];
       },
       onDemandEntries: {
         maxInactiveAge: 60 * 60 * 1000, // extend `maxInactiveAge` to 1 hour (from 15 sec by default)
@@ -47,24 +49,25 @@ module.exports.createWesjetPlugin =
         config.watchOptions = {
           ...config.watchOptions,
           // ignored: /node_modules([\\]+|\/)+(?!\.wesjet)/,
-          ignored: ['**/node_modules/!(.wesjet)/**/*'],
-        }
+          ignored: ["**/node_modules/!(.wesjet)/**/*"],
+        };
 
         config.module.rules.push({
           test: /\.m?js$/,
-          type: 'javascript/auto',
+          type: "javascript/auto",
           resolve: {
             fullySpecified: false,
           },
-        })
+        });
 
-        if (typeof nextConfig.webpack === 'function') {
-          return nextConfig.webpack(config, options)
+        if (typeof nextConfig.webpack === "function") {
+          return nextConfig.webpack(config, options);
         }
 
-        return config
+        return config;
       },
-    }
-  }
+    };
+  };
 
-module.exports.withWesjet = module.exports.createWesjetPlugin(defaultPluginOptions)
+module.exports.withWesjet =
+  module.exports.createWesjetPlugin(defaultPluginOptions);

@@ -1,25 +1,28 @@
-import * as core from '@wesjet/core'
-import { processArgs, SourceProvideSchemaError } from '@wesjet/core'
-import { unknownToAbsolutePosixFilePath, unknownToRelativePosixFilePath } from '@wesjet/utils'
-import { pipe, S, T } from '@wesjet/utils/effect'
+import * as core from "@wesjet/core";
+import { processArgs, SourceProvideSchemaError } from "@wesjet/core";
+import {
+  unknownToAbsolutePosixFilePath,
+  unknownToRelativePosixFilePath,
+} from "@wesjet/utils";
+import { pipe, S, T } from "@wesjet/utils/effect";
 
-import { fetchData } from './fetchData/index.js'
-import type * as LocalSchema from './schema/defs/index.js'
-import { makeCoreSchema } from './schema/provideSchema.js'
-import type { Flags, PluginOptions } from './types.js'
+import { fetchData } from "./fetchData/index.js";
+import type * as LocalSchema from "./schema/defs/index.js";
+import { makeCoreSchema } from "./schema/provideSchema.js";
+import type { Flags, PluginOptions } from "./types.js";
 
-export * from './types.js'
-export * from './schema/defs/index.js'
+export * from "./types.js";
+export * from "./schema/defs/index.js";
 
 export type Args = {
-  documentTypes: LocalSchema.DocumentTypes
+  documentTypes: LocalSchema.DocumentTypes;
   /**
    * Path to the root directory that contains all content. Every content file path will be relative
    * to this directory. This includes:
    *  - The `filePathPattern` option in `defineDocumentType` is relative to `contentDirPath`
    *  - Each document's `_raw` fields such as `flattenedPath`, `sourceFilePath`, `sourceFileDir`
    */
-  contentDirPath: string
+  contentDirPath: string;
 
   /**
    * An array of paths that wesjet should include. They can be either files or directories.
@@ -38,7 +41,7 @@ export type Args = {
    * })
    * ```
    */
-  contentDirInclude?: string[]
+  contentDirInclude?: string[];
 
   /**
    * An array of paths that wesjet should ignore. They can be either files or directories.
@@ -61,19 +64,19 @@ export type Args = {
    * })
    * ```
    */
-  contentDirExclude?: string[]
+  contentDirExclude?: string[];
   // NOTE https://github.com/parcel-bundler/watcher/issues/64
 
   /**
    * This is an experimental feature and should be ignored for now.
    */
   extensions?: {
-    stackbit?: core.StackbitExtension.Config
-  }
+    stackbit?: core.StackbitExtension.Config;
+  };
 } & PluginOptions &
-  Partial<Flags>
+  Partial<Flags>;
 
-export const makeSource: core.MakeSourcePlugin<Args> = async args => {
+export const makeSource: core.MakeSourcePlugin<Args> = async (args) => {
   const {
     options,
     extensions,
@@ -82,38 +85,45 @@ export const makeSource: core.MakeSourcePlugin<Args> = async args => {
       contentDirPath: contentDirPath_,
       contentDirInclude: contentDirInclude_,
       contentDirExclude: contentDirExclude_,
-      onUnknownDocuments = 'skip-warn',
-      onMissingOrIncompatibleData = 'skip-warn',
-      onExtraFieldData = 'warn',
+      onUnknownDocuments = "skip-warn",
+      onMissingOrIncompatibleData = "skip-warn",
+      onExtraFieldData = "warn",
     },
-  } = await processArgs(args)
+  } = await processArgs(args);
 
-  const flags: Flags = { onUnknownDocuments, onExtraFieldData, onMissingOrIncompatibleData }
+  const flags: Flags = {
+    onUnknownDocuments,
+    onExtraFieldData,
+    onMissingOrIncompatibleData,
+  };
 
-  const documentTypeDefs = (Array.isArray(documentTypes) ? documentTypes : Object.values(documentTypes)).map(_ =>
-    _.def()
-  )
+  const documentTypeDefs = (
+    Array.isArray(documentTypes) ? documentTypes : Object.values(documentTypes)
+  ).map((_) => _.def());
 
   return {
-    type: 'local',
+    type: "local",
     extensions: extensions ?? {},
     options,
-    provideSchema: esbuildHash =>
+    provideSchema: (esbuildHash) =>
       pipe(
         makeCoreSchema({ documentTypeDefs, options, esbuildHash }),
-        T.mapError(error => new SourceProvideSchemaError({ error }))
+        T.mapError((error) => new SourceProvideSchemaError({ error }))
       ),
     fetchData: ({ schemaDef, verbose }) =>
       pipe(
         S.fromEffect(core.getCwd),
-        S.chain(cwd => {
-          const contentDirPath = unknownToAbsolutePosixFilePath(contentDirPath_, cwd)
-          const contentDirExclude = (contentDirExclude_ ?? contentDirExcludeDefault).map(_ =>
+        S.chain((cwd) => {
+          const contentDirPath = unknownToAbsolutePosixFilePath(
+            contentDirPath_,
+            cwd
+          );
+          const contentDirExclude = (
+            contentDirExclude_ ?? contentDirExcludeDefault
+          ).map((_) => unknownToRelativePosixFilePath(_, contentDirPath));
+          const contentDirInclude = (contentDirInclude_ ?? []).map((_) =>
             unknownToRelativePosixFilePath(_, contentDirPath)
-          )
-          const contentDirInclude = (contentDirInclude_ ?? []).map(_ =>
-            unknownToRelativePosixFilePath(_, contentDirPath)
-          )
+          );
 
           return fetchData({
             coreSchemaDef: schemaDef,
@@ -124,10 +134,17 @@ export const makeSource: core.MakeSourcePlugin<Args> = async args => {
             contentDirExclude,
             contentDirInclude,
             verbose,
-          })
+          });
         })
       ),
-  }
-}
+  };
+};
 
-export const contentDirExcludeDefault = ['node_modules', '.git', '.yarn', '.cache', '.next', '.wesjet']
+export const contentDirExcludeDefault = [
+  "node_modules",
+  ".git",
+  ".yarn",
+  ".cache",
+  ".next",
+  ".wesjet",
+];

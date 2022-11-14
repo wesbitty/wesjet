@@ -7,5 +7,9 @@
     "tsBuildInfoFile": "./dist/.tsbuildinfo.json"
   },
   "include": ["./src"],
-  "references": [{ "path": "../@wesjet/utils" }, { "path": "../wesjet" }, { "path": "../@wesjet/core" }]
+  "references": [
+    { "path": "../@wesjet/utils" },
+    { "path": "../wesjet" },
+    { "path": "../@wesjet/core" }
+  ]
 }

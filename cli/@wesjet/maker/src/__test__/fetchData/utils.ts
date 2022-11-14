@@ -1,39 +1,51 @@
-import type { HasCwd } from '@wesjet/core'
-import * as core from '@wesjet/core'
-import { provideCwd } from '@wesjet/core'
-import { provideDummyTracing, unknownToAbsolutePosixFilePath, unknownToRelativePosixFilePath } from '@wesjet/utils'
-import type { HasClock, HasConsole, OT } from '@wesjet/utils/effect'
-import { pipe, provideTestConsole, T, These } from '@wesjet/utils/effect'
+import type { HasCwd } from "@wesjet/core";
+import * as core from "@wesjet/core";
+import { provideCwd } from "@wesjet/core";
+import {
+  provideDummyTracing,
+  unknownToAbsolutePosixFilePath,
+  unknownToRelativePosixFilePath,
+} from "@wesjet/utils";
+import type { HasClock, HasConsole, OT } from "@wesjet/utils/effect";
+import { pipe, provideTestConsole, T, These } from "@wesjet/utils/effect";
 
-import type { HasDocumentTypeMapState } from '../../fetchData/DocumentTypeMap.js'
-import { provideDocumentTypeMapState } from '../../fetchData/DocumentTypeMap.js'
-import { testOnly_makeContentTypeMap, testOnly_makefilePathPatternMap } from '../../fetchData/index.js'
-import { makeCacheItemFromFilePath } from '../../fetchData/makeCacheItemFromFilePath.js'
-import type { DocumentTypes } from '../../index.js'
-import { makeSource } from '../../index.js'
+import type { HasDocumentTypeMapState } from "../../fetchData/DocumentTypeMap.js";
+import { provideDocumentTypeMapState } from "../../fetchData/DocumentTypeMap.js";
+import {
+  testOnly_makeContentTypeMap,
+  testOnly_makefilePathPatternMap,
+} from "../../fetchData/index.js";
+import { makeCacheItemFromFilePath } from "../../fetchData/makeCacheItemFromFilePath.js";
+import type { DocumentTypes } from "../../index.js";
+import { makeSource } from "../../index.js";
 
 export const runTest = async ({
   documentTypes,
   contentDirPath: contentDirPath_,
   relativeFilePath: relativeFilePath_,
 }: {
-  documentTypes: DocumentTypes
-  contentDirPath: string
-  relativeFilePath: string
+  documentTypes: DocumentTypes;
+  contentDirPath: string;
+  relativeFilePath: string;
 }) => {
   const eff = T.gen(function* ($) {
-    const relativeFilePath = unknownToRelativePosixFilePath(relativeFilePath_)
-    const contentDirPath = unknownToAbsolutePosixFilePath(contentDirPath_)
-    const esbuildHash = 'not-important-for-this-test'
+    const relativeFilePath = unknownToRelativePosixFilePath(relativeFilePath_);
+    const contentDirPath = unknownToAbsolutePosixFilePath(contentDirPath_);
+    const esbuildHash = "not-important-for-this-test";
 
-    const source = yield* $(T.tryPromise(() => makeSource({ contentDirPath, documentTypes })))
-    const coreSchemaDef = yield* $(source.provideSchema(esbuildHash))
+    const source = yield* $(
+      T.tryPromise(() => makeSource({ contentDirPath, documentTypes }))
+    );
+    const coreSchemaDef = yield* $(source.provideSchema(esbuildHash));
 
-    const documentTypeDefs = (Array.isArray(documentTypes) ? documentTypes : Object.values(documentTypes)).map(_ =>
-      _.def()
-    )
-    const filePathPatternMap = testOnly_makefilePathPatternMap(documentTypeDefs)
-    const contentTypeMap = testOnly_makeContentTypeMap(documentTypeDefs)
+    const documentTypeDefs = (
+      Array.isArray(documentTypes)
+        ? documentTypes
+        : Object.values(documentTypes)
+    ).map((_) => _.def());
+    const filePathPatternMap =
+      testOnly_makefilePathPatternMap(documentTypeDefs);
+    const contentTypeMap = testOnly_makeContentTypeMap(documentTypeDefs);
 
     const options: core.PluginOptions = {
       date: undefined,
@@ -41,7 +53,7 @@ export const runTest = async ({
       mdx: undefined,
       fieldOptions: core.defaultFieldOptions,
       disableImportAliasWarning: false,
-    }
+    };
 
     const cache = yield* $(
       pipe(
@@ -56,18 +68,22 @@ export const runTest = async ({
         }),
         These.effectToEither
       )
-    )
+    );
 
-    return cache
-  })
+    return cache;
+  });
 
-  return runMain(eff)
-}
+  return runMain(eff);
+};
 
 const runMain = async <E, A>(
-  eff: T.Effect<OT.HasTracer & HasClock & HasCwd & HasConsole & HasDocumentTypeMapState, E, A>
+  eff: T.Effect<
+    OT.HasTracer & HasClock & HasCwd & HasConsole & HasDocumentTypeMapState,
+    E,
+    A
+  >
 ) => {
-  const logMessages: string[] = []
+  const logMessages: string[] = [];
   const result = await pipe(
     eff,
     provideTestConsole(logMessages),
@@ -75,7 +91,7 @@ const runMain = async <E, A>(
     provideCwd,
     provideDummyTracing,
     T.runPromise
-  )
+  );
 
-  return { logMessages, result }
-}
+  return { logMessages, result };
+};

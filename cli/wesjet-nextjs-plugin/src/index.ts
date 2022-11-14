@@ -1,23 +1,30 @@
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
-import { checkConstraints } from './check-constraints.js'
-import { type NextPluginOptions, runWesjetBuild, runWesjetDev } from './plugin.js'
+import { checkConstraints } from "./check-constraints.js";
+import {
+  type NextPluginOptions,
+  runWesjetBuild,
+  runWesjetDev,
+} from "./plugin.js";
 
-export type { NextConfig }
+export type { NextConfig };
 
-let devServerStarted = false
+let devServerStarted = false;
 
-export const defaultPluginOptions: NextPluginOptions = {}
+export const defaultPluginOptions: NextPluginOptions = {};
 
 export const createWesjetPlugin =
   (pluginOptions: NextPluginOptions = defaultPluginOptions) =>
   (nextConfig: Partial<NextConfig> = {}): Partial<NextConfig> => {
     // could be either `next dev` or just `next`
     const isNextDev =
-      process.argv.includes('dev') || process.argv.some(_ => _.endsWith('bin/next') || _.endsWith('bin\\next'))
-    const isBuild = process.argv.includes('build')
+      process.argv.includes("dev") ||
+      process.argv.some(
+        (_) => _.endsWith("bin/next") || _.endsWith("bin\\next")
+      );
+    const isBuild = process.argv.includes("build");
 
-    const { configPath } = pluginOptions
+    const { configPath } = pluginOptions;
 
     return {
       ...nextConfig,
@@ -25,15 +32,15 @@ export const createWesjetPlugin =
       // in order to hook into and block the `next build` and initial `next dev` run.
       redirects: async () => {
         if (isBuild) {
-          checkConstraints()
-          await runWesjetBuild({ configPath })
+          checkConstraints();
+          await runWesjetBuild({ configPath });
         } else if (isNextDev && !devServerStarted) {
-          devServerStarted = true
+          devServerStarted = true;
           // TODO also block here until first wesjet run is complete
-          runWesjetDev({ configPath })
+          runWesjetDev({ configPath });
         }
 
-        return nextConfig.redirects?.() ?? []
+        return nextConfig.redirects?.() ?? [];
       },
       onDemandEntries: {
         maxInactiveAge: 60 * 60 * 1000, // extend `maxInactiveAge` to 1 hour (from 15 sec by default)
@@ -43,27 +50,26 @@ export const createWesjetPlugin =
         config.watchOptions = {
           ...config.watchOptions,
           // ignored: /node_modules([\\]+|\/)+(?!\.wesjet)/,
-          ignored: ['**/node_modules/!(.wesjet)/**/*'],
-        }
+          ignored: ["**/node_modules/!(.wesjet)/**/*"],
+        };
 
         // NOTE workaround for https://github.com/vercel/next.js/issues/17806#issuecomment-913437792
         // https://github.com/wesbitty/wesjetpkg/issues/121
         config.module.rules.push({
           test: /\.m?js$/,
-          type: 'javascript/auto',
+          type: "javascript/auto",
           resolve: {
             fullySpecified: false,
           },
-        })
+        });
 
-        if (typeof nextConfig.webpack === 'function') {
-          return nextConfig.webpack(config, options)
+        if (typeof nextConfig.webpack === "function") {
+          return nextConfig.webpack(config, options);
         }
 
-        return config
+        return config;
       },
-    }
-  }
+    };
+  };
 
-
-export const withWesjet = createWesjetPlugin(defaultPluginOptions)
+export const withWesjet = createWesjetPlugin(defaultPluginOptions);

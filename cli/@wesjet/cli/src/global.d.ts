@@ -1,1 +1,1 @@
-declare module 'eval'
+declare module "eval";

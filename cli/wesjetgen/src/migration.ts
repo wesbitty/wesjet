@@ -1,45 +1,45 @@
-import type { MigrationFunction } from 'contentful-migration'
+import type { MigrationFunction } from "contentful-migration";
 
-const migrate: MigrationFunction = migration => {
-  const post = migration.createContentType('post', {
-    name: 'Blog Post',
-    description: 'Posts on our blog',
-  })
+const migrate: MigrationFunction = (migration) => {
+  const post = migration.createContentType("post", {
+    name: "Blog Post",
+    description: "Posts on our blog",
+  });
 
-  post.createField('title', {
-    name: 'Title',
-    type: 'Text',
+  post.createField("title", {
+    name: "Title",
+    type: "Text",
     required: true,
     localized: true,
-  })
+  });
 
-  post.createField('introduction', {
-    name: 'Introduction',
-    type: 'Text',
+  post.createField("introduction", {
+    name: "Introduction",
+    type: "Text",
     // type: 'RichText',
     required: true,
     localized: true,
-  })
+  });
 
-  post.createField('body', {
-    name: 'Introduction',
-    type: 'Text',
+  post.createField("body", {
+    name: "Introduction",
+    type: "Text",
     // type: 'RichText',
     required: true,
     localized: true,
-  })
+  });
 
-  post.createField('background', {
-    name: 'Background Image',
-    type: 'Link',
-    linkType: 'Asset',
-  })
+  post.createField("background", {
+    name: "Background Image",
+    type: "Link",
+    linkType: "Asset",
+  });
 
-  post.createField('card', {
-    name: 'Card Image',
-    type: 'Link',
-    linkType: 'Asset',
-  })
+  post.createField("card", {
+    name: "Card Image",
+    type: "Link",
+    linkType: "Asset",
+  });
 
   // const page = migration.createContentType('page', {
   //   description: 'Landing Page',
@@ -74,6 +74,6 @@ const migrate: MigrationFunction = migration => {
   //   required: true,
   //   localized: true,
   // })
-}
+};
 
-module.exports = migrate
+module.exports = migrate;

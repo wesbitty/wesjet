@@ -1,1 +1,1 @@
-export * from '@wesjet/core'
+export * from "@wesjet/core";

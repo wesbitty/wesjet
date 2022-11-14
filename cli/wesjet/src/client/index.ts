@@ -1,1 +1,1 @@
-export * from '@wesjet/client'
+export * from "@wesjet/client";

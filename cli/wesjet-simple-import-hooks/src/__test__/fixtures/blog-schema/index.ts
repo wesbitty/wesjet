@@ -1,21 +1,21 @@
-import { defineDocumentType } from 'wesjet/maker'
+import { defineDocumentType } from "wesjet/maker";
 
 export const post = defineDocumentType(() => ({
-  name: 'Post',
+  name: "Post",
   filePathPattern: `**/*.md`,
   fields: {
     title: {
-      type: 'string',
-      description: 'The title of the post',
+      type: "string",
+      description: "The title of the post",
       required: true,
     },
     date: {
-      type: 'date',
-      description: 'The date of the post',
+      type: "date",
+      description: "The date of the post",
       required: true,
     },
   },
   computedFields: {
-    slug: { type: 'string', resolve: _ => _._id.replace('.md', '') },
+    slug: { type: "string", resolve: (_) => _._id.replace(".md", "") },
   },
-}))
+}));

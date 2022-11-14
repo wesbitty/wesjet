@@ -1,42 +1,48 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import * as fs from 'node:fs/promises'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import * as fs from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-import { expect, test } from 'vitest'
-import * as core from 'wesjet/core'
-import { defineDocumentType, makeSource } from 'wesjet/maker'
+import { expect, test } from "vitest";
+import * as core from "wesjet/core";
+import { defineDocumentType, makeSource } from "wesjet/maker";
 
-test('mdx-image-field ', async () => {
+test("mdx-image-field ", async () => {
   const Post = defineDocumentType(() => ({
-    name: 'Post',
-    filePathPattern: 'posts/*.md',
-    contentType: 'markdown',
+    name: "Post",
+    filePathPattern: "posts/*.md",
+    contentType: "markdown",
     fields: {
-      coverImage: { type: 'image' },
+      coverImage: { type: "image" },
     },
-  }))
+  }));
 
-  const testDirPath = fileURLToPath(new URL('.', import.meta.url))
+  const testDirPath = fileURLToPath(new URL(".", import.meta.url));
 
-  const generatedWesjetDirPath = path.join(testDirPath, '.wesjet')
+  const generatedWesjetDirPath = path.join(testDirPath, ".wesjet");
 
-  await fs.rm(generatedWesjetDirPath, { recursive: true, force: true })
+  await fs.rm(generatedWesjetDirPath, { recursive: true, force: true });
 
-  process.env['PWD'] = testDirPath
+  process.env["PWD"] = testDirPath;
 
   const source = await makeSource({
-    contentDirPath: path.join(testDirPath, 'content'),
+    contentDirPath: path.join(testDirPath, "content"),
     documentTypes: [Post],
-  })
+  });
 
-  await core.runMain({ tracingServiceName: 'wesjet-test', verbose: false })(
-    core.generateDotpkg({ config: { source, esbuildHash: 'STATIC_HASH' }, verbose: true })
-  )
+  await core.runMain({ tracingServiceName: "wesjet-test", verbose: false })(
+    core.generateDotpkg({
+      config: { source, esbuildHash: "STATIC_HASH" },
+      verbose: true,
+    })
+  );
 
   const allPosts = await fs
-    .readFile(path.join(generatedWesjetDirPath, 'generated', 'Post', '_index.json'), 'utf8')
-    .then(json => JSON.parse(json))
+    .readFile(
+      path.join(generatedWesjetDirPath, "generated", "Post", "_index.json"),
+      "utf8"
+    )
+    .then((json) => JSON.parse(json));
 
   expect(allPosts[0].coverImage).toMatchInlineSnapshot(`
     {
@@ -47,5 +53,5 @@ test('mdx-image-field ', async () => {
       "relativeFilePath": "image-a.png",
       "width": 640,
     }
-  `)
-})
+  `);
+});

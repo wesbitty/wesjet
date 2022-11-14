@@ -1,12 +1,14 @@
 !/.*
 /build/
-.yarn
 **/fixtures/**/*.yaml
 **/dist/*
 **/.nyc_output/*
 node_modules
 apps/
+.next
+.wesjet
 examples/
+package-lock.json
 dist*
 
 

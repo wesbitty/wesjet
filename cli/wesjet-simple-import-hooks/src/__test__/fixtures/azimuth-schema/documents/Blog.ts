@@ -1,23 +1,23 @@
-import { defineDocumentType } from 'wesjet/maker'
+import { defineDocumentType } from "wesjet/maker";
 
-import { SEO } from '../nested/SEO.js'
-import { urlFromFilePath } from '../utils.js'
+import { SEO } from "../nested/SEO.js";
+import { urlFromFilePath } from "../utils.js";
 
 export const Blog = defineDocumentType(() => ({
-  name: 'Blog',
+  name: "Blog",
   filePathPattern: `pages/blog.md`,
   isSingleton: true,
   fields: {
     title: {
-      type: 'string',
-      description: 'The title of the page',
+      type: "string",
+      description: "The title of the page",
       required: true,
     },
-    seo: { type: 'nested', of: SEO },
+    seo: { type: "nested", of: SEO },
   },
   computedFields: {
     url_path: {
-      type: 'string',
+      type: "string",
       description:
         'The URL path of this page relative to site root. For example, the site root page would be "/", and post page would be "posts/new-post/"',
       resolve: urlFromFilePath,
@@ -26,9 +26,9 @@ export const Blog = defineDocumentType(() => ({
   extensions: {
     stackbit: {
       fields: {
-        title: { label: 'Title' },
+        title: { label: "Title" },
       },
-      file: 'blog.md',
+      file: "blog.md",
     },
   },
-}))
+}));

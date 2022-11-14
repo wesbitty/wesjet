@@ -1,113 +1,113 @@
-import { renderTypes } from '@wesjet/core'
-import { provideJaegerTracing } from '@wesjet/utils'
-import { pipe, provideConsole, T } from '@wesjet/utils/effect'
-import { expect, test } from 'vitest'
+import { renderTypes } from "@wesjet/core";
+import { provideJaegerTracing } from "@wesjet/utils";
+import { pipe, provideConsole, T } from "@wesjet/utils/effect";
+import { expect, test } from "vitest";
 
-import type { DocumentTypes } from '../../index.js'
-import { makeSource } from '../../index.js'
-import { defineDocumentType } from '../../schema/defs/index.js'
+import type { DocumentTypes } from "../../index.js";
+import { makeSource } from "../../index.js";
+import { defineDocumentType } from "../../schema/defs/index.js";
 
 const renderTypeSource = async (documentTypes: DocumentTypes) => {
-  const esbuildHash = 'not-important-for-this-test'
+  const esbuildHash = "not-important-for-this-test";
   const schemaDef = await pipe(
-    T.tryPromise(() => makeSource({ documentTypes, contentDirPath: '' })),
-    T.chain(source => source.provideSchema(esbuildHash)),
-    provideJaegerTracing('wesjet-cli'),
+    T.tryPromise(() => makeSource({ documentTypes, contentDirPath: "" })),
+    T.chain((source) => source.provideSchema(esbuildHash)),
+    provideJaegerTracing("wesjet-cli"),
     provideConsole,
     T.runPromise
-  )
+  );
 
   const typeSource = renderTypes({
     schemaDef,
     generationOptions: {
-      sourcePluginType: 'local',
+      sourcePluginType: "local",
       options: {
-        fieldOptions: { bodyFieldName: 'body', typeFieldName: 'type' },
+        fieldOptions: { bodyFieldName: "body", typeFieldName: "type" },
         markdown: undefined,
         mdx: undefined,
         date: undefined,
         disableImportAliasWarning: false,
       },
     },
-  })
+  });
 
-  return typeSource
-}
+  return typeSource;
+};
 
 // TODO rewrite test for gendotpkg
-test('generate-types: simple schema', async () => {
+test("generate-types: simple schema", async () => {
   const TestPost = defineDocumentType(() => ({
-    name: 'TestPost',
+    name: "TestPost",
     filePathPattern: `**/*.md`,
     fields: {
       title: {
-        type: 'string',
-        description: 'The title of the post',
+        type: "string",
+        description: "The title of the post",
         required: true,
       },
       date: {
-        type: 'date',
-        description: 'The date of the post',
+        type: "date",
+        description: "The date of the post",
         required: true,
       },
     },
     computedFields: {
-      slug: { type: 'string', resolve: _ => _._id.replace('.md', '') },
+      slug: { type: "string", resolve: (_) => _._id.replace(".md", "") },
     },
-  }))
+  }));
 
-  const typeSource = await renderTypeSource([TestPost])
+  const typeSource = await renderTypeSource([TestPost]);
 
-  expect(typeSource).toMatchSnapshot()
-})
+  expect(typeSource).toMatchSnapshot();
+});
 
-test('generate-types: simple schema with optional fields', async () => {
+test("generate-types: simple schema with optional fields", async () => {
   const TestPost = defineDocumentType(() => ({
-    name: 'TestPost',
+    name: "TestPost",
     filePathPattern: `**/*.md`,
     fields: {
       title: {
-        type: 'string',
-        description: 'The title of the post',
+        type: "string",
+        description: "The title of the post",
         required: true,
       },
       date: {
-        type: 'date',
-        description: 'The date of the post',
+        type: "date",
+        description: "The date of the post",
       },
     },
     computedFields: {
-      slug: { type: 'string', resolve: _ => _._id.replace('.md', '') },
+      slug: { type: "string", resolve: (_) => _._id.replace(".md", "") },
     },
-  }))
+  }));
 
-  const typeSource = await renderTypeSource([TestPost])
+  const typeSource = await renderTypeSource([TestPost]);
 
-  expect(typeSource).toMatchSnapshot()
-})
+  expect(typeSource).toMatchSnapshot();
+});
 
-test('generate-types: references with embedded schema', async () => {
+test("generate-types: references with embedded schema", async () => {
   const Post = defineDocumentType(() => ({
-    name: 'Post',
+    name: "Post",
     fields: {
-      title: { type: 'string', required: true },
+      title: { type: "string", required: true },
       author: {
-        type: 'reference',
+        type: "reference",
         of: Person,
         required: true,
         embedDocument: true,
       },
     },
-  }))
+  }));
 
   const Person = defineDocumentType(() => ({
-    name: 'Person',
+    name: "Person",
     fields: {
-      name: { type: 'string', required: true },
+      name: { type: "string", required: true },
     },
-  }))
+  }));
 
-  const typeSource = await renderTypeSource([Post, Person])
+  const typeSource = await renderTypeSource([Post, Person]);
 
-  expect(typeSource).toMatchSnapshot()
-})
+  expect(typeSource).toMatchSnapshot();
+});

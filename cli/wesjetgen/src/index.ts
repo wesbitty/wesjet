@@ -1,11 +1,11 @@
-import { createClient } from 'contentful-management'
-import type * as Contentful from 'contentful-management/dist/typings/export-types'
-import { runMigration } from 'contentful-migration'
-import { LoremIpsum } from 'lorem-ipsum'
+import { createClient } from "contentful-management";
+import type * as Contentful from "contentful-management/dist/typings/export-types";
+import { runMigration } from "contentful-migration";
+import { LoremIpsum } from "lorem-ipsum";
 
-const spaceId = 'y5crayy7d02t'
-const environmentId = 'dev'
-const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN!
+const spaceId = "y5crayy7d02t";
+const environmentId = "dev";
+const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN!;
 
 const createContentTypes = () =>
   runMigration({
@@ -14,16 +14,16 @@ const createContentTypes = () =>
     environmentId,
     accessToken,
     yes: true,
-  })
+  });
 
-const lorem = new LoremIpsum()
+const lorem = new LoremIpsum();
 
 const createMockData = async () => {
-  const environment = await getEnvironment()
+  const environment = await getEnvironment();
 
-  const numberOfEntriesToCreate = 13000
+  const numberOfEntriesToCreate = 13000;
   for (let i = 0; i < numberOfEntriesToCreate; i++) {
-    await environment.createEntry('post', {
+    await environment.createEntry("post", {
       fields: {
         title: localized(lorem.generateWords(4)),
         // introduction: localized(richText({ numSentences: 1 })),
@@ -31,30 +31,30 @@ const createMockData = async () => {
         // body: localized(richText({ numSentences: 80 })),
         body: localized(lorem.generateSentences(80)),
       },
-    })
-    console.log(`Created ${i} / ${numberOfEntriesToCreate} entries.`)
+    });
+    console.log(`Created ${i} / ${numberOfEntriesToCreate} entries.`);
   }
-}
+};
 
 const resetEnvironment = async () => {
-  const environment = await getEnvironment()
-  await environment.delete()
+  const environment = await getEnvironment();
+  await environment.delete();
 
-  const space = await getSpace()
-  await space.createEnvironmentWithId(environmentId, { name: environmentId })
-}
+  const space = await getSpace();
+  await space.createEnvironmentWithId(environmentId, { name: environmentId });
+};
 
-const localized = <T>(val: T) => ({ 'en-US': val })
+const localized = <T>(val: T) => ({ "en-US": val });
 
 const _richText = ({ numSentences }: { numSentences: number }) => ({
   content: [
     {
-      nodeType: 'paragraph',
+      nodeType: "paragraph",
       data: {},
       content: [
         {
           value: lorem.generateSentences(numSentences),
-          nodeType: 'text',
+          nodeType: "text",
           marks: [],
           data: {},
         },
@@ -62,36 +62,36 @@ const _richText = ({ numSentences }: { numSentences: number }) => ({
     },
   ],
   data: {},
-  nodeType: 'document',
-})
+  nodeType: "document",
+});
 
 const getEnvironment = async (): Promise<Contentful.Environment> => {
-  const space = await getSpace()
-  return space.getEnvironment(environmentId)
-}
+  const space = await getSpace();
+  return space.getEnvironment(environmentId);
+};
 
 const getSpace = async () => {
-  const client = createClient({ accessToken })
-  return client.getSpace(spaceId)
-}
+  const client = createClient({ accessToken });
+  return client.getSpace(spaceId);
+};
 
 const main = async () => {
-  const cmd = process.argv[2]
+  const cmd = process.argv[2];
 
   switch (cmd) {
-    case 'types': {
-      await createContentTypes()
-      return
+    case "types": {
+      await createContentTypes();
+      return;
     }
-    case 'data':
-      await createMockData()
-      return
-    case 'reset':
-      await resetEnvironment()
-      return
+    case "data":
+      await createMockData();
+      return;
+    case "reset":
+      await resetEnvironment();
+      return;
     default:
-      throw new Error(`Unknown command ${cmd}`)
+      throw new Error(`Unknown command ${cmd}`);
   }
-}
+};
 
-main().catch(e => console.error(e))
+main().catch((e) => console.error(e));

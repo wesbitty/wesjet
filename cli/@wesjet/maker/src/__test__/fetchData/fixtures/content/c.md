@@ -402,8 +402,8 @@ Curious how it all works? Then read the full article.
 [stringer]: https://golang.org/pkg/fmt/#Stringer
 [textmarshaler]: https://golang.org/pkg/encoding/#TextMarshaler
 [textunmarshaler]: https://golang.org/pkg/encoding/#TextUnMarshaler
-[start-golang]: /start-on-your-first-golang-project 'Start on your first Golang project'
-[interfaces-type-assertions]: /go-interfaces-and-type-assertions 'Go interfaces and type assertions'
-[golang-blogs]: /categories/golang 'My personal articles on Go'
+[start-golang]: /start-on-your-first-golang-project "Start on your first Golang project"
+[interfaces-type-assertions]: /go-interfaces-and-type-assertions "Go interfaces and type assertions"
+[golang-blogs]: /categories/golang "My personal articles on Go"
 
 Please leave me a comment below.

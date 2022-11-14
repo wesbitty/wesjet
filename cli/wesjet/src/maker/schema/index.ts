@@ -1,1 +1,1 @@
-export * from '@wesjet/maker/schema/defs'
+export * from "@wesjet/maker/schema/defs";

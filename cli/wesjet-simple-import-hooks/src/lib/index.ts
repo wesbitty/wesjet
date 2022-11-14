@@ -1,5 +1,5 @@
-import type { YamlConfig } from '@stackbit/sdk'
+import type { YamlConfig } from "@stackbit/sdk";
 
-export type Transform = (config: YamlConfig) => YamlConfig
+export type Transform = (config: YamlConfig) => YamlConfig;
 
-export const defineTransform = (transform: Transform): Transform => transform
+export const defineTransform = (transform: Transform): Transform => transform;

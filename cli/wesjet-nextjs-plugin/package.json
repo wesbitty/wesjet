@@ -45,13 +45,11 @@
     "./package.json"
   ],
   "scripts": {
-    "prepack": "sed '/^import /d' dist/index-cjs.js > dist/index-cjs.cjs; cp src/hooks/jsx-runtime.cjs dist/hooks/jsx-runtime.cjs"
+    "prepack": "sed -i '/import re /d' dist/index-cjs.js > dist/index-cjs.cjs src/hooks/jsx-runtime.cjs dist/hooks/jsx-runtime.cjs"
   },
   "dependencies": {
     "@wesjet/core": "*",
-    "@wesjet/utils": "*",
-    "prepack": "^0.2.54",
-    "run": "^1.4.0"
+    "@wesjet/utils": "*"
   },
   "peerDependencies": {
     "next": "^12 || ^13",
