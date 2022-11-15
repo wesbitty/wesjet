@@ -20,16 +20,6 @@ jobs:
     - uses: actions/checkout@v3
     - run: npm ci
     - run: npm run check:eslint
-
-  check-prettier:
-    strategy:
-      matrix:
-        node-version: [16]
-        os: [ubuntu-latest]
-    runs-on: ${{ matrix.os }}
-    steps:
-    - uses: actions/checkout@v3
-    - run: npm ci
     - run: npm run check:prettier
   
   format:
