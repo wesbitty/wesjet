@@ -2,7 +2,7 @@
 
 View the deployed project: [Wesjet Starter - Demo](https://wesjet-starter.vercel)
 
-## Installation
+## Getting Started
 
 Clone the project:
 
