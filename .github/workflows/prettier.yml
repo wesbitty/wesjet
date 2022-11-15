@@ -1,4 +1,4 @@
-name: Check Code With Prettier
+name: Check & Format Code With Prettier
 
 on:
   pull_request:
@@ -12,9 +12,9 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v2
       # disable this check while we migrate to monorepo
-      - name: Run prettier
-        run: |-
-          npx prettier -c 'cli/**/*.{js,jsx,ts,tsx,css,mdx,json}'
+      - name: Check prettier
+        run:
+          npx prettier -c .
         # run: |-
         #   function run_check() {
         #     if $(grep -q '"prettier"' "$1") ; then
@@ -29,11 +29,11 @@ jobs:
         #   done
 
   # Example's Folder is not a node package, so we handle that one separately
-  format-cli:
+  format-prettier:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo
         uses: actions/checkout@v2
       - name: Run prettier
-        run: |-
-          npx prettier -w 'cli/**/*.{js,jsx,ts,tsx,css,md,json}'
+        run:
+          npx prettier -w .
