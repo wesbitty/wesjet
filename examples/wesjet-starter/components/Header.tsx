@@ -1,9 +1,8 @@
 import Link from 'next/link'
-import styles from '../styles/Home.module.css'
 
 function Icon() {
   return (
-    <svg width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -19,7 +18,10 @@ function Icon() {
 function Logo() {
   return (
     <Link href="/" className="inline-flex justify-center items-center">
-      <h1 className={styles.jet}><Icon /> Wesjet</h1>
+      <span className="mr-2">
+        <Icon />
+      </span>
+      <span className="font-bold">Wesjet</span>
     </Link>
   )
 }

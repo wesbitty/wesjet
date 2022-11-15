@@ -1,0 +1,10 @@
+{
+  "name": "dev-wesjet",
+  "private": true,
+  "scripts": {
+    "start": "wesjet build && node --experimental-json-modules wesjet.bit.mjs"
+  },
+  "dependencies": {
+    "wesjet": "^0.0.8"
+  }
+}

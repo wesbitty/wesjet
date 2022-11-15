@@ -1,6 +1,6 @@
 {
   "name": "wesjet-nextjs-plugin",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "license": "MIT",
   "author": "Wesbitty, Inc",
   "homepage": "https://github.com/wesbitty/wesjetpkg",
@@ -48,8 +48,8 @@
     "prepack": "sed '/^import /d' dist/index-cjs.js > dist/index-cjs.cjs; cp src/hooks/jsx-runtime.cjs dist/hooks/jsx-runtime.cjs"
   },
   "dependencies": {
-    "@wesjet/core": "*",
-    "@wesjet/utils": "*"
+    "@wesjet/core": "^0.0.8",
+    "@wesjet/utils": "^0.0.8"
   },
   "peerDependencies": {
     "next": "^12 || ^13",

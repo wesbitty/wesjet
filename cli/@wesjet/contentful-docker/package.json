@@ -1,6 +1,6 @@
 {
   "name": "@wesjet/contentful-docker",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "type": "module",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,8 +16,8 @@
     "@types/node": "^18.7.15"
   },
   "dependencies": {
-    "@wesjet/core": "*",
-    "@wesjet/utils": "*",
+    "@wesjet/core": "^0.0.8",
+    "@wesjet/utils": "^0.0.8",
     "contentful-management": "7.22.4"
   }
 }

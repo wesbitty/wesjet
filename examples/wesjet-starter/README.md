@@ -1,34 +1,23 @@
-This is a [Wesjet](https://wesbitty.com/docs/wesjet/) project bootstrapped with [`create-wesjet-app`](https://github.com/wesbitty/wesjetpkg/tree/master/packages/create-wesjet-app).
+# Next.js Contentlayer Example
 
-## Getting Started
+## Demo
 
-First, run the development server:
+View the deployed project: [Demo](https://wesjet-nextjs-plugin-example.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Try it Now
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](http://gitpod.io/#https://github.com/contentlayerdev/wesjet-nextjs-plugin-example)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Local Installation
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Clone the project:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+    git clone git@github.com:contentlayerdev/wesjet-nextjs-plugin-example.git
 
-## Learn More
+Install dependencies:
 
-To learn more about Next.js, take a look at the following resources:
+    yarn
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Run dev server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    yarn dev
