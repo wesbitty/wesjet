@@ -1,7 +1,7 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Lint
+name: Check & Format Code With Prettier
 
 on:
   push:
@@ -10,7 +10,29 @@ on:
     branches: [ "master" ]
 
 jobs:
-  lint:
+  check-eslint:
+    strategy:
+      matrix:
+        node-version: [16]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v3
+    - run: npm ci
+    - run: npm run check:eslint
+
+  check-prettier:
+    strategy:
+      matrix:
+        node-version: [16]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v3
+    - run: npm ci
+    - run: npm run check:prettier
+  
+  format:
     strategy:
       matrix:
         node-version: [16]
