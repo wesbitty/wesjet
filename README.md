@@ -8,7 +8,7 @@ Visit [https://wesbitty.com](https://wesbitty.com/docs/getting-started) to get s
 
 ## Features
 
-- incremental bundler
+- Incremental bundler
 - Live reload on content changes
 - Powerful schema DSL to design your content model (validates your content and compiles types)
 - Compile TypeScript types based on your content model automatically (e.g. frontmatter or CMS schema)
