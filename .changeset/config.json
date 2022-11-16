@@ -7,7 +7,7 @@
   "access": "public",
   "baseBranch": "master",
   "updateInternalDependencies": "patch",
-  "ignore": ["www", "wesjet-starter", "create-wesjet-app", "dev-wesjet"],
+  "ignore": ["private"],
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "snapshot.useCalculatedVersion": true
   }
