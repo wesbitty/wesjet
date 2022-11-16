@@ -25,6 +25,7 @@
     }
   },
   "dependencies": {
+    "@wesjet/core": "^0.0.8",
     "@wesjet/utils": "^0.0.8",
     "camel-case": "^4.1.2",
     "comment-json": "^4.2.3",
