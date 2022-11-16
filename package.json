@@ -9,20 +9,22 @@
     "node": ">=14.0.0"
   },
   "scripts": {
+    "postinstall": "ts-patch install && ts-patch --persist && npm run postinstall -w wesjet",
+    "prepack": "npm run prepack -w wesjet-nextjs-plugin",
     "lint": "npm run format:prettier && npm run format:eslint",
+    "build:": "npm run build:cli && npm build:apps.etc",
+    "rm": "npm run rm:cli && npm run rm:apps.etc",
     "check:prettier": "prettier -c .",
     "check:eslint": "eslint cli --ext .ts --max-warnings=0",
-    "postinstall": "ts-patch install && ts-patch --persist",
-    "postinstall:wesjet": "npm --workspaces --verbose --include \"examples-*\" exec npm -w wesjet run postinstall",
     "format:prettier": "prettier -w .",
     "format:eslint": "eslint . --ext js,jsx,ts,tsx -c ./.eslintrc.json",
-    "build": "tsc -b tsconfig.build.json",
-    "build:www": "npm run build -w apps/www",
-    "build:examples": "npm run build -w examples/wesjet-starter",
-    "build:clean": "bash -c 'rm -rf cli/*/dist cli/@wesjet/*/dist'",
-    "dev:www": "npm run dev -w apps/www",
-    "dev:examples": "npm run dev -w examples/wesjet-starter",
-    "all": "npm run build:clean && npm run build && npm -w wesjet-nextjs-plugin run prepack"
+    "build:cli": "tsc -b tsconfig.build.json",
+    "build:app.etc": "npm run build -w www && npm run build -w wesjet-starter",
+    "rm:cli": "bash -c 'rm -rf cli/*/dist cli/*/.wesjet cli/@wesjet/*/dist'",
+    "rm:apps.etc": "bash -c 'rm -rf apps/*/.wesjet apps/*/.next examples/*/.wesjet examples/*/.next'",
+    "dev:www": "npm run dev -w www",
+    "dev:examples": "npm run dev -w wesjet-starter",
+    "all": "npm i && npm run lint && npm run build:cli && npm -w wesjet-nextjs-plugin run prepack && npm run build:app.etc"
   },
   "lint-staged": {
     "*.@(js|ts)": [
