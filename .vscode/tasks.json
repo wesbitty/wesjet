@@ -6,7 +6,7 @@
     {
       "label": "build",
       "type": "shell",
-      "command": "yarn build",
+      "command": "npm run build",
       "options": { "cwd": "${workspaceFolder}" },
       "presentation": {
         "focus": true,
@@ -18,10 +18,10 @@
       }
     },
     {
-      "label": "build:wesjet",
+      "label": "build:cli",
       "type": "shell",
-      "command": "yarn build",
-      "options": { "cwd": "${workspaceFolder}/cli/wesjet" },
+      "command": "npm run build",
+      "options": { "cwd": "${workspaceFolder}/cli/*" },
       "presentation": {
         "focus": false,
         "panel": "dedicated",
@@ -32,9 +32,9 @@
       }
     },
     {
-      "label": "build:clean",
+      "label": "rm",
       "type": "shell",
-      "command": "yarn build:clean",
+      "command": "npm run rm",
       "presentation": {
         "focus": true,
         "panel": "shared",
@@ -47,7 +47,20 @@
     {
       "label": "test",
       "type": "shell",
-      "command": "yarn test",
+      "command": "npm run test",
+      "presentation": {
+        "focus": true,
+        "panel": "shared",
+        "group": "test",
+        "showReuseMessage": true,
+        "clear": true
+      }
+    },
+    {
+      "label": "all",
+      "type": "shell",
+      "command": "npm run all",
+      "problemMatcher": ["$eslint-stylish"],
       "presentation": {
         "focus": true,
         "panel": "shared",
@@ -59,7 +72,7 @@
     {
       "label": "lint",
       "type": "shell",
-      "command": "yarn lint",
+      "command": "npm run lint",
       "problemMatcher": ["$eslint-stylish"],
       "presentation": {
         "focus": true,
