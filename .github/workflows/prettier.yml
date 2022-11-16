@@ -7,7 +7,7 @@ on:
   push:
     branches: ["master"]
   pull_request:
-    branches: ["master"]
+    branches: ["feat/jet"]
 
 jobs:
   check-eslint:

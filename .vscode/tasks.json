@@ -45,9 +45,10 @@
       }
     },
     {
-      "label": "test",
+      "label": "lint",
       "type": "shell",
-      "command": "npm run test",
+      "command": "npm run lint",
+      "problemMatcher": ["$eslint-stylish"],
       "presentation": {
         "focus": true,
         "panel": "shared",
@@ -60,19 +61,6 @@
       "label": "all",
       "type": "shell",
       "command": "npm run all",
-      "problemMatcher": ["$eslint-stylish"],
-      "presentation": {
-        "focus": true,
-        "panel": "shared",
-        "group": "test",
-        "showReuseMessage": true,
-        "clear": true
-      }
-    },
-    {
-      "label": "lint",
-      "type": "shell",
-      "command": "npm run lint",
       "problemMatcher": ["$eslint-stylish"],
       "presentation": {
         "focus": true,
