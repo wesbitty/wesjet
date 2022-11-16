@@ -5,8 +5,7 @@
   },
   "files.exclude": {
     "**/CVS": true,
-    "**/.*": true,
-    "!**/.vscode": true,
+    "**/.*": false,
     "**/Thumbs.db": true,
     "**/dist": true
   },
