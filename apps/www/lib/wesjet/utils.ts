@@ -2,7 +2,7 @@ import type { DocumentGen } from "wesjet/core";
 import * as fs from "node:fs/promises";
 import path from "node:path";
 
-export const contentDirPath = "content";
+export const contentDirPath = "_blog";
 
 export const urlFromFilePath = (doc: DocumentGen): string => {
   return doc._raw.flattenedPath.replace(/pages\/?/, "");

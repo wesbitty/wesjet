@@ -21,7 +21,7 @@ function PostCard(post: Post) {
           {post.title}
         </Link>
       </h2>
-      <time dateTime={post.date} className="block text-xs text-gray-600 mb-2">
+      <time dateTime={post.date} className="mb-2 block text-xs text-gray-600">
         {format(parseISO(post.date), "LLLL d, yyyy")}
       </time>
       <div
@@ -34,8 +34,8 @@ function PostCard(post: Post) {
 
 export default function Home({ posts }: { posts: Post[] }) {
   return (
-    <div className="max-w-xl mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">
+    <div className="mx-auto max-w-xl py-8">
+      <h1 className="mb-8 text-center text-3xl font-bold">
         Welcome to Wesjet Blog - Starter
       </h1>
 

@@ -9,7 +9,7 @@ import {
   useMemo,
   useCallback,
 } from "react";
-import { ColorScheme } from "lib/utils/syntax-highlighting";
+import { ColorScheme } from "../lib/utils/syntax-highlighting";
 
 const ColorSchemeContext = createContext<"light" | "dark" | "system">("light");
 const UpdateColorSchemeContext = createContext<

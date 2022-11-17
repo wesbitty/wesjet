@@ -23,7 +23,7 @@ function Icon() {
 
 function Logo() {
   return (
-    <Link href="/" className="inline-flex justify-center items-center">
+    <Link href="/" className="inline-flex items-center justify-center">
       <span className="mr-2">
         <Icon />
       </span>
@@ -34,7 +34,7 @@ function Logo() {
 
 export function Header() {
   return (
-    <header className="p-8 flex justify-center">
+    <header className="flex justify-center p-8">
       <Logo />
     </header>
   );

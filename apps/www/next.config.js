@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const { withWesjet } = require("wesjet-nextjs-plugin");
 
 module.exports = withWesjet({

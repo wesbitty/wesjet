@@ -14,7 +14,7 @@ export const codeSnippets = [
   import remarkRehype from "remark-rehype";
   import { unified } from "unified";
   import type { Page, PageFrontmatter } from "../types/Page";
-  const contentDir = path.join(process.cwd(), "../content");
+  const contentDir = path.join(process.cwd(), "../content);
   /**
    * Full paths to all content source files.
    *

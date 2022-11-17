@@ -1,0 +1,64 @@
+---
+title: Processing MDX Files
+nav_title: MDX
+excerpt: How Contentlayer processes MDX when using local files as the content source.
+---
+
+MDX brings JSX components to markdown, which can provide power and flexibility to the main body area of a content piece.
+
+## MDX Content
+
+Contentlayer supports MDX processing via [`mdx-bundler`](https://github.com/kentcdodds/mdx-bundler). By default, Contentlayer processes the main content area of `.md` and `.mdx` files as markdown. You can enable this behavior using the `contentType` option in your document type definition.
+
+```js
+defineDocumentType(() => ({
+  name: 'Post',
+  filePathPattern: `**/*.mdx`,
+  contentType: 'mdx',
+  fields: {
+    // ...
+  },
+}))
+```
+
+## Usage from Next.js
+
+```tsx
+import React from 'react'
+import { allPosts, type Post } from 'contentlayer/generated'
+import { useMDXComponent } from 'next-contentlayer/hooks'
+
+export const getStaticProps = () => {
+  const post = allPosts[0]
+  return { props: { post } }
+}
+
+const MyButton: React.FC = () => <button>Click me</button>
+
+const Page: React.FC<{ post }> = ({ post }) => {
+  const MDXContent = useMDXComponent(post.body.code)
+  
+  return (
+    <div>
+      {/* Some code ... */}
+      <MDXContent components={{ MyButton }} />
+    </div>
+  )
+}
+
+export default Page
+```
+
+## MDX Plugins (remark/rehype)
+
+You can add [remark](https://github.com/remarkjs/remark) and [rehype](https://github.com/rehypejs/rehype) plugins inside the `mdx` property when calling `makeSource` in your Contentlayer configuration.
+
+```js
+import { makeSource } from 'contentlayer/source-files'
+import highlight from 'rehype-highlight'
+
+export default makeSource({
+  // ...
+  mdx: { rehypePlugins: [highlight] },
+})
+```
