@@ -1,30 +1,34 @@
-import { FC, ReactNode, useMemo } from "react";
-import { useRouter } from "next/router";
+import { format } from "date-fns";
+import type {
+  Action} from "kbar";
 import {
-  KBarProvider,
+  KBarAnimator,
   KBarPortal,
   KBarPositioner,
-  KBarSearch,
-  KBarAnimator,
+  KBarProvider,
   KBarResults,
-  useMatches,
-  Action,
+  KBarSearch,
+  useMatches
 } from "kbar";
-import { TreeNode } from "types/TreeNode";
+import { useRouter } from "next/router";
+import type { FC, ReactNode} from "react";
+import { useMemo } from "react";
+import type { TreeNode } from "types/TreeNode";
+import type { Post } from "wesjet/jetpack";
+import { allDocs, allExamples, allPosts } from "wesjet/jetpack";
+
+import { buildDocsTree } from "../lib/utils/build-doc-tree";
+import { buildExamplesTree } from "../lib/utils/build-example-tree";
 import { Card } from "./common/Card";
 import { Icon } from "./common/Icon";
 import { Label } from "./common/Label";
-import { buildDocsTree } from "../lib/utils/build-doc-tree";
-import { allDocs, allExamples, allPosts, Post } from "wesjet/jetpack";
-import { buildExamplesTree } from "../lib/utils/build-example-tree";
-import { format } from "date-fns";
 
 export const SearchProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const router = useRouter();
   const docsTree = buildDocsTree(allDocs);
   const examplesTree = buildExamplesTree(allExamples);
   const actions = useMemo(() => {
-    let actions: Action[] = [
+    const actions: Action[] = [
       {
         id: "0-homepage",
         name: "Homepage",

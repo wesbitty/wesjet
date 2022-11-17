@@ -1,10 +1,14 @@
-import { FC } from 'react'
-import Link from 'next/link'
-import { Icon } from './Icon'
+import Link from "next/link";
+import type { FC } from "react";
 
-const isExternalUrl = (link: string): boolean => !link.startsWith('/')
+import { Icon } from "./Icon";
 
-export const ChevronLink: FC<{ label: string; url: string }> = ({ label, url }) => {
+const isExternalUrl = (link: string): boolean => !link.startsWith("/");
+
+export const ChevronLink: FC<{ label: string; url: string }> = ({
+  label,
+  url,
+}) => {
   if (isExternalUrl(url)) {
     return (
       <a
@@ -18,7 +22,7 @@ export const ChevronLink: FC<{ label: string; url: string }> = ({ label, url }) 
           <Icon name="chevron-right" />
         </span>
       </a>
-    )
+    );
   } else {
     return (
       <Link href={url}>
@@ -29,6 +33,6 @@ export const ChevronLink: FC<{ label: string; url: string }> = ({ label, url }) 
           </span>
         </a>
       </Link>
-    )
+    );
   }
-}
+};

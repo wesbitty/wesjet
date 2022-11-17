@@ -1,5 +1,7 @@
-import { FC, useState } from "react";
 import Image from "next/image";
+import type { FC} from "react";
+import { useState } from "react";
+
 import { Card } from "../common/Card";
 import { Icon } from "../common/Icon";
 

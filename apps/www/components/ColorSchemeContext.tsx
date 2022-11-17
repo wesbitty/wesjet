@@ -1,15 +1,17 @@
+import type {
+  FC} from "react";
 import {
-  FC,
-  useEffect,
+  createContext,
   Dispatch,
   SetStateAction,
-  createContext,
-  useState,
-  useContext,
-  useMemo,
   useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
 } from "react";
-import { ColorScheme } from "../lib/utils/syntax-highlighting";
+
+import type { ColorScheme } from "../lib/utils/syntax-highlighting";
 
 const ColorSchemeContext = createContext<"light" | "dark" | "system">("light");
 const UpdateColorSchemeContext = createContext<

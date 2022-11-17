@@ -1,14 +1,15 @@
-import { Post } from "wesjet/jetpack";
+import { format } from "date-fns";
+import Image from "next/image";
+import Link from "next/link";
+import type { FC } from "react";
+import type { Post } from "wesjet/jetpack";
+
 import { BlogDetails } from "../../components/blog/BlogDetails";
+import { ChevronLink } from "../../components/common/ChevronLink";
+import { Icon } from "../../components/common/Icon";
 import { Heading } from "../../components/landing-page/Heading";
 import { Paragraph } from "../../components/landing-page/Paragraph";
-import { ChevronLink } from "../../components/common/ChevronLink";
-import { FC } from "react";
-import Image from "next/image";
 import { Card } from "../common/Card";
-import Link from "next/link";
-import { Icon } from "../../components/common/Icon";
-import { format } from "date-fns";
 
 export const BlogPreview: FC<{ post: Post }> = ({ post }) => {
   return (

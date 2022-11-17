@@ -11,8 +11,8 @@ import type * as LocalSchema from "./schema/defs/index.js";
 import { makeCoreSchema } from "./schema/provideSchema.js";
 import type { Flags, PluginOptions } from "./types.js";
 
-export * from "./types.js";
 export * from "./schema/defs/index.js";
+export * from "./types.js";
 
 export type Args = {
   documentTypes: LocalSchema.DocumentTypes;

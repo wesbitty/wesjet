@@ -1,5 +1,6 @@
-import { FC, useState } from "react";
 import * as Tooltip from "@radix-ui/react-tooltip";
+import type { FC} from "react";
+import { useState } from "react";
 
 export const Dashed: FC<{ label: string; tooltip: string }> = ({
   label,

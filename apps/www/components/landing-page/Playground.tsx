@@ -1,11 +1,13 @@
-import { FC, useEffect, useRef, useState } from "react";
-import stackblitz from "@stackblitz/sdk";
 import type * as Stackblitz from "@stackblitz/sdk";
+import stackblitz from "@stackblitz/sdk";
+import classNames from "classnames";
+import type { FC} from "react";
+import { useEffect, useRef, useState } from "react";
+
+import { arraysAreEqual } from "../../lib/utils/helpers";
 import { Arrow } from "../common/Arrow";
 import { Card } from "../common/Card";
 import { Heading } from "./Heading";
-import { arraysAreEqual } from "../../lib/utils/helpers";
-import classNames from "classnames";
 
 type Content = {
   heading: string;

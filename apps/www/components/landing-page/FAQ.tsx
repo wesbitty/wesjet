@@ -1,9 +1,10 @@
-import { FC } from "react";
-import { Button } from "../common/Button";
-import { Heading } from "./Heading";
-import { IconName } from "../common/Icon";
-import { Paragraph } from "./Paragraph";
 import Markdown from "markdown-to-jsx";
+import type { FC } from "react";
+
+import { Button } from "../common/Button";
+import type { IconName } from "../common/Icon";
+import { Heading } from "./Heading";
+import { Paragraph } from "./Paragraph";
 
 const content = {
   heading: "Frequently Asked Questions",

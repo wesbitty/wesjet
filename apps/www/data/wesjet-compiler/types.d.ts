@@ -1,5 +1,5 @@
 import type { Markdown, MDX } from "wesjet/core";
-import * as Local from "wesjet/maker";
+import type * as Local from "wesjet/maker";
 
 export { isType } from "wesjet/client";
 

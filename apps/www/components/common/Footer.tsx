@@ -1,18 +1,19 @@
-import Link from 'next/link'
-import { FC } from 'react'
-import { Logo } from './Logo'
-import { Icon } from './Icon'
-import { Heading } from '../landing-page/Heading'
+import Link from "next/link";
+import type { FC } from "react";
+
+import { Heading } from "../landing-page/Heading";
+import { Icon } from "./Icon";
+import { Logo } from "./Logo";
 
 const isExternalUrl = (link: string): boolean => {
-  return !link.startsWith('/')
-}
+  return !link.startsWith("/");
+};
 
 const content = {
   note: (
     <>
       <p>
-        MIT Licenced - A project by{' '}
+        MIT Licenced - A project by{" "}
         <a
           href="https://www.stackbit.com/"
           target="_blank"
@@ -23,46 +24,53 @@ const content = {
         </a>
       </p>
       <p className="mt-2">
-        Made with 💜 by{' '}
+        Made with 💜 by{" "}
         <Link href="https://twitter.com/schickling">
-          <a className="hover:text-slate-700 dark:hover:text-slate-300" target="_blank" rel="noreferrer">
+          <a
+            className="hover:text-slate-700 dark:hover:text-slate-300"
+            target="_blank"
+            rel="noreferrer"
+          >
             @schickling
           </a>
-        </Link>{' '}
+        </Link>{" "}
         & community
       </p>
     </>
   ),
   menus: [
     {
-      title: 'Docs',
+      title: "Docs",
       elements: [
-        { label: 'Getting Started', url: '/docs/getting-started' },
-        { label: 'Concepts', url: '/docs/concepts' },
-        { label: 'Sources', url: '/docs/sources' },
-        { label: 'Environments', url: '/docs/environments' },
-        { label: 'API Reference', url: '/docs/reference' },
+        { label: "Getting Started", url: "/docs/getting-started" },
+        { label: "Concepts", url: "/docs/concepts" },
+        { label: "Sources", url: "/docs/sources" },
+        { label: "Environments", url: "/docs/environments" },
+        { label: "API Reference", url: "/docs/reference" },
       ],
     },
     {
-      title: 'Examples',
+      title: "Examples",
       elements: [
         {
-          label: 'Next.js (TypeScript)',
-          url: '/examples/nextjs',
+          label: "Next.js (TypeScript)",
+          url: "/examples/nextjs",
         },
       ],
     },
     {
-      title: 'Community',
+      title: "Community",
       elements: [
-        { label: 'Twitter', url: 'https://twitter.com/contentlayerdev' },
-        { label: 'Discord', url: 'https://discord.gg/rytFErsARm' },
-        { label: 'GitHub', url: 'https://github.com/contentlayerdev/contentlayer' },
+        { label: "Twitter", url: "https://twitter.com/contentlayerdev" },
+        { label: "Discord", url: "https://discord.gg/rytFErsARm" },
+        {
+          label: "GitHub",
+          url: "https://github.com/contentlayerdev/contentlayer",
+        },
       ],
     },
   ],
-}
+};
 
 export const Footer: FC = () => {
   return (
@@ -75,7 +83,9 @@ export const Footer: FC = () => {
               <span>Contentlayer</span>
             </a>
           </Link>
-          <div className="mt-4 text-sm text-slate-500 dark:text-slate-400">{content.note}</div>
+          <div className="mt-4 text-sm text-slate-500 dark:text-slate-400">
+            {content.note}
+          </div>
         </div>
         <div className="space-y-8 md:flex md:space-y-0 md:space-x-16">
           {content.menus.map(({ title, elements }, index) => (
@@ -89,7 +99,7 @@ export const Footer: FC = () => {
                     <Link href={url}>
                       <a
                         className="inline-flex items-center space-x-1 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"
-                        target={isExternalUrl(url) ? '_blank' : undefined}
+                        target={isExternalUrl(url) ? "_blank" : undefined}
                       >
                         <span>{label}</span>
                         {isExternalUrl(url) && (
@@ -107,5 +117,5 @@ export const Footer: FC = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

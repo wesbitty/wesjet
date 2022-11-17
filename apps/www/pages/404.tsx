@@ -1,9 +1,10 @@
-import React from 'react'
-import { Container } from '../components/common/Container'
-import { Icon } from '../components/common/Icon'
-import { Heading } from '../components/landing-page/Heading'
-import { Paragraph } from '../components/landing-page/Paragraph'
-import { Label } from '../components/common/Label'
+import React from "react";
+
+import { Container } from "../components/common/Container";
+import { Icon } from "../components/common/Icon";
+import { Label } from "../components/common/Label";
+import { Heading } from "../components/landing-page/Heading";
+import { Paragraph } from "../components/landing-page/Paragraph";
 
 const NotFound = () => {
   return (
@@ -24,7 +25,7 @@ const NotFound = () => {
         </div>
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default NotFound
+export default NotFound;

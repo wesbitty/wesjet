@@ -1,15 +1,17 @@
-import { useRouter } from "next/router";
-import { useState, FC } from "react";
 import Image from "next/image";
-import { Dashed } from "./Dashed";
-import { Icon } from "../common/Icon";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import type { FC} from "react";
+import {useState } from "react";
+
 import { Button } from "../common/Button";
 import { Card } from "../common/Card";
-import { Heading } from "./Heading";
+import { Icon } from "../common/Icon";
 import { Checklist } from "./Checklist";
+import { Dashed } from "./Dashed";
+import { Heading } from "./Heading";
 import { Paragraph } from "./Paragraph";
 import { Video } from "./Video";
-import Link from "next/link";
 
 const content = {
   heading: "Content made easy for developers",

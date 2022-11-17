@@ -1,9 +1,11 @@
-import { FC, Fragment, useState, useEffect } from "react";
-import { TreeNode } from "types/TreeNode";
 import Link from "next/link";
-import { DocsNavigation } from "./DocsNavigation";
-import { Icon } from "../common/Icon";
 import { useRouter } from "next/router";
+import type { FC} from "react";
+import { Fragment, useEffect,useState } from "react";
+import type { TreeNode } from "types/TreeNode";
+
+import { Icon } from "../common/Icon";
+import { DocsNavigation } from "./DocsNavigation";
 
 export const DocsHeader: FC<{
   tree: TreeNode[];

@@ -1,6 +1,6 @@
 ---
-title: 'Introducing Contentlayer (Beta): Content Made Easy for Developers'
-excerpt: 'Working with content data (e.g. Markdown files or CMS) is a surprisingly difficult and laborious task when developing modern sites (e.g. with Next.js). Contentlayer is a content SDK that aims to make content easy for developers.'
+title: "Introducing Contentlayer (Beta): Content Made Easy for Developers"
+excerpt: "Working with content data (e.g. Markdown files or CMS) is a surprisingly difficult and laborious task when developing modern sites (e.g. with Next.js). Contentlayer is a content SDK that aims to make content easy for developers."
 date: 2022-04-21
 cover_image:
   url: https://i.imgur.com/lRrBFqd.png
@@ -39,8 +39,8 @@ We're very excited to officially release Contentlayer in beta after many months 
 
 <Video
   thumbnail={{
-    url: 'https://i.imgur.com/5IKJALH.png',
-    alt: 'Intro to Contentlayer Video Thumbnail',
+    url: "https://i.imgur.com/5IKJALH.png",
+    alt: "Intro to Contentlayer Video Thumbnail",
     width: 2560,
     height: 1440,
   }}
@@ -54,9 +54,9 @@ How we build content-driven web experiences [has evolved significantly](/blog/wo
 While developers gained more flexibility in the way they can design and structure their site - it also came at the cost of having to take responsibility over how to process and serve the content.
 
 <ContentStack
-  content={{ icons: ['markdown', 'contentful'], label: 'Local/Remote Content' }}
-  processor={{ icons: ['question'], label: 'Custom Content Processor' }}
-  pages={{ icons: ['react'], label: 'React Pages' }}
+  content={{ icons: ["markdown", "contentful"], label: "Local/Remote Content" }}
+  processor={{ icons: ["question"], label: "Custom Content Processor" }}
+  pages={{ icons: ["react"], label: "React Pages" }}
   decoupled={true}
 />
 
@@ -76,30 +76,35 @@ That's already a lot code for a simple use case - and it's just the tip of the i
 
 <BulletList>
   <BulletListItem type="cross">
-    Write **markdown processing logic**, including working with content-processing libraries and their plugins. This is
-    a lot of base-level logic and adds a number of dependencies to your project.
+    Write **markdown processing logic**, including working with
+    content-processing libraries and their plugins. This is a lot of base-level
+    logic and adds a number of dependencies to your project.
   </BulletListItem>
   <BulletListItem type="cross">
-    Implement **content validation** to make sure your content matches the structure expected by your application.
+    Implement **content validation** to make sure your content matches the
+    structure expected by your application.
   </BulletListItem>
   <BulletListItem type="cross">
-    **Cache** processed content data to avoid unnecessary work. But _caching is hard_ and _Not caching_ degrades the
-    developer experience and build performance.
+    **Cache** processed content data to avoid unnecessary work. But _caching is
+    hard_ and _Not caching_ degrades the developer experience and build
+    performance.
   </BulletListItem>
   <BulletListItem type="cross">
-    **Incrementally regenerate** only the content you changed to optimize rebuild/reload performance.
+    **Incrementally regenerate** only the content you changed to optimize
+    rebuild/reload performance.
   </BulletListItem>
   <BulletListItem type="cross">
-    Account for rich and complex **content relations**, so that objects can live as individual content files but be
-    embedded as necessary when used as data.
+    Account for rich and complex **content relations**, so that objects can live
+    as individual content files but be embedded as necessary when used as data.
   </BulletListItem>
   <BulletListItem type="cross">
-    Most frameworks (e.g Next.js) don't support **content live-reload**. Building this yourself is usually very
-    complicated.
+    Most frameworks (e.g Next.js) don't support **content live-reload**.
+    Building this yourself is usually very complicated.
   </BulletListItem>
   <BulletListItem type="cross">
-    If you want to work with **TypeScript** and have strongly-typed data, you must write those types manually and hope
-    that the content data matches your types.
+    If you want to work with **TypeScript** and have strongly-typed data, you
+    must write those types manually and hope that the content data matches your
+    types.
   </BulletListItem>
 </BulletList>
 
@@ -110,9 +115,13 @@ Doing all of this is an insane amount of work - and you really shouldn't have to
 And that’s why we built Contentlayer. **Contentlayer makes working with content easy** for developers.
 
 <ContentStack
-  content={{ icons: ['markdown', 'contentful', 'notion'], label: 'Content' }}
-  processor={{ icons: ['contentlayer'], label: 'Contentlayer', className: 'text-purple-500' }}
-  pages={{ icons: ['react'], label: 'Pages' }}
+  content={{ icons: ["markdown", "contentful", "notion"], label: "Content" }}
+  processor={{
+    icons: ["contentlayer"],
+    label: "Contentlayer",
+    className: "text-purple-500",
+  }}
+  pages={{ icons: ["react"], label: "Pages" }}
   decoupled={true}
 />
 
@@ -154,25 +163,31 @@ Contentlayer aims to provide a great developer experience (DX) through the follo
 
 <BulletList>
   <BulletListItem type="check">
-    **Content just works**: Gone are the days of writing low-level content-processing logic. Instead, you set the rules
-    and the content _just works_.
+    **Content just works**: Gone are the days of writing low-level
+    content-processing logic. Instead, you set the rules and the content _just
+    works_.
   </BulletListItem>
   <BulletListItem type="check">
-    **TypeScript Support**: Auto-generated TypeScript type definitions every document type.
+    **TypeScript Support**: Auto-generated TypeScript type definitions every
+    document type.
   </BulletListItem>
   <BulletListItem type="check">
-    <div className="mb-4">**Content validation:** Content is validated automatically with helpful error messages.</div>
+    <div className="mb-4">
+      **Content validation:** Content is validated automatically with helpful
+      error messages.
+    </div>
   </BulletListItem>
   <BulletListItem type="check">
-    **Caching**: Content builds are cached and incrementally regenerated - doing only the minimal amount of work
-    necessary when changing your content.
+    **Caching**: Content builds are cached and incrementally regenerated - doing
+    only the minimal amount of work necessary when changing your content.
   </BulletListItem>
   <BulletListItem type="check">
-    **Live reload**: The browser will automatically reload after changing content for those frameworks that support live
-    reloading.
+    **Live reload**: The browser will automatically reload after changing
+    content for those frameworks that support live reloading.
   </BulletListItem>
   <BulletListItem type="check">
-    **Flexible content modeling**: Contentlayer allows you to structure your content in a flexible and powerful way.
+    **Flexible content modeling**: Contentlayer allows you to structure your
+    content in a flexible and powerful way.
   </BulletListItem>
 </BulletList>
 
@@ -181,7 +196,12 @@ Contentlayer aims to provide a great developer experience (DX) through the follo
 We put our claims to the test and [built a simple benchmark study](https://github.com/contentlayerdev/contentlayer-benchmarks) that compared a Next.js site with 1,000+ markdown content files to the same site using a DIY content processing method. We then built the same site with Gatsby.
 
 <div className="my-8 space-y-4">
-  <Image src="https://i.imgur.com/RL2t7es.png" alt="Contentlayer Performance Comparison" width="2560" height="1200" />
+  <Image
+    src="https://i.imgur.com/RL2t7es.png"
+    alt="Contentlayer Performance Comparison"
+    width="2560"
+    height="1200"
+  />
   <div className="flex w-full justify-center text-sm text-slate-300 dark:text-slate-500">
     Smaller is better/faster. Used machine: [GitHub
     Actions](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources)

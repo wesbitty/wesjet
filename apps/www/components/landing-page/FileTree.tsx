@@ -1,5 +1,7 @@
-import { FC, useMemo, useState } from "react";
 import * as Tooltip from "@radix-ui/react-tooltip";
+import type { FC} from "react";
+import { useMemo, useState } from "react";
+
 import { Card } from "../common/Card";
 
 const Folder: FC<{

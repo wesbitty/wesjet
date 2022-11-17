@@ -1,8 +1,9 @@
-import { FC } from "react";
-import Link from "next/link";
-import { Icon } from "../common/Icon";
 import { format } from "date-fns";
-import { Doc } from "wesjet/jetpack";
+import Link from "next/link";
+import type { FC } from "react";
+import type { Doc } from "wesjet/jetpack";
+
+import { Icon } from "../common/Icon";
 
 const githubBranch = "master";
 const githubBaseUrl = `https://github.com/wesbitty/wesjetpkg/blob/${githubBranch}/apps/www/_blog/`;

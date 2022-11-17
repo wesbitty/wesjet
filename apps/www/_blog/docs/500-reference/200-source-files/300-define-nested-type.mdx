@@ -11,25 +11,25 @@ Nested types are defined within document type definitions, and therefore do not 
 
 ```js
 const SEO = defineNestedType(() => ({
-  name: 'SEO',
+  name: "SEO",
   fields: {
     title: {
-      type: 'string',
+      type: "string",
     },
   },
-}))
+}));
 
 const Doc = defineDocumentType(() => ({
-  name: 'Doc',
-  filePathPattern: '**/*.md',
+  name: "Doc",
+  filePathPattern: "**/*.md",
   fields: {
     // ...
     seo: {
-      type: 'nested',
+      type: "nested",
       of: SEO,
     },
   },
-}))
+}));
 ```
 
 ## Options

@@ -1,8 +1,8 @@
-import { makeSource } from "wesjet/maker";
 import highlight from "rehype-highlight";
-import { contentDirPath } from "./lib/wesjet/utils";
+import { makeSource } from "wesjet/maker";
 
 import * as documentTypes from "./lib/wesjet";
+import { contentDirPath } from "./lib/wesjet/utils";
 
 export default makeSource({
   contentDirPath,

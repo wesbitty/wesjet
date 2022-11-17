@@ -26,9 +26,9 @@ This is a type definition that defines a single field with the name `title` and 
 defineDocumentType(() => ({
   // ...
   fields: {
-    title: { type: 'string' },
+    title: { type: "string" },
   },
-}))
+}));
 ```
 
 ## `boolean`
@@ -46,11 +46,11 @@ defineDocumentType(() => ({
   // ...
   fields: {
     isActive: {
-      type: 'boolean',
+      type: "boolean",
       default: false,
     },
   },
-}))
+}));
 ```
 
 ## `date`
@@ -68,10 +68,10 @@ defineDocumentType(() => ({
   // ...
   fields: {
     publishAt: {
-      type: 'date',
+      type: "date",
     },
   },
-}))
+}));
 ```
 
 ## `enum`
@@ -90,12 +90,12 @@ defineDocumentType(() => ({
   // ...
   fields: {
     theme: {
-      type: 'enum',
-      options: ['light', 'dark'],
-      default: 'dark',
+      type: "enum",
+      options: ["light", "dark"],
+      default: "dark",
     },
   },
-}))
+}));
 ```
 
 ## `json`
@@ -113,10 +113,10 @@ defineDocumentType(() => ({
   // ...
   fields: {
     options: {
-      type: 'json',
+      type: "json",
     },
   },
-}))
+}));
 ```
 
 ## `list`
@@ -135,11 +135,11 @@ defineDocumentType(() => ({
   // ...
   fields: {
     tags: {
-      type: 'list',
-      of: { type: 'string' },
+      type: "list",
+      of: { type: "string" },
     },
   },
-}))
+}));
 ```
 
 The default list type expects an array of strings, like this:
@@ -158,22 +158,22 @@ To specify a list of nested objects, use the `of` option. Here's an example of t
 
 ```js
 const Tag = defineNestedType(() => ({
-  name: 'Tag',
+  name: "Tag",
   fields: {
-    title: { type: 'string', required: true },
+    title: { type: "string", required: true },
   },
-}))
+}));
 
 defineDocumentType(() => ({
   // ...
   fields: {
     // ...
     tags: {
-      type: 'list',
+      type: "list",
       of: Tag,
     },
   },
-}))
+}));
 ```
 
 Now you could use the nested objects in your content files.
@@ -205,10 +205,10 @@ defineDocumentType(() => ({
   fields: {
     // ...
     description: {
-      type: 'markdown',
+      type: "markdown",
     },
   },
-}))
+}));
 ```
 
 If your content file has the following:
@@ -248,10 +248,10 @@ defineDocumentType(() => ({
   // ...
   fields: {
     description: {
-      type: 'mdx',
+      type: "mdx",
     },
   },
-}))
+}));
 ```
 
 If your content file has the following:
@@ -286,21 +286,21 @@ A nested field is a directly-embedded object that must match the shape of one or
 
 ```js
 const Category = defineNestedType(() => ({
-  name: 'Category',
+  name: "Category",
   fields: {
-    title: { type: 'string', required: true },
+    title: { type: "string", required: true },
   },
-}))
+}));
 
 defineDocumentType(() => ({
   // ...
   fields: {
     category: {
-      type: 'nested',
+      type: "nested",
       of: Category,
     },
   },
-}))
+}));
 ```
 
 The shape of the content would then look like this:
@@ -328,28 +328,28 @@ You can specify multiple nested field types by passing an array of nested types 
 
 ```js
 const Tag = defineNestedType(() => ({
-  name: 'Tag',
+  name: "Tag",
   fields: {
-    title: { type: 'string', required: true },
+    title: { type: "string", required: true },
   },
-}))
+}));
 
 const Category = defineNestedType(() => ({
-  name: 'Category',
+  name: "Category",
   fields: {
-    title: { type: 'string', required: true },
+    title: { type: "string", required: true },
   },
-}))
+}));
 
 defineDocumentType(() => ({
   // ...
   fields: {
     category: {
-      type: 'nested',
+      type: "nested",
       of: [Category, Tag],
     },
   },
-}))
+}));
 ```
 
 This requires that you specify the type of the object in your content using the `type` property.
@@ -375,18 +375,21 @@ defineDocumentType(() => ({
   // ...
   fields: {
     count: {
-      type: 'number',
+      type: "number",
       default: 0,
     },
   },
-}))
+}));
 ```
 
 ## `reference`
 
 A path to another document file of a specific types. The path should be relative to the `contentDirPath` option passed to [`makeSource`](./make-source).
 
-<Callout>References are not currently transformed or embedded. They are simply passed through as strings.</Callout>
+<Callout>
+  References are not currently transformed or embedded. They are simply passed
+  through as strings.
+</Callout>
 
 **Options:**
 
@@ -397,22 +400,22 @@ A path to another document file of a specific types. The path should be relative
 
 ```js
 const Category = defineNestedType(() => ({
-  name: 'Category',
-  filePathPattern: 'categories/*.md',
+  name: "Category",
+  filePathPattern: "categories/*.md",
   fields: {
-    title: { type: 'string', required: true },
+    title: { type: "string", required: true },
   },
-}))
+}));
 
 defineDocumentType(() => ({
   // ...
   fields: {
     category: {
-      type: 'reference',
+      type: "reference",
       of: Category,
     },
   },
-}))
+}));
 ```
 
 Your content file would then point the referenced doc, using a path relative to the `contentDirPath` option passed to `makeSource`.
@@ -444,9 +447,9 @@ defineDocumentType(() => ({
   // ...
   fields: {
     title: {
-      type: 'string',
+      type: "string",
       required: true,
     },
   },
-}))
+}));
 ```

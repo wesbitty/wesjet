@@ -1,10 +1,11 @@
-import { IconName } from "../common/Icon";
-import { FC } from "react";
-import { Button } from "../common/Button";
-import { CodeWindow } from "./CodeWindow";
-import { DataTransformation } from "./DataTransformation";
 import * as Tabs from "@radix-ui/react-tabs";
 import * as Tooltip from "@radix-ui/react-tooltip";
+import type { FC } from "react";
+
+import { Button } from "../common/Button";
+import type { IconName } from "../common/Icon";
+import { CodeWindow } from "./CodeWindow";
+import { DataTransformation } from "./DataTransformation";
 import { Heading } from "./Heading";
 import { Paragraph } from "./Paragraph";
 
@@ -203,9 +204,8 @@ const content = {
           heading: "Configure your content source",
           text: (
             <p>
-              When working with local markdown or MDX files, you tell
-              Wesjet the expected shape of your data (document type
-              definitions).
+              When working with local markdown or MDX files, you tell Wesjet the
+              expected shape of your data (document type definitions).
             </p>
           ),
           cta: {

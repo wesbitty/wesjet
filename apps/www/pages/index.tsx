@@ -1,53 +1,69 @@
-import type { InferGetStaticPropsType } from 'next'
-import React, { useEffect, useState } from 'react'
-import { allDocs, allExamples, allPosts } from 'wesjet/jetpack'
-import { buildDocsTree } from '../lib/utils/build-doc-tree'
-import { defineStaticProps } from '../lib/utils/next'
-import { ColorScheme, snippetToHtml } from '../lib/utils/syntax-highlighting'
-import { getUsedByCountWithFallback } from '../lib/utils/used-by-count'
-import { promiseAllProperties, mapObjectValues } from '../lib/utils/object'
-import { useColorScheme } from '../components/ColorSchemeContext'
-import { Hero } from '../components/landing-page/Hero'
-import { Support } from '../components/landing-page/Support'
-import { Testimonials } from '../components/landing-page/Testimonials'
-import { Features } from '../components/landing-page/Features'
-import { type CodeSnippets, HowItWorks, codeSnippets } from '../components/landing-page/HowItWorks'
-import { FAQ } from '../components/landing-page/FAQ'
-import { Tweets } from '../components/landing-page/Tweets'
-import { Playground } from '../components/landing-page/Playground'
-import { Container } from '../components/common/Container'
-import { buildExamplesTree } from '../lib/utils/build-example-tree'
+import type { InferGetStaticPropsType } from "next";
+import React, { useEffect, useState } from "react";
+import { allDocs, allExamples, allPosts } from "wesjet/jetpack";
+
+import { useColorScheme } from "../components/ColorSchemeContext";
+import { Container } from "../components/common/Container";
+import { FAQ } from "../components/landing-page/FAQ";
+import { Features } from "../components/landing-page/Features";
+import { Hero } from "../components/landing-page/Hero";
+import {
+  type CodeSnippets,
+  codeSnippets,
+  HowItWorks,
+} from "../components/landing-page/HowItWorks";
+import { Playground } from "../components/landing-page/Playground";
+import { Support } from "../components/landing-page/Support";
+import { Testimonials } from "../components/landing-page/Testimonials";
+import { Tweets } from "../components/landing-page/Tweets";
+import { buildDocsTree } from "../lib/utils/build-doc-tree";
+import { buildExamplesTree } from "../lib/utils/build-example-tree";
+import { defineStaticProps } from "../lib/utils/next";
+import { mapObjectValues,promiseAllProperties } from "../lib/utils/object";
+import type { ColorScheme} from "../lib/utils/syntax-highlighting";
+import { snippetToHtml } from "../lib/utils/syntax-highlighting";
+import { getUsedByCountWithFallback } from "../lib/utils/used-by-count";
 
 export const getStaticProps = defineStaticProps(async (_context) => {
-  console.time('getStaticProps /')
+  console.time("getStaticProps /");
 
   const { preprocessedCodeSnippets, usedByCount } = await promiseAllProperties({
     preprocessedCodeSnippets: promiseAllProperties<PreprocessedCodeSnippets>({
-      light: htmlForCodeSnippets('light'),
-      dark: htmlForCodeSnippets('dark'),
+      light: htmlForCodeSnippets("light"),
+      dark: htmlForCodeSnippets("dark"),
     }),
     usedByCount: getUsedByCountWithFallback(),
-  })
-  const docs = buildDocsTree(allDocs)
-  const examples = buildExamplesTree(allExamples)
-  const posts = allPosts
+  });
+  const docs = buildDocsTree(allDocs);
+  const examples = buildExamplesTree(allExamples);
+  const posts = allPosts;
 
-  console.timeEnd('getStaticProps /')
+  console.timeEnd("getStaticProps /");
 
-  return { props: { preprocessedCodeSnippets, usedByCount, docs, examples, posts } }
-})
+  return {
+    props: { preprocessedCodeSnippets, usedByCount, docs, examples, posts },
+  };
+});
 
-const Page: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ preprocessedCodeSnippets, usedByCount }) => {
-  const preferredColorScheme = useColorScheme()
-  const [colorScheme, setColorScheme] = useState<'light' | 'dark'>('light')
+const Page: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  preprocessedCodeSnippets,
+  usedByCount,
+}) => {
+  const preferredColorScheme = useColorScheme();
+  const [colorScheme, setColorScheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
-    if (preferredColorScheme === 'system') {
-      setColorScheme(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+    if (preferredColorScheme === "system") {
+      setColorScheme(
+        window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light"
+      );
     } else {
-      setColorScheme(preferredColorScheme)
+      setColorScheme(preferredColorScheme);
     }
-  }, [preferredColorScheme])
+  }, [preferredColorScheme]);
 
   return (
     <Container>
@@ -60,22 +76,28 @@ const Page: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ prepro
       <FAQ />
       <Tweets />
     </Container>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
 
-export type PreprocessedCodeSnippets = Record<ColorScheme, CodeSnippets>
+export type PreprocessedCodeSnippets = Record<ColorScheme, CodeSnippets>;
 
-export const htmlForCodeSnippets = (colorScheme: ColorScheme): Promise<CodeSnippets> =>
+export const htmlForCodeSnippets = (
+  colorScheme: ColorScheme
+): Promise<CodeSnippets> =>
   promiseAllProperties(
     mapObjectValues(
       codeSnippets,
       (_key, snippets) =>
         Promise.all(
           snippets.map(({ content, file, lines }) =>
-            snippetToHtml(content, colorScheme).then((_) => ({ file, lines, content: _ })),
-          ),
-        ) as any, // TODO: fix type
-    ),
-  )
+            snippetToHtml(content, colorScheme).then((_) => ({
+              file,
+              lines,
+              content: _,
+            }))
+          )
+        ) as any // TODO: fix type
+    )
+  );

@@ -1,5 +1,6 @@
-import { FC, ReactNode } from "react";
 import classnames from "classnames";
+import type { FC, ReactNode } from "react";
+
 import { Icon } from "../common/Icon";
 
 export const Checklist: FC<{ items: ReactNode[]; className?: string }> = ({

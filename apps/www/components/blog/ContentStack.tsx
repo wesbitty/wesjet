@@ -1,4 +1,5 @@
-import { Icon, IconName } from "../common/Icon";
+import type { IconName } from "../common/Icon";
+import { Icon } from "../common/Icon";
 
 /* ----- Types ----- */
 

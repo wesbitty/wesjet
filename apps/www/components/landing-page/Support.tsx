@@ -1,7 +1,7 @@
+import * as Tooltip from "@radix-ui/react-tooltip";
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
-import * as Tooltip from "@radix-ui/react-tooltip";
+import type { FC } from "react";
 
 const content = {
   logosPath: "/images/logos/",

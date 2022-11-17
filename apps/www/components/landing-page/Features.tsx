@@ -1,8 +1,10 @@
 import Image from "next/image";
-import { FC } from "react";
+import type { FC } from "react";
+
+import type { IconName } from "../common/Icon";
+import { Icon } from "../common/Icon";
 import { Checklist } from "./Checklist";
 import { Heading } from "./Heading";
-import { Icon, IconName } from "../common/Icon";
 import { Paragraph } from "./Paragraph";
 
 const content = {

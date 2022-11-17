@@ -17,7 +17,7 @@
     "check:prettier": "prettier -c .",
     "check:eslint": "eslint cli --ext .ts --max-warnings=0",
     "format:prettier": "prettier -w .",
-    "format:eslint": "eslint . --ext js,jsx,ts,tsx -c ./.eslintrc.json",
+    "format:eslint": "eslint . --ext js,jsx,ts,tsx -c ./.eslintrc.json --fix",
     "build:cli": "tsc -b tsconfig.build.json",
     "build:app.etc": "npm run build -w www && npm run build -w wesjet-starter",
     "rm:cli": "bash -c 'rm -rf cli/*/dist cli/*/.wesjet cli/@wesjet/*/dist'",

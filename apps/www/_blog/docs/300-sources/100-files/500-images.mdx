@@ -29,11 +29,11 @@ For example, consider a post model with an image field:
 
 ```js
 defineDocumentType(() => ({
-  name: 'Post',
+  name: "Post",
   fields: {
     image: { type: string },
   },
-}))
+}));
 ```
 
 In the frontmatter of your content files, you'd store a reference to an image:
@@ -80,7 +80,7 @@ Then you'd add a _computed_ field like `image` that would do the processing.
 
 ```js
 defineDocumentType(() => ({
-  name: 'Post',
+  name: "Post",
   computedFields: {
     image: {
       type: string,
@@ -89,16 +89,16 @@ defineDocumentType(() => ({
       },
     },
   },
-}))
+}));
 ```
 
 Note that if you don't also specify the `imageSrc` as a field, you'll run into a warning from Contentlayer. To avoid that, you can tell Contentlayer to ignore extra fields.
 
 ```js
 export default makeSource({
-  onExtraFieldData: 'ignore',
+  onExtraFieldData: "ignore",
   // ...
-})
+});
 ```
 
 ### Processing after the Contentlayer Build

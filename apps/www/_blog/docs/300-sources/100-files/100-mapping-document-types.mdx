@@ -17,17 +17,17 @@ Consider the following schema (document type) definition:
 
 ```js
 defineDocumentType(() => ({
-  name: 'Post',
+  name: "Post",
   filePathPattern: `posts/**/*.mdx`,
   // ...
-}))
+}));
 ```
 
 The name of this definition is `Post`. Therefore, in the content file, you can specify the `Post` type directly, like this (in markdown):
 
 ```yaml
 ---
-title: '...'
+title: "..."
 type: Post
 # ...
 ---
@@ -41,16 +41,16 @@ Say you have pages and posts, but you want them both to live in the same directo
 
 ```js
 const Page = defineDocumentType(() => ({
-  name: 'Page',
+  name: "Page",
   filePathPattern: `**/*.md`,
   // ...
-}))
+}));
 
 const Post = defineDocumentType(() => ({
-  name: 'Post',
+  name: "Post",
   filePathPattern: `**/*.md`,
   // ...
-}))
+}));
 ```
 
 In this case, regardless of where you put a page or a post, you'd want to specify the type explicitly.
@@ -86,10 +86,10 @@ If this is our definition:
 
 ```js
 const Post = defineDocumentType(() => ({
-  name: 'Post',
+  name: "Post",
   filePathPattern: `posts/**/*.md`,
   // ...
-}))
+}));
 ```
 
 Then Contentlayer's interpretation would look like this:

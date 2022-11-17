@@ -1,8 +1,9 @@
-import { FC } from "react";
-import * as Tabs from "@radix-ui/react-tabs";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
-import { Card } from "../common/Card";
+import * as Tabs from "@radix-ui/react-tabs";
 import { useRouter } from "next/router";
+import type { FC } from "react";
+
+import { Card } from "../common/Card";
 
 export type CodeSnippet = { file: string; content: string; lines: number };
 

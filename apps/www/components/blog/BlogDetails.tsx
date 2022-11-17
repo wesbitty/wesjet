@@ -1,8 +1,9 @@
-import { Post } from "wesjet/jetpack";
-import { FC } from "react";
-import Link from "next/link";
-import { Icon } from "../../components/common/Icon";
 import { format } from "date-fns";
+import Link from "next/link";
+import type { FC } from "react";
+import type { Post } from "wesjet/jetpack";
+
+import { Icon } from "../../components/common/Icon";
 
 export const BlogDetails: FC<{ post: Post; className?: string }> = ({
   post,

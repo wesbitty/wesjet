@@ -11,14 +11,14 @@ Document type definitions are used within the options for [`makeSource`](/docs/r
 
 ```js
 const Doc = defineDocumentType(() => ({
-  name: 'Doc',
-  filePathPattern: '**/*.md',
+  name: "Doc",
+  filePathPattern: "**/*.md",
   fields: {
     title: {
-      type: 'string',
+      type: "string",
     },
   },
-}))
+}));
 ```
 
 ## Options
@@ -53,7 +53,7 @@ They follow a similar pattern to `fields` (see above), except that each field ta
 Here's an example that introspects the document for its path and applies a `url_path` property to the document.
 
 ```js
-import { urlFromFilePath } from '../utils'
+import { urlFromFilePath } from "../utils";
 
 export const Page = defineDocumentType(() => ({
   // ...
@@ -62,11 +62,11 @@ export const Page = defineDocumentType(() => ({
   },
   computedFields: {
     url_path: {
-      type: 'string',
-      resolve: (doc) => doc._raw.flattenedPath.replace(/pages\/?/, ''),
+      type: "string",
+      resolve: (doc) => doc._raw.flattenedPath.replace(/pages\/?/, ""),
     },
   },
-}))
+}));
 ```
 
 ### `filePathPattern`
@@ -81,14 +81,14 @@ This would recursively retrieve all files with a `.md` extension in the `content
 
 ```js
 const Doc = defineDocumentType(() => ({
-  filePathPattern: '**/*.md',
+  filePathPattern: "**/*.md",
   // ...
-}))
+}));
 
 export default makeSource({
-  contentDirPath: 'content',
+  contentDirPath: "content",
   documentTypes: [Doc],
-})
+});
 ```
 
 ### `contentType` (default: `markdown`)
@@ -111,9 +111,9 @@ In this example, Contentlayer would export a `globalConfig` data object with the
 
 ```js
 defineDocumentType(() => ({
-  name: 'GlobalConfig',
+  name: "GlobalConfig",
   filePathPattern: `config/global.yaml`,
   isSingleton: true,
   // ...
-}))
+}));
 ```

@@ -19,20 +19,20 @@ The exported types will look something like this:
 
 ```ts
 export type SEO = {
-  type: 'SEO'
-  title: string
-  description: string | undefined
-}
+  type: "SEO";
+  title: string;
+  description: string | undefined;
+};
 
 export type Page = {
-  _id: string
-  _raw: Local.RawDocumentData
-  type: 'Page'
-  title: string
-  description: string | undefined
-  seo: SEO | undefined
-  body: Markdown
-}
+  _id: string;
+  _raw: Local.RawDocumentData;
+  type: "Page";
+  title: string;
+  description: string | undefined;
+  seo: SEO | undefined;
+  body: Markdown;
+};
 ```
 
 ## Provided Types

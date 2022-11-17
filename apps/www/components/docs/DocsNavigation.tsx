@@ -1,11 +1,12 @@
-import { FC, useState, useEffect } from "react";
+import classNames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import classNames from "classnames";
-import { TreeNode } from "types/TreeNode";
-import React from "react";
-import { Label } from "../common/Label";
+import type { FC} from "react";
+import React, { useEffect,useState } from "react";
+import type { TreeNode } from "types/TreeNode";
+
 import { Icon } from "../common/Icon";
+import { Label } from "../common/Label";
 
 const NavLink: FC<{
   title: string;

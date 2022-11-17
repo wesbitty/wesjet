@@ -1,8 +1,10 @@
-import { FC, useState } from "react";
 import Link from "next/link";
-import { User } from "../common/User";
+import type { FC} from "react";
+import { useState } from "react";
+
 import { Button } from "../common/Button";
 import { Card } from "../common/Card";
+import { User } from "../common/User";
 
 export type TweetData = {
   text: string;

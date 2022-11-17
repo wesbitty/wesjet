@@ -1,4 +1,4 @@
-import { Post, DocumentTypes } from "./types";
+import type { DocumentTypes,Post } from "./types";
 
 export type * from "./types";
 

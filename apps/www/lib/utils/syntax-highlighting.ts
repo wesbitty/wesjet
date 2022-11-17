@@ -1,10 +1,11 @@
+import { getHighlighter } from "shiki";
+import type {
+  createShikiHighlighter} from "shiki-twoslash";
 import {
+  type UserConfigSettings,
   renderCodeToHTML,
   runTwoSlash,
-  createShikiHighlighter,
-  type UserConfigSettings,
 } from "shiki-twoslash";
-import { getHighlighter } from "shiki";
 type Highlighter = Awaited<ReturnType<typeof createShikiHighlighter>>;
 
 const highlighterMap = new Map<ColorScheme, Highlighter>();

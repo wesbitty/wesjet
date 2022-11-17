@@ -83,10 +83,10 @@ The document type manifest is responsible for importing and exporting document _
 Here's an example of a `Page` document type with two documents in the collection:
 
 ```js
-import indexMdx from './Page/index.mdx.json'
-import aboutMdx from './Page/about.mdx.json'
+import indexMdx from "./Page/index.mdx.json";
+import aboutMdx from "./Page/about.mdx.json";
 
-export const allPages = [indexMdx, aboutMdx]
+export const allPages = [indexMdx, aboutMdx];
 ```
 
 ### Manifest Exports
@@ -108,12 +108,12 @@ It it colocated with the collection manifest in the `.contentlayer/generated` di
 Continuing the `Page` example, a simple version of the file may look like this:
 
 ```js
-export { isType } from 'contentlayer/client'
+export { isType } from "contentlayer/client";
 
-export * from './allPages.mjs'
-import { allPages } from './allPages.mjs'
+export * from "./allPages.mjs";
+import { allPages } from "./allPages.mjs";
 
-export const allDocuments = [...allPages]
+export const allDocuments = [...allPages];
 ```
 
 ### `isType` Utility
@@ -125,15 +125,15 @@ This is most frequently used to determine if a particular document is of a parti
 Rather than using a filter like this (where you need to know the `type` field name):
 
 ```js
-allDocuments.filter((doc) => ['Page', 'Post'].includes(doc.type))
+allDocuments.filter((doc) => ["Page", "Post"].includes(doc.type));
 ```
 
 You can do this instead:
 
 ```js
-import { isType, allDocuments } from 'contentlayer/generated'
+import { isType, allDocuments } from "contentlayer/generated";
 
-allDocuments.filter(isType(['Page', 'Post']))
+allDocuments.filter(isType(["Page", "Post"]));
 ```
 
 ## Nested Objects

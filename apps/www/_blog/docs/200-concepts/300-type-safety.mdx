@@ -17,9 +17,9 @@ TypeScript is tool to help you write JavaScript better, stronger, and faster by 
 JavaScript does what is called _type coercion_. This means when your code runs, it will be converted so as to avoid failures. Consider the following:
 
 ```js
-const a = '1'
-const b = 1
-const sum = a + b // => 11
+const a = "1";
+const b = 1;
+const sum = a + b; // => 11
 ```
 
 Because JavaScript can't add a string and a number, it converts `b` into a string (`"1"`) and uses the plus operator as a string concatenation operator. Thus: `"1" + 1` becomes `"1" + "1"`.
@@ -27,9 +27,9 @@ Because JavaScript can't add a string and a number, it converts `b` into a strin
 With TypeScript, we can declare that `sum` should be a number.
 
 ```ts
-const a = '1'
-const b = 1
-const sum: number = a + b
+const a = "1";
+const b = 1;
+const sum: number = a + b;
 ```
 
 When we compile our code, we're then told we have a problem.
@@ -59,22 +59,24 @@ Because Contentlayer caches transformed content locally as JSON data, you can ha
 Consider this example:
 
 ```ts
-import { allPosts } from 'contentlayer/generated'
+import { allPosts } from "contentlayer/generated";
 
 export async function getStaticProps({ params }) {
-  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug)
-  return { props: { post } }
+  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
+  return { props: { post } };
 }
 ```
 
 This _seems_ like it should be fine, as you're bringing in content of a single type. But you can be absolutely sure by using TypeScript:
 
 ```ts
-import { allPosts, Post } from 'contentlayer/generated'
+import { allPosts, Post } from "contentlayer/generated";
 
 export async function getStaticProps({ params }) {
-  const post: Post = allPosts.find((post) => post._raw.flattenedPath === params.slug)
-  return { props: { post } }
+  const post: Post = allPosts.find(
+    (post) => post._raw.flattenedPath === params.slug
+  );
+  return { props: { post } };
 }
 ```
 

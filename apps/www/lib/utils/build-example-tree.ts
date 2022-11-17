@@ -1,6 +1,6 @@
 import { children } from "cheerio/lib/api/traversing";
-import { Example } from "wesjet/jetpack";
-import { TreeNode } from "types/TreeNode";
+import type { TreeNode } from "types/TreeNode";
+import type { Example } from "wesjet/jetpack";
 
 export const buildExamplesTree = (
   examples: Example[],

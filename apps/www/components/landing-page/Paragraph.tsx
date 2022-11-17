@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { FC, ReactNode } from "react";
+import type { FC, ReactNode } from "react";
 
 export const Paragraph: FC<{ children: ReactNode; className?: string }> = ({
   children,

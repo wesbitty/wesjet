@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
+import type { FC } from "react";
+
+import { Card } from "../common/Card";
 import { Icon } from "../common/Icon";
 import { User } from "../common/User";
-import { Card } from "../common/Card";
 
 const content = {
   tweet: {

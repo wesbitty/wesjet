@@ -1,9 +1,8 @@
-import { defineDocumentType } from "wesjet/maker";
-import type * as unified from "unified";
-import { toMarkdown } from "mdast-util-to-markdown";
 import { mdxToMarkdown } from "mdast-util-mdx";
-
+import { toMarkdown } from "mdast-util-to-markdown";
 import { bundleMDX } from "mdx-bundler";
+import type * as unified from "unified";
+import { defineDocumentType } from "wesjet/maker";
 
 // import { SEO } from '../nested/SEO'
 import { getLastEditedDate, urlFromFilePath } from "../utils";
