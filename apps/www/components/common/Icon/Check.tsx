@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { FC } from 'react'
 
 export const CheckIcon: FC = () => {
   return (
@@ -14,5 +14,5 @@ export const CheckIcon: FC = () => {
         clipRule="evenodd"
       />
     </svg>
-  );
-};
+  )
+}

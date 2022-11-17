@@ -1,26 +1,19 @@
-import * as ScrollArea from "@radix-ui/react-scroll-area";
-import * as Tabs from "@radix-ui/react-tabs";
-import { useRouter } from "next/router";
-import type { FC } from "react";
+import { FC } from 'react'
+import * as Tabs from '@radix-ui/react-tabs'
+import * as ScrollArea from '@radix-ui/react-scroll-area'
+import { Card } from '../common/Card'
+import { useRouter } from 'next/router'
 
-import { Card } from "../common/Card";
-
-export type CodeSnippet = { file: string; content: string; lines: number };
+export type CodeSnippet = { file: string; content: string; lines: number }
 
 export const CodeWindow: FC<{
-  snippets: readonly CodeSnippet[];
+  snippets: readonly CodeSnippet[]
 }> = ({ snippets }) => {
-  const router = useRouter();
+  const router = useRouter()
   return (
-    <Card
-      shadow
-      className={router.pathname.split("/")[1] == "blog" ? "mb-8" : "mb-0"}
-    >
+    <Card shadow className={router.pathname.split('/')[1] == 'blog' ? 'mb-8' : 'mb-0'}>
       <Tabs.Root defaultValue={snippets[0].file}>
-        <Tabs.List
-          aria-label="Select file to view"
-          className="flex flex-nowrap overflow-x-auto"
-        >
+        <Tabs.List aria-label="Select file to view" className="flex flex-nowrap overflow-x-auto">
           <div className="flex h-10 items-center space-x-1.5 border-r border-b border-gray-100 px-4 dark:border-gray-900">
             <span className="h-3 w-3 rounded-full bg-red-400 dark:bg-slate-600" />
             <span className="h-3 w-3 rounded-full bg-amber-400 dark:bg-slate-600" />
@@ -39,11 +32,7 @@ export const CodeWindow: FC<{
         </Tabs.List>
         <div className="max-h-[600px] overflow-y-scroll">
           {snippets.map(({ file, content, lines }, index) => (
-            <Tabs.Content
-              key={index}
-              value={file}
-              className="flex overflow-y-hidden focus:outline-none"
-            >
+            <Tabs.Content key={index} value={file} className="flex overflow-y-hidden focus:outline-none">
               <div className="w-8 shrink-0 grow-0 bg-white pt-[19px] pb-3 text-right font-mono text-sm leading-none text-slate-300 dark:bg-[#0d1116] dark:text-slate-700">
                 {[...new Array(lines)].map((v, index) => (
                   <div key={index} className="h-[20px] px-2">
@@ -55,9 +44,7 @@ export const CodeWindow: FC<{
                 <ScrollArea.Viewport>
                   <div
                     className={`not-prose text-[13] ${
-                      router.pathname.split("/")[1] == "blog"
-                        ? "-mt-[30px]"
-                        : "-mt-[20px]"
+                      router.pathname.split('/')[1] == 'blog' ? '-mt-[30px]' : '-mt-[20px]'
                     } -mb-[40px]`}
                     dangerouslySetInnerHTML={{ __html: content }}
                   />
@@ -72,5 +59,5 @@ export const CodeWindow: FC<{
         </div>
       </Tabs.Root>
     </Card>
-  );
-};
+  )
+}

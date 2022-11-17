@@ -1,19 +1,19 @@
 ---
 title: Getting Started
-excerpt: Get comfortable with the basics of Contentlayer by showing how we can quickly build a blog site using Next.js.
+excerpt: Get comfortable with the basics of Wesjet by showing how we can quickly build a blog site using Next.js.
 ---
 
-This tutorial will get you comfortable with the basics of Contentlayer by walking through how to to build a simple blog site using Next.js.
+This tutorial will get you comfortable with the basics of Wesjet by walking through how to to build a simple blog site using Next.js.
 
 The blog will include a list of posts with a title, body, and date, rendered with the most recent on top. And each post will have its own page.
 
 <div className="mt-8 grid gap-6 md:grid-cols-2">
-  <Card title="Try it Now" icon="gitpod" link={{url: 'http://gitpod.io/#https://github.com/wesbitty/wesjetpkg/tree/master/examples/wesjet-starter', label: 'Try in Gitpod'}}>
+  <Card title="Try it Now" icon="gitpod" link={{url: 'http://gitpod.io/#https://github.com/wesbitty/nextjs-with-wesjet', label: 'Try in Gitpod'}}>
     If you'd like to dive right in and start playing with Wesjet, you can open the project in Gitpod.
 
   </Card>
-  <Card title="Example Project" icon="github" link={{url: 'https://github.com/wesbitty/wesjetpkg/tree/master/examples/wesjet-starter', label: 'See example'}}>
-    You can find a working version of this tutorial in [this state](https://github.com/wesbitty/wesjetpkg/tree/master/examples/wesjet-starter/tree/bca4b7884f5cad8963e631a2f24a19200c106495) of the example project.
+  <Card title="Example Project" icon="github" link={{url: 'https://github.com/wesbitty/nextjs-with-wesjet', label: 'See example'}}>
+    You can find a working version of this tutorial in [this state](https://github.com/wesbitty/nextjs-with-wesjet/tree/bca4b7884f5cad8963e631a2f24a19200c106495) of the example project.
 
     See [the examples page](/examples) for a full list of examples.
 
@@ -29,13 +29,13 @@ Just to demonstrate how quickly we can start working, let's start with a new bla
 Create a new Next.js project.
 
 ```txt
-npx create-next-app wesjet-starter-example
+npx create-next-app Wesjet-example
 ```
 
-That command will place the project in a `wesjet-starter-example` directory. Change into that directory.
+That command will place the project in a `Wesjet-example` directory. Change into that directory.
 
 ```txt
-cd wesjet-starter-example
+cd Wesjet-example
 ```
 
 ### Add Tailwind
@@ -57,9 +57,9 @@ Create a new file called `next.config.mjs` in the root of your project, and add 
 ```js
 // next.config.mjs
 
-import { withWesjet } from "wesjet-nextjs-plugin";
+import { withWesjet } from 'wesjet-nextjs-plugin'
 
-export default withWesjet({});
+export default withWesjet({})
 ```
 
 Then add the following lines to your `tsconfig.json` or `jsconfig.json` file:
@@ -89,42 +89,42 @@ Because we're building a simple blog site, let's define a single document type c
 ```js
 // wesjet.config.js
 
-import { defineDocumentType, makeSource } from "wesjet/maker";
+import { defineDocumentType, makeSource } from 'wesjet/maker'
 
 export const Post = defineDocumentType(() => ({
-  name: "Post",
+  name: 'Post',
   filePathPattern: `**/*.md`,
   fields: {
     title: {
-      type: "string",
-      description: "The title of the post",
+      type: 'string',
+      description: 'The title of the post',
       required: true,
     },
     date: {
-      type: "date",
-      description: "The date of the post",
+      type: 'date',
+      description: 'The date of the post',
       required: true,
     },
   },
   computedFields: {
     url: {
-      type: "string",
+      type: 'string',
       resolve: (post) => `/posts/${post._raw.flattenedPath}`,
     },
   },
-}));
+}))
 
 export default makeSource({
-  contentDirPath: "posts",
+  contentDirPath: 'posts',
   documentTypes: [Post],
-});
+})
 ```
 
-This configuration specifies a single document type called `Post`. These documents are expected to be `.md` files that live within a `posts` directory in your project. And data objects compiled from these files will have the following properties:
+This configuration specifies a single document type called `Post`. These documents are expected to be `.md` files that live within a `posts` directory in your project. And data objects generated from these files will have the following properties:
 
 - `title`: String pulled from the file's frontmatter.
 - `date`: JavaScript `Date` object, pulled from the file's frontmatter.
-- `body`: An object that contains the `raw` content from the markdown file and the converted `html` string. (This is built into Contentlayer by default and does not have to be defined.)
+- `body`: An object that contains the `raw` content from the markdown file and the converted `html` string. (This is built into Wesjet by default and does not have to be defined.)
 - `url`: A string that takes the name of the file (without the extension) and prepends `/posts/` to it, thus defining that path at which that content will be available on your site. (More on this soon.)
 
 ## 4. Add Post Content
@@ -180,23 +180,23 @@ Replace the default home page (`pages/index.js`) with a listing of all the posts
 ```jsx
 // pages/index.js
 
-import Head from "next/head";
-import Link from "next/link";
-import { compareDesc, format, parseISO } from "date-fns";
-import { allPosts } from "wesjet/jetpack";
+import Head from 'next/head'
+import Link from 'next/link'
+import { compareDesc, format, parseISO } from 'date-fns'
+import { allPosts } from 'wesjet/jetpack'
 
 export async function getStaticProps() {
   const posts = allPosts.sort((a, b) => {
-    return compareDesc(new Date(a.date), new Date(b.date));
-  });
-  return { props: { posts } };
+    return compareDesc(new Date(a.date), new Date(b.date))
+  })
+  return { props: { posts } }
 }
 
 function PostCard(post) {
   return (
     <div className="mb-6">
       <time dateTime={post.date} className="block text-sm text-slate-600">
-        {format(parseISO(post.date), "LLLL d, yyyy")}
+        {format(parseISO(post.date), 'LLLL d, yyyy')}
       </time>
       <h2 className="text-lg">
         <Link href={post.url}>
@@ -204,23 +204,23 @@ function PostCard(post) {
         </Link>
       </h2>
     </div>
-  );
+  )
 }
 
 export default function Home({ posts }) {
   return (
     <div className="mx-auto max-w-2xl py-16 text-center">
       <Head>
-        <title>Contentlayer Blog Example</title>
+        <title>Wesjet Blog Example</title>
       </Head>
 
-      <h1 className="mb-8 text-3xl font-bold">Contentlayer Blog Example</h1>
+      <h1 className="mb-8 text-3xl font-bold">Wesjet Blog Example</h1>
 
       {posts.map((post, idx) => (
         <PostCard key={idx} {...post} />
       ))}
     </div>
-  );
+  )
 }
 ```
 
@@ -249,26 +249,26 @@ Create the page at `pages/posts/[slug].js` and add the following code.
 ```jsx
 // pages/posts/[slug].js
 
-import Head from "next/head";
-import Link from "next/link";
-import { format, parseISO } from "date-fns";
-import { allPosts } from "wesjet/jetpack";
+import Head from 'next/head'
+import Link from 'next/link'
+import { format, parseISO } from 'date-fns'
+import { allPosts } from 'wesjet/jetpack'
 
 export async function getStaticPaths() {
-  const paths = allPosts.map((post) => post.url);
+  const paths = allPosts.map((post) => post.url)
   return {
     paths,
     fallback: false,
-  };
+  }
 }
 
 export async function getStaticProps({ params }) {
-  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
+  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug)
   return {
     props: {
       post,
     },
-  };
+  }
 }
 
 const PostLayout = ({ post }) => {
@@ -280,27 +280,22 @@ const PostLayout = ({ post }) => {
       <article className="mx-auto max-w-2xl py-16">
         <div className="mb-6 text-center">
           <Link href="/">
-            <a className="text-center text-sm font-bold uppercase text-blue-700">
-              Home
-            </a>
+            <a className="text-center text-sm font-bold uppercase text-blue-700">Home</a>
           </Link>
         </div>
         <div className="mb-6 text-center">
           <h1 className="mb-1 text-3xl font-bold">{post.title}</h1>
           <time dateTime={post.date} className="text-sm text-slate-600">
-            {format(parseISO(post.date), "LLLL d, yyyy")}
+            {format(parseISO(post.date), 'LLLL d, yyyy')}
           </time>
         </div>
-        <div
-          className="cl-post-body"
-          dangerouslySetInnerHTML={{ __html: post.body.html }}
-        />
+        <div className="cl-post-body" dangerouslySetInnerHTML={{ __html: post.body.html }} />
       </article>
     </>
-  );
-};
+  )
+}
 
-export default PostLayout;
+export default PostLayout
 ```
 
 Notice again that we're importing data from `wesjet/jetpack`. This is the beauty of Wesjet. It has already loaded and shaped our date and keeps the logic in `getStaticPaths()` and `getStaticProps()` nice and simple.
@@ -313,9 +308,9 @@ Now clicking on a post link from the home page should lead you to a working post
 
 You now have a simple blog site with Next.js and Wesjet! 🎉
 
-This is just the beginning. Now you can dig in and add all the bells and whistles necessary to build a site with great content using Contentlayer. Here are a few suggestions:
+This is just the beginning. Now you can dig in and add all the bells and whistles necessary to build a site with great content using Wesjet. Here are a few suggestions:
 
-- Jump into [the conceptual guides](/docs/concepts) to learn more about [how Contentlayer works](/docs/concepts/how-contentlayer-works).
+- Jump into [the conceptual guides](/docs/concepts) to learn more about [how Wesjet works](/docs/concepts/how-Wesjet-works).
 - [Join our Discord community](https://discord.gg/rytFErsARm) to ask questions, stay up to date, and share your work.
-- Check out [the examples](/examples) for inspiration on what you can do with Contentlayer.
-- Explore [local file source guides](/docs/sources/files) for learning about specific techniques.
+- Check out [the examples](/examples) for inspiration on what you can do with Wesjet.
+- Explore [local file source guides](/docs/maker/files) for learning about specific techniques.

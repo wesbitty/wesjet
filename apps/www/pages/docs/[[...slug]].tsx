@@ -1,70 +1,56 @@
-import * as ScrollArea from "@radix-ui/react-scroll-area";
-import type { InferGetStaticPropsType } from "next";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import type { FC } from "react";
-import { allDocs } from "wesjet/jetpack";
+import type { InferGetStaticPropsType } from 'next'
 // TODO remove eslint-disable when fixed https://github.com/import-js/eslint-plugin-import/issues/1810
 // eslint-disable-next-line import/no-unresolved
-import { useLiveReload, useMDXComponent } from "wesjet-nextjs-plugin/hooks";
-
-import { Callout } from "../../components/common/Callout";
-import { Card as ChildCard } from "../../components/common/Card";
-import { ChevronLink } from "../../components/common/ChevronLink";
-import { Container } from "../../components/common/Container";
-import { H2, H3, H4 } from "../../components/common/Headings";
-import { Label } from "../../components/common/Label";
-import { Link } from "../../components/common/Link";
-import { PageNavigation } from "../../components/common/PageNavigation";
-import { DocsCard as Card } from "../../components/docs/DocsCard";
-import { DocsFooter } from "../../components/docs/DocsFooter";
-import { DocsHeader } from "../../components/docs/DocsHeader";
-import { DocsNavigation } from "../../components/docs/DocsNavigation";
-import {
-  OptionDescription,
-  OptionsTable,
-  OptionTitle,
-} from "../../components/docs/OptionsTable";
-import { buildDocsTree } from "../../lib/utils/build-doc-tree";
-import { defineStaticProps, toParams } from "../../lib/utils/next";
+import { useLiveReload, useMDXComponent } from 'wesjet-nextjs-plugin/hooks'
+import type { FC } from 'react'
+import { allDocs } from 'wesjet/jetpack'
+import { Container } from '../../components/common/Container'
+import { defineStaticProps, toParams } from '../../utils/next'
+import { DocsNavigation } from '../../components/docs/DocsNavigation'
+import { Callout } from '../../components/common/Callout'
+import { DocsCard as Card } from '../../components/docs/DocsCard'
+import { Card as ChildCard } from '../../components/common/Card'
+import { Link } from '../../components/common/Link'
+import Image from 'next/image'
+import { DocsHeader } from '../../components/docs/DocsHeader'
+import { ChevronLink } from '../../components/common/ChevronLink'
+import { Label } from '../../components/common/Label'
+import { DocsFooter } from '../../components/docs/DocsFooter'
+import { PageNavigation } from '../../components/common/PageNavigation'
+import { buildDocsTree } from '../../utils/build-docs-tree'
+import { H2, H3, H4 } from '../../components/common/Headings'
+import { OptionsTable, OptionTitle, OptionDescription } from '../../components/docs/OptionsTable'
+import { useRouter } from 'next/router'
+import * as ScrollArea from '@radix-ui/react-scroll-area'
 
 export const getStaticPaths = async () => {
-  const paths = allDocs
-    .map((_) => _.pathSegments.map((_: PathSegment) => _.pathName).join("/"))
-    .map(toParams);
-  return { paths, fallback: false };
-};
+  const paths = allDocs.map((_) => _.pathSegments.map((_: PathSegment) => _.pathName).join('/')).map(toParams)
+  return { paths, fallback: false }
+}
 
 export const getStaticProps = defineStaticProps(async (context) => {
-  const params = context.params as any;
-  const pagePath = params.slug?.join("/") ?? "";
-  const doc = allDocs.find(
-    (_) =>
-      _.pathSegments.map((_: PathSegment) => _.pathName).join("/") === pagePath
-  )!;
-  const slugs = params.slug ? ["", ...params.slug] : [];
-  let path = "";
-  const breadcrumbs: any = [];
+  const params = context.params as any
+  const pagePath = params.slug?.join('/') ?? ''
+  const doc = allDocs.find((_) => _.pathSegments.map((_: PathSegment) => _.pathName).join('/') === pagePath)!
+  let slugs = params.slug ? ['', ...params.slug] : []
+  let path = ''
+  let breadcrumbs: any = []
   for (const slug of slugs) {
-    path += path == "" ? slug : "/" + slug;
+    path += path == '' ? slug : '/' + slug
     const navTitle = allDocs.find(
-      (_) =>
-        _.pathSegments.map((_: PathSegment) => _.pathName).join("/") === path
-    )?.nav_title;
-    const title = allDocs.find(
-      (_) =>
-        _.pathSegments.map((_: PathSegment) => _.pathName).join("/") === path
-    )?.title;
-    breadcrumbs.push({ path: "/docs/" + path, slug, title: navTitle || title });
+      (_) => _.pathSegments.map((_: PathSegment) => _.pathName).join('/') === path,
+    )?.nav_title
+    const title = allDocs.find((_) => _.pathSegments.map((_: PathSegment) => _.pathName).join('/') === path)?.title
+    breadcrumbs.push({ path: '/docs/' + path, slug, title: navTitle || title })
   }
-  const tree = buildDocsTree(allDocs);
+  const tree = buildDocsTree(allDocs)
   const childrenTree = buildDocsTree(
     allDocs,
-    doc.pathSegments.map((_: PathSegment) => _.pathName)
-  );
+    doc.pathSegments.map((_: PathSegment) => _.pathName),
+  )
 
-  return { props: { doc, tree, breadcrumbs, childrenTree } };
-});
+  return { props: { doc, tree, breadcrumbs, childrenTree } }
+})
 
 const mdxComponents = {
   Callout,
@@ -80,23 +66,18 @@ const mdxComponents = {
   OptionsTable,
   OptionTitle,
   OptionDescription,
-};
+}
 
-const Page: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
-  doc,
-  tree,
-  breadcrumbs,
-  childrenTree,
-}) => {
-  const router = useRouter();
-  useLiveReload();
-  const MDXContent = useMDXComponent(doc.body.code || "");
+const Page: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ doc, tree, breadcrumbs, childrenTree }) => {
+  const router = useRouter()
+  useLiveReload()
+  const MDXContent = useMDXComponent(doc.body.code || '')
 
   return (
-    <Container title={doc.title + " – Wesjet"} description={doc.excerpt}>
+    <Container title={doc.title + ' – Wesjet'} description={doc.excerpt}>
       <div className="relative mx-auto w-full max-w-screen-2xl lg:flex lg:items-start">
         <div
-          style={{ height: "calc(100vh - 64px)" }}
+          style={{ height: 'calc(100vh - 64px)' }}
           className="sticky top-16 hidden shrink-0 border-r border-gray-200 dark:border-gray-800 lg:block"
         >
           <div className="-ml-3 h-full overflow-y-scroll p-8 pl-16">
@@ -115,11 +96,7 @@ const Page: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
                 <hr />
                 <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
                   {childrenTree.map((card, index) => (
-                    <div
-                      key={index}
-                      onClick={() => router.push(card.urlPath)}
-                      className="cursor-pointer"
-                    >
+                    <div key={index} onClick={() => router.push(card.urlPath)} className="cursor-pointer">
                       <ChildCard className="h-full p-6 py-4 hover:border-violet-100 hover:bg-violet-50 dark:hover:border-violet-900/50 dark:hover:bg-violet-900/20">
                         <h3 className="mt-0 no-underline">{card.title}</h3>
                         {card.label && <Label text={card.label} />}
@@ -136,7 +113,7 @@ const Page: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
           </div>
         </div>
         <div
-          style={{ maxHeight: "calc(100vh - 128px)" }}
+          style={{ maxHeight: 'calc(100vh - 128px)' }}
           className="sticky top-32 hidden w-80 shrink-0 overflow-y-scroll p-8 pr-16 1.5xl:block"
         >
           <PageNavigation headings={doc.headings} />
@@ -145,7 +122,7 @@ const Page: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
         </div>
       </div>
     </Container>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

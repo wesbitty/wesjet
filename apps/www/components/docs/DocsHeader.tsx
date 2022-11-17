@@ -1,33 +1,31 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import type { FC} from "react";
-import { Fragment, useEffect,useState } from "react";
-import type { TreeNode } from "types/TreeNode";
+import { FC, Fragment, useState, useEffect } from 'react'
+import { TreeNode } from 'types/TreeNode'
+import Link from 'next/link'
+import { DocsNavigation } from './DocsNavigation'
+import { Icon } from '../common/Icon'
+import { useRouter } from 'next/router'
 
-import { Icon } from "../common/Icon";
-import { DocsNavigation } from "./DocsNavigation";
-
-export const DocsHeader: FC<{
-  tree: TreeNode[];
-  breadcrumbs: any[];
-  title: string;
-}> = ({ tree, breadcrumbs, title }) => {
-  const { asPath } = useRouter();
-  const [open, setOpen] = useState<boolean>(false);
-  const [top, setTop] = useState<boolean>(true);
+export const DocsHeader: FC<{ tree: TreeNode[]; breadcrumbs: any[]; title: string }> = ({
+  tree,
+  breadcrumbs,
+  title,
+}) => {
+  const { asPath } = useRouter()
+  const [open, setOpen] = useState<boolean>(false)
+  const [top, setTop] = useState<boolean>(true)
 
   useEffect(() => {
-    const handleScroll = () => setTop(window.scrollY <= 30);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setTop(window.scrollY <= 30)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll)
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   useEffect(() => {
-    setOpen(false);
-  }, [asPath]);
+    setOpen(false)
+  }, [asPath])
 
   return (
     <>
@@ -39,9 +37,7 @@ export const DocsHeader: FC<{
                 {index < breadcrumbs.length - 1 && (
                   <li className="mx-1 flex items-center space-x-2">
                     <Link href={path}>
-                      <a className="inline whitespace-nowrap hover:text-slate-600 dark:hover:text-slate-300">
-                        {title}
-                      </a>
+                      <a className="inline whitespace-nowrap hover:text-slate-600 dark:hover:text-slate-300">{title}</a>
                     </Link>
                     <span className="inline-block w-1.5 text-slate-400 dark:text-slate-500">
                       <Icon name="chevron-right" />
@@ -72,9 +68,7 @@ export const DocsHeader: FC<{
         <div className="fixed inset-0 z-50 h-screen bg-gray-950/10 pb-20 backdrop-blur-lg backdrop-filter dark:bg-gray-950/50">
           <div className="absolute left-0 h-full divide-y divide-gray-200 overflow-y-scroll border-l border-gray-200 bg-white p-4 dark:divide-gray-800 dark:border-gray-800 dark:bg-gray-950">
             <div className="flex items-center justify-between pb-2">
-              <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-200">
-                Documentation
-              </h2>
+              <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-200">Documentation</h2>
               <button
                 type="button"
                 aria-label="Close docs navigation"
@@ -94,7 +88,7 @@ export const DocsHeader: FC<{
       )}
       <div
         className={`fixed top-16 z-10 hidden h-16 w-full border-b border-gray-200 bg-white bg-opacity-90 backdrop-blur backdrop-filter transition-opacity duration-200 dark:border-gray-800 dark:bg-gray-950 lg:block ${
-          top ? "opacity-0" : "opacity-100"
+          top ? 'opacity-0' : 'opacity-100'
         }`}
       >
         <ul className="flex h-full items-center space-x-2 px-16 text-sm">
@@ -103,9 +97,7 @@ export const DocsHeader: FC<{
               {index < breadcrumbs.length - 1 && (
                 <li className="flex items-center space-x-2">
                   <Link href={path}>
-                    <a className="inline whitespace-nowrap hover:text-slate-600 dark:hover:text-slate-300">
-                      {title}
-                    </a>
+                    <a className="inline whitespace-nowrap hover:text-slate-600 dark:hover:text-slate-300">{title}</a>
                   </Link>
                   <span className="inline-block w-1.5 text-slate-400 dark:text-slate-500">
                     <Icon name="chevron-right" />
@@ -114,11 +106,9 @@ export const DocsHeader: FC<{
               )}
             </Fragment>
           ))}
-          <li className="hidden text-slate-800 dark:text-slate-200 lg:block">
-            {title}
-          </li>
+          <li className="hidden text-slate-800 dark:text-slate-200 lg:block">{title}</li>
         </ul>
       </div>
     </>
-  );
-};
+  )
+}

@@ -1,15 +1,13 @@
-import Image from "next/image";
-import type { FC} from "react";
-import { useState } from "react";
-
-import { Card } from "../common/Card";
-import { Icon } from "../common/Icon";
+import { FC, useState } from 'react'
+import Image from 'next/image'
+import { Card } from '../common/Card'
+import { Icon } from '../common/Icon'
 
 export const Video: FC<{
-  thumbnail: { url: string; alt: string; width?: number; height?: number };
-  videoId: string;
+  thumbnail: { url: string; alt: string; width?: number; height?: number }
+  videoId: string
 }> = ({ thumbnail, videoId }) => {
-  const [showVideo, setShowVideo] = useState(false);
+  const [showVideo, setShowVideo] = useState(false)
 
   return (
     <Card shadow className="w-full">
@@ -21,7 +19,7 @@ export const Video: FC<{
             src={`https://www.youtube-nocookie.com/embed/${videoId}?&autoplay=1`}
             loading="lazy"
             allowFullScreen
-            title="Intro to Contentlayer"
+            title="Intro to Wesjet"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
           />
         </div>
@@ -46,5 +44,5 @@ export const Video: FC<{
         </div>
       )}
     </Card>
-  );
-};
+  )
+}

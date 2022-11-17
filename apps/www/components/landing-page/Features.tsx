@@ -1,48 +1,38 @@
-import Image from "next/image";
-import type { FC } from "react";
-
-import type { IconName } from "../common/Icon";
-import { Icon } from "../common/Icon";
-import { Checklist } from "./Checklist";
-import { Heading } from "./Heading";
-import { Paragraph } from "./Paragraph";
+import Image from 'next/image'
+import { FC } from 'react'
+import { Checklist } from './Checklist'
+import { Heading } from './Heading'
+import { Icon, IconName } from '../common/Icon'
+import { Paragraph } from './Paragraph'
 
 const content = {
   blocks: [
     {
-      icon: "code-light" as IconName,
-      heading: "Just use JS/TS",
-      text: "No need to learn a new query language or complicated API docs to read. Import and manipulate your content as data directly with the JavaScript methods you know and love.",
+      icon: 'code-light' as IconName,
+      heading: 'Just use JS/TS',
+      text: 'No need to learn a new query language or complicated API docs to read. Import and manipulate your content as data directly with the JavaScript methods you know and love.',
       features: [
         <>
           Simply <code>import</code> your content as data
         </>,
-        "No new query language to learn",
-        "Works great with your site framework",
+        'No new query language to learn',
+        'Works great with your site framework',
       ],
     },
     {
-      icon: "check-circle" as IconName,
-      heading: "Built-in code confidence",
-      text: "Automatically-generated type definitions and configurable data validations ensure that your data is properly structured across your application.",
-      features: [
-        "Validates your content & frontmatter",
-        "Generates TypeScript types",
-        "Great error messages",
-      ],
+      icon: 'check-circle' as IconName,
+      heading: 'Built-in code confidence',
+      text: 'Compile type definitions and configurable data validations ensure that your data is properly structured across your application automatically.',
+      features: ['Validates your content & frontmatter', 'Compiles TypeScript types', 'Great error messages'],
     },
     {
-      icon: "lightning" as IconName,
-      heading: "Build. Faster.",
-      text: "Contentlayer + Next.js brings faster build times than Next.js alone or up against other frameworks, like Gatsby.",
-      features: [
-        "Incremental & parallel builds",
-        "Instant content live-reload",
-        "Scales to 100k of documents",
-      ],
+      icon: 'lightning' as IconName,
+      heading: 'Build. Faster.',
+      text: 'Wesjet + Next.js brings faster build times than Next.js alone or up against other frameworks, like Gatsby.',
+      features: ['Incremental & parallel builds', 'Instant content live-reload', 'Scales to 100k of documents'],
     },
   ],
-};
+}
 
 export const Features: FC = () => {
   return (
@@ -60,5 +50,5 @@ export const Features: FC = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}

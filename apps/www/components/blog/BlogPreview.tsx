@@ -1,15 +1,14 @@
-import { format } from "date-fns";
-import Image from "next/image";
-import Link from "next/link";
-import type { FC } from "react";
-import type { Post } from "wesjet/jetpack";
-
-import { BlogDetails } from "../../components/blog/BlogDetails";
-import { ChevronLink } from "../../components/common/ChevronLink";
-import { Icon } from "../../components/common/Icon";
-import { Heading } from "../../components/landing-page/Heading";
-import { Paragraph } from "../../components/landing-page/Paragraph";
-import { Card } from "../common/Card";
+import { Post } from 'wesjet/jetpack'
+import { BlogDetails } from '../../components/blog/BlogDetails'
+import { Heading } from '../../components/landing-page/Heading'
+import { Paragraph } from '../../components/landing-page/Paragraph'
+import { ChevronLink } from '../../components/common/ChevronLink'
+import { FC } from 'react'
+import Image from 'next/image'
+import { Card } from '../common/Card'
+import Link from 'next/link'
+import { Icon } from '../../components/common/Icon'
+import { format } from 'date-fns'
 
 export const BlogPreview: FC<{ post: Post }> = ({ post }) => {
   return (
@@ -37,7 +36,7 @@ export const BlogPreview: FC<{ post: Post }> = ({ post }) => {
             <span className="mt-1 mr-2 block w-3 shrink-0 text-violet-600 dark:text-violet-400">
               <Icon name="calendar" />
             </span>
-            <span>{format(new Date(post.date), "MMMM dd, yyyy")}</span>
+            <span>{format(new Date(post.date), 'MMMM dd, yyyy')}</span>
           </p>
           <p className="flex">
             <span className="mt-1 mr-2 block w-3 shrink-0 text-violet-600 dark:text-violet-400">
@@ -46,7 +45,7 @@ export const BlogPreview: FC<{ post: Post }> = ({ post }) => {
             <span>
               {post.authors.map(({ name }, index) => (
                 <span key={index}>
-                  {index > 0 && ", "}
+                  {index > 0 && ', '}
                   {name}
                 </span>
               ))}
@@ -54,8 +53,8 @@ export const BlogPreview: FC<{ post: Post }> = ({ post }) => {
           </p>
         </div>
         <Paragraph>{post.excerpt}</Paragraph>
-        <ChevronLink label="Read more" url={"/blog/" + post.slug} />
+        <ChevronLink label="Read more" url={'/blog/' + post.slug} />
       </div>
     </Card>
-  );
-};
+  )
+}

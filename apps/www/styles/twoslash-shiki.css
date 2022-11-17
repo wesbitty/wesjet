@@ -84,7 +84,7 @@ pre.twoslash data-lsp:hover::before {
   text-align: left;
   padding: 5px 8px;
   border-radius: 2px;
-  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, Courier New, monospace;
+  font-family: 'JetBrains Mono', Menlo, Monaco, Consolas, Courier New, monospace;
   /* font-size: 14px; */
   font-size: 13px;
   white-space: pre-wrap;
@@ -124,7 +124,7 @@ pre .code-container:hover a {
 
 pre code {
   /* font-size: 15px; */
-  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, Courier New, monospace;
+  font-family: 'JetBrains Mono', Menlo, Monaco, Consolas, Courier New, monospace;
   white-space: pre;
   -webkit-overflow-scrolling: touch;
 }
@@ -144,10 +144,10 @@ pre .query {
 }
 
 /* In order to have the 'popped out' style design and to not break the layout
-    /* we need to place a fake and un-selectable copy of the error which _isn't_ broken out
-    /* behind the actual error message.
-  
-    /* This sections keeps both of those two in in sync  */
+  /* we need to place a fake and un-selectable copy of the error which _isn't_ broken out
+  /* behind the actual error message.
+
+  /* This sections keeps both of those two in in sync  */
 
 pre .error,
 pre .error-behind {
@@ -220,7 +220,7 @@ pre .inline-completions ul.dropdown::before {
   position: absolute;
   top: -1.2rem;
   left: -3px;
-  content: " ";
+  content: ' ';
 }
 pre .inline-completions ul.dropdown li {
   overflow-x: hidden;
@@ -263,7 +263,7 @@ data-lsp {
 }
 .tag-container .twoslash-annotation {
   position: absolute;
-  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, Courier New, monospace;
+  font-family: 'JetBrains Mono', Menlo, Monaco, Consolas, Courier New, monospace;
   right: -10px;
   /** Default annotation text to 200px */
   width: 200px;

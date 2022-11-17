@@ -1,23 +1,21 @@
-import Image from "next/image";
-import Link from "next/link";
-import type { FC } from "react";
-
-import { Card } from "../common/Card";
-import { Icon } from "../common/Icon";
-import { User } from "../common/User";
+import Image from 'next/image'
+import Link from 'next/link'
+import { FC } from 'react'
+import { Icon } from '../common/Icon'
+import { User } from '../common/User'
+import { Card } from '../common/Card'
 
 const content = {
   tweet: {
-    text: "Having type-safe access to my content has been extremely helpful. Wesjet provides a nice abstraction between your Markdown files or CMS and your application.",
+    text: 'Having type-safe access to my content has been extremely helpful. Wesjet provides a nice abstraction between your Markdown files or CMS and your application.',
     person: {
-      name: "Lee Robinson",
-      bio: "Developer Relations at Vercel",
-      avatar:
-        "https://pbs.twimg.com/profile_images/1194080814688079872/6qhYKGKC_400x400.jpg",
+      name: 'Lee Robinson',
+      bio: 'Developer Relations at Vercel',
+      avatar: 'https://pbs.twimg.com/profile_images/1194080814688079872/6qhYKGKC_400x400.jpg',
     },
   },
   projects: {
-    heading: "Used in _ projects", // _ gets replaced with actual count
+    heading: 'Used in _ projects', // _ gets replaced with actual count
     cta: {
       label: (
         <span className="inline-flex items-center space-x-2">
@@ -27,28 +25,28 @@ const content = {
           </span>
         </span>
       ),
-      url: "https://github.com/contentlayerdev/contentlayer/network/dependents",
+      url: 'https://github.com/wesbitty/wesjet/network/dependents',
     },
     avatars: [
-      "https://avatars.githubusercontent.com/u/77748010?s=120&v=4",
-      "https://avatars.githubusercontent.com/u/76196237?s=120&v=4",
-      "https://avatars.githubusercontent.com/u/51397083?s=120&v=4",
-      "https://avatars.githubusercontent.com/u/12715704?s=120&v=4",
-      "https://avatars.githubusercontent.com/u/34954499?s=120&v=4",
-      "https://avatars.githubusercontent.com/u/16396161?s=120&v=4",
-      "https://avatars.githubusercontent.com/u/47774076?s=120&v=4",
-      "https://avatars.githubusercontent.com/u/84158781?s=120&v=4",
-      "https://avatars.githubusercontent.com/u/1552357?s=120&v=4",
-      "https://avatars.githubusercontent.com/u/49778014?s=120&v=4",
-      "https://avatars.githubusercontent.com/u/75498339?s=120&v=4",
-      "https://avatars.githubusercontent.com/u/441774?s=120&v=4",
-      "https://avatars.githubusercontent.com/u/10709345?s=120&v=4",
-      "https://avatars.githubusercontent.com/u/7504237?s=120&v=4",
-      "https://avatars.githubusercontent.com/u/65501165?s=120&v=4",
-      "https://avatars.githubusercontent.com/u/5955802?s=120&v=4",
+      'https://avatars.githubusercontent.com/u/77748010?s=120&v=4',
+      'https://avatars.githubusercontent.com/u/76196237?s=120&v=4',
+      'https://avatars.githubusercontent.com/u/51397083?s=120&v=4',
+      'https://avatars.githubusercontent.com/u/12715704?s=120&v=4',
+      'https://avatars.githubusercontent.com/u/34954499?s=120&v=4',
+      'https://avatars.githubusercontent.com/u/16396161?s=120&v=4',
+      'https://avatars.githubusercontent.com/u/47774076?s=120&v=4',
+      'https://avatars.githubusercontent.com/u/84158781?s=120&v=4',
+      'https://avatars.githubusercontent.com/u/1552357?s=120&v=4',
+      'https://avatars.githubusercontent.com/u/49778014?s=120&v=4',
+      'https://avatars.githubusercontent.com/u/75498339?s=120&v=4',
+      'https://avatars.githubusercontent.com/u/441774?s=120&v=4',
+      'https://avatars.githubusercontent.com/u/10709345?s=120&v=4',
+      'https://avatars.githubusercontent.com/u/7504237?s=120&v=4',
+      'https://avatars.githubusercontent.com/u/65501165?s=120&v=4',
+      'https://avatars.githubusercontent.com/u/5955802?s=120&v=4',
     ],
   },
-};
+}
 
 export const Testimonials: FC<{ usedByCount: number }> = ({ usedByCount }) => {
   return (
@@ -63,11 +61,7 @@ export const Testimonials: FC<{ usedByCount: number }> = ({ usedByCount }) => {
       </Card>
       <Card className="h-64 border-violet-100 md:h-auto">
         <Link href={content.projects.cta.url}>
-          <a
-            className="relative block h-full w-full"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a className="relative block h-full w-full" target="_blank" rel="noreferrer">
             <div className="absolute inset-x-3 -top-8 grid grid-cols-4 gap-x-3 sm:grid-cols-5 md:grid-cols-3 lg:grid-cols-4">
               {content.projects.avatars
                 .map((url) => ({ url, sort: Math.random() }))
@@ -76,24 +70,18 @@ export const Testimonials: FC<{ usedByCount: number }> = ({ usedByCount }) => {
                   <div
                     key={index}
                     className={`flex aspect-square items-center justify-center rounded-lg bg-gray-200 dark:bg-gray-800
-                ${index % 2 ? "mt-3" : ""}
+                ${index % 2 ? 'mt-3' : ''}
                 `}
                   >
                     <div className="relative h-8 w-8 overflow-hidden rounded-full">
-                      <Image
-                        src={url}
-                        alt={"Profile image"}
-                        layout="fill"
-                        placeholder="blur"
-                        blurDataURL={url}
-                      />
+                      <Image src={url} alt={'Profile image'} layout="fill" placeholder="blur" blurDataURL={url} />
                     </div>
                   </div>
                 ))}
             </div>
             <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-b from-violet-50/50 via-violet-50/95 to-violet-50 p-8 dark:from-gray-900/30 dark:via-gray-900/95 dark:to-gray-900/100 lg:p-16">
               <p className="mb-2 text-center text-xl font-semibold text-violet-600 dark:text-violet-500">
-                {content.projects.heading.replace("_", usedByCount.toString())}
+                {content.projects.heading.replace('_', usedByCount.toString())}
               </p>
               <Link href={content.projects.cta.url}>
                 <p className="text-center">{content.projects.cta.label}</p>
@@ -103,5 +91,5 @@ export const Testimonials: FC<{ usedByCount: number }> = ({ usedByCount }) => {
         </Link>
       </Card>
     </div>
-  );
-};
+  )
+}

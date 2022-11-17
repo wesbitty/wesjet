@@ -1,37 +1,37 @@
 ---
-title: Contentlayer CLI
+title: Wesjet Cli
 nav_title: CLI
-excerpt: Working with Contentlayer on the command line.
+excerpt: Working with Wesjet on the command line.
 ---
 
-The Contentlayer CLI enables you to transform you content into data.
+The Wesjet CLI enables you to transform you content into data.
 
 ## Usage
 
 ```txt
-contentlayer <command> [options]
+wesjet <command> [options]
 ```
 
-To get a list of all commands, you can run `contentlayer` with the `--help` flag:
+To get a list of all commands, you can run `wesjet` with the `--help` flag:
 
 ```txt
-contentlayer --help
+wesjet --help
 ```
 
 Which will produce an output that looks like this:
 
 ```txt
-━━━ Contentlayer CLI - 0.0.34 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━ Wesjet CLI - 0.0.2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  $ contentlayer <command>
+  $ wesjet <command>
 
 ━━━ General commands ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  contentlayer build [-c,--config #0] [--clearCache] [--verbose]
+  wesjet build [-c,--config #0] [--clearCache] [--verbose]
     Transforms your content into static data
 
-  contentlayer dev [-c,--config #0] [--clearCache] [--verbose]
-    Same as "contentlayer build" but with watch mode
+  wesjet dev [-c,--config #0] [--clearCache] [--verbose]
+    Same as "wesjet build" but with watch mode
 
 You can also print more details about any of these commands by calling them
 with the `-h,--help` flag right after the command name.
@@ -42,15 +42,15 @@ with the `-h,--help` flag right after the command name.
 ### `build`
 
 ```txt
-contentlayer build [options]
+wesjet build [options]
 ```
 
-Transforms content into data objects that your pages and components can consume. These objects are written to files in the `.contentlayer/generated` directory.
+Transforms content into data objects that your pages and components can consume. These objects are written to files in the `.wesjet/jetpack` directory.
 
 ### `dev`
 
 ```txt
-contentlayer dev [options]
+wesjet dev [options]
 ```
 
 Runs a build, then listens for changes to your content files, rebuilding after each change.
@@ -61,11 +61,11 @@ The following options are available to run with each command.
 
 ### `config` (alias: `-c`)
 
-Use a custom config file path. Both `contentlayer.config.ts` and `contentlayer.config.js` work by default.
+Use a custom config file path. Both `wesjet.config.ts` and `wesjet.config.js` work by default.
 
 ### `clearCache`
 
-Clears the `.contentlayer/generated` directory before running the specified command.
+Clears the `.wesjet/jetpack` directory before running the specified command.
 
 ### `verbose`
 

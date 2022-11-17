@@ -1,35 +1,34 @@
-import Markdown from "markdown-to-jsx";
-import type { FC } from "react";
-
-import { Button } from "../common/Button";
-import type { IconName } from "../common/Icon";
-import { Heading } from "./Heading";
-import { Paragraph } from "./Paragraph";
+import { FC } from 'react'
+import { Button } from '../common/Button'
+import { Heading } from './Heading'
+import { IconName } from '../common/Icon'
+import { Paragraph } from './Paragraph'
+import Markdown from 'markdown-to-jsx'
 
 const content = {
-  heading: "Frequently Asked Questions",
-  description: `We've heard a lot of questions about Wesjet. These are the questions we get most often.`,
+  heading: 'Frequently Asked Questions',
+  description: `We've heard a lot of questions about Wesjet(Pkg). These are the questions we get most often.`,
   elements: [
     {
-      question: "What problem is Wesjet solving?",
-      answer: `Modern web frameworks don't prescribe a method for parsing content. They provide powerful page routing and rendering processes, but it's up to you to provide it with content. Wesjet persists the great developer experience provided by modern web frameworks by making it easy to work with content in your web project. [Learn more](/docs/other/faq#what-problem-is-wesjet-solving).`,
+      question: 'What problem is Wesjet solving?',
+      answer: `Modern web frameworks don't prescribe a method for parsing content. They provide powerful page routing and rendering processes, but it's up to you to provide it with content. Wesjet(Pkg) persists the great developer experience provided by modern web frameworks by making it easy to work with content in your web project. [Learn more](/docs/other/faq#what-problem-is-wesjet-solving).`,
     },
     {
-      question: "Why is Wesjet fast?",
-      answer: `Wesjet leverages optimizations of build tools to the fullest to make processing source content a breeze. It then caches that content intelligently and builds incrementally. When you update content, Wesjet will only build what has changed, taking advantage of work already done. [Learn more](/docs/concepts/how-wesjet-works).`,
+      question: 'Why is Wesjet fast?',
+      answer: `Wesjet(pkg) leverages optimizations of build tools to the fullest to make processing source content a breeze. It then caches that content intelligently and builds incrementally. When you update content, Wesjet will only build what has changed, taking advantage of work already done. [Learn more](/docs/concepts/how-wesjet-works).`,
     },
     {
-      question: "Can I use Wesjet with my existing tools?",
+      question: 'Can I use Wesjet with my existing tools?',
       answer: `Wesjet is built to be framework agnostic. Wesjet is a content processor at its core, but provides modules for importing content from various sources, and uses plugins to provide tight integration with modern frameworks. [Learn more](/docs/other/faq#can-i-use-wesjet-with-my-existing-tools).`,
     },
   ],
-  primaryAction: { label: "Read more in docs", url: "/docs/other/faq" },
+  primaryAction: { label: 'Read more in docs', url: '/docs/other/faq' },
   secondaryAction: {
-    label: "Ask a question",
-    url: "https://github.com/wesbitty/wesjetpkg/issues/new",
-    icon: "external-link" as IconName,
+    label: 'Ask a question',
+    url: 'https://github.com/wesbitty/wesjet/issues/new',
+    icon: 'external-link' as IconName,
   },
-};
+}
 
 export const FAQ: FC = () => {
   return (
@@ -39,11 +38,7 @@ export const FAQ: FC = () => {
           <Heading level={2}>{content.heading}</Heading>
           <Paragraph>{content.description}</Paragraph>
           <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 md:flex-col md:space-y-4 md:space-x-0 lg:flex-row lg:space-y-0 lg:space-x-4">
-            <Button
-              label={content.primaryAction.label}
-              href={content.primaryAction.url}
-              theme="primary"
-            />
+            <Button label={content.primaryAction.label} href={content.primaryAction.url} theme="primary" />
             <Button
               label={content.secondaryAction.label}
               href={content.secondaryAction.url}
@@ -64,5 +59,5 @@ export const FAQ: FC = () => {
         </ul>
       </div>
     </div>
-  );
-};
+  )
+}

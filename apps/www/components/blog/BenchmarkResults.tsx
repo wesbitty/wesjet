@@ -1,38 +1,35 @@
 const TableHeadCell: React.FC<
   React.PropsWithChildren<{
-    style?: React.CSSProperties;
-    className?: string;
+    style?: React.CSSProperties
+    className?: string
   }>
 > = ({ children, className, style }) => {
   return (
     <th className={`py-4 px-3 ${className}`} style={style}>
       {children}
     </th>
-  );
-};
+  )
+}
 
 const TableCell: React.FC<
   React.PropsWithChildren<{
-    style?: React.CSSProperties;
-    className?: string;
+    style?: React.CSSProperties
+    className?: string
   }>
 > = ({ children, className, style }) => {
   return (
     <td className={`py-3 px-3 ${className}`} style={style}>
       {children}
     </td>
-  );
-};
+  )
+}
 
-const ResultCell: React.FC<React.PropsWithChildren<{ success?: boolean }>> = ({
-  children,
-  success,
-}) => {
-  let classes = `font-mono`;
-  if (success) classes += ` font-bold text-green-500`;
+const ResultCell: React.FC<React.PropsWithChildren<{ success?: boolean }>> = ({ children, success }) => {
+  let classes = `font-mono`
+  if (success) classes += ` font-bold text-green-500`
 
-  return <TableCell className={classes}>{children}</TableCell>;
-};
+  return <TableCell className={classes}>{children}</TableCell>
+}
 
 export const BenchmarkResults: React.FC = () => {
   return (
@@ -41,16 +38,14 @@ export const BenchmarkResults: React.FC = () => {
         <table className="m-0 table-fixed text-[1rem]">
           <thead>
             <tr>
-              <TableHeadCell style={{ width: "14rem" }}></TableHeadCell>
+              <TableHeadCell style={{ width: '14rem' }}></TableHeadCell>
               <TableHeadCell>Cold Build</TableHeadCell>
               <TableHeadCell>Cached Build</TableHeadCell>
             </tr>
           </thead>
           <tbody className="table-fixed">
             <tr>
-              <TableCell className="font-bold">
-                Next.js + Contentlayer
-              </TableCell>
+              <TableCell className="font-bold">Next.js + Wesjet</TableCell>
               <ResultCell success={true}>25.73 s</ResultCell>
               <ResultCell success={true}>16.29 s</ResultCell>
             </tr>
@@ -68,7 +63,7 @@ export const BenchmarkResults: React.FC = () => {
         </table>
       </div>
       <div className="w-full text-center text-sm text-slate-300 dark:text-slate-500">
-        Smaller is better/faster. Used machine:{" "}
+        Smaller is better/faster. Used machine:{' '}
         <a
           href="https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources"
           target="_blank"
@@ -79,5 +74,5 @@ export const BenchmarkResults: React.FC = () => {
         .
       </div>
     </div>
-  );
-};
+  )
+}

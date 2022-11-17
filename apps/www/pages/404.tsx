@@ -1,10 +1,9 @@
-import React from "react";
-
-import { Container } from "../components/common/Container";
-import { Icon } from "../components/common/Icon";
-import { Label } from "../components/common/Label";
-import { Heading } from "../components/landing-page/Heading";
-import { Paragraph } from "../components/landing-page/Paragraph";
+import React from 'react'
+import { Container } from '../components/common/Container'
+import { Icon } from '../components/common/Icon'
+import { Heading } from '../components/landing-page/Heading'
+import { Paragraph } from '../components/landing-page/Paragraph'
+import { Label } from '../components/common/Label'
 
 const NotFound = () => {
   return (
@@ -20,12 +19,12 @@ const NotFound = () => {
           <Paragraph className="pb-16 text-center">
             The URL you are looking for does not exist.
             <br />
-            Hit <Label text="⌘K" /> to explore Contentlayer.
+            Hit <Label text="⌘K" /> to explore Wesbitty, Inc.
           </Paragraph>
         </div>
       </div>
     </Container>
-  );
-};
+  )
+}
 
-export default NotFound;
+export default NotFound

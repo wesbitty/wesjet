@@ -1,24 +1,21 @@
-import { ChevronLink } from "../common/ChevronLink";
-import type { IconName } from "../common/Icon";
-import { Icon } from "../common/Icon";
-import { Label } from "../common/Label";
+import { Icon, IconName } from '../common/Icon'
+import { Label } from '../common/Label'
+import { ChevronLink } from '../common/ChevronLink'
 
 export const DocsCard: React.FC<
   React.PropsWithChildren<{
-    title: string;
-    icon?: IconName | null;
-    label?: string | null;
-    subtitle?: string | null;
-    link?: { url: string; label: string };
+    title: string
+    icon?: IconName | null
+    label?: string | null
+    subtitle?: string | null
+    link?: { url: string; label: string }
   }>
 > = ({ title, icon, label, subtitle, children, link }) => {
   return (
     <div className="flex flex-col">
       <div
         className={`grow border border-gray-100 bg-gray-50 p-6 py-4 dark:border-gray-800 dark:bg-gray-900 
-        ${link ? "rounded-t-2xl border-b-0" : "rounded-2xl"} ${
-          icon ? "mt-6" : "mt-0"
-        }`}
+        ${link ? 'rounded-t-2xl border-b-0' : 'rounded-2xl'} ${icon ? 'mt-6' : 'mt-0'}`}
       >
         {icon && (
           <div className="-mt-10 mb-4 block w-12 rounded-full bg-white dark:bg-gray-950">
@@ -42,5 +39,5 @@ export const DocsCard: React.FC<
         </div>
       )}
     </div>
-  );
-};
+  )
+}

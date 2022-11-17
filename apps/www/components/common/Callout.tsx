@@ -1,12 +1,7 @@
-import type { ReactNode } from "react";
-import { FC } from "react";
+import { FC, ReactNode } from 'react'
+import { Icon } from './Icon'
 
-import { Icon } from "./Icon";
-
-export const Callout: React.FC<{
-  children: ReactNode;
-  className?: string | "";
-}> = ({ children, className }) => {
+export const Callout: React.FC<{ children: ReactNode; className?: string | '' }> = ({ children, className }) => {
   return (
     <div
       className={`rounded-lg border border-violet-100 bg-violet-50 dark:border-violet-900/50 dark:bg-violet-900/20 ${className}`}
@@ -18,5 +13,5 @@ export const Callout: React.FC<{
         <div className="prose-a:font-semibold">{children}</div>
       </div>
     </div>
-  );
-};
+  )
+}

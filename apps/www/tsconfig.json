@@ -10,13 +10,14 @@
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "noErrorTruncation": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "wesjet/jetpack": [".wesjet/jetpack"]
+      "wesjet/jetpack": ["./.wesjet/jetpack"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".wesjet/jetpack"],

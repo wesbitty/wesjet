@@ -1,137 +1,118 @@
-import { format } from "date-fns";
-import type {
-  Action} from "kbar";
+import { FC, ReactNode, useMemo } from 'react'
+import { useRouter } from 'next/router'
 import {
-  KBarAnimator,
+  KBarProvider,
   KBarPortal,
   KBarPositioner,
-  KBarProvider,
-  KBarResults,
   KBarSearch,
-  useMatches
-} from "kbar";
-import { useRouter } from "next/router";
-import type { FC, ReactNode} from "react";
-import { useMemo } from "react";
-import type { TreeNode } from "types/TreeNode";
-import type { Post } from "wesjet/jetpack";
-import { allDocs, allExamples, allPosts } from "wesjet/jetpack";
-
-import { buildDocsTree } from "../lib/utils/build-doc-tree";
-import { buildExamplesTree } from "../lib/utils/build-example-tree";
-import { Card } from "./common/Card";
-import { Icon } from "./common/Icon";
-import { Label } from "./common/Label";
+  KBarAnimator,
+  KBarResults,
+  useMatches,
+  Action,
+} from 'kbar'
+import { TreeNode } from 'types/TreeNode'
+import { Card } from './common/Card'
+import { Icon } from './common/Icon'
+import { Label } from './common/Label'
+import { buildDocsTree } from '../utils/build-docs-tree'
+import { allDocs, allExamples, allPosts, Post } from 'wesjet/jetpack'
+import { buildExamplesTree } from '../utils/build-examples-tree'
+import { format } from 'date-fns'
 
 export const SearchProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const router = useRouter();
-  const docsTree = buildDocsTree(allDocs);
-  const examplesTree = buildExamplesTree(allExamples);
+  const router = useRouter()
+  const docsTree = buildDocsTree(allDocs)
+  const examplesTree = buildExamplesTree(allExamples)
   const actions = useMemo(() => {
-    const actions: Action[] = [
+    let actions: Action[] = [
       {
-        id: "0-homepage",
-        name: "Homepage",
-        keywords: "Contentlayer Home Start Index Overview Features Intro",
-        section: "Home",
-        perform: () => router.push("/"),
+        id: '0-homepage',
+        name: 'Homepage',
+        keywords: 'Wesbitty Home Start Index Overview Features Intro',
+        section: 'Home',
+        perform: () => router.push('/'),
       },
       {
-        id: "3-github",
-        name: "GitHub Repository",
-        keywords: "Contentlayer Github Git Repository Repo Code Examples",
-        section: "External",
-        perform: () =>
-          window.open(
-            "https://github.com/contentlayerdev/contentlayer",
-            "_ blank"
-          ),
+        id: '3-github',
+        name: 'GitHub Repository',
+        keywords: 'Wesbitty Github Git Repository Repo Code Examples',
+        section: 'External',
+        perform: () => window.open('https://github.com/wesbitty/wesjet', '_ blank'),
       },
       {
-        id: "3-discord",
-        name: "Discord Community",
-        keywords: "Discord Community Channel Contact",
-        section: "External",
-        perform: () =>
-          window.open("https://discord.com/invite/rytFErsARm", "_ blank"),
+        id: '3-discord',
+        name: 'Discord Community',
+        keywords: 'Discord Community Channel Contact',
+        section: 'External',
+        perform: () => window.open('https://discord.com/invite/rytFErsARm', '_ blank'),
       },
       {
-        id: "3-twitter",
-        name: "Twitter",
-        keywords: "Twitter Account Tweets Tweet News",
-        section: "External",
-        perform: () =>
-          window.open("https://twitter.com/contentlayerdev", "_ blank"),
+        id: '3-twitter',
+        name: 'Twitter',
+        keywords: 'Twitter Account Tweets Tweet News',
+        section: 'External',
+        perform: () => window.open('https://twitter.com/wesbitty', '_ blank'),
       },
-    ];
-    let id = 1;
+    ]
+    let id = 1
     const mapExamples = (tree: TreeNode[], parent: string) => {
       for (const element of tree) {
         actions.push({
-          id: ("1-examples-" + id).toString(),
+          id: ('1-examples-' + id).toString(),
           name: element.label
-            ? `${element.title == "Examples" ? "Overview" : element.title} (${
-                element.label
-              })`
-            : element.title == "Examples"
-            ? "Overview"
+            ? `${element.title == 'Examples' ? 'Overview' : element.title} (${element.label})`
+            : element.title == 'Examples'
+            ? 'Overview'
             : element.title,
-          keywords: element?.excerpt || "",
-          section: "Examples",
+          keywords: element?.excerpt || '',
+          section: 'Examples',
           subtitle: parent,
           perform: () => router.push(element.urlPath),
-        });
-        id++;
-        if (element.children.length)
-          mapExamples(
-            element.children,
-            parent + parent ? " / " : "" + element.title
-          );
+        })
+        id++
+        if (element.children.length) mapExamples(element.children, parent + parent ? ' / ' : '' + element.title)
       }
-    };
+    }
     const mapPosts = (posts: Post[]) => {
       actions.push({
-        id: ("2-blog-" + id).toString(),
-        name: "Overview",
-        keywords: "Contentlayer Blog Post List Overview",
-        section: "Blog",
-        perform: () => router.push("/blog"),
-      });
-      id++;
+        id: ('2-blog-' + id).toString(),
+        name: 'Overview',
+        keywords: 'Wesbitty Blog Post List Overview',
+        section: 'Blog',
+        perform: () => router.push('/blog'),
+      })
+      id++
       for (const post of posts) {
         actions.push({
-          id: ("2-blog-" + id).toString(),
+          id: ('2-blog-' + id).toString(),
           name: post.title,
-          keywords: post?.excerpt || "",
-          section: "Blog",
-          subtitle: format(new Date(post.date), "MMMM dd, yyyy"),
-          perform: () => router.push("/" + post.url_path),
-        });
-        id++;
+          keywords: post?.excerpt || '',
+          section: 'Blog',
+          subtitle: format(new Date(post.date), 'MMMM dd, yyyy'),
+          perform: () => router.push('/' + post.url_path),
+        })
+        id++
       }
-    };
+    }
     const mapDocs = (tree: TreeNode[], parent: string) => {
       for (const element of tree) {
         actions.push({
-          id: ("4-bldocsog-" + id).toString(),
-          name: element.label
-            ? `${element.title} (${element.label})`
-            : element.title,
-          keywords: element?.excerpt || "",
-          section: "Documentation",
+          id: ('4-bldocsog-' + id).toString(),
+          name: element.label ? `${element.title} (${element.label})` : element.title,
+          keywords: element?.excerpt || '',
+          section: 'Documentation',
           subtitle: parent,
           perform: () => router.push(element.urlPath),
-        });
-        id++;
-        if (element.children.length)
-          mapDocs(element.children, parent + " / " + element.title);
+        })
+        id++
+        if (element.children.length) mapDocs(element.children, parent + ' / ' + element.title)
       }
-    };
-    mapExamples(examplesTree, "");
-    mapPosts(allPosts);
-    mapDocs(docsTree, "Docs");
-    return actions;
-  }, [docsTree, examplesTree, router]);
+    }
+    mapExamples(examplesTree, '')
+    mapPosts(allPosts)
+    mapDocs(docsTree, 'Docs')
+    return actions
+  }, [docsTree, examplesTree, router])
 
   return (
     <KBarProvider actions={actions}>
@@ -153,11 +134,11 @@ export const SearchProvider: FC<{ children: ReactNode }> = ({ children }) => {
       </KBarPortal>
       {children}
     </KBarProvider>
-  );
-};
+  )
+}
 
 const RenderResults = () => {
-  const { results } = useMatches();
+  const { results } = useMatches()
 
   if (results.length) {
     return (
@@ -165,7 +146,7 @@ const RenderResults = () => {
         items={results}
         onRender={({ item, active }) => (
           <div>
-            {typeof item === "string" ? (
+            {typeof item === 'string' ? (
               <div className="pt-3">
                 <div className="block border-t border-gray-100 px-4 pt-6 pb-2 text-xs font-semibold uppercase text-slate-400 dark:border-gray-800 dark:text-slate-500">
                   {item}
@@ -174,26 +155,22 @@ const RenderResults = () => {
             ) : (
               <div
                 className={`block cursor-pointer px-4 py-2 text-slate-600 dark:text-slate-300 ${
-                  active ? "bg-gray-100 dark:bg-gray-800" : "bg-transparent"
+                  active ? 'bg-gray-100 dark:bg-gray-800' : 'bg-transparent'
                 }`}
               >
-                {item.subtitle && (
-                  <div className="text-xs text-slate-400 dark:text-slate-500">
-                    {item.subtitle}
-                  </div>
-                )}
+                {item.subtitle && <div className="text-xs text-slate-400 dark:text-slate-500">{item.subtitle}</div>}
                 <div>{item.name}</div>
               </div>
             )}
           </div>
         )}
       />
-    );
+    )
   } else {
     return (
       <div className="block border-t border-gray-100 px-4 py-8 text-center text-slate-400 dark:border-gray-800 dark:text-slate-600">
         No results for your search...
       </div>
-    );
+    )
   }
-};
+}

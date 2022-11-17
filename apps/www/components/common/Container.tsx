@@ -1,34 +1,31 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import type { FC } from "react";
-
-import { SearchProvider } from "../SearchContext";
-import { Footer } from "./Footer";
-import { MainNavigation } from "./MainNavigation";
+import { FC } from 'react'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { SearchProvider } from '../SearchContext'
+import { MainNavigation } from './MainNavigation'
+import { Footer } from './Footer'
 
 export const Container: FC<any> = ({ children, ...customMeta }) => {
-  const router = useRouter();
+  const router = useRouter()
 
-  const baseUrl = `https://www.wesbitty.com`;
+  const baseUrl = `https://www.wesbitty.com`
 
   const meta = {
-    title: "Wesjet makes content easy for developers",
+    title: 'Wesjet(Pkg) makes content easy for developers - Wesbitty',
     description:
-      "Wesjet is a content SDK that validates and transforms your content into type-safe JSON data you can easily import into your application.",
+      'Wesjet(Pkg) is a content SDK that validates and transforms your content into type-safe JSON data you can easily import into your application.',
     url: customMeta.urlPath ? `${baseUrl}${customMeta.urlPath}` : baseUrl,
-    name: "Wesbitty",
-    image: customMeta.imagePath
-      ? `${baseUrl}${customMeta.imagePath}`
-      : `${baseUrl}/images/beta-launch-post-meta.png`,
-    type: "website",
+    name: 'Wesbitty',
+    image: customMeta.imagePath ? `${baseUrl}${customMeta.imagePath}` : `${baseUrl}/images/beta-launch-post-meta.png`,
+    type: 'website',
     ...customMeta,
-  };
+  }
   const jsonLd = {
-    "@context": "http://www.schema.org",
-    "@type": "WebSite",
+    '@context': 'http://www.schema.org',
+    '@type': 'WebSite',
     name: meta.name,
     url: meta.url,
-  };
+  }
 
   return (
     <>
@@ -47,23 +44,17 @@ export const Container: FC<any> = ({ children, ...customMeta }) => {
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </Head>
       <SearchProvider>
         <MainNavigation />
         <div className="flex min-h-screen flex-col justify-between">
-          <main
-            className="relative pt-16"
-            style={{ scrollPaddingTop: "150px" }}
-          >
+          <main className="relative pt-16" style={{ scrollPaddingTop: '150px' }}>
             {children}
           </main>
           <Footer />
         </div>
       </SearchProvider>
     </>
-  );
-};
+  )
+}
