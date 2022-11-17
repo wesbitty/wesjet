@@ -1,11 +1,16 @@
 {
-    "github": {
-      "silent": true
-    },
-    "headers": [
-      {
-        "source": "/fonts/virgil.woff2",
-        "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
-      }
-    ]
-  }
+  "github": {
+    "silent": true
+  },
+  "headers": [
+    {
+      "source": "/fonts/virgil.woff2",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}

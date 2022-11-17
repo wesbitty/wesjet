@@ -1,7 +1,7 @@
-import { load as cheerio } from 'cheerio'
+import { load as cheerio } from "cheerio";
 
 // NOTE this is used to speed up reload in local dev
-let cachedUsedByCount: number | undefined
+let cachedUsedByCount: number | undefined;
 
 // const getUsedByCount = async () => {
 //   // We're scraping the GitHub website here instead of using the API since I don't want to deal with rate limits and API tokens 🤷‍♂️
@@ -30,65 +30,70 @@ let cachedUsedByCount: number | undefined
 const getUsedByCount = async () => {
   // We're scraping the GitHub website here instead of using the API since I don't want to deal with rate limits and API tokens 🤷‍♂️
   const url =
-    'https://github.com/wesbitty/wesjetpkg/network/dependents?dependent_type=REPOSITORY&package_id=UGFja2FnZS0yMTE4Nzg3MDAw'
-  const gitHubPage = await fetch(url, { cache: 'no-store' }).then((_) => _.text())
-  const $ = cheerio(gitHubPage)
+    "https://github.com/wesbitty/wesjetpkg/network/dependents?dependent_type=REPOSITORY&package_id=UGFja2FnZS0yMTE4Nzg3MDAw";
+  const gitHubPage = await fetch(url, { cache: "no-store" }).then((_) =>
+    _.text()
+  );
+  const $ = cheerio(gitHubPage);
 
   const usedByCountStr = $(
-    'a[href="/wesbitty/wesjetpkg/network/dependents?dependent_type=REPOSITORY&package_id=UGFja2FnZS0yMTE4Nzg3MDAw"]',
+    'a[href="/wesbitty/wesjetpkg/network/dependents?dependent_type=REPOSITORY&package_id=UGFja2FnZS0yMTE4Nzg3MDAw"]'
   )
     .text()
     .trim()
-    .split(' ')[0]
+    .split(" ")[0];
 
-  const usedByCount = parseInt(usedByCountStr, 10)
+  const usedByCount = parseInt(usedByCountStr, 10);
 
   if (Number.isNaN(usedByCount)) {
-    throw new Error(`Could not parse used by count: ${usedByCountStr}`)
+    throw new Error(`Could not parse used by count: ${usedByCountStr}`);
   }
 
-  return usedByCount
-}
+  return usedByCount;
+};
 
 export const getUsedByCountWithFallback = async () => {
   if (cachedUsedByCount) {
-    return cachedUsedByCount
+    return cachedUsedByCount;
   }
 
   try {
-    const usedByCount = await retry(getUsedByCount, 5)
+    const usedByCount = await retry(getUsedByCount, 5);
 
-    cachedUsedByCount = usedByCount
+    cachedUsedByCount = usedByCount;
 
-    return usedByCount
+    return usedByCount;
   } catch (e) {
-    console.log(`Error occurred while fetching used by count: ${e}`)
+    console.log(`Error occurred while fetching used by count: ${e}`);
 
     // Hardcode last known number as fallback
-    return 300
+    return 300;
   }
-}
+};
 
-const retry = async <T>(fn: () => Promise<T>, maxRetryCount: number): Promise<T> => {
-  let retryCount = 0
+const retry = async <T>(
+  fn: () => Promise<T>,
+  maxRetryCount: number
+): Promise<T> => {
+  let retryCount = 0;
 
   while (true) {
     try {
       if (retryCount > 0) {
-        console.log(`Retrying ${retryCount} / ${maxRetryCount}`)
+        console.log(`Retrying ${retryCount} / ${maxRetryCount}`);
       }
 
-      return await fn()
+      return await fn();
     } catch (e) {
-      console.log(`Error occurred: ${e}`)
+      console.log(`Error occurred: ${e}`);
 
-      retryCount++
+      retryCount++;
 
       if (retryCount > maxRetryCount) {
-        throw e
+        throw e;
       } else {
-        await new Promise((resolve) => setTimeout(resolve, 200))
+        await new Promise((resolve) => setTimeout(resolve, 200));
       }
     }
   }
-}
+};

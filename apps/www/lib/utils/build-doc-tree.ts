@@ -1,9 +1,12 @@
-import { children } from 'cheerio/lib/api/traversing'
-import { Doc } from 'wesjet/jetpack'
-import { TreeNode } from 'types/TreeNode'
+import { children } from "cheerio/lib/api/traversing";
+import { Doc } from "wesjet/jetpack";
+import { TreeNode } from "types/TreeNode";
 
-export const buildDocsTree = (docs: Doc[], parentPathNames: string[] = []): TreeNode[] => {
-  const level = parentPathNames.length
+export const buildDocsTree = (
+  docs: Doc[],
+  parentPathNames: string[] = []
+): TreeNode[] => {
+  const level = parentPathNames.length;
 
   return docs
     .filter(
@@ -11,8 +14,8 @@ export const buildDocsTree = (docs: Doc[], parentPathNames: string[] = []): Tree
         _.pathSegments.length === level + 1 &&
         _.pathSegments
           .map((_: PathSegment) => _.pathName)
-          .join('/')
-          .startsWith(parentPathNames.join('/')),
+          .join("/")
+          .startsWith(parentPathNames.join("/"))
     )
     .sort((a, b) => a.pathSegments[level].order - b.pathSegments[level].order)
     .map<TreeNode>((doc) => ({
@@ -20,12 +23,14 @@ export const buildDocsTree = (docs: Doc[], parentPathNames: string[] = []): Tree
       title: doc.title,
       label: doc.label ?? null,
       excerpt: doc.excerpt ?? null,
-      urlPath: '/docs/' + doc.pathSegments.map((_: PathSegment) => _.pathName).join('/'),
+      urlPath:
+        "/docs/" +
+        doc.pathSegments.map((_: PathSegment) => _.pathName).join("/"),
       collapsible: doc.collapsible ?? null,
       collapsed: doc.collapsed ?? null,
       children: buildDocsTree(
         docs,
-        doc.pathSegments.map((_: PathSegment) => _.pathName),
+        doc.pathSegments.map((_: PathSegment) => _.pathName)
       ),
-    }))
-}
+    }));
+};

@@ -1,20 +1,20 @@
-import { defineNestedType } from 'wesjet/maker'
+import { defineNestedType } from "wesjet/maker";
 
 export const Link = defineNestedType(() => ({
-  name: 'Link',
+  name: "Link",
   fields: {
     label: {
-      type: 'string',
+      type: "string",
       required: true,
     },
     url: {
-      type: 'string',
+      type: "string",
       required: true,
     },
     isExternal: {
-      type: 'boolean',
+      type: "boolean",
       default: false,
     },
   },
   extensions: {},
-}))
+}));

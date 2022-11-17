@@ -1,16 +1,24 @@
-import { renderCodeToHTML, runTwoSlash, createShikiHighlighter, type UserConfigSettings } from 'shiki-twoslash'
-import { getHighlighter } from 'shiki'
-type Highlighter = Awaited<ReturnType<typeof createShikiHighlighter>>
+import {
+  renderCodeToHTML,
+  runTwoSlash,
+  createShikiHighlighter,
+  type UserConfigSettings,
+} from "shiki-twoslash";
+import { getHighlighter } from "shiki";
+type Highlighter = Awaited<ReturnType<typeof createShikiHighlighter>>;
 
-const highlighterMap = new Map<ColorScheme, Highlighter>()
+const highlighterMap = new Map<ColorScheme, Highlighter>();
 
-export type ColorScheme = 'light' | 'dark'
+export type ColorScheme = "light" | "dark";
 
-export const snippetToHtml = async (snippet: string, colorScheme: ColorScheme) => {
-  const themeName = `github-${colorScheme}`
+export const snippetToHtml = async (
+  snippet: string,
+  colorScheme: ColorScheme
+) => {
+  const themeName = `github-${colorScheme}`;
 
   if (!highlighterMap.has(colorScheme)) {
-    highlighterMap.set(colorScheme, await getHighlighter({ theme: themeName }))
+    highlighterMap.set(colorScheme, await getHighlighter({ theme: themeName }));
   }
 
   const settings: UserConfigSettings = {
@@ -19,17 +27,17 @@ export const snippetToHtml = async (snippet: string, colorScheme: ColorScheme) =
       strict: false,
       noImplicitAny: false,
     },
-  }
+  };
 
-  const twoslash = runTwoSlash(snippet, 'tsx', settings)
+  const twoslash = runTwoSlash(snippet, "tsx", settings);
   const html = renderCodeToHTML(
     twoslash.code,
-    'tsx',
+    "tsx",
     { twoslash: true },
     { ...settings, themeName },
     highlighterMap.get(colorScheme)!,
-    twoslash,
-  )
+    twoslash
+  );
 
-  return html.replace('./data/wesjet-compiler', 'wesjet/jetpack')
-}
+  return html.replace("./data/wesjet-compiler", "wesjet/jetpack");
+};

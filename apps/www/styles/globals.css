@@ -1,15 +1,15 @@
-@import url('./tailwind.css');
-@import url('./twoslash-shiki.css');
-@import url('./hljs-github-dark.css');
-@import url('./markdown.css');
+@import url("./tailwind.css");
+@import url("./twoslash-shiki.css");
+@import url("./hljs-github-dark.css");
+@import url("./markdown.css");
 
 @layer base {
   @font-face {
-    font-family: 'Virgil';
+    font-family: "Virgil";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: local(''), url('/fonts/virgil.woff2') format('woff2');
+    src: local(""), url("/fonts/virgil.woff2") format("woff2");
   }
 
   .scroll-padding {
@@ -114,7 +114,7 @@
     hyphens: auto;
     -webkit-hyphens: auto;
   }
-  
+
   html.dark {
     color-scheme: dark;
   }

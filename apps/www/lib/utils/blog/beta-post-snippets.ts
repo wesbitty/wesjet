@@ -1,8 +1,8 @@
 export const codeSnippets = [
-    {
-      file: 'utils/page-utils.tsx',
-      lines: 106,
-      content: `\
+  {
+    file: "utils/page-utils.tsx",
+    lines: 106,
+    content: `\
   // @noErrors
   import fs from "fs";
   import glob from "glob";
@@ -98,11 +98,11 @@ export const codeSnippets = [
       return page;
   }
   `,
-    },
-    {
-      file: 'pages/index.tsx',
-      lines: 22,
-      content: `\
+  },
+  {
+    file: "pages/index.tsx",
+    lines: 22,
+    content: `\
   // @noErrors
   import type { FC } from "react";
   import type { Page } from "../types/Page";
@@ -122,11 +122,11 @@ export const codeSnippets = [
   );
   export default Page;\
   `,
-    },
-    {
-      file: 'pages/[slug].tsx',
-      lines: 27,
-      content: `\
+  },
+  {
+    file: "pages/[slug].tsx",
+    lines: 27,
+    content: `\
   // @noErrors
   import Head from "next/head";
   import type { FC } from "react";
@@ -151,7 +151,7 @@ export const codeSnippets = [
   );
   export default Page;
   `,
-    },
-  ] as const
-  
-  export type CodeSnippets = typeof codeSnippets
+  },
+] as const;
+
+export type CodeSnippets = typeof codeSnippets;

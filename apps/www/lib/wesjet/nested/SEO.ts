@@ -1,18 +1,18 @@
-import { defineNestedType } from 'wesjet/maker'
+import { defineNestedType } from "wesjet/maker";
 
 export const SEO = defineNestedType(() => ({
-  name: 'SEO',
+  name: "SEO",
   fields: {
     title: {
-      type: 'string',
+      type: "string",
     },
     description: {
-      type: 'string',
+      type: "string",
     },
     imagePath: {
-      type: 'string',
+      type: "string",
       required: true,
     },
   },
   extensions: {},
-}))
+}));

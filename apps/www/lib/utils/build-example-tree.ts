@@ -1,9 +1,12 @@
-import { children } from 'cheerio/lib/api/traversing'
-import { Example } from 'wesjet/jetpack'
-import { TreeNode } from 'types/TreeNode'
+import { children } from "cheerio/lib/api/traversing";
+import { Example } from "wesjet/jetpack";
+import { TreeNode } from "types/TreeNode";
 
-export const buildExamplesTree = (examples: Example[], parentPathNames: string[] = []): TreeNode[] => {
-  const level = parentPathNames.length
+export const buildExamplesTree = (
+  examples: Example[],
+  parentPathNames: string[] = []
+): TreeNode[] => {
+  const level = parentPathNames.length;
 
   return examples
     .filter(
@@ -11,8 +14,8 @@ export const buildExamplesTree = (examples: Example[], parentPathNames: string[]
         _.pathSegments.length === level + 1 &&
         _.pathSegments
           .map((_: PathSegment) => _.pathName)
-          .join('/')
-          .startsWith(parentPathNames.join('/')),
+          .join("/")
+          .startsWith(parentPathNames.join("/"))
     )
     .sort((a, b) => a.pathSegments[level].order - b.pathSegments[level].order)
     .map<TreeNode>((example) => ({
@@ -22,10 +25,12 @@ export const buildExamplesTree = (examples: Example[], parentPathNames: string[]
       excerpt: example.excerpt ?? null,
       collapsible: false,
       collapsed: false,
-      urlPath: '/' + example.pathSegments.map((_: PathSegment) => _.pathName).join('/'),
+      urlPath:
+        "/" +
+        example.pathSegments.map((_: PathSegment) => _.pathName).join("/"),
       children: buildExamplesTree(
         examples,
-        example.pathSegments.map((_: PathSegment) => _.pathName),
+        example.pathSegments.map((_: PathSegment) => _.pathName)
       ),
-    }))
-}
+    }));
+};
