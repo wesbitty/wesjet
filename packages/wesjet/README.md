@@ -1,4 +1,4 @@
-# <img src="https://i.ibb.co/dMH4HS8/wesjet.png" height="30" />&nbsp;&nbsp;WesjetPkg [![](https://badgen.net/npm/v/wesjet)](https://www.npmjs.com/wesjet/packages)
+# <img src="https://i.ibb.co/dMH4HS8/wesjet.png" height="30" />&nbsp;&nbsp;Wesjet [![](https://badgen.net/npm/v/wesjet)](https://www.npmjs.com/wesjet/packages)
 
 **WesjetPkg Transforms & Validates Content, build system optimized for JavaScript and TypeScript, written in Rust in application's pages.**
 
