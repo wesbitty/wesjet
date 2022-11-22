@@ -14,11 +14,11 @@
     "lint": "npm run format:prettier && npm run format:eslint",
     "build": "tsc -b tsconfig.build.json",
     "rm": "bash -c 'rm -rf packages/*/dist packages/*/.wesjet'",
-    "check:prettier": "prettier -c .",
+    "check:prettier": "prettier -c packages",
     "check:eslint": "eslint packages --ext .ts --max-warnings=0",
     "format:prettier": "prettier -w packages",
     "format:eslint": "eslint packages --ext ts -c ./.eslintrc.json --fix",
-    "all": "npm i && npm run lint && npm run build:cli && npm -w wesjet-nextjs-plugin run prepack && npm run build:app.etc"
+    "all": "npm i && npm run lint && npm run build && npm -w wesjet-nextjs-plugin run prepack"
   },
   "lint-staged": {
     "*.@(ts)": [
