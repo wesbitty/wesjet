@@ -40,7 +40,6 @@
     "url": "git+https://github.com/wesbitty/wesjetpkg"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.25.0",
     "@effect-ts/tracing-plugin": "^0.20.0",
     "@types/prettier": "^2.7.1",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
