@@ -33,6 +33,6 @@ fields:
     options:
       - label: Full
         value: full
-      - label: 'One half'
-        value: '1/2'
+      - label: "One half"
+        value: "1/2"
     default: full

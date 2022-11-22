@@ -31,12 +31,12 @@ fields:
         actions:
           - type: Button
             label: Get Started
-            url: '/'
+            url: "/"
             style: primary
             elementId: hero-main-button
           - type: Button
             label: Learn More
-            url: '/'
+            url: "/"
             style: secondary
         media:
           type: ImageBlock
@@ -46,8 +46,8 @@ fields:
           self:
             height: auto
             width: wide
-            margin: ['mt-0', 'mb-0', 'ml-0', 'mr-0']
-            padding: ['pt-12', 'pb-12', 'pl-4', 'pr-4']
+            margin: ["mt-0", "mb-0", "ml-0", "mr-0"]
+            padding: ["pt-12", "pb-12", "pl-4", "pr-4"]
             alignItems: center
             justifyContent: center
             flexDirection: row
@@ -56,7 +56,7 @@ fields:
           subtitle:
             fontWeight: 400
             textAlign: left
-            textDecoration: ['underline']
+            textDecoration: ["underline"]
           text:
             textAlign: left
           actions:

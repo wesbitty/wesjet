@@ -33,10 +33,10 @@ fields:
     default:
       - type: FeaturedItem
         title: Item Title
-        text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae. explicabo.'
+        text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae. explicabo."
         featuredImage:
           type: ImageBlock
-          url: 'https://assets.stackbit.com/components/images/default/default-image.png'
+          url: "https://assets.stackbit.com/components/images/default/default-image.png"
           altText: Item image
         styles:
           title:
@@ -59,17 +59,17 @@ fields:
     default:
       - type: Button
         label: Apply Now
-        url: '#'
+        url: "#"
         style: primary
       - type: Button
         label: Learn More
-        url: '#'
+        url: "#"
         style: secondary
   - type: number
     name: columns
     label: Items per row
     group: styles
-    controlType: 'slider'
+    controlType: "slider"
     min: 1
     max: 4
     step: 1
@@ -78,21 +78,21 @@ fields:
     name: spacingX
     label: Horizontal spacing between items
     group: styles
-    controlType: 'slider'
+    controlType: "slider"
     min: 0
     max: 160
     step: 1
-    unit: 'px'
+    unit: "px"
     default: 16
   - type: number
     name: spacingY
     label: Vertical spacing between items
     group: styles
-    controlType: 'slider'
+    controlType: "slider"
     min: 0
     max: 160
     step: 1
-    unit: 'px'
+    unit: "px"
     default: 16
   - type: boolean
     name: enableHover
@@ -102,45 +102,45 @@ fields:
     name: styles
     styles:
       self:
-        height: ['auto', 'screen']
-        width: ['narrow', 'wide', 'full']
-        margin: ['tw0:96']
-        padding: ['tw0:96']
-        justifyContent: ['flex-start', 'flex-end', 'center']
-        borderRadius: '*'
-        borderWidth: ['0:8']
-        borderStyle: '*'
+        height: ["auto", "screen"]
+        width: ["narrow", "wide", "full"]
+        margin: ["tw0:96"]
+        padding: ["tw0:96"]
+        justifyContent: ["flex-start", "flex-end", "center"]
+        borderRadius: "*"
+        borderWidth: ["0:8"]
+        borderStyle: "*"
         borderColor:
-          - value: 'border-primary'
-            label: 'Primary color'
-            color: '$primary'
-          - value: 'border-secondary'
-            label: 'Secondary color'
-            color: '$secondary'
-          - value: 'border-dark'
-            label: 'Dark color'
-            color: '$dark'
-          - value: 'border-complementary'
-            label: 'Complementary color'
-            color: '$complementary'
+          - value: "border-primary"
+            label: "Primary color"
+            color: "$primary"
+          - value: "border-secondary"
+            label: "Secondary color"
+            color: "$secondary"
+          - value: "border-dark"
+            label: "Dark color"
+            color: "$dark"
+          - value: "border-complementary"
+            label: "Complementary color"
+            color: "$complementary"
       title:
-        fontWeight: ['400', '500']
-        fontStyle: ['italic']
-        textAlign: ['left', 'center', 'right']
-        textDecoration: ['underline']
+        fontWeight: ["400", "500"]
+        fontStyle: ["italic"]
+        textAlign: ["left", "center", "right"]
+        textDecoration: ["underline"]
       subtitle:
-        fontWeight: ['400', '500']
-        fontStyle: ['italic']
-        textAlign: ['left', 'center', 'right']
-        textDecoration: ['underline']
+        fontWeight: ["400", "500"]
+        fontStyle: ["italic"]
+        textAlign: ["left", "center", "right"]
+        textDecoration: ["underline"]
       actions:
-        justifyContent: ['flex-start', 'flex-end', 'center']
+        justifyContent: ["flex-start", "flex-end", "center"]
     default:
       self:
         height: auto
         width: wide
-        margin: ['mt-0', 'mb-0', 'ml-0', 'mr-0']
-        padding: ['pt-12', 'pb-12', 'pl-4', 'pr-4']
+        margin: ["mt-0", "mb-0", "ml-0", "mr-0"]
+        padding: ["pt-12", "pb-12", "pl-4", "pr-4"]
         justifyContent: center
         borderRadius: none
         borderWidth: 0

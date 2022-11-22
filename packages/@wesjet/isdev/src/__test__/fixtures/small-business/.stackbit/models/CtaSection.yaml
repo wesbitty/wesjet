@@ -45,7 +45,7 @@ fields:
     default:
       - type: Button
         label: Try it now
-        url: '/about'
+        url: "/about"
         style: primary
   - type: model
     name: backgroundImage
@@ -57,45 +57,45 @@ fields:
     name: styles
     styles:
       self:
-        height: ['auto', 'screen']
-        width: ['narrow', 'wide', 'full']
-        margin: ['tw0:96']
-        padding: ['tw0:96']
-        alignItems: ['flex-start', 'flex-end', 'center']
-        justifyContent: ['flex-start', 'flex-end', 'center']
-        flexDirection: ['row', 'col']
-        borderRadius: '*'
-        borderWidth: ['0:8']
-        borderStyle: '*'
+        height: ["auto", "screen"]
+        width: ["narrow", "wide", "full"]
+        margin: ["tw0:96"]
+        padding: ["tw0:96"]
+        alignItems: ["flex-start", "flex-end", "center"]
+        justifyContent: ["flex-start", "flex-end", "center"]
+        flexDirection: ["row", "col"]
+        borderRadius: "*"
+        borderWidth: ["0:8"]
+        borderStyle: "*"
         borderColor:
-          - value: 'border-primary'
-            label: 'Primary color'
-            color: '$primary'
-          - value: 'border-secondary'
-            label: 'Secondary color'
-            color: '$secondary'
-          - value: 'border-dark'
-            label: 'Dark color'
-            color: '$dark'
-          - value: 'border-complementary'
-            label: 'Complementary color'
-            color: '$complementary'
-        boxShadow: '*'
+          - value: "border-primary"
+            label: "Primary color"
+            color: "$primary"
+          - value: "border-secondary"
+            label: "Secondary color"
+            color: "$secondary"
+          - value: "border-dark"
+            label: "Dark color"
+            color: "$dark"
+          - value: "border-complementary"
+            label: "Complementary color"
+            color: "$complementary"
+        boxShadow: "*"
       title:
-        fontWeight: ['400', '500']
-        fontStyle: ['italic']
-        textAlign: ['left', 'center', 'right']
-        textDecoration: ['underline']
+        fontWeight: ["400", "500"]
+        fontStyle: ["italic"]
+        textAlign: ["left", "center", "right"]
+        textDecoration: ["underline"]
       text:
-        textAlign: ['left', 'center', 'right']
+        textAlign: ["left", "center", "right"]
       actions:
-        justifyContent: ['flex-start', 'flex-end', 'center']
+        justifyContent: ["flex-start", "flex-end", "center"]
     default:
       self:
         height: auto
         width: wide
-        margin: ['mt-0', 'mb-0', 'ml-0', 'mr-0']
-        padding: ['pt-12', 'pb-12', 'pl-4', 'pr-4']
+        margin: ["mt-0", "mb-0", "ml-0", "mr-0"]
+        padding: ["pt-12", "pb-12", "pl-4", "pr-4"]
         alignItems: center
         justifyContent: center
         flexDirection: row
@@ -108,4 +108,4 @@ fields:
       text:
         textAlign: left
       actions:
-        justifyContent: 'flex-start'
+        justifyContent: "flex-start"

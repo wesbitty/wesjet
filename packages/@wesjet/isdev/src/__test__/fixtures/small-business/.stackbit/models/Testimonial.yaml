@@ -33,18 +33,18 @@ fields:
     group: settings
     label: Element ID
     description: A unique ID for the HTML element. Must not contain whitespace.
-    default: ''
+    default: ""
   - type: style
     name: styles
     styles:
       name:
-        fontWeight: ['400', '500']
-        fontStyle: ['italic']
-        textDecoration: ['underline']
+        fontWeight: ["400", "500"]
+        fontStyle: ["italic"]
+        textDecoration: ["underline"]
       title:
-        fontWeight: ['400', '500']
-        fontStyle: ['italic']
-        textDecoration: ['underline']
+        fontWeight: ["400", "500"]
+        fontStyle: ["italic"]
+        textDecoration: ["underline"]
     default:
       name:
         fontWeight: 400

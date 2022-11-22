@@ -15,7 +15,7 @@ fields:
   - type: string
     name: label
     label: Label
-    default: 'Sign me up to receive updates'
+    default: "Sign me up to receive updates"
   - type: boolean
     name: isRequired
     label: Is the field required?
@@ -27,6 +27,6 @@ fields:
     options:
       - label: Full
         value: full
-      - label: 'One half'
-        value: '1/2'
+      - label: "One half"
+        value: "1/2"
     default: full

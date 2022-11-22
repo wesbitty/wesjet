@@ -17,12 +17,12 @@ fields:
   - type: string
     name: altText
     label: Alt text
-    default: ''
+    default: ""
     description: Alternative text for screen readers
   - type: string
     name: url
     label: URL
-    default: '/'
+    default: "/"
     required: true
   - type: boolean
     name: showIcon
@@ -104,4 +104,4 @@ fields:
     group: settings
     label: Element ID
     description: A unique ID for the HTML element. Must not contain whitespace.
-    default: ''
+    default: ""

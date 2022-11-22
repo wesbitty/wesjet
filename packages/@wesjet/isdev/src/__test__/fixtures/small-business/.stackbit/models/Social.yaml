@@ -13,16 +13,16 @@ fields:
   - type: string
     name: label
     label: Label
-    default: 'Facebook'
+    default: "Facebook"
   - type: string
     name: altText
     label: Alt text
-    default: ''
+    default: ""
     description: Alternative text for screen readers
   - type: string
     name: url
     label: URL
-    default: '/'
+    default: "/"
     required: true
   - type: enum
     name: icon
@@ -65,4 +65,4 @@ fields:
     group: settings
     label: Element ID
     description: A unique ID for the HTML element. Must not contain whitespace.
-    default: ''
+    default: ""

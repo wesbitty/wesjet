@@ -22,29 +22,29 @@ fields:
     options:
       - label: Colors A
         value: colors-a
-        textColor: '$onLight'
-        backgroundColor: '$light'
-        borderColor: '#ececec'
+        textColor: "$onLight"
+        backgroundColor: "$light"
+        borderColor: "#ececec"
       - label: Colors B
         value: colors-b
-        textColor: '$onDark'
-        backgroundColor: '$dark'
-        borderColor: '#ececec'
+        textColor: "$onDark"
+        backgroundColor: "$dark"
+        borderColor: "#ececec"
       - label: Colors C
         value: colors-c
-        textColor: '$onSecondary'
-        backgroundColor: '$secondary'
-        borderColor: '#ececec'
+        textColor: "$onSecondary"
+        backgroundColor: "$secondary"
+        borderColor: "#ececec"
       - label: Colors D
         value: colors-d
-        textColor: '$onComplementary'
-        backgroundColor: '$complementary'
-        borderColor: '#ececec'
+        textColor: "$onComplementary"
+        backgroundColor: "$complementary"
+        borderColor: "#ececec"
       - label: Colors E
         value: colors-e
-        textColor: '$onComplementaryAlt'
-        backgroundColor: '$complementaryAlt'
-        borderColor: '#ececec'
+        textColor: "$onComplementaryAlt"
+        backgroundColor: "$complementaryAlt"
+        borderColor: "#ececec"
     default: colors-d
   - type: date
     name: date
@@ -68,7 +68,7 @@ fields:
       type: ImageBlock
       url: https://assets.stackbit.com/components/images/default/post-4.jpeg
       altText: Post thumbnail image
-      caption: ''
+      caption: ""
   - type: model
     name: media
     label: Media
@@ -88,13 +88,13 @@ fields:
         - sectionComponent
   - type: string
     name: metaDescription
-    label: 'Description tag (default: excerpt)'
-    description: 'By default, the description tag for this post is taken from the Excerpt field. You can override the tag value here.'
+    label: "Description tag (default: excerpt)"
+    description: "By default, the description tag for this post is taken from the Excerpt field. You can override the tag value here."
     default: null
     group: seo
   - type: image
     name: socialImage
-    label: 'Image for social (default:  featured image)'
+    label: "Image for social (default:  featured image)"
     description: 'By default, the "og:image" meta tag set for social sharing this post points to the Featured Image field (in the Content group). You can override that image here.'
     default: null
     group: seo

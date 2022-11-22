@@ -15,13 +15,13 @@
     "build": "tsc -b tsconfig.build.json",
     "rm": "bash -c 'rm -rf packages/*/dist packages/*/.wesjet'",
     "check:prettier": "prettier -c .",
-    "check:eslint": "eslint cli --ext .ts --max-warnings=0",
+    "check:eslint": "eslint packages --ext .ts --max-warnings=0",
     "format:prettier": "prettier -w packages",
-    "format:eslint": "eslint . --ext js,jsx,ts,tsx -c ./.eslintrc.json --fix",
+    "format:eslint": "eslint packages --ext ts -c ./.eslintrc.json --fix",
     "all": "npm i && npm run lint && npm run build:cli && npm -w wesjet-nextjs-plugin run prepack && npm run build:app.etc"
   },
   "lint-staged": {
-    "*.@(js|ts)": [
+    "*.@(ts)": [
       "eslint --quiet --fix"
     ],
     "*.{ts,tsx,md,mdx,js,jsx,mjs,yml,yaml,css}": [
@@ -45,12 +45,12 @@
     "@types/prettier": "^2.7.1",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
-    "eslint": "^8.24.0",
+    "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^8.0.0",
-    "prettier": "^2.5.1",
+    "prettier": "^2.7.1",
     "ts-jest": "^27.0.7",
     "ts-patch": "^2.0.2",
     "typescript": "^4.8.4"

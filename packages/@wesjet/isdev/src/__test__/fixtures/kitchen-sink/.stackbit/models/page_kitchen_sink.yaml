@@ -49,11 +49,11 @@ fields:
   - type: number
     name: number_slider
     description: Number field with a slider control, min, max, step and unit properties
-    controlType: 'slider'
+    controlType: "slider"
     min: 0
     max: 100
     step: 10
-    unit: '%'
+    unit: "%"
   - type: list
     name: number_list
     items:
@@ -90,41 +90,41 @@ fields:
   - type: enum
     name: enum_palette
     group: enums
-    controlType: 'palette'
+    controlType: "palette"
     options:
       - value: option-1
         label: Option 1
-        textColor: '#FFFFFF'
-        backgroundColor: '#000000'
+        textColor: "#FFFFFF"
+        backgroundColor: "#000000"
       - value: option-2
         label: Option 2
-        textColor: '#000000'
-        backgroundColor: '#FFFF00'
-        borderColor: '#000000'
+        textColor: "#000000"
+        backgroundColor: "#FFFF00"
+        borderColor: "#000000"
       - value: option-3
         label: Option 3
-        textColor: '#FF0000'
-        backgroundColor: '#FFFFFF'
-        borderColor: '#FF0000'
+        textColor: "#FF0000"
+        backgroundColor: "#FFFFFF"
+        borderColor: "#FF0000"
   - type: list
     name: enum_list
     group: enums
     items:
       type: enum
       options:
-        - 'option-1'
-        - 'option-2'
-        - 'option-3'
+        - "option-1"
+        - "option-2"
+        - "option-3"
   - type: list
     name: enum_list_checkbox
     group: enums
-    controlType: 'checkbox'
+    controlType: "checkbox"
     items:
       type: enum
       options:
-        - 'option-1'
-        - 'option-2'
-        - 'option-3'
+        - "option-1"
+        - "option-2"
+        - "option-3"
 
   # images
   - type: image

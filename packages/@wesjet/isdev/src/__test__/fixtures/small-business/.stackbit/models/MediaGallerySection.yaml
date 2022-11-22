@@ -50,17 +50,17 @@ fields:
     name: spacing
     label: Spacing between images
     group: styles
-    controlType: 'slider'
+    controlType: "slider"
     min: 0
     max: 160
     step: 1
-    unit: 'px'
+    unit: "px"
     default: 16
   - type: number
     name: columns
     label: Images per row
     group: styles
-    controlType: 'slider'
+    controlType: "slider"
     min: 1
     max: 7
     step: 1
@@ -70,21 +70,21 @@ fields:
     label: Image aspect ratio
     group: styles
     options:
-      - label: '1:1'
-        value: '1:1'
-      - label: '3:2'
-        value: '3:2'
-      - label: '2:3'
-        value: '2:3'
-      - label: '4:3'
-        value: '4:3'
-      - label: '3:4'
-        value: '3:4'
-      - label: '16:9'
-        value: '16:9'
+      - label: "1:1"
+        value: "1:1"
+      - label: "3:2"
+        value: "3:2"
+      - label: "2:3"
+        value: "2:3"
+      - label: "4:3"
+        value: "4:3"
+      - label: "3:4"
+        value: "3:4"
+      - label: "16:9"
+        value: "16:9"
       - label: Auto
         value: auto
-    default: '1:1'
+    default: "1:1"
   - type: boolean
     name: showCaption
     label: Show caption
@@ -97,43 +97,43 @@ fields:
     name: styles
     styles:
       self:
-        width: ['narrow', 'wide', 'full']
-        height: ['auto', 'screen']
-        margin: ['tw0:96']
-        padding: ['tw0:96']
-        justifyContent: ['flex-start', 'flex-end', 'center']
-        borderRadius: '*'
-        borderWidth: ['0:8']
-        borderStyle: '*'
+        width: ["narrow", "wide", "full"]
+        height: ["auto", "screen"]
+        margin: ["tw0:96"]
+        padding: ["tw0:96"]
+        justifyContent: ["flex-start", "flex-end", "center"]
+        borderRadius: "*"
+        borderWidth: ["0:8"]
+        borderStyle: "*"
         borderColor:
-          - value: 'border-primary'
-            label: 'Primary color'
-            color: '$primary'
-          - value: 'border-secondary'
-            label: 'Secondary color'
-            color: '$secondary'
-          - value: 'border-dark'
-            label: 'Dark color'
-            color: '$dark'
-          - value: 'border-complementary'
-            label: 'Complementary color'
-            color: '$complementary'
+          - value: "border-primary"
+            label: "Primary color"
+            color: "$primary"
+          - value: "border-secondary"
+            label: "Secondary color"
+            color: "$secondary"
+          - value: "border-dark"
+            label: "Dark color"
+            color: "$dark"
+          - value: "border-complementary"
+            label: "Complementary color"
+            color: "$complementary"
       title:
-        fontWeight: ['400', '500']
-        fontStyle: ['italic']
-        textAlign: ['left', 'center', 'right']
-        textDecoration: ['underline']
+        fontWeight: ["400", "500"]
+        fontStyle: ["italic"]
+        textAlign: ["left", "center", "right"]
+        textDecoration: ["underline"]
       subtitle:
-        fontWeight: ['400', '500']
-        fontStyle: ['italic']
-        textAlign: ['left', 'center', 'right']
-        textDecoration: ['underline']
+        fontWeight: ["400", "500"]
+        fontStyle: ["italic"]
+        textAlign: ["left", "center", "right"]
+        textDecoration: ["underline"]
     default:
       self:
         width: full
         height: auto
-        margin: ['mt-0', 'mb-0', 'ml-0', 'mr-0']
-        padding: ['pt-12', 'pb-12', 'pl-4', 'pr-4']
+        margin: ["mt-0", "mb-0", "ml-0", "mr-0"]
+        padding: ["pt-12", "pb-12", "pl-4", "pr-4"]
         justifyContent: center
         borderRadius: none
         borderWidth: 0

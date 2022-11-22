@@ -50,7 +50,7 @@ fields:
     group: settings
     label: Element ID
     description: The unique ID used for id and name attributes in the HTML form. Must not contain whitespace.
-    default: 'contact-form'
+    default: "contact-form"
     required: true
   - type: string
     name: action
@@ -60,13 +60,13 @@ fields:
   - type: string
     name: destination
     label: Destination (email to redirect responses)
-    default: ''
+    default: ""
     group: settings
   - type: style
     name: styles
     styles:
       submitLabel:
-        textAlign: ['left', 'center', 'right']
+        textAlign: ["left", "center", "right"]
     default:
       submitLabel:
         textAlign: left

@@ -684,20 +684,20 @@ fields:
       - type: number
         name: horizontalPadding
         label: Horizontal padding
-        controlType: 'slider'
+        controlType: "slider"
         min: 0
         max: 30
         step: 1
-        unit: 'px'
+        unit: "px"
         default: 24
       - type: number
         name: verticalPadding
         label: Vertical padding
-        controlType: 'slider'
+        controlType: "slider"
         min: 0
         max: 30
         step: 1
-        unit: 'px'
+        unit: "px"
         default: 12
       - type: enum
         name: shadow
@@ -788,20 +788,20 @@ fields:
       - type: number
         name: horizontalPadding
         label: Horizontal padding
-        controlType: 'slider'
+        controlType: "slider"
         min: 0
         max: 30
         step: 1
-        unit: 'px'
+        unit: "px"
         default: 24
       - type: number
         name: verticalPadding
         label: Vertical padding
-        controlType: 'slider'
+        controlType: "slider"
         min: 0
         max: 30
         step: 1
-        unit: 'px'
+        unit: "px"
         default: 12
       - type: enum
         name: shadow

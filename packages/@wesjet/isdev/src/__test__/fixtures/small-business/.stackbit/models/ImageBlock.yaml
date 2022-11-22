@@ -26,4 +26,4 @@ fields:
     group: settings
     label: Element ID
     description: A unique ID for the HTML element. Must not contain whitespace.
-    default: ''
+    default: ""
