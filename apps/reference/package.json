@@ -1,7 +1,0 @@
-{
-  "name": "reference",
-  "dependencies": {
-    "wesjet": "*",
-    "wesjet-nextjs-plugin": "*"
-  }
-}

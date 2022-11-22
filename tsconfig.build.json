@@ -3,15 +3,15 @@
   "compilerOptions": {},
   "include": [],
   "references": [
-    { "path": "./cli/@wesjet/cli" },
-    { "path": "./cli/@wesjet/core" },
-    { "path": "./cli/@wesjet/contentful-docker" },
-    { "path": "./cli/@wesjet/maker" },
-    { "path": "./cli/@wesjet/sanity-store" },
-    { "path": "./cli/@wesjet/isdev" },
-    { "path": "./cli/@wesjet/utils" },
-    { "path": "./cli/wesjet" },
-    { "path": "./cli/wesjet-simple-import-hooks" },
-    { "path": "./cli/wesjet-nextjs-plugin" }
+    { "path": "./packages/@wesjet/cli" },
+    { "path": "./packages/@wesjet/core" },
+    { "path": "./packages/@wesjet/contentful-docker" },
+    { "path": "./packages/@wesjet/maker" },
+    { "path": "./packages/@wesjet/sanity-store" },
+    { "path": "./packages/@wesjet/isdev" },
+    { "path": "./packages/@wesjet/utils" },
+    { "path": "./packages/wesjet" },
+    { "path": "./packages/wesjet-simple-import-hooks" },
+    { "path": "./packages/wesjet-nextjs-plugin" }
   ]
 }
