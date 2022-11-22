@@ -7,7 +7,7 @@
     "**/CVS": true,
     "**/.*": false,
     "**/Thumbs.db": true,
-    "**/dist": true
+    "**/dist": false
   },
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {

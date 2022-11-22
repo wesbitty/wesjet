@@ -16,7 +16,7 @@
     "rm": "bash -c 'rm -rf packages/*/dist packages/*/.wesjet'",
     "check:prettier": "prettier -c .",
     "check:eslint": "eslint cli --ext .ts --max-warnings=0",
-    "format:prettier": "prettier -w .",
+    "format:prettier": "prettier -w packages",
     "format:eslint": "eslint . --ext js,jsx,ts,tsx -c ./.eslintrc.json --fix",
     "all": "npm i && npm run lint && npm run build:cli && npm -w wesjet-nextjs-plugin run prepack && npm run build:app.etc"
   },
