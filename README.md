@@ -1,10 +1,20 @@
- <img src="https://i.ibb.co/dMH4HS8/wesjet.png" height="30" />
+<p align="center">
+<a href="https://wesbitty.com/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://avatars.githubusercontent.com/u/115786374?v=4">
+      <img src="https://avatars.githubusercontent.com/u/115786374?v=4" alt="Wesbitty" width="150" />
+    </picture> 
+  </a>
+</p>
 
+<p align="center">Transforms & Validates Content, build system optimized for JavaScript and TypeScript in application's pages</p>
+
+<br/>
+
+<p align="center">
  <a href="https://github.com/wesbitty/wesjet/blob/master/README.md" title="latest"><img alt="latest" src="https://img.shields.io/npm/v/wesjet/latest?style=for-the-badge&logo=wesjet&logoColor=ffffff&color=66BF3C" /></a>
- 
  <a href="https://github.com/wesbitty/wesjet/blob/master/README.md" title="latest"><img alt="latest" src="https://img.shields.io/github/license/wesbitty/wesjet?style=for-the-badge&logo=wesjet&logoColor=ffffff&color=66BF3C" /></a>
- 
-**Wesjet - Transforms & Validates Content, build system optimized for JavaScript and TypeScript in application's pages.**
+ </p>
 
 ## Getting Started
 
