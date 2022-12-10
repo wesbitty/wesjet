@@ -2,6 +2,8 @@
 
  <a href="https://github.com/wesbitty/wesjet/blob/master/README.md" title="latest"><img alt="latest" src="https://img.shields.io/npm/v/wesjet/latest?style=for-the-badge&logo=wesjet&logoColor=ffffff&color=66BF3C" /></a>
  
+ <a href="https://github.com/wesbitty/wesjet/blob/master/README.md" title="latest"><img alt="latest" src="https://img.shields.io/github/license/wesbitty/wesjet?style=for-the-badge&logo=wesjet&logoColor=ffffff&color=66BF3C" /></a>
+ 
 **Wesjet - Transforms & Validates Content, build system optimized for JavaScript and TypeScript in application's pages.**
 
 ## Getting Started
