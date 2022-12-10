@@ -1,5 +1,7 @@
-# <img src="https://i.ibb.co/dMH4HS8/wesjet.png" height="30" />&nbsp;&nbsp;Wesjet [![](https://badgen.net/npm/v/wesjet)](https://www.npmjs.com/wesjet/packages)
+ <img src="https://i.ibb.co/dMH4HS8/wesjet.png" height="30" />
 
+ <a href="https://github.com/wesbitty/wesjet/blob/master/README.md" title="latest"><img alt="latest" src="https://img.shields.io/npm/v/wesjet/latest?style=for-the-badge&logo=wesjet&logoColor=ffffff&color=66BF3C" /></a>
+ 
 **Wesjet - Transforms & Validates Content, build system optimized for JavaScript and TypeScript in application's pages.**
 
 ## Getting Started
