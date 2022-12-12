@@ -43,9 +43,9 @@ Visit [Wesbitty Inc](https://wesbitty.com/docs/wesjet/getting-started) to learn 
 
 The Wesjet community can be found on [GitHub Discussions](https://github.com/wesbitty/wesbitty/discussions/3), where you can ask questions, voice ideas, and share your projects.
 
-To chat with other community members, you can join the [WesjetPkg Discord](https://discord.com)
+To chat with other community members, you can join the [wesjet Discord](https://discord.com)
 
-Our [Code of Conduct](https://github.com/wesbitty/wesjet/master/blob/code_of_conduct.md) applies to all WesjetPkg community channels.
+Our [Code of Conduct](https://github.com/wesbitty/wesjet/master/blob/code_of_conduct.md) applies to all wesjet community channels.
 
 Report bugs and errors you encounter using wesjet on [Wesjet Issues Forum](https://github.com/wesbitty/wesjet/issues).
 
