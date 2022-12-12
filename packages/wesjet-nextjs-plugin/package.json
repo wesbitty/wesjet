@@ -9,7 +9,7 @@
     "url": "git+https://github.com/wesbitty/wesjet.git"
   },
   "bug": {
-    "url": "https://github.com/wesbitty/wesjet/issues"
+    "url": "https://github.com/wesbitty/wesbitty/discussions/3"
   },
   "type": "module",
   "main": "./dist/index-cjs.cjs",

@@ -1,5 +1,5 @@
 {
-  "name": "wesjetpkg",
+  "name": "@wesbitty/wesjet",
   "description": "Incremental Bundler, Transform & Validate content and build system optimized for JavaScript and TypeScript",
   "version": "0.0.0",
   "license": "MIT",
@@ -66,5 +66,8 @@
     "wesjet-simple-import-hooks": "*",
     "wesjet-nextjs-plugin": "*",
     "rxjs": "^7.1.0"
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.25.2"
   }
 }

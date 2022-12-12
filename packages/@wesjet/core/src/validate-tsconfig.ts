@@ -30,7 +30,7 @@ export const validateTsconfig = pipe(
 wesjet (Warning): Importing from \`wesjet\/jetpack\` might not work.
 ${msg}
 
-For more information see https://www.wesbitty.vercel.app/docs/getting-started
+For more information see https://www.wesbitty.com/docs/wesjet/getting-started
 To disable this warning you can set \`disableImportAliasWarning: true\` in your wesjet config.
 `);
 

@@ -281,10 +281,10 @@ const writeFilesForCache = ({
 
 const makePackageJson = (schemaHash: string): string => {
   const packageJson: PackageJson & { typesVersions: any } = {
-    name: "wesjet-app",
-    description: "This package is automatically compiled by WesJet",
-    // TODO generate more meaningful version (e.g. by using wesjet version and schema hash)
-    version: `0.0.8-${schemaHash}`,
+    name: `wesjet-${schemaHash}`,
+    description: "Application's bundler",
+    // TODO compile more meaningful version (e.g. by using wesjet version and schema hash)
+    version: `0.0.9-${schemaHash}`,
     exports: {
       "./jetpack": {
         import: "./jetpack/index.mjs",
