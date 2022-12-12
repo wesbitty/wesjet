@@ -98,7 +98,7 @@ export type DocumentType<DefName extends string = string> = {
   def: Thunk<DocumentTypeDef<DefName>>;
 };
 
-// `<any>` cast here is needed here to flip variance (see https://github.com/wsj-jet/wesjetpkg/issues/33)
+// `<any>` cast here is needed here to flip variance (see https://github.com/wsj-jet/wesjet/issues/33)
 export type DocumentTypes =
   | DocumentType<any>[]
   | Record<string, DocumentType<any>>;

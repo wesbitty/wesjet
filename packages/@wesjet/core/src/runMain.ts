@@ -45,7 +45,7 @@ export const runMain =
             yield* $(
               T.log(`\
 This error shouldn't have happened. Please consider opening a GitHub issue with the stack trace below here:
-https://github.com/wesbitty/wesjetpkg/issues`)
+https://github.com/wesbitty/wesjet/issues`)
             );
           }
 

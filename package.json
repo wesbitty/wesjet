@@ -37,7 +37,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wesbitty/wesjetpkg"
+    "url": "git+https://github.com/wesbitty/wesjet"
   },
   "devDependencies": {
     "@effect-ts/tracing-plugin": "^0.20.0",

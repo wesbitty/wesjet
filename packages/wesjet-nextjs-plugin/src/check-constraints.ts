@@ -32,7 +32,7 @@ const checkWesjetVersionsMatch = () => {
     throw new Error(
       `\
 The versions of "wesjet" and "wesjet-nextjs-plugin" need to be identical in your "package.json".
-Currently used versions: wesjetpkg: "${wesjetVersion}", wesjet-nextjs-plugin: "${nextWesjetVersion}"`
+Currently used versions: wesjet: "${wesjetVersion}", wesjet-nextjs-plugin: "${nextWesjetVersion}"`
     );
   }
 };

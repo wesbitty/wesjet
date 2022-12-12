@@ -3,13 +3,13 @@
   "version": "0.0.8",
   "license": "MIT",
   "author": "Wesbitty, Inc",
-  "homepage": "https://github.com/wesbitty/wesjetpkg",
+  "homepage": "https://github.com/wesbitty/wesjet",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wesbitty/wesjetpkg.git"
+    "url": "git+https://github.com/wesbitty/wesjet.git"
   },
   "bug": {
-    "url": "https://github.com/wesbitty/wesjetpkg/issues"
+    "url": "https://github.com/wesbitty/wesjet/issues"
   },
   "type": "module",
   "main": "./dist/index-cjs.cjs",
@@ -42,6 +42,7 @@
   "files": [
     "./dist/**/*.{cjs,js,ts,map}",
     "./src",
+    "LICENSE",
     "./package.json"
   ],
   "scripts": {

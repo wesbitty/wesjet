@@ -22,6 +22,7 @@
     "./dist/*.{js,ts,map}",
     "./dist/!(__test__)/**/*.{js,ts,map}",
     "./src",
+    "LICENSE",
     "./package.json"
   ],
   "scripts": {

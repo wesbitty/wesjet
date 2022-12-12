@@ -3,10 +3,10 @@
   "version": "0.0.8",
   "license": "MIT",
   "author": "Wesbitty, Inc",
-  "homepage": "https://github.com/wesbitty/wesjetpkg",
+  "homepage": "https://github.com/wesbitty/wesjet",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wesbitty/wesjetpkg"
+    "url": "git+https://github.com/wesbitty/wesjet"
   },
   "bin": "./bin/cli.cjs",
   "type": "module",
@@ -64,6 +64,7 @@
     "./bin/cli.cjs",
     "./dist/**/*.{js,ts,map}",
     "./src",
+    "LICENSE",
     "./package.json"
   ],
   "scripts": {

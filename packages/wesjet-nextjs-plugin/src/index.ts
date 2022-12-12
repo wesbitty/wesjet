@@ -54,7 +54,7 @@ export const createWesjetPlugin =
         };
 
         // NOTE workaround for https://github.com/vercel/next.js/issues/17806#issuecomment-913437792
-        // https://github.com/wesbitty/wesjetpkg/issues/121
+        // https://github.com/wesbitty/wesjet/issues/121
         config.module.rules.push({
           test: /\.m?js$/,
           type: "javascript/auto",
